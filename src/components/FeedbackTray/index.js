@@ -27,7 +27,6 @@ const FeedbackTray = () => {
   const [dummyFeedbackData, setDummyFeedbackData] = useState(data);
 
   const updateFeedback = (titleMatch, newRating, newComment) => {
-    console.log("fired!");
     const matchedIndex = dummyFeedbackData.findIndex(
       item => titleMatch === item.title
     );
