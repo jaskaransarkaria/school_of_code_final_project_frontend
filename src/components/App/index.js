@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
-import StudentPage from "../StudentPage/index";
+import React, { useState, useEffect, createContext } from "react";
+import SchedulePage from "../SchedulePage";
 import "./App.css";
 import firebase from "firebase";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-import Calendar from "react-calendar";
-import moment from "moment";
 import AdminUploadSchedulePage from "../AdminUploadSchedulePage";
 import FeedbackTray from "../FeedbackTray";
+import Welcome from "../Welcome";
 
 const allContent = [
   {
@@ -140,50 +139,15 @@ const allContent = [
     ]
   }
 ];
+export const Store = createContext([allContent, () => {}]);
 
 firebase.initializeApp({
   apiKey: "AIzaSyBEjVPCQzoKZxg-YCv3Pno_X4Ek1MtOqQw",
   authDomain: "what-did-i-miss-88f32.firebaseapp.com"
 });
 function App() {
-  const todaysDate = moment().format("DD/MM/YYYY");
   const [fullScheduleData, setFullScheduleData] = useState(allContent);
   const [signedIn, setSignedIn] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(todaysDate);
-
-  const appendAdminUpload = (date, dataToAppend) => {
-    const duplicateDate = fullScheduleData.findIndex(
-      item => item.date === date
-    );
-
-    duplicateDate < 0
-      ? setFullScheduleData([
-          ...fullScheduleData.slice(),
-          { date: date, daysContent: dataToAppend.slice() }
-        ])
-      : setFullScheduleData([
-          ...fullScheduleData.slice(0, duplicateDate),
-          { date: date, daysContent: dataToAppend.slice() },
-          ...fullScheduleData.slice(duplicateDate + 1)
-        ]);
-  };
-
-  const convertDate = isoDate => {
-    const convertedDate = moment(isoDate).format("DD/MM/YYYY");
-    setSelectedDate(convertedDate);
-  };
-
-  // function to find the selected date from allContent
-  const contentToBeDisplayed = fullScheduleData.find(
-    obj => obj.date === selectedDate
-  );
-
-  // buttons to toggle date
-  const changeDate = num => {
-    // returns a moment.js object
-    const newDate = moment(selectedDate, "DD/MM/YYYY").add(num, "days");
-    return setSelectedDate(moment(newDate._d).format("DD/MM/YYYY"));
-  };
 
   const uiConfig = {
     signInFlow: "popup",
@@ -205,8 +169,8 @@ function App() {
   }, []);
 
   return (
-    <>
-      {console.log("on reload", fullScheduleData)}
+    <Store.Provider value={[fullScheduleData, setFullScheduleData]}>
+      {console.log("reloaaad", fullScheduleData)}
       {!signedIn ? (
         <StyledFirebaseAuth
           uiConfig={uiConfig}
@@ -214,18 +178,9 @@ function App() {
         />
       ) : (
         <div className="App">
-          <h1>
-            Welcome, {firebase.auth().currentUser.displayName}
-            <img
-              alt="profile pic"
-              src={firebase.auth().currentUser.photoURL}
-              style={{ width: "5vh", height: "5vh", borderRadius: "100%" }}
-            />
-          </h1>
-          <Calendar
-            onClickDay={value => {
-              convertDate(value);
-            }}
+          <Welcome
+            fullName={firebase.auth().currentUser.displayName}
+            photo={firebase.auth().currentUser.photoURL}
           />
           <button
             onClick={() => {
@@ -234,19 +189,13 @@ function App() {
           >
             Sign Out
           </button>
-          Schedule
-          <button onClick={() => changeDate(-1)}>&lt;</button>
-          <button onClick={() => changeDate(1)}>&gt;</button>
-          <AdminUploadSchedulePage
-            props={(date, dataToAppend) =>
-              appendAdminUpload(date, dataToAppend)
-            }
-          />
-          <StudentPage props={contentToBeDisplayed} />
+
+          <AdminUploadSchedulePage />
+          <SchedulePage />
           <FeedbackTray />
         </div>
       )}
-    </>
+    </Store.Provider>
   );
 }
 

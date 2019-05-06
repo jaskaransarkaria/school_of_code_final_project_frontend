@@ -1,19 +1,25 @@
-import React, { useState, useEffect } from "react";
-import css from "./AdminUploadSchedulePage.module.css";
+import React, { useState, useContext } from "react";
 import AdminPageScheduleTimes from "../AdminPageScheduleTimes";
 import moment from "moment";
+import { Store } from "../App";
 
-const AdminUploadSchedulePage = props => {
+//form handler is going to do the POST
+// atm form handler is running a function that changes data at the APP level
+// changing state at the app level is redundant once there is a data base.
+
+const AdminUploadSchedulePage = () => {
+  const [fullScheduleData, setFullScheduleData] = useContext(Store);
   // ability to upload schedule
   // pass down a function that adds the days schedule up to the state in the app
   // multiple content Urls
   // date setter (more intuitive and force date to be a certain format) use a calender/ date picker probs
   // auto select next time slot
 
-  // then clear the schedule
+  // then clear/ reset the schedule
   // description <text area ></text> add description mechanism
   // a way to upload video
   // a way to upload files
+
   // progress bar to whilst uploading
 
   // send all the info up to the App (useContext())?
@@ -28,8 +34,16 @@ const AdminUploadSchedulePage = props => {
 
   const formHandler = event => {
     event.preventDefault();
-    const scheduleToBeApended = daysSchedule.slice();
-    props.props(selectedDate, scheduleToBeApended);
+
+    const duplicateDate = fullScheduleData.findIndex(
+      item => item.date === selectedDate
+    );
+
+    setFullScheduleData([
+      ...fullScheduleData.slice(0, duplicateDate),
+      { date: selectedDate, daysContent: daysSchedule.slice() },
+      ...fullScheduleData.slice(duplicateDate + 1)
+    ]);
   };
 
   const addURL = ind => {
