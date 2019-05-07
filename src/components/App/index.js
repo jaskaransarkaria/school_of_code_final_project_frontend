@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import StudentPage from "../StudentPage/index";
+import React, { useState, useEffect, createContext } from "react";
+import SchedulePage from "../SchedulePage";
 import "./App.css";
 import firebase from "firebase";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-import Calendar from "react-calendar";
-import moment from "moment";
-import AdminPage from "../AdminPage";
+import AdminUploadSchedulePage from "../AdminUploadSchedulePage";
+import FeedbackTray from "../FeedbackTray";
+import Welcome from "../Welcome";
 
 const allContent = [
   {
@@ -139,47 +139,15 @@ const allContent = [
     ]
   }
 ];
+export const Store = createContext([allContent, () => {}]);
 
 firebase.initializeApp({
   apiKey: "AIzaSyBEjVPCQzoKZxg-YCv3Pno_X4Ek1MtOqQw",
   authDomain: "what-did-i-miss-88f32.firebaseapp.com"
 });
 function App() {
+  const [fullScheduleData, setFullScheduleData] = useState(allContent);
   const [signedIn, setSignedIn] = useState(false);
-  const d = new Date();
-  const todaysDate = moment().format("DD/MM/YYYY");
-  const [selectedDate, setSelectedDate] = useState(todaysDate);
-
-  const convertDate = isoDate => {
-    const convertedDate = moment(isoDate).format("DD/MM/YYYY");
-    console.log("this moment", moment().format("DD/MM/YYYY"));
-    console.log(selectedDate);
-    console.log("convertedDate", convertedDate);
-    console.log(typeof convertedDate);
-    console.log("isodate", isoDate);
-    setSelectedDate(convertedDate);
-  };
-
-  // function to find the selected date from allContent
-  const contentToBeDisplayed = allContent.find(
-    obj => obj.date === selectedDate
-  );
-
-  // buttons to toggle date
-  const changeDate = num => {
-    console.log(selectedDate);
-    console.log("date", d.getDate());
-    console.log(num);
-
-    return setSelectedDate(
-      Number(selectedDate[0]) +
-        num +
-        "/" +
-        (d.getMonth() + 1) +
-        "/" +
-        d.getFullYear()
-    );
-  };
 
   const uiConfig = {
     signInFlow: "popup",
@@ -201,7 +169,8 @@ function App() {
   }, []);
 
   return (
-    <>
+    <Store.Provider value={[fullScheduleData, setFullScheduleData]}>
+      {console.log("reloaaad", fullScheduleData)}
       {!signedIn ? (
         <StyledFirebaseAuth
           uiConfig={uiConfig}
@@ -209,18 +178,9 @@ function App() {
         />
       ) : (
         <div className="App">
-          <h1>
-            Welcome, {firebase.auth().currentUser.displayName}
-            <img
-              alt="profile pic"
-              src={firebase.auth().currentUser.photoURL}
-              style={{ width: "5vh", height: "5vh", borderRadius: "100%" }}
-            />
-          </h1>
-          <Calendar
-            onClickDay={value => {
-              convertDate(value);
-            }}
+          <Welcome
+            fullName={firebase.auth().currentUser.displayName}
+            photo={firebase.auth().currentUser.photoURL}
           />
           <button
             onClick={() => {
@@ -229,14 +189,13 @@ function App() {
           >
             Sign Out
           </button>
-          Schedule
-          <button onClick={() => changeDate(-1)}>&lt;</button>
-          <button onClick={() => changeDate(1)}>&gt;</button>
-          <AdminPage />
-          <StudentPage props={contentToBeDisplayed} />
+
+          <AdminUploadSchedulePage />
+          <SchedulePage />
+          <FeedbackTray />
         </div>
       )}
-    </>
+    </Store.Provider>
   );
 }
 
