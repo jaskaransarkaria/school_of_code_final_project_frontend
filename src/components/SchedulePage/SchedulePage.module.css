@@ -1,0 +1,8 @@
+#timeline {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 3%;
+  background-color: rgba(1, 1, 1, 0);
+  margin-left: 4%;
+}

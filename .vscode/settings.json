@@ -1,0 +1,10 @@
+{
+  "emojisense.languages": {
+    "markdown": true,
+    "git-commit": true,
+    "plaintext": true,
+    "json": true,
+    "javascript": true,
+    "javascriptreact": true
+  }
+}
