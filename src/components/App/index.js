@@ -6,6 +6,7 @@ import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import AdminUploadSchedulePage from "../AdminUploadSchedulePage";
 import FeedbackTray from "../FeedbackTray";
 import Welcome from "../Welcome";
+import VideoUpload from "../VideoUpload";
 
 const allContent = [
   {
@@ -193,6 +194,7 @@ function App() {
           <AdminUploadSchedulePage />
           <SchedulePage />
           <FeedbackTray />
+          <VideoUpload />
         </div>
       )}
     </Store.Provider>
