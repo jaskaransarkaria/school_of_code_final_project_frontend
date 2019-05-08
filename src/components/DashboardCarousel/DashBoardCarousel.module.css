@@ -1,0 +1,10 @@
+.cardContainer {
+  display: inline-flex;
+  justify-content: center;
+}
+.card {
+  max-width: 345px;
+}
+.media {
+  object-fit: cover;
+}

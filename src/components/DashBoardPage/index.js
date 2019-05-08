@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Banner from "../Banner";
 import NavBar from "../NavBar";
 import DashBoardSchedule from "../DashboardSchedule";
-// import DashboardCarousel from "../DashboardCarousel";
+import DashboardCarousel from "../DashboardCarousel";
 
 import css from "./DashboardPage.module.css";
 class DashBoardPage extends Component {
@@ -12,7 +12,7 @@ class DashBoardPage extends Component {
         <Banner />
         <NavBar />
         <DashBoardSchedule />
-        {/* <DashboardCarousel /> */}
+        <DashboardCarousel />
       </div>
     );
   }

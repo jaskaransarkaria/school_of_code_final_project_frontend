@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import DashboardCarousel from "../DashboardCarousel";
 import css from "../DashboardSchedule/DashboardSchedule.module.css";
 class DashboardSchedule extends Component {
   render() {
@@ -11,6 +12,7 @@ class DashboardSchedule extends Component {
           <div className={css.thursdayBox}>Thursday</div>
           <div className={css.fridayBox}>Friday</div>
         </div>
+        <DashboardCarousel />
       </div>
     );
   }
