@@ -1,10 +1,11 @@
 import React from "react";
 import css from "../Banner/Banner.module.css";
-function Banner() {
+import Welcome from "../Welcome";
+function Banner({ props }) {
   return (
     <>
       <div className={css.bannerContainer}>
-        <h1 className={css.bannerWelcomeText}>Welcome, User!</h1>
+        <h1 className={css.bannerWelcomeText}>{`Welcome, ${props}`}</h1>
       </div>
     </>
   );
