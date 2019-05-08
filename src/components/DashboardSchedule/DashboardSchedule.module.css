@@ -1,0 +1,52 @@
+.dashboardScheduleContainer {
+  display: inline-block;
+  width: 100%;
+  height: 20%;
+  background-image: linear-gradient(to bottom right, #5f04cf, #04c7d9);
+}
+.daysOfWeekContainer {
+  width: 100%;
+  height: 30%;
+  font-family: "Oxygen", sans-serif;
+  font-weight: bold;
+  display: inline-flex;
+  justify-content: space-between;
+  background-color: white;
+}
+.mondayBox {
+  display: inline-flex;
+  border-right: 1px solid lightgrey;
+  align-items: center;
+  justify-content: center;
+  width: 20%;
+  background-color: #11cf84;
+}
+.tuesdayBox {
+  display: inline-flex;
+  border-right: 0.5px solid lightgrey;
+  align-items: center;
+  justify-content: center;
+  width: 20%;
+}
+.wednesdayBox {
+  display: inline-flex;
+  border-right: 0.5px solid lightgrey;
+  align-items: center;
+  justify-content: center;
+  width: 20%;
+}
+
+.thursdayBox {
+  display: inline-flex;
+  border-right: 0.5px solid lightgrey;
+  align-items: center;
+  justify-content: center;
+  width: 20%;
+}
+.fridayBox {
+  display: inline-flex;
+  border-right: 0.5px solid lightgrey;
+  align-items: center;
+  justify-content: center;
+  width: 20%;
+}

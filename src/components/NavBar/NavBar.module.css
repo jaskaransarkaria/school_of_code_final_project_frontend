@@ -1,0 +1,23 @@
+.navContainer {
+  display: flex;
+  justify-content: center;
+
+  background-color: #0834ac;
+  width: 6%;
+  height: 100vh;
+}
+
+.homeIcon,
+.calendarIcon,
+.glassesIcon,
+.educationIcon,
+.notebookIcon {
+  height: 40px;
+  width: 40px;
+  margin: 20px;
+}
+
+.homeIcon:hover {
+  background-color: #00249a;
+  border-left: 2px solid white;
+}
