@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import css from "../NavBar/NavBar.module.css";
 import HomeIcon from "../../Images/home.svg";
 import CalendarIcon from "../../Images/calendar.svg";
@@ -12,35 +13,27 @@ function NavBar() {
       <nav className={css.navContainer}>
         <div className={css.iconsContainer}>
           <div>
-            <img className={css.homeIcon} src={HomeIcon} alt="home icon" />
+            <Link to="/">
+              <img className={css.homeIcon} src={HomeIcon} alt="home icon" />
+            </Link>
           </div>
           <div>
-            <img
-              className={css.calendarIcon}
-              src={CalendarIcon}
-              alt="calendar icon"
-            />
+            <Link to="/schedule">
+              <img
+                className={css.calendarIcon}
+                src={CalendarIcon}
+                alt="calendar icon"
+              />
+            </Link>
           </div>
           <div>
-            <img
-              className={css.glassesIcon}
-              src={GlassesIcon}
-              alt="glasses icon"
-            />
-          </div>
-          <div>
-            <img
-              className={css.educationIcon}
-              src={EducationIcon}
-              alt="education icon"
-            />
-          </div>
-          <div>
-            <img
-              className={css.notebookIcon}
-              src={NotebookIcon}
-              alt="notebook icon"
-            />
+            <Link to="/links">
+              <img
+                className={css.glassesIcon}
+                src={GlassesIcon}
+                alt="glasses icon"
+              />
+            </Link>
           </div>
         </div>
       </nav>

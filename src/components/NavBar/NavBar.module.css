@@ -16,8 +16,3 @@
   width: 40px;
   margin: 20px;
 }
-
-.homeIcon:hover {
-  background-color: #00249a;
-  border-left: 2px solid white;
-}

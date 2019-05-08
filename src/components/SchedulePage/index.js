@@ -1,10 +1,12 @@
 import React, { useState, useContext } from "react";
-//import css from "./index.module.css";
+import css from "../SchedulePage/SchedulePage.module.css";
 import { Timeline, TimelineEvent } from "react-event-timeline";
 import moment from "moment";
 //import PropTypes from "prop-types";
 import Calendar from "react-calendar";
 import { Store } from "../App";
+import NavBar from "../NavBar";
+import Banner from "../Banner";
 
 const SchedulePage = ({ props }) => {
   const todaysDate = moment().format("DD/MM/YYYY");
@@ -54,7 +56,9 @@ const SchedulePage = ({ props }) => {
 
   return (
     <>
-      <div>
+      <Banner />
+      <NavBar />
+      <div className={css.schedulePageContainer}>
         <Calendar
           onClickDay={value => {
             convertDate(value);
@@ -71,24 +75,24 @@ const SchedulePage = ({ props }) => {
             Showing: {contentToBeDisplayed.date}
           </>
         ) || <>{contentToBeDisplayed.date}</>}
+        <Timeline>
+          {contentToBeDisplayed.daysContent.map(item => (
+            <TimelineEvent title={item.sessionTimes}>
+              {item.contentURL !== "" ? (
+                <div>
+                  {item.contentTitle}
+                  <br />
+                  <a href={`https://${item.contentURL}`} target="_blank">
+                    {item.contentURL}
+                  </a>
+                </div>
+              ) : (
+                <div>{item.contentTitle}</div>
+              )}
+            </TimelineEvent>
+          ))}
+        </Timeline>
       </div>
-      <Timeline>
-        {contentToBeDisplayed.daysContent.map(item => (
-          <TimelineEvent title={item.sessionTimes}>
-            {item.contentURL !== "" ? (
-              <div>
-                {item.contentTitle}
-                <br />
-                <a href={`https://${item.contentURL}`} target="_blank">
-                  {item.contentURL}
-                </a>
-              </div>
-            ) : (
-              <div>{item.contentTitle}</div>
-            )}
-          </TimelineEvent>
-        ))}
-      </Timeline>
     </>
   );
 };

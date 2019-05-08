@@ -1,8 +1,18 @@
-#timeline {
+/* #timeline {
   display: flex;
   flex-direction: column;
   height: 100%;
   width: 3%;
   background-color: rgba(1, 1, 1, 0);
-  margin-left: 4%;
+  left: 6%;
+} */
+.schedulePageContainer {
+  position: absolute;
+  left: 6%;
+  display: inline-block;
+  top: 18%;
+  width: 94%;
+  background-image: linear-gradient(to bottom right, #5f04cf, #04c7d9);
+
+  /* background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png"); */
 }
