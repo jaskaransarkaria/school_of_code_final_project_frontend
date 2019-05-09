@@ -8,9 +8,7 @@ const interviewQuestions = [
   { question: "Explain something complex in simple terms." }
 ];
 
-// bug you can't stop it from seperate places
-// bug can't keep stopping something that is already stopped errors at different points that call stop...
-// bug it actually starts recording if you pass stop twice
+// send the video to the server
 // check video and audio are available, if not post alert.
 
 const VideoUpload = () => {
@@ -27,11 +25,11 @@ const VideoUpload = () => {
 
   // no microphone on this comp!!!!
   const constraints = {
-    // audio: {
-    //   sampleRate: 48000,
-    //   channelCount: 2,
-    //   volume: 1.0
-    // },
+    audio: {
+      sampleRate: 48000,
+      channelCount: 2,
+      volume: 1.0
+    },
     video: {
       width: { min: 1280 },
       height: { min: 720 },
@@ -40,6 +38,21 @@ const VideoUpload = () => {
   };
 
   const hasGetUserMedia = () => {
+    navigator.mediaDevices
+      .enumerateDevices()
+      .then(function(devices) {
+        devices.forEach(function(device) {
+          console.log(
+            device.kind + ": " + device.label + " id = " + device.deviceId
+          );
+        });
+      })
+      .catch(function(err) {
+        console.log(err.name + ": " + err.message);
+      });
+    console.log(navigator.mediaDevices);
+    // console.log(navigator.mediaDevices.getUserMedia({ video: true }));
+    // console.log(navigator.mediaDevices.getUserMedia({ audio: true }));
     return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
     // the parameter passed into getUserMedia() is an object eg. {video: true, audio: true}
   };
@@ -50,17 +63,34 @@ const VideoUpload = () => {
     console.log("no feature detected");
   }
 
+  const sumbitVideo = () => {
+    console.log("submit localc stream", localStream);
+    // console.log("submit stream", stream.getTracks());
+    console.log("submit recorder", recorder);
+    console.log(document.getElementById("videoUpload"));
+    // when video submitted old vid disappear and reset with blank screen
+    localStream = null;
+    document.getElementById("videoUpload").srcObject = null;
+    recorder = null;
+    console.log("paused?", document.getElementById("videoUpload").paused);
+    console.log("ended?", document.getElementById("videoUpload").ended);
+    // send video to server
+    return;
+  };
+
   const handleRecording = action => {
     try {
       navigator.mediaDevices.getUserMedia(constraints).then(stream => {
         switch (action) {
           case "stop":
             var track = stream.getTracks()[0];
-            document.getElementById("videoUpload").pause();
             document.getElementById("videoUpload").srcObject = null;
-
             localStream.getTracks()[0].stop();
             track.stop();
+            stream.getTracks().forEach(function(track) {
+              track.stop();
+            });
+            document.getElementById("videoUpload").autoplay = false;
             if (recorder.state === "recording") {
               recorder.stop();
             } else {
@@ -68,19 +98,34 @@ const VideoUpload = () => {
             }
             return;
           case "start":
+            document.getElementById("videoUpload").autoplay = true;
             document.getElementById("videoUpload").play();
+            console.log("from start", stream);
             localStream = stream;
             recorder = new MediaRecorder(stream);
+            var video = document.querySelector("video");
             recorder.addEventListener("dataavailable", function(e) {
               // e.data contains the audio data! let's associate it to an <audio> element
+              video.src = URL.createObjectURL(e.data);
+            });
+            video.addEventListener("timeupdate", function() {
+              // don't have set the startTime yet? set it to our currentTime
+              if (!this._startTime) this._startTime = this.currentTime;
 
-              var el = document.querySelector("video");
-              el.src = URL.createObjectURL(e.data);
+              var playedTime = this.currentTime - this._startTime;
+
+              if (playedTime >= 30) {
+                handleRecording("stop");
+              }
+            });
+
+            video.addEventListener("seeking", function() {
+              // reset the timeStart
+              this._startTime = undefined;
             });
 
             recorder.start();
             return (document.getElementById("videoUpload").srcObject = stream);
-
           default:
             return;
         }
@@ -118,6 +163,7 @@ const VideoUpload = () => {
                   height="50%"
                   width="80%"
                   display="block"
+                  poster="/school-of-code.jpg"
                 />
                 <br />
                 <button
@@ -130,7 +176,9 @@ const VideoUpload = () => {
                 <>
                   <button
                     onClick={() => {
-                      handleRecording("stop");
+                      if (localStream) {
+                        handleRecording("stop");
+                      }
                     }}
                   >
                     Stop Recording
@@ -139,17 +187,26 @@ const VideoUpload = () => {
                 {questionCounter + 1 < interviewQuestions.length ? (
                   <button
                     onClick={() => {
-                      // handleRecording("stop");
-                      setQuestionCounter(questionCounter + 1);
                       // upload to datbase;
+                      if (localStream && localStream.active === false) {
+                        console.log("from submit button", localStream);
+                        sumbitVideo();
+                        setQuestionCounter(questionCounter + 1);
+                      } else {
+                        if (localStream) {
+                          alert("finish recording your video first");
+                        } else {
+                          alert("You must record a video before submitting.");
+                        }
+                      }
                     }}
                   >
-                    Next Question
+                    Submit Video
                   </button>
                 ) : (
                   <button
                     onClick={() => {
-                      // handleRecording("stop");
+                      sumbitVideo();
                       setShowVideo(false);
                     }}
                   >
