@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import MainContainer from "../MainContainer";
 import SchedulePage from "../SchedulePage";
-import Links from "../Links";
+import TopicsPage from "../TopicsPage";
 
 function Routes() {
   return (
@@ -11,7 +11,7 @@ function Routes() {
         <>
           <Route exact path="/" component={MainContainer} />
           <Route path="/schedule" component={SchedulePage} />
-          <Route path="/links" component={Links} />
+          <Route path="/topics" component={TopicsPage} />
         </>
       </Router>
     </div>

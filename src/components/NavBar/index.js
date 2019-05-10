@@ -12,12 +12,12 @@ function NavBar() {
     <>
       <nav className={css.navContainer}>
         <div className={css.iconsContainer}>
-          <div>
+          <div className={css.homeContainer}>
             <Link to="/">
               <img className={css.homeIcon} src={HomeIcon} alt="home icon" />
             </Link>
           </div>
-          <div>
+          <div className={css.calendarContainer}>
             <Link to="/schedule">
               <img
                 className={css.calendarIcon}
@@ -26,8 +26,8 @@ function NavBar() {
               />
             </Link>
           </div>
-          <div>
-            <Link to="/links">
+          <div className={css.glassesContainer}>
+            <Link to="/topics">
               <img
                 className={css.glassesIcon}
                 src={GlassesIcon}

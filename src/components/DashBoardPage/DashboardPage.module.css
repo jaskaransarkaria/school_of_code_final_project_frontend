@@ -1,8 +1,3 @@
-.dashboardContainer {
-  position: relative;
-
-  width: 100%;
-  height: 100%;
-  display: inline-block;
+.background {
   background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png");
 }

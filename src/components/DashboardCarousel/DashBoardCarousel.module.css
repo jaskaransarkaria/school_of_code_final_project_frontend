@@ -1,10 +1,60 @@
-.cardContainer {
+.leftArrow {
   display: inline-flex;
-  justify-content: center;
+  position: relative;
+  transform: rotate(180deg);
+
+  height: 70px;
+  width: 70px;
 }
-.card {
-  max-width: 345px;
+.leftArrow:hover {
+  cursor: pointer;
+  transform: scale(1.1) rotate(180deg);
 }
-.media {
-  object-fit: cover;
+.rightArrow {
+  display: inline-flex;
+  position: relative;
+  height: 70px;
+  width: 70px;
+}
+.rightArrow:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.itemOne,
+.itemTwo,
+.itemThree {
+  display: inline-flex;
+  position: relative;
+  width: 15%;
+  height: 80%;
+  bottom: 15%;
+  background-color: whitesmoke;
+  border-radius: 4px;
+}
+.itemOne:hover {
+  transition-duration: 0.25s;
+  transform: scale(1.2);
+  cursor: pointer;
+}
+.itemTwo:hover {
+  transition-duration: 0.25s;
+  transform: scale(1.2);
+  cursor: pointer;
+}
+.itemThree:hover {
+  transition-duration: 0.25s;
+  transform: scale(1.2);
+  cursor: pointer;
+}
+.carouselContainer {
+  display: flex;
+  position: relative;
+  justify-content: space-around;
+  top: 25%;
+  height: 50%;
+}
+.lessonTitle {
+  margin: 0px;
+  text-align: center;
 }

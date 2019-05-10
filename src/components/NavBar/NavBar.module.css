@@ -1,5 +1,5 @@
 .navContainer {
-  display: flex;
+  display: inline-flex;
   justify-content: center;
 
   background-color: #0834ac;
@@ -15,4 +15,23 @@
   height: 40px;
   width: 40px;
   margin: 20px;
+}
+
+.homeContainer:hover {
+  background-color: #00249a;
+  margin: 0px;
+  padding: 0px;
+  border-left: white solid 1px;
+}
+.calendarContainer:hover {
+  background-color: #00249a;
+  margin: 0px;
+  padding: 0px;
+  border-left: white solid 1px;
+}
+.glassesContainer:hover {
+  background-color: #00249a;
+  margin: 0px;
+  padding: 0px;
+  border-left: white solid 1px;
 }

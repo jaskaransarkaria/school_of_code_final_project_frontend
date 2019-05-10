@@ -1,15 +1,16 @@
 import React from "react";
-import Banner from "../Banner";
+
 import NavBar from "../NavBar";
-import css from "../Links/Links.module.css";
-function Links() {
+import TopicsBanner from "../TopicsBanner";
+import css from "../TopicsPage/Topics.module.css";
+function Topics() {
   return (
     <>
       <div className={css.linksContainer}>
-        <Banner />
         <NavBar />
+        <TopicsBanner />
       </div>
     </>
   );
 }
-export default Links;
+export default Topics;

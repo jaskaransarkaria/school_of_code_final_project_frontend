@@ -6,7 +6,7 @@ import moment from "moment";
 import Calendar from "react-calendar";
 import { Store } from "../App";
 import NavBar from "../NavBar";
-import Banner from "../Banner";
+import ScheduleBanner from "../ScheduleBanner";
 
 const SchedulePage = ({ props }) => {
   const todaysDate = moment().format("DD/MM/YYYY");
@@ -56,8 +56,8 @@ const SchedulePage = ({ props }) => {
 
   return (
     <>
-      <Banner />
       <NavBar />
+      <ScheduleBanner />
       <div className={css.schedulePageContainer}>
         <Calendar
           onClickDay={value => {
@@ -75,23 +75,25 @@ const SchedulePage = ({ props }) => {
             Showing: {contentToBeDisplayed.date}
           </>
         ) || <>{contentToBeDisplayed.date}</>}
-        <Timeline>
-          {contentToBeDisplayed.daysContent.map(item => (
-            <TimelineEvent title={item.sessionTimes}>
-              {item.contentURL !== "" ? (
-                <div>
-                  {item.contentTitle}
-                  <br />
-                  <a href={`https://${item.contentURL}`} target="_blank">
-                    {item.contentURL}
-                  </a>
-                </div>
-              ) : (
-                <div>{item.contentTitle}</div>
-              )}
-            </TimelineEvent>
-          ))}
-        </Timeline>
+        <div className={css.timelineContainer}>
+          <Timeline>
+            {contentToBeDisplayed.daysContent.map(item => (
+              <TimelineEvent title={item.sessionTimes}>
+                {item.contentURL !== "" ? (
+                  <div>
+                    {item.contentTitle}
+                    <br />
+                    <a href={`https://${item.contentURL}`} target="_blank">
+                      {item.contentURL}
+                    </a>
+                  </div>
+                ) : (
+                  <div>{item.contentTitle}</div>
+                )}
+              </TimelineEvent>
+            ))}
+          </Timeline>
+        </div>
       </div>
     </>
   );
