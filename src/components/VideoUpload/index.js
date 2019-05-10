@@ -44,6 +44,7 @@ const VideoUpload = () => {
       .enumerateDevices()
       .then(function(devices) {
         devices.forEach(item => {
+          console.log(item);
           if (item.kind === "videoinput") {
             setHasVideo(true);
           } else if (item.kind === "audioinput") {
@@ -71,9 +72,7 @@ const VideoUpload = () => {
   };
 
   if (hasGetUserMedia()) {
-    console.log("features detected");
-  } else {
-    console.log("no feature detected");
+    console.log(`video ${hasVideo}. audio ${hasAudio}`);
   }
 
   const sumbitVideo = () => {
@@ -96,11 +95,18 @@ const VideoUpload = () => {
       navigator.mediaDevices.getUserMedia(constraints).then(stream => {
         switch (action) {
           case "stop":
-            var track = stream.getTracks()[0];
+            var tracks = stream.getTracks();
+            console.log(tracks);
+            console.log(stream.getTracks());
             document.getElementById("videoUpload").srcObject = null;
-            localStream.getTracks()[0].stop();
-            track.stop();
+            //localStream.getTracks()[0].stop();
+            tracks.forEach(function(track) {
+              track.stop();
+            });
             stream.getTracks().forEach(function(track) {
+              track.stop();
+            });
+            localStream.getTracks().forEach(function(track) {
               track.stop();
             });
             document.getElementById("videoUpload").autoplay = false;
@@ -182,6 +188,8 @@ const VideoUpload = () => {
                 <button
                   onClick={() => {
                     // check if they have a microphone and webcam here
+                    hasGetUserMedia();
+                    console.log(hasAudio, hasVideo);
 
                     if (!hasVideo || !hasAudio) {
                       alert(
