@@ -1,37 +1,40 @@
 .navContainer {
-  display: inline-flex;
+  display: flex;
   justify-content: center;
 
   background-color: #0834ac;
   width: 6%;
   height: 100vh;
 }
-
+.iconsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
 .homeIcon,
 .calendarIcon,
 .glassesIcon,
-.educationIcon,
-.notebookIcon {
+.infoIcon {
   height: 40px;
   width: 40px;
-  margin: 20px;
 }
-
 .homeContainer:hover {
   background-color: #00249a;
-  margin: 0px;
-  padding: 0px;
-  border-left: white solid 1px;
+
+  border-left: white solid 2px;
 }
 .calendarContainer:hover {
   background-color: #00249a;
-  margin: 0px;
-  padding: 0px;
-  border-left: white solid 1px;
+
+  border-left: white solid 2px;
 }
 .glassesContainer:hover {
   background-color: #00249a;
-  margin: 0px;
-  padding: 0px;
-  border-left: white solid 1px;
+
+  border-left: white solid 2px;
+}
+.infoContainer:hover {
+  background-color: #00249a;
+
+  border-left: white solid 2px;
 }

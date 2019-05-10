@@ -1,15 +1,13 @@
 import React from "react";
-
 import NavBarBootcampers from "../NavBarBootcampers";
 import SubBanner from "../SubBanner";
-import css from "../TopicsPage/Topics.module.css";
-function Topics() {
+import css from "../InfoPage/InfoPage.module.css";
+function InfoPage() {
   return (
     <>
       <SubBanner />
-
       <NavBarBootcampers />
     </>
   );
 }
-export default Topics;
+export default InfoPage;

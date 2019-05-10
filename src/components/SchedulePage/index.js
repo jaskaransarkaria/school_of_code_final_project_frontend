@@ -5,8 +5,8 @@ import moment from "moment";
 //import PropTypes from "prop-types";
 import Calendar from "react-calendar";
 import { Store } from "../App";
-import NavBar from "../NavBar";
-import ScheduleBanner from "../ScheduleBanner";
+import NavBarBootcampers from "../NavBarBootcampers";
+import SubBanner from "../SubBanner";
 
 const SchedulePage = ({ props }) => {
   const todaysDate = moment().format("DD/MM/YYYY");
@@ -56,8 +56,9 @@ const SchedulePage = ({ props }) => {
 
   return (
     <>
-      <NavBar />
-      <ScheduleBanner />
+      <SubBanner />
+      <NavBarBootcampers />
+
       <div className={css.schedulePageContainer}>
         <Calendar
           onClickDay={value => {

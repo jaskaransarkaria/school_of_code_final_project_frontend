@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import DashboardBanner from "../DashboardBanner";
-import NavBar from "../NavBar";
+import NavBarBootcampers from "../NavBarBootcampers";
 import DashBoardSchedule from "../DashboardSchedule";
-
+import NavBarAdmin from "../NavBarAdmin";
 import css from "./DashboardPage.module.css";
 class DashBoardPage extends Component {
   render() {
@@ -10,7 +10,7 @@ class DashBoardPage extends Component {
       <div className={css.background}>
         <div className={css.dashboardContainer}>
           <DashboardBanner />
-          <NavBar />
+          <NavBarBootcampers />
           <DashBoardSchedule />
         </div>
       </div>

@@ -1,13 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import css from "../NavBar/NavBar.module.css";
+import css from "./NavBarBootcampers.module.css";
 import HomeIcon from "../../Images/home.svg";
 import CalendarIcon from "../../Images/calendar.svg";
 import GlassesIcon from "../../Images/glasses.svg";
-import EducationIcon from "../../Images/education.svg";
-import NotebookIcon from "../../Images/notebook.svg";
-
-function NavBar() {
+import InfoIcon from "../../Images/information.svg";
+function NavBarBootcampers() {
   return (
     <>
       <nav className={css.navContainer}>
@@ -17,6 +15,7 @@ function NavBar() {
               <img className={css.homeIcon} src={HomeIcon} alt="home icon" />
             </Link>
           </div>
+
           <div className={css.calendarContainer}>
             <Link to="/schedule">
               <img
@@ -35,9 +34,14 @@ function NavBar() {
               />
             </Link>
           </div>
+          <div className={css.infoContainer}>
+            <Link to="/information">
+              <img className={css.infoIcon} src={InfoIcon} alt="info icon" />
+            </Link>
+          </div>
         </div>
       </nav>
     </>
   );
 }
-export default NavBar;
+export default NavBarBootcampers;
