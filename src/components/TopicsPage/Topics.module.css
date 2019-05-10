@@ -1,8 +1,11 @@
-.topicsContainer {
+.topicInfoContainer {
   position: relative;
-  left: 6%;
-  background-color: red;
-  width: 94%;
-  height: 100%;
-  bottom: 80%;
+
+  width: 100%;
+}
+.title {
+  display: inline-block;
+  position: absolute;
+  left: 20%;
+  top: 30%;
 }

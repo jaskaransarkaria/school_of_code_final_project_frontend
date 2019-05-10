@@ -55,48 +55,45 @@ const SchedulePage = ({ props }) => {
   };
 
   return (
-    <>
+    <div className={css.schedulePageContainer}>
       <SubBanner />
       <NavBarBootcampers />
-
-      <div className={css.schedulePageContainer}>
-        <Calendar
-          onClickDay={value => {
-            convertDate(value);
-          }}
-        />
-        <button onClick={() => changeDate(-1)}>&lt;</button>
-        Schedule
-        <button onClick={() => changeDate(1)}>&gt;</button>
-        <br />
-        {(
-          <>
-            {contentToBeDisplayed.defaultUsed}
-            <br />
-            Showing: {contentToBeDisplayed.date}
-          </>
-        ) || <>{contentToBeDisplayed.date}</>}
-        <div className={css.timelineContainer}>
-          <Timeline>
-            {contentToBeDisplayed.daysContent.map(item => (
-              <TimelineEvent title={item.sessionTimes}>
-                {item.contentURL !== "" ? (
-                  <div>
-                    {item.contentTitle}
-                    <br />
-                    <a href={`https://${item.contentURL}`} target="_blank">
-                      {item.contentURL}
-                    </a>
-                  </div>
-                ) : (
-                  <div>{item.contentTitle}</div>
-                )}
-              </TimelineEvent>
-            ))}
-          </Timeline>
-        </div>
+      <Calendar
+        onClickDay={value => {
+          convertDate(value);
+        }}
+      />
+      <button onClick={() => changeDate(-1)}>&lt;</button>
+      Schedule
+      <button onClick={() => changeDate(1)}>&gt;</button>
+      <br />
+      {(
+        <>
+          {contentToBeDisplayed.defaultUsed}
+          <br />
+          Showing: {contentToBeDisplayed.date}
+        </>
+      ) || <>{contentToBeDisplayed.date}</>}
+      <div className={css.timelineContainer}>
+        <Timeline>
+          {contentToBeDisplayed.daysContent.map(item => (
+            <TimelineEvent title={item.sessionTimes}>
+              {item.contentURL !== "" ? (
+                <div>
+                  {item.contentTitle}
+                  <br />
+                  <a href={`https://${item.contentURL}`} target="_blank">
+                    {item.contentURL}
+                  </a>
+                </div>
+              ) : (
+                <div>{item.contentTitle}</div>
+              )}
+            </TimelineEvent>
+          ))}
+        </Timeline>
       </div>
-    </>
+    </div>
   );
 };
 

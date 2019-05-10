@@ -1,5 +1,5 @@
 .navContainer {
-  display: flex;
+  display: inline-flex;
   justify-content: center;
 
   background-color: #0834ac;
@@ -7,7 +7,7 @@
   height: 100vh;
 }
 .iconsContainer {
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   justify-content: space-around;
 }

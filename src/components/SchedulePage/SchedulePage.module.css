@@ -7,11 +7,7 @@
   left: 6%;
 } */
 .schedulePageContainer {
-  position: absolute;
-  left: 6%;
-  display: inline-block;
-  top: 20%;
-  width: 94%;
+  width: 100%;
 
   /* background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png"); */
 }
