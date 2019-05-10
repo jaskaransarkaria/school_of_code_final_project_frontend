@@ -13,6 +13,8 @@ const interviewQuestions = [
 
 const VideoUpload = () => {
   const [questionCounter, setQuestionCounter] = useState(0);
+  const [hasVideo, setHasVideo] = useState(false);
+  const [hasAudio, setHasAudio] = useState(false);
   const [showVideo, setShowVideo] = useState(true);
   navigator.getUserMedia =
     navigator.getUserMedia ||
@@ -41,16 +43,27 @@ const VideoUpload = () => {
     navigator.mediaDevices
       .enumerateDevices()
       .then(function(devices) {
-        devices.forEach(function(device) {
-          console.log(
-            device.kind + ": " + device.label + " id = " + device.deviceId
-          );
+        devices.forEach(item => {
+          if (item.kind === "videoinput") {
+            setHasVideo(true);
+          } else if (item.kind === "audioinput") {
+            setHasAudio(true);
+          }
         });
       })
+      // check a key === audioinput and a key === videoinput
+      // .then(function(devices) {
+      //   devices.forEach(function(device) {
+      //     console.log(
+      //       device.kind + ": " + device.label + " id = " + device.deviceId
+      //     );
+      //   });
+      // })
       .catch(function(err) {
+        console.log("err caught");
         console.log(err.name + ": " + err.message);
       });
-    console.log(navigator.mediaDevices);
+    // console.log(navigator.mediaDevices);
     // console.log(navigator.mediaDevices.getUserMedia({ video: true }));
     // console.log(navigator.mediaDevices.getUserMedia({ audio: true }));
     return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
@@ -168,7 +181,16 @@ const VideoUpload = () => {
                 <br />
                 <button
                   onClick={() => {
-                    handleRecording("start");
+                    // check if they have a microphone and webcam here
+
+                    if (!hasVideo || !hasAudio) {
+                      alert(
+                        "Your device needs a microphone and a webcam your device is missing one"
+                      );
+                      return;
+                    } else {
+                      handleRecording("start");
+                    }
                   }}
                 >
                   Start Recording

@@ -29,17 +29,22 @@ const SchedulePage = ({ props }) => {
       daysContent: [
         {
           sessionTimes: "09.00 - 10.00",
+          learningObjectives: "freak on dates",
           contentTitle: "Sort out the Freaking dates",
           contentURL: ""
         },
         {
           sessionTimes: "13.00 - 14.00",
+          learningObjectives: "learn hooks",
+
           contentTitle: "React Hooks",
           contentURL: ""
         },
         {
           sessionTimes: "15.00 - 16.00",
           contentTitle: "React useContext()",
+          learningObjectives: "understand context",
+
           contentURL: "https://reactjs.org/docs/components-and-props.html"
         }
       ]
@@ -78,13 +83,17 @@ const SchedulePage = ({ props }) => {
             {item.contentURL !== "" ? (
               <div>
                 {item.contentTitle}
+                <p>{item.learningObjectives}</p>
                 <br />
                 <a href={`https://${item.contentURL}`} target="_blank">
                   {item.contentURL}
                 </a>
               </div>
             ) : (
-              <div>{item.contentTitle}</div>
+              <>
+                <div>{item.contentTitle}</div>
+                <p>{item.learningObjectives}</p>
+              </>
             )}
           </TimelineEvent>
         ))}
