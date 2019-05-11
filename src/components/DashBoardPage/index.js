@@ -9,7 +9,7 @@ class DashBoardPage extends Component {
     return (
       <div className={css.dashBoardContainer}>
         <DashboardBanner />
-        <NavBarBootcampers />
+        <NavBarAdmin />
         <DashBoardSchedule />
       </div>
     );

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import css from "../SchedulePage/SchedulePage.module.css";
+import css from "./Schedule.module.css";
 import { Timeline, TimelineEvent } from "react-event-timeline";
 import moment from "moment";
 //import PropTypes from "prop-types";
@@ -8,7 +8,7 @@ import { Store } from "../App";
 import NavBarBootcampers from "../NavBarBootcampers";
 import SubBanner from "../SubBanner";
 
-const SchedulePage = ({ props }) => {
+const Schedule = ({ props }) => {
   const todaysDate = moment().format("DD/MM/YYYY");
   const [selectedDate, setSelectedDate] = useState(todaysDate);
   const [fullScheduleData, setFullScheduleData] = useContext(Store);
@@ -119,11 +119,11 @@ const SchedulePage = ({ props }) => {
           </TimelineEvent>
         ))}
       </Timeline>
-    </>
+    </div>
   );
 };
 
-export default SchedulePage;
+export default Schedule;
 
 // SchedulePage.propTypes = {
 //   date: PropTypes.string,

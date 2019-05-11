@@ -2,7 +2,7 @@ import React from "react";
 
 import NavBarBootcampers from "../NavBarBootcampers";
 import SubBanner from "../SubBanner";
-import css from "../TopicsPage/Topics.module.css";
+import css from "./Topics.module.css";
 import HtmlImage from "../../Images/html.svg";
 import CssImage from "../../Images/css.svg";
 import JsImage from "../../Images/js.svg";
