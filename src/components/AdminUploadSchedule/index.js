@@ -58,6 +58,22 @@ const AdminUploadSchedule = () => {
       },
       ...fullScheduleData.slice(duplicateDate + 1)
     ]);
+
+    fetch("http://localhost:5000/schedule", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        date: selectedDate,
+        daysContent: daysSchedule.slice()
+      })
+    }).then(res => res.json());
+    console.log("sending", {
+      date: selectedDate,
+      daysContent: daysSchedule.slice()
+    });
   };
 
   const addURL = ind => {
