@@ -1,6 +1,12 @@
 import React from "react";
-const AdminDashboardPage = () => {
-  return <></>;
+import VideoUpload from "../components/VideoUpload";
+
+const ApplicantDashboardPage = () => {
+  return (
+    <>
+      <VideoUpload />
+    </>
+  );
 };
 
-export default AdminDashboardPage;
+export default ApplicantDashboardPage;

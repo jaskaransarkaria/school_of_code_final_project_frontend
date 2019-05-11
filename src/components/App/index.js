@@ -168,10 +168,7 @@ function App() {
     <Store.Provider value={[fullScheduleData, setFullScheduleData]}>
       <Router>
         <Route exact path="/" component={LoginPage} />
-        <Route
-          path="/application-dashboard"
-          component={ApplicantDashboardPage}
-        />
+        <Route path="/applicant-dashboard" component={ApplicantDashboardPage} />
         <Route
           path="/bootcamper-dashboard"
           component={BootcamperDashboardPage}
