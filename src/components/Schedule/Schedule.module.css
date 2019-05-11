@@ -1,0 +1,19 @@
+/* #timeline {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 3%;
+  background-color: rgba(1, 1, 1, 0);
+  left: 6%;
+} */
+.schedulePageContainer {
+  width: 100%;
+
+  /* background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png"); */
+}
+
+.timelineContainer {
+}
+.react-calendar {
+  background-color: red;
+}

@@ -1,12 +1,14 @@
 import React, { useState, useContext } from "react";
-//import css from "./index.module.css";
+import css from "./Schedule.module.css";
 import { Timeline, TimelineEvent } from "react-event-timeline";
 import moment from "moment";
 //import PropTypes from "prop-types";
 import Calendar from "react-calendar";
 import { Store } from "../App";
+import NavBarBootcampers from "../NavBarBootcampers";
+import SubBanner from "../SubBanner";
 
-const SchedulePage = ({ props }) => {
+const Schedule = ({ props }) => {
   const todaysDate = moment().format("DD/MM/YYYY");
   const [selectedDate, setSelectedDate] = useState(todaysDate);
   const [fullScheduleData, setFullScheduleData] = useContext(Store);
@@ -29,17 +31,22 @@ const SchedulePage = ({ props }) => {
       daysContent: [
         {
           sessionTimes: "09.00 - 10.00",
+          learningObjectives: "freak on dates",
           contentTitle: "Sort out the Freaking dates",
           contentURL: ""
         },
         {
           sessionTimes: "13.00 - 14.00",
+          learningObjectives: "learn hooks",
+
           contentTitle: "React Hooks",
           contentURL: ""
         },
         {
           sessionTimes: "15.00 - 16.00",
           contentTitle: "React useContext()",
+          learningObjectives: "understand context",
+
           contentURL: "https://reactjs.org/docs/components-and-props.html"
         }
       ]
@@ -53,24 +60,43 @@ const SchedulePage = ({ props }) => {
   };
 
   return (
-    <>
-      <div>
-        <Calendar
-          onClickDay={value => {
-            convertDate(value);
-          }}
-        />
-        <button onClick={() => changeDate(-1)}>&lt;</button>
-        Schedule
-        <button onClick={() => changeDate(1)}>&gt;</button>
-        <br />
-        {(
-          <>
-            {contentToBeDisplayed.defaultUsed}
-            <br />
-            Showing: {contentToBeDisplayed.date}
-          </>
-        ) || <>{contentToBeDisplayed.date}</>}
+    <div className={css.schedulePageContainer}>
+      <SubBanner />
+      <NavBarBootcampers />
+      <Calendar
+        onClickDay={value => {
+          convertDate(value);
+        }}
+      />
+      <button onClick={() => changeDate(-1)}>&lt;</button>
+      Schedule
+      <button onClick={() => changeDate(1)}>&gt;</button>
+      <br />
+      {(
+        <>
+          {contentToBeDisplayed.defaultUsed}
+          <br />
+          Showing: {contentToBeDisplayed.date}
+        </>
+      ) || <>{contentToBeDisplayed.date}</>}
+      <div className={css.timelineContainer}>
+        <Timeline>
+          {contentToBeDisplayed.daysContent.map(item => (
+            <TimelineEvent title={item.sessionTimes}>
+              {item.contentURL !== "" ? (
+                <div>
+                  {item.contentTitle}
+                  <br />
+                  <a href={`https://${item.contentURL}`} target="_blank">
+                    {item.contentURL}
+                  </a>
+                </div>
+              ) : (
+                <div>{item.contentTitle}</div>
+              )}
+            </TimelineEvent>
+          ))}
+        </Timeline>
       </div>
       <Timeline>
         {contentToBeDisplayed.daysContent.map(item => (
@@ -78,22 +104,26 @@ const SchedulePage = ({ props }) => {
             {item.contentURL !== "" ? (
               <div>
                 {item.contentTitle}
+                <p>{item.learningObjectives}</p>
                 <br />
                 <a href={`https://${item.contentURL}`} target="_blank">
                   {item.contentURL}
                 </a>
               </div>
             ) : (
-              <div>{item.contentTitle}</div>
+              <>
+                <div>{item.contentTitle}</div>
+                <p>{item.learningObjectives}</p>
+              </>
             )}
           </TimelineEvent>
         ))}
       </Timeline>
-    </>
+    </div>
   );
 };
 
-export default SchedulePage;
+export default Schedule;
 
 // SchedulePage.propTypes = {
 //   date: PropTypes.string,

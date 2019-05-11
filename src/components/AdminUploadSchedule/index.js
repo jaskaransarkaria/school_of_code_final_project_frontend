@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import AdminPageScheduleTimes from "../AdminPageScheduleTimes";
+import AdminScheduleTimes from "../AdminScheduleTimes";
 import moment from "moment";
 import { Store } from "../App";
 
@@ -7,8 +7,9 @@ import { Store } from "../App";
 // atm form handler is running a function that changes data at the APP level
 // changing state at the app level is redundant once there is a data base.
 
-const AdminUploadSchedulePage = () => {
+const AdminUploadSchedule = () => {
   const [fullScheduleData, setFullScheduleData] = useContext(Store);
+  const handleUpload = document.getElementById("fileUpload");
   // ability to upload schedule
   // pass down a function that adds the days schedule up to the state in the app
   // multiple content Urls
@@ -26,7 +27,12 @@ const AdminUploadSchedulePage = () => {
   // review schedule before upload?
 
   const [daysSchedule, setDaysSchedule] = useState([
-    { sessionTimes: "09.00 - 10.00", contentTitle: "", contentURL: [] }
+    {
+      sessionTimes: "09.00 - 10.00",
+      contentTitle: "",
+      contentURL: [],
+      learningObjectives: ""
+    }
   ]);
   const [selectedDate, setSelectedDate] = useState(
     moment().format("DD/MM/YYYY")
@@ -35,13 +41,21 @@ const AdminUploadSchedulePage = () => {
   const formHandler = event => {
     event.preventDefault();
 
+    console.log("files to be uploaded", handleUpload.files);
+    //const formData = new FormData();
+    //handleUpload.files.map(item => formData.append("fileUpload", item));
+    // do something with the appended files
+
     const duplicateDate = fullScheduleData.findIndex(
       item => item.date === selectedDate
     );
 
     setFullScheduleData([
       ...fullScheduleData.slice(0, duplicateDate),
-      { date: selectedDate, daysContent: daysSchedule.slice() },
+      {
+        date: selectedDate,
+        daysContent: daysSchedule.slice()
+      },
       ...fullScheduleData.slice(duplicateDate + 1)
     ]);
   };
@@ -115,6 +129,8 @@ const AdminUploadSchedulePage = () => {
         <div>
           Date:{" "}
           <input
+            aria-label="Session date"
+            id="sessionDate"
             type="text"
             value={selectedDate}
             onChange={e => {
@@ -127,7 +143,7 @@ const AdminUploadSchedulePage = () => {
           return (
             <>
               <br />
-              <AdminPageScheduleTimes
+              <AdminScheduleTimes
                 props={(ind, newTime) => handleSessionTime(ind, newTime)}
                 index={ind}
                 startValue={daysSchedule[ind].sessionTimes}
@@ -147,19 +163,34 @@ const AdminUploadSchedulePage = () => {
               <br />
               <br />
               <>
-                Description: <textarea name="Description" />
+                Learning Objectives:{" "}
+                <textarea
+                  name="Learning Objectives"
+                  placeholder="Learning Objectives"
+                  onChange={event =>
+                    setDaysSchedule([
+                      ...daysSchedule.slice(0, ind),
+                      {
+                        ...daysSchedule[ind],
+                        learningObjectives: event.target.value
+                      },
+                      ...daysSchedule.slice(ind + 1)
+                    ])
+                  }
+                />
               </>
               <br />
               <br />
-              <input type="file" multiple />
+              <input type="file" id="fileUpload" multiple />
               <br />
               {daysSchedule[ind].contentURL.length > 0 ? (
                 daysSchedule[ind].contentURL.map((_, contentIndex) =>
                   contentIndex + 1 === daysSchedule[ind].contentURL.length ? (
                     <>
                       <br />
-                      <label>Useful Links: </label>
+                      <label htmlFor="contentUrlInput">Useful Links:</label>
                       <input
+                        id="contentUrlInput"
                         autoFocus
                         value={daysSchedule[ind].contentURL[contentIndex]}
                         type="text"
@@ -248,4 +279,4 @@ const AdminUploadSchedulePage = () => {
   );
 };
 
-export default AdminUploadSchedulePage;
+export default AdminUploadSchedule;
