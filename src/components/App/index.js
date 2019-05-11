@@ -1,13 +1,14 @@
-import React, { useState, useEffect, createContext } from "react";
-import SchedulePage from "../SchedulePage";
-import "./App.css";
-import firebase from "firebase";
-import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-import AdminUploadSchedulePage from "../AdminUploadSchedulePage";
-import FeedbackTray from "../FeedbackTray";
-import Welcome from "../Welcome";
-import VideoUpload from "../VideoUpload";
-import { api } from "../../config";
+import React, { useState, createContext } from "react";
+import ApplicantDashboardPage from "../../pages/ApplicantDashboardPage";
+import AdminUploadSchedulePage from "../../pages/AdminUploadSchedulePage";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import LoginPage from "../../pages/LoginPage";
+import SchedulePage from "../../pages/SchedulePage";
+import TopicsPage from "../../pages/TopicsPage";
+import CreditsPage from "../../pages/CreditsPage";
+import AdminDashboardPage from "../../pages/AdminDashboardPage";
+import BootcamperDashboardPage from "../../pages/BootcamperDashboardPage";
+import AdminApplicationProcessingPage from "../../pages/AdminApplicationProcessingPage";
 
 const allContent = [
   {
@@ -160,64 +161,31 @@ const allContent = [
 ];
 export const Store = createContext([allContent, () => {}]);
 
-console.log(api.firebase_auth_domain);
-console.log(api.firebase_key);
-
-firebase.initializeApp({
-  apiKey: api.firebase_key,
-  authDomain: api.firebase_auth_domain
-});
 function App() {
   const [fullScheduleData, setFullScheduleData] = useState(allContent);
-  const [signedIn, setSignedIn] = useState(false);
-
-  const uiConfig = {
-    signInFlow: "popup",
-    signInOptions: [
-      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-      firebase.auth.GithubAuthProvider.PROVIDER_ID
-    ],
-    callbacks: {
-      signInSuccess: () => false
-    }
-  };
-
-  useEffect(() => {
-    firebase.auth().onAuthStateChanged(user => {
-      setSignedIn(!!user); // not not meaning if the user is an object it will revert to true and if it isn't an object it will revert to false
-      console.log("user", user);
-      console.log("uid", user.uid);
-    });
-  }, []);
 
   return (
     <Store.Provider value={[fullScheduleData, setFullScheduleData]}>
-      {console.log("reloaaad", fullScheduleData)}
-      {!signedIn ? (
-        <StyledFirebaseAuth
-          uiConfig={uiConfig}
-          firebaseAuth={firebase.auth()}
+      <Router>
+        <Route exact path="/" component={LoginPage} />
+        <Route
+          path="/application-dashboard"
+          component={ApplicantDashboardPage}
         />
-      ) : (
-        <div className="App">
-          <Welcome
-            fullName={firebase.auth().currentUser.displayName}
-            photo={firebase.auth().currentUser.photoURL}
-          />
-          <button
-            onClick={() => {
-              firebase.auth().signOut();
-            }}
-          >
-            Sign Out
-          </button>
-
-          <AdminUploadSchedulePage />
-          <SchedulePage />
-          <FeedbackTray />
-          <VideoUpload />
-        </div>
-      )}
+        <Route
+          path="/bootcamper-dashboard"
+          component={BootcamperDashboardPage}
+        />
+        <Route path="/admin-dashboard" component={AdminDashboardPage} />
+        <Route path="/upload-schedule" component={AdminUploadSchedulePage} />
+        <Route path="/schedule" component={SchedulePage} />
+        <Route path="/topics" component={TopicsPage} />
+        <Route path="/credits" component={CreditsPage} />
+        <Route
+          path="/admin-application-processing"
+          component={AdminApplicationProcessingPage}
+        />
+      </Router>
     </Store.Provider>
   );
 }

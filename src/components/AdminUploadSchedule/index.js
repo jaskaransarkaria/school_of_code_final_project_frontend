@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import AdminPageScheduleTimes from "../AdminPageScheduleTimes";
+import AdminScheduleTimes from "../AdminScheduleTimes";
 import moment from "moment";
 import { Store } from "../App";
 
@@ -7,7 +7,7 @@ import { Store } from "../App";
 // atm form handler is running a function that changes data at the APP level
 // changing state at the app level is redundant once there is a data base.
 
-const AdminUploadSchedulePage = () => {
+const AdminUploadSchedule = () => {
   const [fullScheduleData, setFullScheduleData] = useContext(Store);
   const handleUpload = document.getElementById("fileUpload");
   // ability to upload schedule
@@ -42,8 +42,8 @@ const AdminUploadSchedulePage = () => {
     event.preventDefault();
 
     console.log("files to be uploaded", handleUpload.files);
-    const formData = new FormData();
-    handleUpload.files.map(item => formData.append("fileUpload", item));
+    //const formData = new FormData();
+    //handleUpload.files.map(item => formData.append("fileUpload", item));
     // do something with the appended files
 
     const duplicateDate = fullScheduleData.findIndex(
@@ -143,7 +143,7 @@ const AdminUploadSchedulePage = () => {
           return (
             <>
               <br />
-              <AdminPageScheduleTimes
+              <AdminScheduleTimes
                 props={(ind, newTime) => handleSessionTime(ind, newTime)}
                 index={ind}
                 startValue={daysSchedule[ind].sessionTimes}
@@ -279,4 +279,4 @@ const AdminUploadSchedulePage = () => {
   );
 };
 
-export default AdminUploadSchedulePage;
+export default AdminUploadSchedule;
