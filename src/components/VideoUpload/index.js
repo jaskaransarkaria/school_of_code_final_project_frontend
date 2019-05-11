@@ -96,8 +96,6 @@ const VideoUpload = () => {
         switch (action) {
           case "stop":
             var tracks = stream.getTracks();
-            console.log(tracks);
-            console.log(stream.getTracks());
             document.getElementById("videoUpload").srcObject = null;
             //localStream.getTracks()[0].stop();
             tracks.forEach(function(track) {
