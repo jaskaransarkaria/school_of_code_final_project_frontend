@@ -6,6 +6,8 @@ import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import AdminUploadSchedulePage from "../AdminUploadSchedulePage";
 import FeedbackTray from "../FeedbackTray";
 import Welcome from "../Welcome";
+import VideoUpload from "../VideoUpload";
+import { api } from "../../config";
 
 const allContent = [
   {
@@ -14,22 +16,26 @@ const allContent = [
       {
         sessionTimes: "09.00 - 10.00",
         contentTitle: "Code Wars",
-        contentURL: ""
+        contentURL: "",
+        learningObjectives: ""
       },
       {
         sessionTimes: "10.00 - 11.00",
         contentTitle: "JavaScript Fat Arrows",
-        contentURL: ""
+        contentURL: "",
+        learningObjectives: ""
       },
       {
         sessionTimes: "13.00 - 14.00",
         contentTitle: "JavaScript async await",
-        contentURL: ""
+        contentURL: "",
+        learningObjectives: ""
       },
       {
         sessionTimes: "15.00 - 16.00",
         contentTitle: "React functional Components",
-        contentURL: "https://reactjs.org/docs/components-and-props.html"
+        contentURL: "https://reactjs.org/docs/components-and-props.html",
+        learningObjectives: ""
       }
     ]
   },
@@ -39,7 +45,8 @@ const allContent = [
       {
         sessionTimes: "",
         contentTitle: "",
-        contentURL: ""
+        contentURL: "",
+        learningObjectives: ""
       }
     ]
   },
@@ -49,7 +56,8 @@ const allContent = [
       {
         sessionTimes: "",
         contentTitle: "",
-        contentURL: ""
+        contentURL: "",
+        learningObjectives: ""
       }
     ]
   },
@@ -59,22 +67,26 @@ const allContent = [
       {
         sessionTimes: "09.00 - 10.00",
         contentTitle: "Code Wars",
-        contentURL: ""
+        contentURL: "",
+        learningObjectives: ""
       },
       {
         sessionTimes: "10.00 - 11.00",
         contentTitle: "JavaScript Fat Arrows",
-        contentURL: ""
+        contentURL: "",
+        learningObjectives: ""
       },
       {
         sessionTimes: "13.00 - 14.00",
         contentTitle: "JavaScript async await",
-        contentURL: ""
+        contentURL: "",
+        learningObjectives: ""
       },
       {
         sessionTimes: "15.00 - 16.00",
         contentTitle: "React functional Components",
-        contentURL: "https://reactjs.org/docs/components-and-props.html"
+        contentURL: "https://reactjs.org/docs/components-and-props.html",
+        learningObjectives: ""
       }
     ]
   },
@@ -84,7 +96,8 @@ const allContent = [
       {
         sessionTimes: "09.00 - 10.00",
         contentTitle: "Sort out the Freaking dates",
-        contentURL: ""
+        contentURL: "",
+        learningObjectives: ""
       },
       {
         sessionTimes: "13.00 - 14.00",
@@ -94,7 +107,8 @@ const allContent = [
       {
         sessionTimes: "15.00 - 16.00",
         contentTitle: "React useContext()",
-        contentURL: "https://reactjs.org/docs/components-and-props.html"
+        contentURL: "https://reactjs.org/docs/components-and-props.html",
+        learningObjectives: ""
       }
     ]
   },
@@ -104,17 +118,20 @@ const allContent = [
       {
         sessionTimes: "09.00 - 10.00",
         contentTitle: "Code Wars",
-        contentURL: ""
+        contentURL: "",
+        learningObjectives: ""
       },
       {
         sessionTimes: "13.00 - 14.00",
         contentTitle: "React Hooks",
-        contentURL: ""
+        contentURL: "",
+        learningObjectives: ""
       },
       {
         sessionTimes: "15.00 - 16.00",
         contentTitle: "React useContext()",
-        contentURL: "https://reactjs.org/docs/components-and-props.html"
+        contentURL: "https://reactjs.org/docs/components-and-props.html",
+        learningObjectives: ""
       }
     ]
   },
@@ -124,7 +141,8 @@ const allContent = [
       {
         sessionTimes: "",
         contentTitle: "",
-        contentURL: ""
+        contentURL: "",
+        learningObjectives: ""
       }
     ]
   },
@@ -134,16 +152,20 @@ const allContent = [
       {
         sessionTimes: "",
         contentTitle: "",
-        contentURL: ""
+        contentURL: "",
+        learningObjectives: ""
       }
     ]
   }
 ];
 export const Store = createContext([allContent, () => {}]);
 
+console.log(api.firebase_auth_domain);
+console.log(api.firebase_key);
+
 firebase.initializeApp({
-  apiKey: "AIzaSyBEjVPCQzoKZxg-YCv3Pno_X4Ek1MtOqQw",
-  authDomain: "what-did-i-miss-88f32.firebaseapp.com"
+  apiKey: api.firebase_key,
+  authDomain: api.firebase_auth_domain
 });
 function App() {
   const [fullScheduleData, setFullScheduleData] = useState(allContent);
@@ -193,6 +215,7 @@ function App() {
           <AdminUploadSchedulePage />
           <SchedulePage />
           <FeedbackTray />
+          <VideoUpload />
         </div>
       )}
     </Store.Provider>
