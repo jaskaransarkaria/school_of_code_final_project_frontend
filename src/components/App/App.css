@@ -1,6 +1,12 @@
+@import url("https://fonts.googleapis.com/css?family=Oxygen:300,400");
+
 .App {
   text-align: center;
   background-color: antiquewhite;
   width: 100%;
-  height: 100vh;
+  height: 100%;
+}
+.body {
+  width: 100%;
+  height: 100%;
 }
