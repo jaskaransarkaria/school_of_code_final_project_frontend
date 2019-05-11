@@ -3,7 +3,7 @@ import DashboardBanner from "../DashboardBanner";
 import NavBarBootcampers from "../NavBarBootcampers";
 import DashBoardSchedule from "../DashboardSchedule";
 import NavBarAdmin from "../NavBarAdmin";
-import css from "../DashBoardPage/DashBoardPage.module.css";
+import css from "../DashBoardPage/DashboardPage.module.css";
 class DashBoardPage extends Component {
   render() {
     return (
