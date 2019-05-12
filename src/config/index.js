@@ -1,4 +1,4 @@
-const API_URL = process.env.REACT_APP_API_URL || "";
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
 const FIREBASE_KEY =
   process.env.FIREBASE_API_KEY || "AIzaSyBEjVPCQzoKZxg-YCv3Pno_X4Ek1MtOqQw";
 const FIREBASE_AUTH_DOMAIN =
@@ -10,6 +10,7 @@ export const api = {
   //api routes
   register: `${API_URL}/register`,
   login: `${API_URL}/login`,
+  schedule: `${API_URL}/schedule`,
   firebase_key: `${FIREBASE_KEY}`,
   firebase_auth_domain: `${FIREBASE_AUTH_DOMAIN}`
 };
