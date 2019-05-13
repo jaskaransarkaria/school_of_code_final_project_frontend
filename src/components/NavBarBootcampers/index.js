@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import css from "./NavBarBootcampers.module.css";
+import css from "../NavBarBootcampers/NavBarBootcampers.module.css";
 import HomeIcon from "../../Images/home.svg";
 import CalendarIcon from "../../Images/calendar.svg";
 import GlassesIcon from "../../Images/glasses.svg";
@@ -11,7 +11,7 @@ function NavBarBootcampers() {
       <nav className={css.navContainer}>
         <div className={css.iconsContainer}>
           <div className={css.homeContainer}>
-            <Link to="/">
+            <Link to="/bootcamper-dashboard">
               <img className={css.homeIcon} src={HomeIcon} alt="home icon" />
             </Link>
           </div>
@@ -35,7 +35,7 @@ function NavBarBootcampers() {
             </Link>
           </div>
           <div className={css.infoContainer}>
-            <Link to="/information">
+            <Link to="/credits">
               <img className={css.infoIcon} src={InfoIcon} alt="info icon" />
             </Link>
           </div>

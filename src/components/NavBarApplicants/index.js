@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import css from "./NavBarBootcampers.module.css";
+import css from "../NavBarApplicants/NavBarApplicants.module.css";
 import ApplyIcon from "../../Images/apply.svg";
 function NavBarApplicants() {
   return (

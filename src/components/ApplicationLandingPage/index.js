@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Login from "../Login";
 import css from "../ApplicationLandingPage/ApplicationLandingPage.module.css";
 import SocImage from "../../Images/soc-logo.png";
 import TwitterImage from "../../Images/twitter-logo.svg";
@@ -20,7 +21,7 @@ class ApplicationLandingPage extends Component {
           <div className={css.leftContainer}>
             <h1>School of Code</h1>
             <h3>Register Area</h3>
-
+            <Login />
             <div className={css.socImage}>
               <img
                 style={{ height: "250px", width: "300px" }}

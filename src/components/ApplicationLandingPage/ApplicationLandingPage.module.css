@@ -21,7 +21,7 @@ body {
 }
 .leftContainer {
   border-radius: 1px;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   border-right: 3px solid white;
 }
 h1 {
@@ -43,6 +43,8 @@ h3 {
 .mediumContainer,
 .locationContainer,
 .emailContainer {
+  display: inline-flex;
+
   background-color: rgba(34, 34, 34, 0.452);
   border-radius: 20%;
 }
@@ -53,8 +55,8 @@ h3 {
 .mediumLogo,
 .locationLogo,
 .emailLogo {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
 }
 
 .twitterContainer:hover {
@@ -96,3 +98,7 @@ h2 {
   text-align: center;
   color: white;
 }
+h3 {
+  margin: 5px;
+}
+/* LOGIN */

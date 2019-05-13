@@ -5,7 +5,7 @@ import moment from "moment";
 //import PropTypes from "prop-types";
 import Calendar from "react-calendar";
 import { Store } from "../App";
-import NavBarBootcampers from "../NavBarBootcampers";
+import NavBar from "../NavBar";
 import SubBanner from "../SubBanner";
 
 const Schedule = ({ props }) => {
@@ -62,7 +62,7 @@ const Schedule = ({ props }) => {
   return (
     <div className={css.schedulePageContainer}>
       <SubBanner />
-      <NavBarBootcampers />
+      <NavBar propsUser="Bootcamper" />
       <Calendar
         onClickDay={value => {
           convertDate(value);
