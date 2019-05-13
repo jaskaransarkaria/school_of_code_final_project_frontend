@@ -24,7 +24,37 @@ const LoginPage = () => {
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
-      setSignedIn(!!user); // not not meaning if the user is an object it will revert to true and if it isn't an object it will revert to false
+      // logic which dictates if they are already in the db or they need to register
+      // if they need to register push them to the applicant dashboard page
+
+      async function isUserRegistered(user) {
+        console.log("in async post", user.uid);
+        const response = await fetch(`${api.users}`, {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify({
+            firebaseUid: user.uid
+          })
+        });
+        const data = await response.json();
+        console.log(data.result);
+        if (data.result === null) {
+          // send them to the register page
+        } else {
+          setSignedIn(
+            !!user
+            // not not meaning if the user is an object it will revert to true
+            // and if it isn't an object it will revert to false
+          );
+          console.log("user exists in db");
+        }
+      }
+
+      isUserRegistered(user);
+
       console.log("user", user);
       console.log("uid", user.uid);
     });
