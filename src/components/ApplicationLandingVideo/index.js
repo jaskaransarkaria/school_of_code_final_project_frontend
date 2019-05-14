@@ -16,11 +16,12 @@ class ApplicationLandingVideo extends Component {
       <div className={css.wrapper}>
         <div className={css.container}>
           <div className={css.leftContainer}>
-            <h1>School of Code</h1>
+            <h1 style={{ margin: "0px" }}>School of Code</h1>
+            <h1 style={{ margin: "0px" }}>Bootcamp</h1>
             <h3>Register Area</h3>
 
             <Login />
-            <div className={css.socImage}>
+            <div className={css.socImageContainer}>
               <img
                 style={{ height: "250px", width: "300px" }}
                 src={SocImage}

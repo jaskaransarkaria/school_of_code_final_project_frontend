@@ -1,0 +1,24 @@
+.container {
+  padding: 10px;
+  color: black;
+  border-radius: 5px;
+  background-color: rgba(236, 236, 236, 0.849);
+  display: inline-block;
+  width: 50%;
+  position: relative;
+  margin: 10% 25%;
+}
+.saveAndContinueButton,
+.previousButton {
+  margin: 20px 0px;
+  padding: 10px;
+  border-radius: 2px;
+  font-weight: bold;
+  background-color: #11cf84;
+  border: 2px solid white;
+  border-radius: 7px;
+}
+
+.saveAndContinueButton {
+  margin-left: 10px;
+}

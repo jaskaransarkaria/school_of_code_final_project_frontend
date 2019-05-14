@@ -1,0 +1,10 @@
+.container {
+  padding: 10px;
+  color: black;
+  border-radius: 5px;
+  background-color: rgba(236, 236, 236, 0.849);
+  display: inline-block;
+  width: 50%;
+  position: relative;
+  margin: 10% 25%;
+}

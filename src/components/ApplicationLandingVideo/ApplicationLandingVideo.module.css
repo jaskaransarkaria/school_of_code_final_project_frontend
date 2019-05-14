@@ -15,7 +15,7 @@ body {
   border-radius: 10px;
   width: 70%;
 }
-.socImage {
+.socImageContainer {
   position: relative;
   top: 5%;
   width: 100%;
@@ -25,13 +25,14 @@ body {
 }
 .leftContainer {
   width: 25%;
-  border-radius: 1px;
+
   background-color: rgb(255, 255, 255);
   border-right: 3px solid white;
 }
 .rightContainer {
   position: relative;
-
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
   width: 75%;
   font-weight: bold;
 
@@ -115,6 +116,6 @@ h2 {
   color: white;
 }
 h3 {
-  margin: 5px;
+  margin: 2px;
 }
 /* RIGHT CONTAINER */

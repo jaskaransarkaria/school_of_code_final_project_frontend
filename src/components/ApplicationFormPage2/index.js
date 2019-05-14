@@ -1,5 +1,5 @@
 import React from "react";
-
+import css from "../ApplicationFormPage2/ApplicationFormPage2.module.css";
 const FormPart2 = ({
   step,
   setStep,
@@ -48,38 +48,58 @@ const FormPart2 = ({
 
   return (
     <>
-      <div>
-        <label>Phone</label>
-        <input
-          type="number"
-          name="phoneNumber"
-          onChange={updateField}
-          defaultValue={formValues.phoneNumber}
-        />
-      </div>
-      <div>
-        <label>Age</label>
-        <input
-          type="number"
-          name="age"
-          onChange={updateField}
-          defaultValue={formValues.age}
-        />
-      </div>
-      <div>
-        <label>Location</label>
-        <input
-          type="text"
-          name="location"
-          onChange={updateField}
-          defaultValue={formValues.location}
-        />
-      </div>
-      <div style={{ color: "red", fontSize: 12 }}> {formError.inputError}</div>
-      <div style={{ color: "red", fontSize: 12 }}> {formError.numberError}</div>
+      <h1>
+        Application Form: <span style={{ color: "black" }}>Step 2 of 5</span>
+      </h1>
+      <div className={css.formContainer}>
+        <div>
+          <label>Phone</label>
+          <input
+            className={css.phone}
+            type="number"
+            name="phoneNumber"
+            onChange={updateField}
+            defaultValue={formValues.phoneNumber}
+          />
+        </div>
+        <div>
+          <label>Age</label>
+          <input
+            className={css.age}
+            type="number"
+            name="age"
+            onChange={updateField}
+            defaultValue={formValues.age}
+          />
+        </div>
+        <div>
+          <label>Location</label>
+          <input
+            className={css.location}
+            type="text"
+            name="location"
+            onChange={updateField}
+            defaultValue={formValues.location}
+          />
+        </div>
+        <div style={{ color: "red", fontSize: 12 }}>
+          {" "}
+          {formError.inputError}
+        </div>
+        <div style={{ color: "red", fontSize: 12 }}>
+          {" "}
+          {formError.numberError}
+        </div>
 
-      <button onClick={previous}> Previous </button>
-      <button onClick={saveAndContinue}> Save and Continue </button>
+        <button onClick={previous} className={css.previousButton}>
+          {" "}
+          Previous{" "}
+        </button>
+        <button onClick={saveAndContinue} className={css.saveAndContinueButton}>
+          {" "}
+          Save and Continue{" "}
+        </button>
+      </div>
     </>
   );
 };
