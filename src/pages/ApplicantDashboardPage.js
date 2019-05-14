@@ -1,10 +1,14 @@
 import React from "react";
-import ApplicantDashboard from "../components/ApplicantDashboard";
+
+import VideoUpload from "../components/VideoUpload";
+import ApplicationFormApp from "../components/ApplicationFormApp";
+
 
 const ApplicantDashboardPage = () => {
   return (
     <>
-      <ApplicantDashboard />
+      <ApplicationFormApp />
+      <VideoUpload />
     </>
   );
 };

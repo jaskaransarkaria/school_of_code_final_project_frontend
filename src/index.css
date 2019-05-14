@@ -15,9 +15,10 @@ code {
     monospace;
 }
 
-/* LOGIN */
-/* .firebaseui-idp-list {
-  background-color: red;
-  position: relative;
-  left: 100%;
-} */
+/* Remove the arrows on form input="number" */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
