@@ -9,7 +9,7 @@ import LinkedInImage from "../../Images/linked-in.svg";
 import MediumImage from "../../Images/medium-size.svg";
 import LocationImage from "../../Images/location.svg";
 import EmailImage from "../../Images/close-envelope.svg";
-
+import ApplicationFormApp from "../ApplicationFormApp";
 class ApplicationLandingForm extends Component {
   render() {
     return (
@@ -121,6 +121,9 @@ class ApplicationLandingForm extends Component {
           </div>
           <div className={css.rightContainer}>
             <h3 className={css.techHeading}>Please fill out form below:</h3>
+            <div className={css.formContainer}>
+              <ApplicationFormApp />
+            </div>
             {/* <h3 className={css.subHeading}>Change your life. Learn to code.</h3> */}
           </div>
         </div>
