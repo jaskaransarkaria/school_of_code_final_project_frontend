@@ -1,5 +1,4 @@
 import React from "react";
-import css from "./FormPart1.module.css";
 
 const FormPart1 = ({
   step,

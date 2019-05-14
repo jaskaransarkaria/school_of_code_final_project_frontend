@@ -6,8 +6,6 @@ import FormPart3 from "../ApplicationFormPage3";
 import FormPart4 from "../ApplicationFormPage4";
 import ReviewForm from "../ApplicationFormReviewPage";
 
-import "./App.css";
-
 const App = () => {
   const [step, setStep] = useState(1);
   const [formValues, setFormValues] = useState({
