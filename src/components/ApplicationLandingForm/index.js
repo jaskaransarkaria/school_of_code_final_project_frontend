@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Login from "../Login";
-import css from "../ApplicationLandingPage/ApplicationLandingPage.module.css";
+import css from "../ApplicationLandingForm/ApplicationLandingForm.module.css";
 import SocImage from "../../Images/soc-logo.png";
 import TwitterImage from "../../Images/twitter-logo.svg";
 import FacebookImage from "../../Images/facebook-logo.svg";
@@ -10,7 +10,7 @@ import MediumImage from "../../Images/medium-size.svg";
 import LocationImage from "../../Images/location.svg";
 import EmailImage from "../../Images/close-envelope.svg";
 
-class ApplicationLandingPage extends Component {
+class ApplicationLandingForm extends Component {
   render() {
     return (
       <div className={css.wrapper}>
@@ -120,12 +120,12 @@ class ApplicationLandingPage extends Component {
             </div>
           </div>
           <div className={css.rightContainer}>
-            <h3 className={css.techHeading}>Launch Into Tech</h3>
-            <h3 className={css.subHeading}>Change your life. Learn to code.</h3>
+            <h3 className={css.techHeading}>Please fill out form below:</h3>
+            {/* <h3 className={css.subHeading}>Change your life. Learn to code.</h3> */}
           </div>
         </div>
       </div>
     );
   }
 }
-export default ApplicationLandingPage;
+export default ApplicationLandingForm;

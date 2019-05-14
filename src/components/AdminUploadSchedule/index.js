@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import AdminScheduleTimes from "../AdminScheduleTimes";
+import css from "../AdminUploadSchedule/AdminUploadSchedule.module.css";
 import moment from "moment";
 import { Store } from "../App";
 
@@ -123,12 +124,13 @@ const AdminUploadSchedule = () => {
     ]);
   };
   return (
-    <form>
+    <form className={css.formContainer}>
       <fieldset>
         <legend>Session Information:</legend>
         <div>
           Date:{" "}
           <input
+            style={{ width: "100%", height: "30px" }}
             aria-label="Session date"
             id="sessionDate"
             type="text"
@@ -163,8 +165,9 @@ const AdminUploadSchedule = () => {
               <br />
               <br />
               <>
-                Learning Objectives:{" "}
+                Learning Objectives: <br />
                 <textarea
+                  style={{ width: "100%", height: "60px" }}
                   name="Learning Objectives"
                   placeholder="Learning Objectives"
                   onChange={event =>
