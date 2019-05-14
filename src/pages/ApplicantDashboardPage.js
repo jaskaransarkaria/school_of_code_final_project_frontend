@@ -1,10 +1,10 @@
 import React from "react";
-import VideoUpload from "../components/VideoUpload";
+import ApplicantDashboard from "../components/ApplicantDashboard";
 
 const ApplicantDashboardPage = () => {
   return (
     <>
-      <VideoUpload />
+      <ApplicantDashboard />
     </>
   );
 };

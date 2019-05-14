@@ -9,7 +9,8 @@ import CreditsPage from "../../pages/CreditsPage";
 import AdminDashboardPage from "../../pages/AdminDashboardPage";
 import BootcamperDashboardPage from "../../pages/BootcamperDashboardPage";
 import AdminApplicationProcessingPage from "../../pages/AdminApplicationProcessingPage";
-
+import ApplicantVideoPage from "../../pages/ApplicantVideoPage";
+import ApplicantFormPage from "../../pages/ApplicantFormPage";
 const allContent = [
   {
     date: "30/04/2019",
@@ -182,6 +183,8 @@ function App() {
           path="/admin-application-processing"
           component={AdminApplicationProcessingPage}
         />
+        <Route path="/application-video" component={ApplicantVideoPage} />
+        <Route path="/application-form" component={ApplicantFormPage} />
       </Router>
     </Store.Provider>
   );

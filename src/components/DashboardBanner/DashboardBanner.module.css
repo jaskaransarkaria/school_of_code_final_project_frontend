@@ -1,11 +1,10 @@
 .bannerContainer {
   position: absolute;
-
+  background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png");
   display: inline-block;
   width: 94%;
 
-  background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png");
-  height: 20%;
+  height: 15%;
   left: 6%;
 }
 .bannerWelcomeText {
@@ -18,7 +17,7 @@
 .socLogo {
   display: inline-block;
   position: relative;
-  top: 25%;
+  top: 10%;
   left: 60%;
   height: 100px;
   width: 170px;
