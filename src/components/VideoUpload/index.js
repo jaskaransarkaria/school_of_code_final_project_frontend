@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import AWS from "aws-sdk";
 import { aws } from "../../config";
 import shortid from "shortid";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { FirebaseContext } from "../App";
+import firebase from "firebase";
 
 AWS.config.update({
   region: "eu-west-1",
@@ -38,6 +40,7 @@ const interviewQuestions = [
 // check video and audio are available, if not post alert.
 
 const VideoUpload = () => {
+  const [firebaseUid, setFirebaseUid] = useState("");
   const [isRecording, setIsRecording] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [questionCounter, setQuestionCounter] = useState(0);
@@ -62,11 +65,43 @@ const VideoUpload = () => {
     []
   );
 
+  let savedUid;
   useEffect(() => {
-    return () => {
-      console.log("component did unmount");
-    };
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        savedUid = user.uid;
+        setFirebaseUid(user.uid);
+        console.log(user.uid);
+      } else {
+        console.log("no user");
+      }
+    });
   }, []);
+
+  const uploadVideosToDb = () => {
+    console.log("inside upload", firebaseUid);
+    console.log(allVideoLinks);
+    fetch("http://localhost:5000/applications/video-upload", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        firebaseUid: firebaseUid,
+        videoApplicationData: {
+          video1: { videoUrl: allVideoLinks[0] },
+          video2: { videoUrl: allVideoLinks[1] },
+          video3: { videoUrl: allVideoLinks[2] },
+          video4: { videoUrl: allVideoLinks[3] },
+          video5: { videoUrl: allVideoLinks[4] }
+        }
+      })
+    })
+      .then(res => res.json())
+      .then(data => console.log(data))
+      .then(_ => console.log("sent", allVideoLinks));
+  };
 
   const uploadToAWS = blob => {
     return new Promise((resolve, reject) => {
@@ -224,6 +259,7 @@ const VideoUpload = () => {
                 <button
                   onClick={() => {
                     // check if they have a microphone and webcam here
+
                     hasGetUserMedia();
                     if (!hasVideo || !hasAudio) {
                       alert(
@@ -273,8 +309,11 @@ const VideoUpload = () => {
                         if (blob.size > 0 && !isRecording) {
                           setIsLoading(true);
                           uploadToAWS(blob)
-                            .then(_ => setIsLoading(false))
-                            .then(_ => setShowVideo(false));
+                            .then(_ => setShowVideo(false))
+                            .then(_ => uploadVideosToDb())
+                            .catch(err => console.error(err))
+                            .finally(_ => setIsLoading(false));
+                          // add a confirm upload button which does the upload to s3
                         }
                       }}
                     >
