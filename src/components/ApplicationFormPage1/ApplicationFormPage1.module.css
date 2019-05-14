@@ -25,3 +25,10 @@
   background-color: #11cf84;
   border: 2px solid white;
 }
+/* @media only screen and (max-width: 550px) {
+  .formContainer {
+    display: unset;
+    right: 100%;
+    position: relative;
+  }
+} */

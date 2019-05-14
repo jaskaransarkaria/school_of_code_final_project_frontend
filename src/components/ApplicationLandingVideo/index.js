@@ -28,7 +28,7 @@ class ApplicationLandingVideo extends Component {
                 alt="School of code logo"
               />
             </div>
-            <h3>Follow us:</h3>
+            <h3 className={css.followUs}>Follow us:</h3>
             <div className={css.socialMediaContainer}>
               <div className={css.twitterContainer}>
                 <a
@@ -96,7 +96,7 @@ class ApplicationLandingVideo extends Component {
                 </a>
               </div>
             </div>
-            <h3>Contact Us:</h3>
+            <h3 className={css.contactUs}>Contact Us:</h3>
             <div className={css.contactContainer}>
               <div className={css.locationContainer}>
                 <a

@@ -10,7 +10,7 @@ body {
   background-image: linear-gradient(to bottom right, #04c7d9, #5f04cf);
   display: flex;
   margin: 2% auto;
-  height: 85%;
+  height: 100%;
   border: 3px solid white;
   border-radius: 10px;
   width: 70%;
@@ -25,7 +25,7 @@ body {
 }
 .leftContainer {
   width: 25%;
-
+  height: 100%;
   background-color: rgb(255, 255, 255);
   border-right: 3px solid white;
 }
@@ -154,5 +154,49 @@ h3 {
   .socImage {
     height: 140px;
     width: 140px;
+  }
+}
+
+/* RIGHT CONTAINER MEDIA QUERY */
+@media only screen and (max-width: 964px) {
+  .leftContainer {
+    width: 40%;
+  }
+  .h1 {
+    font-size: 1.2em;
+  }
+}
+
+/* MOBILE VIEW */
+@media only screen and (max-width: 550px) {
+  .rightContainer {
+    display: none;
+    width: 0%;
+  }
+  .socImage {
+    display: none;
+  }
+  .leftContainer {
+    width: 100%;
+  }
+  .socialMediaContainer {
+    display: none;
+  }
+  .contactContainer {
+    display: none;
+  }
+  .followUs {
+    display: none;
+  }
+  .contactUs {
+    display: none;
+  }
+}
+@media only screen and (max-width: 549px) {
+  .rightContainer {
+    display: unset;
+    position: absolute;
+    width: 50%;
+    background-image: none;
   }
 }
