@@ -9,6 +9,7 @@ export const api = {
   register: `${API_URL}/register`,
   users: `${API_URL}/users`,
   schedule: `${API_URL}/schedule`,
+  applications: `${API_URL}/applications`,
   firebase_key: FIREBASE_KEY,
   firebase_auth_domain: FIREBASE_AUTH_DOMAIN
 };

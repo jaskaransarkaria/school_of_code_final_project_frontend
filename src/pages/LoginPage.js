@@ -6,18 +6,9 @@ import Welcome from "../components/Welcome";
 const LoginPage = () => {
   const [signedIn, setSignedIn] = useState(false);
 
-  let savedDisplayName;
-  let savedPhotoURL;
-  let savedUid;
-  let savedEmail;
-
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
-        savedDisplayName = user.displayName;
-        savedPhotoURL = user.photoURL;
-        savedUid = user.uid;
-        savedEmail = user.email;
         setSignedIn(true);
       } else {
         console.log("no user");
@@ -45,7 +36,10 @@ const LoginPage = () => {
         />
       ) : (
         <div className="App">
-          <Welcome fullName={savedDisplayName} photo={savedPhotoURL} />
+          <Welcome
+            fullName={firebase.auth().currentUser.displayName}
+            photo={firebase.auth().currentUser.photoURL}
+          />
           <button
             onClick={() => {
               firebase.auth().signOut();

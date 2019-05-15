@@ -3,8 +3,8 @@ import AWS from "aws-sdk";
 import { aws } from "../../config";
 import shortid from "shortid";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { FirebaseContext } from "../App";
 import firebase from "firebase";
+import { api } from "../../config";
 
 AWS.config.update({
   region: "eu-west-1",
@@ -81,7 +81,7 @@ const VideoUpload = () => {
   const uploadVideosToDb = () => {
     console.log("inside upload", firebaseUid);
     console.log(allVideoLinks);
-    fetch("http://localhost:5000/applications/video-upload", {
+    fetch(`${api.applications}/video-upload`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -89,18 +89,13 @@ const VideoUpload = () => {
       },
       body: JSON.stringify({
         firebaseUid: firebaseUid,
-        videoApplicationData: {
-          video1: { videoUrl: allVideoLinks[0] },
-          video2: { videoUrl: allVideoLinks[1] },
-          video3: { videoUrl: allVideoLinks[2] },
-          video4: { videoUrl: allVideoLinks[3] },
-          video5: { videoUrl: allVideoLinks[4] }
-        }
+        videoApplicationData: [...allVideoLinks.map(vid => ({ videoUrl: vid }))]
       })
     })
       .then(res => res.json())
       .then(data => console.log(data))
-      .then(_ => console.log("sent", allVideoLinks));
+      .then(_ => console.log("sent", allVideoLinks))
+      .catch(err => console.error(err));
   };
 
   const uploadToAWS = blob => {
@@ -310,11 +305,11 @@ const VideoUpload = () => {
                           setIsLoading(true);
                           uploadToAWS(blob)
                             .then(_ => setShowVideo(false))
-                            .then(_ => uploadVideosToDb())
                             .catch(err => console.error(err))
                             .finally(_ => setIsLoading(false));
                           // add a confirm upload button which does the upload to s3
                         }
+                        return;
                       }}
                     >
                       Sumbit Final
@@ -324,6 +319,16 @@ const VideoUpload = () => {
               </>
             );
           })}
+      {!showVideo && (
+        <button
+          onClick={() => {
+            uploadVideosToDb();
+            // add re routing link here
+          }}
+        >
+          confirm upload
+        </button>
+      )}
     </div>
   );
 };
