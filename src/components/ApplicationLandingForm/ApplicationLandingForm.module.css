@@ -8,7 +8,9 @@ body {
 }
 .container {
   background-image: linear-gradient(to bottom right, #04c7d9, #5f04cf);
-  display: flex;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-areas: "header form";
   margin: 2% auto;
   height: 100%;
   border: 3px solid white;
@@ -24,16 +26,18 @@ body {
   justify-content: center;
 }
 .leftContainer {
-  width: 25%;
+  grid-area: header;
+
   height: 100%;
   background-color: rgb(255, 255, 255);
   border-right: 3px solid white;
 }
 .rightContainer {
+  grid-area: form;
   position: relative;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
-  width: 75%;
+
   font-weight: bold;
 
   color: white;
@@ -158,21 +162,9 @@ h3 {
 }
 
 /* RIGHT CONTAINER MEDIA QUERY */
-@media only screen and (max-width: 964px) {
-  .leftContainer {
-    width: 40%;
-  }
-  .h1 {
-    font-size: 1.2em;
-  }
-}
 
 /* MOBILE VIEW */
 @media only screen and (max-width: 550px) {
-  .rightContainer {
-    display: none;
-    width: 0%;
-  }
   .socImage {
     display: none;
   }
@@ -193,10 +185,21 @@ h3 {
   }
 }
 @media only screen and (max-width: 549px) {
-  .rightContainer {
+  /* .rightContainer {
     display: unset;
     position: absolute;
     width: 50%;
     background-image: none;
+  } */
+  .container {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto;
+    grid-template-areas: "header" "form";
+    margin: 2% auto;
+    height: 100%;
+    border: 3px solid white;
+    border-radius: 10px;
+    width: 70%;
   }
 }

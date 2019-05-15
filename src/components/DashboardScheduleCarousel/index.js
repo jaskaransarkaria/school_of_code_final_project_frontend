@@ -39,7 +39,7 @@ class DashboardScheduleCarousel extends Component {
             {this.array[this.state.counter + 1]}
           </div>
           <div className={css.itemThree}>
-            {this.array[this.state.counter + 3]}
+            {this.array[this.state.counter + 2]}
           </div>
 
           <img
