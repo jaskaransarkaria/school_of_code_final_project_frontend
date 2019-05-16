@@ -8,18 +8,24 @@ const ReviewForm = ({ step, setStep, formValues, submitForm }) => {
   return (
     <>
       <h1>
-        Application Form: <span style={{ color: "black" }}>Step 5 of 5</span>
+        Application Form: <span>Step 5 of 5</span>
       </h1>
       <h2>Review Information</h2>
-      <div className={css.container}>
+      <div className={css.wrapper}>
         <ul>
           {Object.keys(formValues).map(item => (
             <li>{formValues[item]}</li>
           ))}
         </ul>
 
-        <button onClick={previous}> Previous </button>
-        <button onClick={submitForm}> Submit </button>
+        <button onClick={previous} className={css.previousButton}>
+          {" "}
+          Previous{" "}
+        </button>
+        <button onClick={submitForm} className={css.submitButton}>
+          {" "}
+          Submit{" "}
+        </button>
       </div>
     </>
   );

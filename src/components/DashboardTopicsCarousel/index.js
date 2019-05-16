@@ -21,6 +21,7 @@ class DashboardTopicsCarousel extends Component {
                   border: "3px solid black"
                 }}
               />
+              <textarea />
             </div>
 
             <img

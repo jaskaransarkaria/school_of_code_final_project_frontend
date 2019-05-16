@@ -16,11 +16,10 @@ class ApplicationLandingForm extends Component {
       <div className={css.wrapper}>
         <div className={css.container}>
           <div className={css.leftContainer}>
-            <h1 style={{ margin: "0px" }}>School of Code</h1>
-            <h1 style={{ margin: "0px" }}>Bootcamp</h1>
-            <h3>Register Area</h3>
+            <h1>School of Code</h1>
 
-            <Login />
+            <h3>Application Area</h3>
+
             <div className={css.socImageContainer}>
               <img
                 className={css.socImage}
@@ -119,6 +118,7 @@ class ApplicationLandingForm extends Component {
                 />
               </div>
             </div>
+            <div className={css.webAddress}>www.schoolofcode.co.uk</div>
           </div>
           <div className={css.rightContainer}>
             <div className={css.formContainer}>

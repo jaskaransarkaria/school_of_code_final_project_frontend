@@ -5,12 +5,13 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import LoginPage from "../../pages/LoginPage";
 import SchedulePage from "../../pages/SchedulePage";
 import TopicsPage from "../../pages/TopicsPage";
-import CreditsPage from "../../pages/CreditsPage";
+// import CreditsPage from "../../pages/CreditsPage";
 import AdminDashboardPage from "../../pages/AdminDashboardPage";
 import BootcamperDashboardPage from "../../pages/BootcamperDashboardPage";
 import AdminApplicationProcessingPage from "../../pages/AdminApplicationProcessingPage";
 import ApplicantVideoPage from "../../pages/ApplicantVideoPage";
 import ApplicantFormPage from "../../pages/ApplicantFormPage";
+import TemplatePage from "../../pages/TemplatePage";
 const allContent = [
   {
     date: "30/04/2019",
@@ -178,13 +179,14 @@ function App() {
         <Route path="/upload-schedule" component={AdminUploadSchedulePage} />
         <Route path="/schedule" component={SchedulePage} />
         <Route path="/topics" component={TopicsPage} />
-        <Route path="/credits" component={CreditsPage} />
+        {/* <Route path="/credits" component={CreditsPage} /> */}
         <Route
           path="/admin-application-processing"
           component={AdminApplicationProcessingPage}
         />
         <Route path="/application-video" component={ApplicantVideoPage} />
         <Route path="/application-form" component={ApplicantFormPage} />
+        <Route path="/template" component={TemplatePage} />
       </Router>
     </Store.Provider>
   );

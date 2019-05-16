@@ -55,9 +55,9 @@ const FormPart3 = ({
   return (
     <>
       <h1>
-        Application Form: <span style={{ color: "black" }}>Step 3 of 5</span>
+        Application Form: <span>Step 3 of 5</span>
       </h1>
-      <div className={css.container}>
+      <div className={css.wrapper}>
         <div>
           <label>How do you identify?</label>
           <br />

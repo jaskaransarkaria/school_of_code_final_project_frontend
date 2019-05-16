@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import css from "../VideoUpload/VideoUpload.module.css";
 const interviewQuestions = [
   { question: "Tell us about yourself." },
   { question: "Why do you want to learn to code?" },
@@ -184,6 +184,7 @@ const VideoUpload = () => {
                 />
                 <br />
                 <button
+                  className={css.startRecording}
                   onClick={() => {
                     // check if they have a microphone and webcam here
                     hasGetUserMedia();
@@ -203,6 +204,7 @@ const VideoUpload = () => {
                 </button>
                 <>
                   <button
+                    className={css.stopRecording}
                     onClick={() => {
                       if (localStream) {
                         handleRecording("stop");
@@ -214,6 +216,7 @@ const VideoUpload = () => {
                 </>
                 {questionCounter + 1 < interviewQuestions.length ? (
                   <button
+                    className={css.submitRecording}
                     onClick={() => {
                       // upload to datbase;
                       if (localStream && localStream.active === false) {

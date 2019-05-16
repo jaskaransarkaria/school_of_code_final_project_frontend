@@ -49,56 +49,61 @@ const FormPart2 = ({
   return (
     <>
       <h1>
-        Application Form: <span style={{ color: "black" }}>Step 2 of 5</span>
+        Application Form: <span>Step 2 of 5</span>
       </h1>
-      <div className={css.formContainer}>
-        <div>
-          <label>Phone</label>
-          <input
-            className={css.phone}
-            type="number"
-            name="phoneNumber"
-            onChange={updateField}
-            defaultValue={formValues.phoneNumber}
-          />
-        </div>
-        <div>
-          <label>Age</label>
-          <input
-            className={css.age}
-            type="number"
-            name="age"
-            onChange={updateField}
-            defaultValue={formValues.age}
-          />
-        </div>
-        <div>
-          <label>Location</label>
-          <input
-            className={css.location}
-            type="text"
-            name="location"
-            onChange={updateField}
-            defaultValue={formValues.location}
-          />
-        </div>
-        <div style={{ color: "red", fontSize: 12 }}>
-          {" "}
-          {formError.inputError}
-        </div>
-        <div style={{ color: "red", fontSize: 12 }}>
-          {" "}
-          {formError.numberError}
-        </div>
+      <div className={css.wrapper}>
+        <div className={css.formContainer}>
+          <div>
+            <label>Phone</label>
+            <input
+              className={css.phone}
+              type="number"
+              name="phoneNumber"
+              onChange={updateField}
+              defaultValue={formValues.phoneNumber}
+            />
+          </div>
+          <div>
+            <label>Age</label>
+            <input
+              className={css.age}
+              type="number"
+              name="age"
+              onChange={updateField}
+              defaultValue={formValues.age}
+            />
+          </div>
+          <div>
+            <label>Location</label>
+            <input
+              className={css.location}
+              type="text"
+              name="location"
+              onChange={updateField}
+              defaultValue={formValues.location}
+            />
+          </div>
+          <div style={{ color: "red", fontSize: 12 }}>
+            {" "}
+            {formError.inputError}
+          </div>
+          <div style={{ color: "red", fontSize: 12 }}>
+            {" "}
+            {formError.numberError}
+          </div>
 
-        <button onClick={previous} className={css.previousButton}>
-          {" "}
-          Previous{" "}
-        </button>
-        <button onClick={saveAndContinue} className={css.saveAndContinueButton}>
-          {" "}
-          Save and Continue{" "}
-        </button>
+          <button onClick={previous} className={css.previousButton}>
+            {" "}
+            Previous{" "}
+          </button>
+          <button
+            onClick={saveAndContinue}
+            className={css.saveAndContinueButton}
+          >
+            {" "}
+            Save and Continue{" "}
+          </button>
+        </div>
       </div>
     </>
   );

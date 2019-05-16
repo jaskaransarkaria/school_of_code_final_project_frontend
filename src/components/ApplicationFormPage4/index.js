@@ -44,9 +44,9 @@ const FormPart4 = ({
   return (
     <>
       <h1>
-        Application Form: <span style={{ color: "black" }}>Step 4 of 5</span>
+        Application Form: <span>Step 4 of 5</span>
       </h1>
-      <div className={css.container}>
+      <div className={css.wrapper}>
         <label>
           Please explain why you would like to do the School of Code
         </label>
