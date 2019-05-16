@@ -1,4 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import AWS from "aws-sdk";
+import { aws } from "../../config";
+import shortid from "shortid";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import firebase from "firebase";
+import { api } from "../../config";
+
+AWS.config.update({
+  region: "eu-west-1",
+  accessKeyId: `${aws.key_id}`,
+  secretAccessKey: `${aws.secret_key}`
+});
+const s3 = new AWS.S3();
+
+const constraints = {
+  audio: {
+    sampleRate: 48000,
+    channelCount: 2,
+    volume: 1.0
+  },
+  video: {
+    width: { min: 1280 },
+    height: { min: 720 },
+    frameRate: { ideal: 60, min: 20 }
+  }
+};
+let localStream;
+let recorder;
 
 const interviewQuestions = [
   { question: "Tell us about yourself." },
@@ -12,31 +40,85 @@ const interviewQuestions = [
 // check video and audio are available, if not post alert.
 
 const VideoUpload = () => {
+  const [firebaseUid, setFirebaseUid] = useState("");
+  const [isRecording, setIsRecording] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [questionCounter, setQuestionCounter] = useState(0);
   const [hasVideo, setHasVideo] = useState(false);
   const [hasAudio, setHasAudio] = useState(false);
   const [showVideo, setShowVideo] = useState(true);
-  navigator.getUserMedia =
-    navigator.getUserMedia ||
-    navigator.webkitGetUserMedia ||
-    navigator.mozGetUserMedia;
-  // feature detction - check existance of a navigator
+  const [src, setSrc] = useState(
+    "https://school-of-code-applicant-videos.s3.eu-west-1.amazonaws.com/video6.webm"
+  );
+  const [allVideoLinks, setAllVideoLinks] = useState([]);
+  const [autoplay, setAutoplay] = useState(true);
+  const [chunks, setChunks] = useState([]);
+  const video = useRef(null);
 
-  let localStream;
-  let recorder;
+  useEffect(
+    () =>
+      // feature detction - check existance of a navigator
+      (navigator.getUserMedia =
+        navigator.getUserMedia ||
+        navigator.webkitGetUserMedia ||
+        navigator.mozGetUserMedia),
+    []
+  );
 
-  // no microphone on this comp!!!!
-  const constraints = {
-    audio: {
-      sampleRate: 48000,
-      channelCount: 2,
-      volume: 1.0
-    },
-    video: {
-      width: { min: 1280 },
-      height: { min: 720 },
-      frameRate: { ideal: 60, min: 20 }
-    }
+  let savedUid;
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        savedUid = user.uid;
+        setFirebaseUid(user.uid);
+        console.log(user.uid);
+      } else {
+        console.log("no user");
+      }
+    });
+  }, []);
+
+  const uploadVideosToDb = () => {
+    console.log("inside upload", firebaseUid);
+    console.log(allVideoLinks);
+    fetch(`${api.applications}/video-upload`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        firebaseUid: firebaseUid,
+        videoApplicationData: [...allVideoLinks.map(vid => ({ videoUrl: vid }))]
+      })
+    })
+      .then(res => res.json())
+      .then(data => console.log(data))
+      .then(_ => console.log("sent", allVideoLinks))
+      .catch(err => console.error(err));
+  };
+
+  const uploadToAWS = blob => {
+    return new Promise((resolve, reject) => {
+      const fileName = shortid.generate();
+      var params = {
+        Bucket: "school-of-code-applicant-videos",
+        Key: `${fileName}.webm`,
+        Body: blob,
+        ContentType: "video/webm"
+      };
+
+      s3.upload(params, function(err, data) {
+        if (err) {
+          console.error(err);
+        } else {
+          //setSrc(data.Location);
+          setAllVideoLinks([...allVideoLinks, data.Location]);
+          setAutoplay(true);
+          resolve(data);
+        }
+      });
+    });
   };
 
   const hasGetUserMedia = () => {
@@ -44,7 +126,7 @@ const VideoUpload = () => {
       .enumerateDevices()
       .then(function(devices) {
         devices.forEach(item => {
-          console.log(item);
+          //console.log(item);
           if (item.kind === "videoinput") {
             setHasVideo(true);
           } else if (item.kind === "audioinput") {
@@ -52,21 +134,10 @@ const VideoUpload = () => {
           }
         });
       })
-      // check a key === audioinput and a key === videoinput
-      // .then(function(devices) {
-      //   devices.forEach(function(device) {
-      //     console.log(
-      //       device.kind + ": " + device.label + " id = " + device.deviceId
-      //     );
-      //   });
-      // })
       .catch(function(err) {
         console.log("err caught");
         console.log(err.name + ": " + err.message);
       });
-    // console.log(navigator.mediaDevices);
-    // console.log(navigator.mediaDevices.getUserMedia({ video: true }));
-    // console.log(navigator.mediaDevices.getUserMedia({ audio: true }));
     return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
     // the parameter passed into getUserMedia() is an object eg. {video: true, audio: true}
   };
@@ -75,57 +146,47 @@ const VideoUpload = () => {
     console.log(`video ${hasVideo}. audio ${hasAudio}`);
   }
 
-  const sumbitVideo = () => {
-    console.log("submit localc stream", localStream);
-    // console.log("submit stream", stream.getTracks());
-    console.log("submit recorder", recorder);
-    console.log(document.getElementById("videoUpload"));
-    // when video submitted old vid disappear and reset with blank screen
-    localStream = null;
-    document.getElementById("videoUpload").srcObject = null;
-    recorder = null;
-    console.log("paused?", document.getElementById("videoUpload").paused);
-    console.log("ended?", document.getElementById("videoUpload").ended);
-    // send video to server
-    return;
-  };
-
   const handleRecording = action => {
     try {
       navigator.mediaDevices.getUserMedia(constraints).then(stream => {
         switch (action) {
           case "stop":
             var tracks = stream.getTracks();
-            document.getElementById("videoUpload").srcObject = null;
-            //localStream.getTracks()[0].stop();
+            setSrc(null);
             tracks.forEach(function(track) {
               track.stop();
             });
             stream.getTracks().forEach(function(track) {
               track.stop();
             });
-            localStream.getTracks().forEach(function(track) {
-              track.stop();
-            });
-            document.getElementById("videoUpload").autoplay = false;
+            if (localStream) {
+              localStream.getTracks().forEach(function(track) {
+                track.stop();
+              });
+            }
+            setAutoplay(false);
             if (recorder.state === "recording") {
               recorder.stop();
+              setIsRecording(false);
             } else {
               return;
             }
             return;
           case "start":
-            document.getElementById("videoUpload").autoplay = true;
-            document.getElementById("videoUpload").play();
-            console.log("from start", stream);
+            setAutoplay(true);
+
+            video.current.play(); // use a ref here
             localStream = stream;
             recorder = new MediaRecorder(stream);
-            var video = document.querySelector("video");
-            recorder.addEventListener("dataavailable", function(e) {
-              // e.data contains the audio data! let's associate it to an <audio> element
-              video.src = URL.createObjectURL(e.data);
-            });
-            video.addEventListener("timeupdate", function() {
+            setIsRecording(true);
+            recorder.ondataavailable = e => {
+              if (e.data && e.data.size > 0) {
+                video.current.src = URL.createObjectURL(e.data);
+                setChunks([e.data]); // overwriting chunks
+              }
+            };
+
+            video.current.addEventListener("timeupdate", function() {
               // don't have set the startTime yet? set it to our currentTime
               if (!this._startTime) this._startTime = this.currentTime;
 
@@ -136,13 +197,15 @@ const VideoUpload = () => {
               }
             });
 
-            video.addEventListener("seeking", function() {
+            video.current.addEventListener("seeking", function() {
               // reset the timeStart
               this._startTime = undefined;
             });
 
             recorder.start();
-            return (document.getElementById("videoUpload").srcObject = stream);
+            setSrc(stream);
+            video.current.srcObject = stream;
+            return;
           default:
             return;
         }
@@ -158,6 +221,7 @@ const VideoUpload = () => {
 
   return (
     <div style={{ textAlign: "center" }}>
+      {console.log("all videos", allVideoLinks)}
       {showVideo &&
         interviewQuestions
           .slice(
@@ -174,21 +238,24 @@ const VideoUpload = () => {
                   {item.question} {questionCounter + 1}/5
                 </h1>
                 <video
+                  ref={video}
                   controls
-                  autoPlay
+                  autoPlay={autoplay}
                   id="videoUpload"
                   height="50%"
                   width="80%"
                   display="block"
                   poster="/school-of-code.jpg"
-                />
+                  key={src}
+                >
+                  <source src={src} />
+                </video>
                 <br />
                 <button
                   onClick={() => {
                     // check if they have a microphone and webcam here
-                    hasGetUserMedia();
-                    console.log(hasAudio, hasVideo);
 
+                    hasGetUserMedia();
                     if (!hasVideo || !hasAudio) {
                       alert(
                         "Your device needs a microphone and a webcam your device is missing one"
@@ -212,38 +279,56 @@ const VideoUpload = () => {
                     Stop Recording
                   </button>
                 </>
-                {questionCounter + 1 < interviewQuestions.length ? (
-                  <button
-                    onClick={() => {
-                      // upload to datbase;
-                      if (localStream && localStream.active === false) {
-                        console.log("from submit button", localStream);
-                        sumbitVideo();
-                        setQuestionCounter(questionCounter + 1);
-                      } else {
-                        if (localStream) {
-                          alert("finish recording your video first");
-                        } else {
-                          alert("You must record a video before submitting.");
+                {!isLoading &&
+                  (questionCounter + 1 < interviewQuestions.length ? (
+                    <button
+                      onClick={() => {
+                        const blob = new Blob(chunks, { type: "video/webm" });
+                        console.log(blob);
+                        if (blob.size > 0 && !isRecording) {
+                          // upload to datbase
+                          setIsLoading(true);
+                          uploadToAWS(blob)
+                            .then(_ => setIsLoading(false))
+                            .then(_ => setQuestionCounter(questionCounter + 1));
                         }
-                      }
-                    }}
-                  >
-                    Submit Video
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => {
-                      sumbitVideo();
-                      setShowVideo(false);
-                    }}
-                  >
-                    Sumbit Final
-                  </button>
-                )}
+                      }}
+                    >
+                      Submit Video
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        const blob = new Blob(chunks, { type: "video/webm" });
+                        console.log(blob);
+                        if (blob.size > 0 && !isRecording) {
+                          setIsLoading(true);
+                          uploadToAWS(blob)
+                            .then(_ => setShowVideo(false))
+                            .catch(err => console.error(err))
+                            .finally(_ => setIsLoading(false));
+                          // add a confirm upload button which does the upload to s3
+                        }
+                        return;
+                      }}
+                    >
+                      Sumbit Final
+                    </button>
+                  ))}
+                {isLoading && <CircularProgress />}
               </>
             );
           })}
+      {!showVideo && (
+        <button
+          onClick={() => {
+            uploadVideosToDb();
+            // add re routing link here
+          }}
+        >
+          confirm upload
+        </button>
+      )}
     </div>
   );
 };

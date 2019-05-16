@@ -1,8 +1,12 @@
-// import React from "react";
-// const AdminApplicationProcessingPage = () => {
-//   return <><video height="50%" width="80%" display="block" controls key={}>
-//     <source src={}
-//   </video>
-// }
+import React from "react";
+import VideoRating from "../components/VideoRating";
+const AdminApplicationProcessingPage = () => {
+  return (
+    <>
+      <VideoRating />
+    </>
+  );
+};
 
-// export default AdminApplicationProcessingPage;
+
+export default AdminApplicationProcessingPage;
