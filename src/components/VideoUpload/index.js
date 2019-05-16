@@ -1,3 +1,5 @@
+
+import css from "../VideoUpload/VideoUpload.module.css";
 import React, { useState, useEffect, useRef } from "react";
 import AWS from "aws-sdk";
 import { aws } from "../../config";
@@ -252,6 +254,7 @@ const VideoUpload = () => {
                 </video>
                 <br />
                 <button
+                  className={css.startRecording}
                   onClick={() => {
                     // check if they have a microphone and webcam here
 
@@ -270,6 +273,7 @@ const VideoUpload = () => {
                 </button>
                 <>
                   <button
+                    className={css.stopRecording}
                     onClick={() => {
                       if (localStream) {
                         handleRecording("stop");
@@ -279,6 +283,7 @@ const VideoUpload = () => {
                     Stop Recording
                   </button>
                 </>
+
                 {!isLoading &&
                   (questionCounter + 1 < interviewQuestions.length ? (
                     <button

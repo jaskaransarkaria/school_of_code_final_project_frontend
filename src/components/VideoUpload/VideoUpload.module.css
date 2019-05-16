@@ -1,0 +1,38 @@
+.startRecording {
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-style: none;
+  outline: none;
+  margin: 20px 0px;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: bold;
+  background-color: #11cf84;
+}
+
+.stopRecording {
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-style: none;
+  outline: none;
+  margin: 20px 0px;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: bold;
+  background-color: red;
+}
+
+.submitRecording {
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-style: none;
+  outline: none;
+  margin: 20px 0px;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: bold;
+  background-color: #11cf84;
+}

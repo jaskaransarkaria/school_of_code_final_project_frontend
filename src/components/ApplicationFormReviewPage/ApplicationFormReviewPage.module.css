@@ -1,0 +1,23 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  color: white;
+
+  width: 70%;
+}
+.previousButton,
+.submitButton {
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-style: none;
+  outline: none;
+  margin: 20px 0px;
+
+  border-radius: 7px;
+  font-weight: bold;
+  background-color: #11cf84;
+}

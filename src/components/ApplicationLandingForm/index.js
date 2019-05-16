@@ -17,17 +17,17 @@ class ApplicationLandingForm extends Component {
         <div className={css.container}>
           <div className={css.leftContainer}>
             <h1>School of Code</h1>
-            <h3>Register Area</h3>
 
-            <Login />
-            <div className={css.socImage}>
+            <h3>Application Area</h3>
+
+            <div className={css.socImageContainer}>
               <img
-                style={{ height: "250px", width: "300px" }}
+                className={css.socImage}
                 src={SocImage}
                 alt="School of code logo"
               />
             </div>
-            <h3>Follow us:</h3>
+            <h3 className={css.followUs}>Follow us:</h3>
             <div className={css.socialMediaContainer}>
               <div className={css.twitterContainer}>
                 <a
@@ -95,7 +95,7 @@ class ApplicationLandingForm extends Component {
                 </a>
               </div>
             </div>
-            <h3>Contact Us:</h3>
+            <h3 className={css.contactUs}>Contact Us:</h3>
             <div className={css.contactContainer}>
               <div className={css.locationContainer}>
                 <a
@@ -118,13 +118,12 @@ class ApplicationLandingForm extends Component {
                 />
               </div>
             </div>
+            <div className={css.webAddress}>www.schoolofcode.co.uk</div>
           </div>
           <div className={css.rightContainer}>
-            <h3 className={css.techHeading}>Please fill out form below:</h3>
             <div className={css.formContainer}>
               <ApplicationFormApp />
             </div>
-            {/* <h3 className={css.subHeading}>Change your life. Learn to code.</h3> */}
           </div>
         </div>
       </div>

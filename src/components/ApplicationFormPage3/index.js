@@ -1,4 +1,5 @@
 import React from "react";
+import css from "../ApplicationFormPage3/ApplicationFormPage3.module.css";
 const identityAnswers = ["Male", "Female", "Non-Binary", "Prefer no to say"];
 const situationAnswers = [
   "Finishing School",
@@ -53,42 +54,55 @@ const FormPart3 = ({
 
   return (
     <>
-      <div>
-        <label>How do you identify?</label>
-        {identityAnswers.map(item => (
-          <>
-            <input
-              type="radio"
-              name="identify"
-              value={item}
-              onChange={updateField}
-              checked={formValues.identify === item ? "checked" : null}
-              defaultValue={formValues.identify}
-            />
-            {item}
-          </>
-        ))}
-      </div>
+      <h1>
+        Application Form: <span>Step 3 of 5</span>
+      </h1>
+      <div className={css.wrapper}>
+        <div>
+          <label>How do you identify?</label>
+          <br />
+          {identityAnswers.map(item => (
+            <>
+              <input
+                type="radio"
+                name="identify"
+                value={item}
+                onChange={updateField}
+                checked={formValues.identify === item ? "checked" : null}
+                defaultValue={formValues.identify}
+              />
+              {item}
+            </>
+          ))}
+        </div>
 
-      <div>
-        <label>Which best describes your current situation</label>
-        {situationAnswers.map(item => (
-          <>
-            <input
-              type="radio"
-              name="situation"
-              value={item}
-              onChange={updateField}
-              checked={formValues.situation === item ? "checked" : null}
-              defaultValue={formValues.situation}
-            />
-            {item}
-          </>
-        ))}
+        <div>
+          <label>Which best describes your current situation</label>
+          <br />
+          {situationAnswers.map(item => (
+            <>
+              <input
+                type="radio"
+                name="situation"
+                value={item}
+                onChange={updateField}
+                checked={formValues.situation === item ? "checked" : null}
+                defaultValue={formValues.situation}
+              />
+              {item}
+            </>
+          ))}
+        </div>
+        <div style={{ color: "red", fontSize: 12 }}>{formError.inputError}</div>
+        <button onClick={previous} className={css.previousButton}>
+          {" "}
+          Previous{" "}
+        </button>
+        <button onClick={saveAndContinue} className={css.saveAndContinueButton}>
+          {" "}
+          Save and Continue{" "}
+        </button>
       </div>
-      <div style={{ color: "red", fontSize: 12 }}>{formError.inputError}</div>
-      <button onClick={previous}> Previous </button>
-      <button onClick={saveAndContinue}> Save and Continue </button>
     </>
   );
 };

@@ -8,22 +8,24 @@ class DashboardScheduleCarousel extends Component {
       counter: 0
     };
   }
+
   nextButton = () => {
     this.setState(state => {
       return {
-        counter: state.counter + 1
+        counter: state.counter + 3
       };
     });
   };
   previousButton = () => {
     this.setState(state => {
       return {
-        counter: state.counter - 1
+        counter: state.counter - 3
       };
     });
   };
 
   array = ["Functions", "React", "Google Analytics", "CSS", "Node", "Hooks"];
+
   render() {
     return (
       <>
@@ -39,7 +41,7 @@ class DashboardScheduleCarousel extends Component {
             {this.array[this.state.counter + 1]}
           </div>
           <div className={css.itemThree}>
-            {this.array[this.state.counter + 3]}
+            {this.array[this.state.counter + 2]}
           </div>
 
           <img

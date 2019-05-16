@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import NavBar from "../NavBar";
+
 import css from "../Template/Template.module.css";
 
 class Template extends Component {
@@ -7,9 +7,7 @@ class Template extends Component {
     return (
       <div className={css.wrapper}>
         <div className={css.container}>
-          <div className={css.leftContainer}>
-            {/* <NavBar propsUser="Bootcamper" /> */}
-          </div>
+          <div className={css.leftContainer} />
           <div className={css.rightContainer} />
         </div>
       </div>

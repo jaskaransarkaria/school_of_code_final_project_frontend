@@ -16,18 +16,20 @@ class ApplicationLandingVideo extends Component {
       <div className={css.wrapper}>
         <div className={css.container}>
           <div className={css.leftContainer}>
-            <h1>School of Code</h1>
-            <h3>Register Area</h3>
+            <div className={css.headers}>
+              <h1>School of Code</h1>
 
-            <Login />
-            <div className={css.socImage}>
+              <h3>Video Question Area</h3>
+            </div>
+
+            <div className={css.socImageContainer}>
               <img
-                style={{ height: "250px", width: "300px" }}
                 src={SocImage}
+                className={css.socImage}
                 alt="School of code logo"
               />
             </div>
-            <h3>Follow us:</h3>
+            <h3 className={css.followUs}>Follow us:</h3>
             <div className={css.socialMediaContainer}>
               <div className={css.twitterContainer}>
                 <a
@@ -95,7 +97,7 @@ class ApplicationLandingVideo extends Component {
                 </a>
               </div>
             </div>
-            <h3>Contact Us:</h3>
+            <h3 className={css.contactUs}>Contact Us:</h3>
             <div className={css.contactContainer}>
               <div className={css.locationContainer}>
                 <a
@@ -118,6 +120,7 @@ class ApplicationLandingVideo extends Component {
                 />
               </div>
             </div>
+            <div className={css.webAddress}>www.schoolofcode.co.uk</div>
           </div>
           <div className={css.rightContainer}>
             <h3 className={css.techHeading}>Video Questions</h3>
