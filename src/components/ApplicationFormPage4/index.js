@@ -1,5 +1,5 @@
 import React from "react";
-
+import css from "../ApplicationFormPage4/ApplicationFormPage4.module.css";
 const FormPart4 = ({
   step,
   setStep,
@@ -43,10 +43,14 @@ const FormPart4 = ({
 
   return (
     <>
-      <div>
+      <h1>
+        Application Form: <span>Step 4 of 5</span>
+      </h1>
+      <div className={css.wrapper}>
         <label>
           Please explain why you would like to do the School of Code
         </label>
+        <br />
         <input
           type="text"
           name="motivationQuestion"
@@ -54,11 +58,17 @@ const FormPart4 = ({
           defaultValue={formValues.motivationQuestion}
         />
         <div style={{ color: "red", fontSize: 12 }}>{formError.inputError}</div>
+
+        <button onClick={previous} className={css.previousButton}>
+          {" "}
+          Previous{" "}
+        </button>
+
+        <button onClick={review} className={css.reviewButton}>
+          {" "}
+          Review{" "}
+        </button>
       </div>
-
-      <button onClick={previous}> Previous </button>
-
-      <button onClick={review}> Review </button>
     </>
   );
 };

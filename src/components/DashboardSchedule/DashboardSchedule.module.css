@@ -7,6 +7,7 @@
   width: 94%;
   height: 40%;
   background-image: linear-gradient(to bottom right, #04c7d9, #5f04cf);
+  opacity: 0.9;
 }
 .daysOfWeekContainer {
   width: 100%;

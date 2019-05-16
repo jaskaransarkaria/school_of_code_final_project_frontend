@@ -102,7 +102,6 @@ const App = () => {
 
   return (
     <>
-      <h1> School of Code Application Form </h1>
       <div className="formContainer">
         <div> {renderSwitch()}</div>
       </div>

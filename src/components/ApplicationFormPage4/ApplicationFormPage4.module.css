@@ -1,0 +1,25 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+.container {
+  color: white;
+
+  width: 70%;
+}
+.previousButton,
+.reviewButton {
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-style: none;
+  outline: none;
+  margin: 20px 0px;
+  padding: 10px;
+  border-radius: 7px;
+  font-weight: bold;
+  background-color: #11cf84;
+}
+.reviewButton {
+  margin-left: 10px;
+}

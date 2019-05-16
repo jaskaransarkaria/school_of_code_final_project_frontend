@@ -1,0 +1,38 @@
+@import url("https://fonts.googleapis.com/css?family=Oxygen:300,400");
+.body {
+  font-family: "Oxygen", sans-serif;
+}
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+.formContainer {
+  width: 70%;
+}
+.firstName,
+.lastName,
+.email {
+  width: 95%;
+  border-radius: 10px;
+  padding: 10px;
+  border-style: none;
+}
+.saveAndContinue {
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-style: none;
+  outline: none;
+  margin: 20px 0px;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: bold;
+  background-color: #11cf84;
+}
+/* @media only screen and (max-width: 550px) {
+  .formContainer {
+    display: unset;
+    right: 100%;
+    position: relative;
+  }
+} */

@@ -1,5 +1,5 @@
 import React from "react";
-
+import css from "../ApplicationFormPage1/ApplicationFormPage1.module.css";
 const FormPart1 = ({
   step,
   setStep,
@@ -48,41 +48,62 @@ const FormPart1 = ({
 
   return (
     <>
-      <div>
-        <label>First Name</label>
-        <input
-          type="text"
-          name="firstName"
-          onChange={updateField}
-          defaultValue={formValues.firstName}
-          required
-        />
-      </div>
+      <h1>
+        Application Form: <span>Step 1 of 5</span>
+      </h1>
+      <div className={css.wrapper}>
+        <div className={css.formContainer}>
+          <br />
+          <label>First Name</label>
+          <input
+            placeholder="Enter first name.."
+            className={css.firstName}
+            type="text"
+            name="firstName"
+            onChange={updateField}
+            defaultValue={formValues.firstName}
+            required
+          />
 
-      <div>
-        <label>Last Name</label>
-        <input
-          type="text"
-          name="lastName"
-          onChange={updateField}
-          defaultValue={formValues.lastName}
-          required
-        />
-      </div>
-      <div>
-        <label>Email</label>
-        <input
-          type="email"
-          name="email"
-          onChange={updateField}
-          defaultValue={formValues.email}
-          required
-        />
-      </div>
-      <div style={{ color: "red", fontSize: 12 }}> {formError.inputError}</div>
-      <div style={{ color: "red", fontSize: 12 }}> {formError.emailError}</div>
+          <div>
+            <label>Last Name</label>
+            <input
+              placeholder="Enter Last name.."
+              className={css.lastName}
+              type="text"
+              name="lastName"
+              onChange={updateField}
+              defaultValue={formValues.lastName}
+              required
+            />
+          </div>
+          <div>
+            <label>Email</label>
+            <input
+              placeholder="Enter email.."
+              className={css.email}
+              type="email"
+              name="email"
+              onChange={updateField}
+              defaultValue={formValues.email}
+              required
+            />
+          </div>
+          <div style={{ color: "red", fontSize: 12 }}>
+            {" "}
+            {formError.inputError}
+          </div>
+          <div style={{ color: "red", fontSize: 12 }}>
+            {" "}
+            {formError.emailError}
+          </div>
 
-      <button onClick={saveAndContinue}> Save and Continue </button>
+          <button onClick={saveAndContinue} className={css.saveAndContinue}>
+            {" "}
+            Save and Continue{" "}
+          </button>
+        </div>
+      </div>
     </>
   );
 };

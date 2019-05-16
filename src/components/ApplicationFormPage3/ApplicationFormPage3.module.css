@@ -1,0 +1,27 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.container {
+  color: white;
+
+  width: 70%;
+}
+.saveAndContinueButton,
+.previousButton {
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-style: none;
+  outline: none;
+  margin: 20px 0px;
+  padding: 10px;
+  border-radius: 7px;
+  font-weight: bold;
+  background-color: #11cf84;
+}
+
+.saveAndContinueButton {
+  margin-left: 10px;
+}
