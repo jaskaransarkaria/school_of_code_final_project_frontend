@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import LoginPage from "../../pages/LoginPage";
 import SchedulePage from "../../pages/SchedulePage";
 import TopicsPage from "../../pages/TopicsPage";
-// import CreditsPage from "../../pages/CreditsPage";
+import CreditsPage from "../../pages/CreditsPage";
 import AdminDashboardPage from "../../pages/AdminDashboardPage";
 import BootcamperDashboardPage from "../../pages/BootcamperDashboardPage";
 import AdminApplicationProcessingPage from "../../pages/AdminApplicationProcessingPage";
@@ -179,7 +179,7 @@ function App() {
         <Route path="/upload-schedule" component={AdminUploadSchedulePage} />
         <Route path="/schedule" component={SchedulePage} />
         <Route path="/topics" component={TopicsPage} />
-        {/* <Route path="/credits" component={CreditsPage} /> */}
+        <Route path="/credits" component={CreditsPage} />
         <Route
           path="/admin-application-processing"
           component={AdminApplicationProcessingPage}
