@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
 import ApplicantDashboardPage from "../../pages/ApplicantDashboardPage";
 import AdminUploadSchedulePage from "../../pages/AdminUploadSchedulePage";
 import { BrowserRouter as Router, Route } from "react-router-dom";
@@ -9,6 +9,13 @@ import CreditsPage from "../../pages/CreditsPage";
 import AdminDashboardPage from "../../pages/AdminDashboardPage";
 import BootcamperDashboardPage from "../../pages/BootcamperDashboardPage";
 import AdminApplicationProcessingPage from "../../pages/AdminApplicationProcessingPage";
+import { api } from "../../config";
+import firebase from "firebase";
+
+firebase.initializeApp({
+  apiKey: api.firebase_key,
+  authDomain: api.firebase_auth_domain
+});
 import ApplicantVideoPage from "../../pages/ApplicantVideoPage";
 import ApplicantFormPage from "../../pages/ApplicantFormPage";
 import TemplatePage from "../../pages/TemplatePage";
@@ -166,6 +173,45 @@ export const Store = createContext([allContent, () => {}]);
 function App() {
   const [fullScheduleData, setFullScheduleData] = useState(allContent);
 
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged(user => {
+      // logic which dictates if they are already in the db or they need to register
+      // if they need to register push them to the applicant dashboard page
+      let newFirebaseUid = user.uid;
+      async function isUserRegistered(user) {
+        console.log("in async post", newFirebaseUid);
+        const response = await fetch(`${api.users}`, {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify({
+            firebaseUid: newFirebaseUid
+          })
+        });
+        const data = await response.json();
+        console.log(data.result);
+        if (data.result === null) {
+          // send them to the register page
+        } else {
+          // set user signed in to true
+          // setSignedIn(
+          //   !!user
+          //   // not not meaning if the user is an object it will revert to true
+          //   // and if it isn't an object it will revert to false
+          // );
+          console.log(user.uid);
+          console.log("user exists in db");
+        }
+      }
+
+      isUserRegistered(user);
+
+      console.log("user", user);
+      console.log("uid", user.uid);
+    });
+  }, []);
   return (
     <Store.Provider value={[fullScheduleData, setFullScheduleData]}>
       <Router>

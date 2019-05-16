@@ -15,13 +15,12 @@ const AdminUploadSchedule = () => {
   // pass down a function that adds the days schedule up to the state in the app
   // multiple content Urls
   // date setter (more intuitive and force date to be a certain format) use a calender/ date picker probs
-  // auto select next time slot
-
-  // then clear/ reset the schedule
   // description <text area ></text> add description mechanism
+
+  // auto select next time slot
+  // then clear/ reset the schedule
   // a way to upload video
   // a way to upload files
-
   // progress bar to whilst uploading
 
   // send all the info up to the App (useContext())?
@@ -59,6 +58,22 @@ const AdminUploadSchedule = () => {
       },
       ...fullScheduleData.slice(duplicateDate + 1)
     ]);
+
+    fetch("http://localhost:5000/schedule", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        date: selectedDate,
+        daysContent: daysSchedule.slice()
+      })
+    }).then(res => res.json());
+    console.log("sending", {
+      date: selectedDate,
+      daysContent: daysSchedule.slice()
+    });
   };
 
   const addURL = ind => {
