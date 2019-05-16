@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Login from "../Login";
 import css from "../ApplicationLandingForm/ApplicationLandingForm.module.css";
 import SocImage from "../../Images/soc-logo.png";
 import TwitterImage from "../../Images/twitter-logo.svg";
@@ -27,6 +26,7 @@ class ApplicationLandingForm extends Component {
                 alt="School of code logo"
               />
             </div>
+
             <h3 className={css.followUs}>Follow us:</h3>
             <div className={css.socialMediaContainer}>
               <div className={css.twitterContainer}>
