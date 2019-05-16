@@ -5,6 +5,8 @@ import { api } from "../../config";
 const VideoRating = () => {
   const [pendingVideosData, setPendingVideosData] = useState([]);
   const [userInfo, setUserInfo] = useState([]);
+  const [videoCounter, setVideoCounter] = useState(0);
+  const [applicantCounter, setApplicantCounter] = useState(0);
   // GET in videos from APPLICATIONS for each applicant based on uid which have a status 'pending'
 
   const getUserInfo = data => {
@@ -25,7 +27,6 @@ const VideoRating = () => {
       console.log(data);
       console.log(data.result);
       setPendingVideosData(data.result);
-      //setUserInfo(data.userInfo);
     };
     getPendingVideos();
   }, []);
@@ -33,49 +34,116 @@ const VideoRating = () => {
   useEffect(() => {
     console.log("mapping over GET users info");
     const grabAll = () =>
-      Promise.all(pendingVideosData.map(getUserInfo)).then(users =>
-        setUserInfo([...userInfo, users])
-      );
+      Promise.all(pendingVideosData.map(getUserInfo)).then(users => {
+        console.log("USERS in grab all", users);
+        setUserInfo(users);
+      });
     grabAll();
   }, [pendingVideosData]);
 
   // GET in personal details from the USERS based on uid
+
   // calculate overall rating
+
   // POST ratings for each video all at once && POST whether they have passed or failed this stage
 
   return (
     <>
-      {console.log("the stuff", userInfo)}
-      {pendingVideosData.map((item, ind) => {
-        return (
-          <div id="userTray">
-            <p>{item.firebaseUid}</p>
-            <div id="videoTray">
-              {item.videoApplicationData.map(video => {
+      {console.log("pendingvideodata", pendingVideosData)}
+      {console.log("userInfo", userInfo)}
+      <div id="userTray">
+        <div id="videoTray">
+          {pendingVideosData.map(
+            ({ videoApplicationData, firebaseUid }, applicantIndex) => {
+              if (applicantIndex === applicantCounter) {
                 return (
                   <>
-                    <>
-                      <p>{item.firebaseUid}</p>
-
-                      <p>{`${userInfo.firstName} ${userInfo.lastName}`}</p>
-                      <p>{`number: ${userInfo.phoneNumber}`}</p>
-                      <p>{`gender: ${userInfo.identify}`}</p>
-                      <p>{`email: ${userInfo.email}`}</p>
-                      <p>{`age: ${userInfo.age}`}</p>
-                      <p>{`location: ${userInfo.location}`}</p>
-                      <p>{`background: ${userInfo.background}`}</p>
-                    </>
-                    <>
-                      <video controls autoplay src={video.videoUrl} />
-                      <FeedbackTray />
-                    </>
+                    <div>
+                      <button
+                        onClick={() => {
+                          if (applicantIndex > 0) {
+                            setApplicantCounter(applicantCounter - 1);
+                          }
+                        }}
+                      >
+                        previous Video
+                      </button>
+                      <button
+                        onClick={() => {
+                          if (applicantCounter + 1 < pendingVideosData.length)
+                            setApplicantCounter(applicantCounter + 1);
+                        }}
+                      >
+                        next Video
+                      </button>
+                    </div>
+                    {videoApplicationData.length === 0 && (
+                      <p>no video application data for: {firebaseUid} </p>
+                    )}
+                    {videoApplicationData.map(({ videoUrl }, videoIndex) => {
+                      if (videoIndex === videoCounter) {
+                        return (
+                          <>
+                            <p>{firebaseUid}</p>
+                            {userInfo &&
+                              userInfo.map(({ result: user }, userIndex) => {
+                                if (applicantIndex === userIndex) {
+                                  return (
+                                    <>
+                                      <p>{`${user.firstName} ${
+                                        user.lastName
+                                      }`}</p>
+                                      <p>{`number: ${user.phoneNumber}`}</p>
+                                      <p>{`gender: ${user.identify}`}</p>
+                                      <p>{`email: ${user.email}`}</p>
+                                      <p>{`age: ${user.age}`}</p>
+                                      <p>{`location: ${user.location}`}</p>
+                                      <p>{`background: ${user.background}`}</p>
+                                    </>
+                                  );
+                                } else {
+                                  return;
+                                }
+                              })}
+                            <div>
+                              <button
+                                onClick={() => {
+                                  if (videoCounter > 0) {
+                                    setVideoCounter(videoCounter - 1);
+                                  }
+                                }}
+                              >
+                                previous Video
+                              </button>
+                              <button
+                                onClick={() => {
+                                  if (
+                                    videoCounter + 1 <
+                                    videoApplicationData.length
+                                  )
+                                    setVideoCounter(videoCounter + 1);
+                                }}
+                              >
+                                next Video
+                              </button>
+                            </div>
+                            <video controls autoplay src={videoUrl} />
+                            <FeedbackTray />
+                          </>
+                        );
+                      } else {
+                        return;
+                      }
+                    })}
                   </>
                 );
-              })}
-            </div>
-          </div>
-        );
-      })}
+              } else {
+                return;
+              }
+            }
+          )}
+        </div>
+      </div>
     </>
   );
 };
