@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Login from "../Login";
 import css from "../ApplicationLandingPage/ApplicationLandingPage.module.css";
 import SocImage from "../../Images/soc-logo.png";
 import TwitterImage from "../../Images/twitter-logo.svg";
@@ -12,15 +13,13 @@ import EmailImage from "../../Images/close-envelope.svg";
 class ApplicationLandingPage extends Component {
   render() {
     return (
-      <>
-        <h2>
-          Welcome to School of Code - Please register for an account below
-        </h2>
+      <div className={css.wrapper}>
         <div className={css.container}>
           <div className={css.leftContainer}>
             <h1>School of Code</h1>
             <h3>Register Area</h3>
 
+            <Login />
             <div className={css.socImage}>
               <img
                 style={{ height: "250px", width: "300px" }}
@@ -120,8 +119,12 @@ class ApplicationLandingPage extends Component {
               </div>
             </div>
           </div>
+          <div className={css.rightContainer}>
+            <h3 className={css.techHeading}>Launch Into Tech</h3>
+            <h3 className={css.subHeading}>Change your life. Learn to code.</h3>
+          </div>
         </div>
-      </>
+      </div>
     );
   }
 }

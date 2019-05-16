@@ -1,6 +1,12 @@
 import React from "react";
+import VideoRating from "../components/VideoRating";
 const AdminApplicationProcessingPage = () => {
-  return <></>;
+  return (
+    <>
+      <VideoRating />
+    </>
+  );
 };
+
 
 export default AdminApplicationProcessingPage;

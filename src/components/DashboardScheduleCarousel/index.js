@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ArrowImage from "../../Images/right-arrow.svg";
-import css from "../DashboardCarousel/DashBoardCarousel.module.css";
-class DashboardCarousel extends Component {
+import css from "../DashboardScheduleCarousel/DashboardScheduleCarousel.module.css";
+class DashboardScheduleCarousel extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -53,4 +53,4 @@ class DashboardCarousel extends Component {
     );
   }
 }
-export default DashboardCarousel;
+export default DashboardScheduleCarousel;

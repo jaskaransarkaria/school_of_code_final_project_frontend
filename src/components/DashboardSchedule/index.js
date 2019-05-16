@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import DashboardCarousel from "../DashboardCarousel";
+import DashboardScheduleCarousel from "../DashboardScheduleCarousel";
 import css from "../DashboardSchedule/DashboardSchedule.module.css";
 class DashboardSchedule extends Component {
   constructor(props) {
@@ -16,19 +16,23 @@ class DashboardSchedule extends Component {
   };
   render() {
     return (
-      <div className={css.dashboardScheduleContainer}>
-        <div className={css.daysOfWeekContainer}>
-          <div className={css.mondayBox} onClick={this.handleClick}>
-            Monday
-          </div>
-          <div className={css.tuesdayBox}>Tuesday</div>
-          <div className={css.wednesdayBox}>Wednseday</div>
-          <div className={css.thursdayBox}>Thursday</div>
-          <div className={css.fridayBox}>Friday</div>
-        </div>
+      <>
+        <div className={css.wrapper}>
+          <div className={css.dashboardScheduleContainer}>
+            <div className={css.daysOfWeekContainer}>
+              <div className={css.mondayBox} onClick={this.handleClick}>
+                Monday
+              </div>
+              <div className={css.tuesdayBox}>Tuesday</div>
+              <div className={css.wednesdayBox}>Wednseday</div>
+              <div className={css.thursdayBox}>Thursday</div>
+              <div className={css.fridayBox}>Friday</div>
+            </div>
 
-        <DashboardCarousel />
-      </div>
+            <DashboardScheduleCarousel />
+          </div>
+        </div>
+      </>
     );
   }
 }

@@ -1,57 +1,141 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import css from "./Schedule.module.css";
 import { Timeline, TimelineEvent } from "react-event-timeline";
 import moment from "moment";
 //import PropTypes from "prop-types";
 import Calendar from "react-calendar";
+
+import { api } from "../../config";
+//import { Store } from "../App";
+
 import { Store } from "../App";
-import NavBarBootcampers from "../NavBarBootcampers";
+import NavBar from "../NavBar";
+
 import SubBanner from "../SubBanner";
+
+let initialState = {
+  defaultUsed: `There is currently no schedule uploaded for today.`,
+  date: "02/05/2019",
+  daysContent: [
+    {
+      sessionTimes: "09.00 - 10.00",
+      learningObjectives: "freak on dates",
+      contentTitle: "Sort out the Freaking dates",
+      contentURL: ""
+    },
+    {
+      sessionTimes: "13.00 - 14.00",
+      learningObjectives: "learn hooks",
+
+      contentTitle: "React Hooks",
+      contentURL: ""
+    },
+    {
+      sessionTimes: "15.00 - 16.00",
+      contentTitle: "React useContext()",
+      learningObjectives: "understand context",
+
+      contentURL: "https://reactjs.org/docs/components-and-props.html"
+    }
+  ]
+};
 
 const Schedule = ({ props }) => {
   const todaysDate = moment().format("DD/MM/YYYY");
   const [selectedDate, setSelectedDate] = useState(todaysDate);
-  const [fullScheduleData, setFullScheduleData] = useContext(Store);
+  // const [fullScheduleData, setFullScheduleData] = useContext(Store);
+  const [scheduleData, setScheduleData] = useState(initialState);
 
   const convertDate = isoDate => {
     const convertedDate = moment(isoDate).format("DD/MM/YYYY");
     setSelectedDate(convertedDate);
   };
 
+  useEffect(() => {
+    async function fetchMostRecentSchedule() {
+      console.log(`${api.schedule}/most-recent`);
+      const response = await fetch(`${api.schedule}/most-recent`);
+      const data = await response.json();
+      console.log("most recent get request", data);
+      console.log(data.result);
+      if (data.result === null) {
+        return;
+      } else {
+        // not sure why it is coming in as an array here?
+        data.result[0][
+          "defaultUsed"
+        ] = `There is currently no schedule uploaded for today.`;
+
+        initialState = {
+          ...data.result[0]
+        };
+        console.log("initialState", initialState);
+      }
+    }
+    fetchMostRecentSchedule();
+  }, []);
+
+  useEffect(() => {
+    async function fetchSchedule() {
+      console.log(`${api.schedule}/${selectedDate}`);
+      const response = await fetch(`${api.schedule}/${selectedDate}`);
+      const data = await response.json();
+      console.log("scheduleData get request", data);
+      console.log(data.result);
+      // add error handling for if it isn't found
+      if (data.result === null) {
+        setScheduleData(initialState);
+      } else {
+        setScheduleData(data.result);
+      }
+    }
+    fetchSchedule();
+  }, [selectedDate]);
+
+  // console.log("contentToBeDisplayed outside get request", contentToBeDisplayed);
   // function to find the selected date from allContent
-  let contentToBeDisplayed = fullScheduleData.find(
-    obj => obj.date === selectedDate
-  );
+  // this is where to do the get request meaning useContext is not needed any more
+  // contentToBeDisplayed =
+  //   // fullScheduleData.find(
+  //   //   obj => obj.date === selectedDate // this usescontext
 
-  if (!contentToBeDisplayed) {
-    // set the default date to the most recent upload
-    contentToBeDisplayed = {
-      defaultUsed: `There is currently no schedule uploaded for today.`,
-      date: "02/05/2019",
-      daysContent: [
-        {
-          sessionTimes: "09.00 - 10.00",
-          learningObjectives: "freak on dates",
-          contentTitle: "Sort out the Freaking dates",
-          contentURL: ""
-        },
-        {
-          sessionTimes: "13.00 - 14.00",
-          learningObjectives: "learn hooks",
+  //   async () => {
+  //     console.log("content to be displayed firing?");
+  //     const response = await fetch(`${api.schedule}/${selectedDate}`);
+  //     const data = await response.json();
+  //     console.log("contentToBeDisplayed get request", data);
+  //     return data;
+  //   };
+  // let contentToBeDisplayed;
+  // if (!contentToBeDisplayed) {
+  //   // set the default date to the most recent upload
+  //   contentToBeDisplayed = {
+  //     defaultUsed: `There is currently no schedule uploaded for today.`,
+  //     date: "02/05/2019",
+  //     daysContent: [
+  //       {
+  //         sessionTimes: "09.00 - 10.00",
+  //         learningObjectives: "freak on dates",
+  //         contentTitle: "Sort out the Freaking dates",
+  //         contentURL: ""
+  //       },
+  //       {
+  //         sessionTimes: "13.00 - 14.00",
+  //         learningObjectives: "learn hooks",
 
-          contentTitle: "React Hooks",
-          contentURL: ""
-        },
-        {
-          sessionTimes: "15.00 - 16.00",
-          contentTitle: "React useContext()",
-          learningObjectives: "understand context",
+  //         contentTitle: "React Hooks",
+  //         contentURL: ""
+  //       },
+  //       {
+  //         sessionTimes: "15.00 - 16.00",
+  //         contentTitle: "React useContext()",
+  //         learningObjectives: "understand context",
 
-          contentURL: "https://reactjs.org/docs/components-and-props.html"
-        }
-      ]
-    };
-  }
+  //         contentURL: "https://reactjs.org/docs/components-and-props.html"
+  //       }
+  //     ]
+  //   };
+  // }
 
   const changeDate = num => {
     // returns a moment.js object
@@ -62,7 +146,7 @@ const Schedule = ({ props }) => {
   return (
     <div className={css.schedulePageContainer}>
       <SubBanner />
-      <NavBarBootcampers />
+      <NavBar propsUser="Bootcamper" />
       <Calendar
         onClickDay={value => {
           convertDate(value);
@@ -74,14 +158,14 @@ const Schedule = ({ props }) => {
       <br />
       {(
         <>
-          {contentToBeDisplayed.defaultUsed}
+          {scheduleData.defaultUsed}
           <br />
-          Showing: {contentToBeDisplayed.date}
+          Showing: {scheduleData.date}
         </>
-      ) || <>{contentToBeDisplayed.date}</>}
+      ) || <>{scheduleData.date}</>}
       <div className={css.timelineContainer}>
         <Timeline>
-          {contentToBeDisplayed.daysContent.map(item => (
+          {scheduleData.daysContent.map(item => (
             <TimelineEvent title={item.sessionTimes}>
               {item.contentURL !== "" ? (
                 <div>
@@ -99,7 +183,7 @@ const Schedule = ({ props }) => {
         </Timeline>
       </div>
       <Timeline>
-        {contentToBeDisplayed.daysContent.map(item => (
+        {scheduleData.daysContent.map(item => (
           <TimelineEvent title={item.sessionTimes}>
             {item.contentURL !== "" ? (
               <div>
