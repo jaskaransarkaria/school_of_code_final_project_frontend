@@ -1,0 +1,18 @@
+.topicsCarouselContainer {
+  display: inline-block;
+
+  position: absolute;
+  left: 6%;
+  bottom: 5%;
+  width: 94%;
+  height: 40%;
+  background-color: white;
+}
+.topicTypesContainer {
+  /* background-image: linear-gradient(to bottom right, #04c7d9, #5f04cf); */
+  margin-top: 20px;
+  background-color: white;
+  justify-content: space-around;
+  width: 100%;
+  display: flex;
+}

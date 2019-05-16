@@ -8,4 +8,5 @@ const AdminApplicationProcessingPage = () => {
   );
 };
 
+
 export default AdminApplicationProcessingPage;

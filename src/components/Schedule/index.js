@@ -4,9 +4,13 @@ import { Timeline, TimelineEvent } from "react-event-timeline";
 import moment from "moment";
 //import PropTypes from "prop-types";
 import Calendar from "react-calendar";
+
 import { api } from "../../config";
 //import { Store } from "../App";
-import NavBarBootcampers from "../NavBarBootcampers";
+
+import { Store } from "../App";
+import NavBar from "../NavBar";
+
 import SubBanner from "../SubBanner";
 
 let initialState = {
@@ -142,7 +146,7 @@ const Schedule = ({ props }) => {
   return (
     <div className={css.schedulePageContainer}>
       <SubBanner />
-      <NavBarBootcampers />
+      <NavBar propsUser="Bootcamper" />
       <Calendar
         onClickDay={value => {
           convertDate(value);

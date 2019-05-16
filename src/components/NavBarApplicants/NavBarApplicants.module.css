@@ -1,0 +1,23 @@
+.navContainer {
+  display: flex;
+  justify-content: center;
+
+  background-color: #0834ac;
+  width: 6%;
+  height: 100vh;
+}
+.iconsContainer {
+  display: flex;
+  flex-direction: column;
+}
+.applyIcon {
+  margin: 40px;
+  height: 40px;
+  width: 40px;
+}
+/* .homeContainer:hover {
+    background-color: #00249a;
+  
+    border-left: white solid 2px;
+  }
+   */
