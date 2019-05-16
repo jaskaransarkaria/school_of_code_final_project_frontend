@@ -5,10 +5,6 @@ import Welcome from "../Welcome";
 
 import { api } from "../../config";
 
-firebase.initializeApp({
-  apiKey: api.firebase_key,
-  authDomain: api.firebase_auth_domain
-});
 const Login = () => {
   const [signedIn, setSignedIn] = useState(false);
 

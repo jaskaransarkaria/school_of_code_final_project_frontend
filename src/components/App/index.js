@@ -11,14 +11,14 @@ import BootcamperDashboardPage from "../../pages/BootcamperDashboardPage";
 import AdminApplicationProcessingPage from "../../pages/AdminApplicationProcessingPage";
 import { api } from "../../config";
 import firebase from "firebase";
+import ApplicantVideoPage from "../../pages/ApplicantVideoPage";
+import ApplicantFormPage from "../../pages/ApplicantFormPage";
+import TemplatePage from "../../pages/TemplatePage";
 
 firebase.initializeApp({
   apiKey: api.firebase_key,
   authDomain: api.firebase_auth_domain
 });
-import ApplicantVideoPage from "../../pages/ApplicantVideoPage";
-import ApplicantFormPage from "../../pages/ApplicantFormPage";
-import TemplatePage from "../../pages/TemplatePage";
 const allContent = [
   {
     date: "30/04/2019",
