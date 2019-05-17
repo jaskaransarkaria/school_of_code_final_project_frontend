@@ -2,6 +2,13 @@ import React, { useState, useEffect } from "react";
 import FeedbackTray from "../FeedbackTray";
 import { api } from "../../config";
 
+// TODO
+
+// add questions
+// number of pending applications
+// force to rate before next question
+// sort out cors
+
 const VideoRating = () => {
   const [currentUid, setCurrentUid] = useState("");
   const [adminFeedbackRating, setAdminFeedbackRating] = useState(0);
