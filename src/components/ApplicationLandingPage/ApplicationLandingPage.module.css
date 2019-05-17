@@ -134,6 +134,11 @@ h3 {
 }
 
 /* RIGHT CONTAINER */
+.subHeader {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
 .moonImage {
   background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png");
   position: absolute;
@@ -224,49 +229,7 @@ h3 {
   font-size: 2.4em;
 }
 /* LOGO MEDIA QUERY */
-@media only screen and (max-width: 1290px) {
-  .socImage {
-    height: 220px;
-    width: 220px;
-  }
-}
-@media only screen and (max-width: 980px) {
-  .socImage {
-    height: 200px;
-    width: 200px;
-  }
-}
-
-@media only screen and (max-width: 875px) {
-  .socImage {
-    height: 180px;
-    width: 180px;
-  }
-}
-
-@media only screen and (max-width: 785px) {
-  .socImage {
-    height: 160px;
-    width: 160px;
-  }
-}
-@media only screen and (max-width: 720px) {
-  .socImage {
-    height: 140px;
-    width: 140px;
-  }
-}
-
-/* RIGHT CONTAINER MEDIA QUERY */
-
-/* MOBILE VIEW */
 @media only screen and (max-width: 550px) {
-  .socImage {
-    display: none;
-  }
-  .leftContainer {
-    width: 100%;
-  }
   .socialMediaContainer {
     display: none;
   }
@@ -279,17 +242,62 @@ h3 {
   .contactUs {
     display: none;
   }
+  .planetImage {
+    display: none;
+  }
+  .launchIntoTech {
+    display: none;
+  }
 }
-@media only screen and (max-width: 549px) {
+@media only screen and (max-width: 800px) {
+  .socialMediaContainer {
+    display: none;
+  }
+  .contactContainer {
+    display: none;
+  }
+  .followUs {
+    display: none;
+  }
+  .contactUs {
+    display: none;
+  }
+  .planetImage {
+    display: none;
+  }
+}
+@media only screen and (max-width: 600px) {
   .container {
     display: grid;
     grid-template-columns: auto;
     grid-template-rows: auto auto;
     grid-template-areas: "header" "form";
-    margin: 2% auto;
+    margin: 5% auto;
     height: 100%;
-    border: 3px solid white;
+    border: 7px solid white;
     border-radius: 7px;
     width: 70%;
+    height: 90%;
+  }
+  .leftContainer {
+    border: 0px;
+    border-radius: 0px;
+
+    border-bottom: #e0e0e0 solid 7px;
+  }
+  .rightContainer {
+    border: 0px;
+  }
+  .planetImage {
+    display: none;
+  }
+  .launchIntoTech {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  .container {
+    height: 90%;
   }
 }

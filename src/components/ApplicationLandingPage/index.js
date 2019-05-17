@@ -129,11 +129,13 @@ class ApplicationLandingPage extends Component {
               />
             </div>
             <h3 className={css.techHeading}>Bootcamp</h3>
-            <div className={css.sentenceOne}>
-              <h4>Free 16 week intensive web development </h4>
-            </div>
-            <div className={css.sentenceTwo}>
-              <h4> course open to everyone</h4>
+            <div className={css.subHeader}>
+              <div className={css.sentenceOne}>
+                <h4>Free 16 week intensive web development </h4>
+              </div>
+              <div className={css.sentenceTwo}>
+                <h4> course open to everyone</h4>
+              </div>
             </div>
             <div className={css.launchIntoTech}>
               <h4 style={{ borderBottom: "3px solid #5F04CF" }}>Launch</h4>

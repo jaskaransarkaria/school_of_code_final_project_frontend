@@ -179,7 +179,7 @@ h2 {
 }
 
 /* MOBILE VIEW MEDIA QUERY */
-@media only screen and (max-width: 550px) {
+@media only screen and (max-width: 800px) {
   .socialMediaContainer {
     display: none;
   }
@@ -193,7 +193,7 @@ h2 {
     display: none;
   }
 }
-@media only screen and (max-width: 549px) {
+@media only screen and (max-width: 799px) {
   .container {
     display: grid;
     grid-template-columns: auto;
@@ -201,7 +201,7 @@ h2 {
     grid-template-areas: "header" "form";
     margin: 5% auto;
     height: 100%;
-    border: 3px solid white;
+    border: 7px solid white;
     border-radius: 7px;
     width: 70%;
     height: 90%;
@@ -209,8 +209,7 @@ h2 {
   .leftContainer {
     border: 0px;
     border-radius: 0px;
-    border-top-left-radius: 7px;
-    border-top-right-radius: 7px;
+
     border-bottom: #e0e0e0 solid 7px;
   }
   .rightContainer {
