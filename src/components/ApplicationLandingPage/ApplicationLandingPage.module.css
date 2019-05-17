@@ -138,9 +138,9 @@ h3 {
   background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png");
   position: absolute;
 
-  top: 80%;
+  top: 85%;
   width: 100%;
-  height: 20%;
+  height: 15%;
 }
 @keyframes float {
   0% {
@@ -159,16 +159,16 @@ h3 {
 }
 .astronautImage {
   position: absolute;
-  top: 60%;
+  top: 70%;
   width: 30%;
   height: 20%;
 }
 .planetImage {
+  top: 40%;
   position: absolute;
-  left: 85%;
+  left: 70%;
   width: 30%;
-  height: 30%;
-  z-index: 1;
+  height: 40%;
 }
 .techHeading {
   font-size: 2.6em;
@@ -217,6 +217,12 @@ h3 {
   justify-content: center;
 }
 
+.launchIntoTech {
+  display: inline-block;
+  position: absolute;
+  left: 5%;
+  font-size: 2.4em;
+}
 /* LOGO MEDIA QUERY */
 @media only screen and (max-width: 1290px) {
   .socImage {

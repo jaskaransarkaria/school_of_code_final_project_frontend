@@ -135,7 +135,13 @@ class ApplicationLandingPage extends Component {
             <div className={css.sentenceTwo}>
               <h4> course open to everyone</h4>
             </div>
-            {/* <img src={PlanetImage} className={css.planetImage} alt="planet" /> */}
+            <div className={css.launchIntoTech}>
+              <h4 style={{ borderBottom: "3px solid #5F04CF" }}>Launch</h4>
+              <span style={{ borderBottom: "3px solid #5F04CF" }}>Into</span>
+              <br />
+              <span style={{ borderBottom: "3px solid #5F04CF" }}>Tech</span>
+            </div>
+            <img src={PlanetImage} className={css.planetImage} alt="planet" />
             <img src={MoonImage} className={css.moonImage} alt="moon" />
             <img
               src={AstronautImage}
