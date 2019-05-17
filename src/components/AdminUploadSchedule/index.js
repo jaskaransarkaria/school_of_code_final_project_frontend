@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import AdminScheduleTimes from "../AdminScheduleTimes";
 import css from "../AdminUploadSchedule/AdminUploadSchedule.module.css";
 import moment from "moment";
+import { api } from "../../config";
 import { Store } from "../App";
 
 //form handler is going to do the POST
@@ -59,7 +60,7 @@ const AdminUploadSchedule = () => {
       ...fullScheduleData.slice(duplicateDate + 1)
     ]);
 
-    fetch("http://localhost:5000/schedule", {
+    fetch(`${api.schedule}`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",

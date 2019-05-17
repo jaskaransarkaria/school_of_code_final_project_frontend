@@ -1,28 +1,13 @@
 import React, { useState } from "react";
-import Paper from "@material-ui/core/Paper";
 import FeedbackCard from "../FeedbackCard";
+import moment from "moment";
 
+const todaysDate = moment().format("DD/MM/YYYY");
 const data = [
-  { title: "React", rating: 0, complete: false, date: "05/05/19" },
-  {
-    title: "React Hooks Overview",
-    rating: 0,
-    complete: false,
-    date: "05/05/19"
-  },
-  { title: "React Material UI", rating: 0, complete: false, date: "05/05/19" },
-  { title: "React Proptypes", rating: 0, complete: false, date: "05/05/19" },
-  { title: "React useContext", rating: 0, complete: false, date: "05/05/19" },
-  { title: "React useReducer", rating: 0, complete: false, date: "05/05/19" },
-  {
-    title: "React useful JS patterns",
-    rating: 0,
-    complete: false,
-    date: "05/05/19"
-  }
+  { title: "Rate this vid.", rating: 0, complete: false, date: todaysDate }
 ];
 
-const FeedbackTray = () => {
+const FeedbackTray = ({ setAdminFeedbackRating, setAdminFeedbackComment }) => {
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [dummyFeedbackData, setDummyFeedbackData] = useState(data);
 
@@ -46,8 +31,8 @@ const FeedbackTray = () => {
   };
   return (
     <>
-      {console.log("dummyData", dummyFeedbackData)}
-      <button
+      {console.log("feedback tray", dummyFeedbackData)}
+      {/* <button
         onClick={() => {
           if (
             carouselIndex ===
@@ -60,27 +45,29 @@ const FeedbackTray = () => {
         }}
       >
         &gt;
-      </button>
-      <Paper>
-        {dummyFeedbackData
-          .filter(i => i.complete === false)
-          .slice(carouselIndex, carouselIndex + 3)
-          .map((item, index) => {
-            return (
-              <>
-                <br />
-                <FeedbackCard
-                  key={index}
-                  item={item}
-                  update={updateFeedback}
-                  style={{ margin: "20px auto" }}
-                />
-                <br />
-              </>
-            );
-          })}
-      </Paper>
-      <button
+      </button> */}
+      {/* <Paper> */}
+      {dummyFeedbackData
+        .filter(i => i.complete === false)
+        .slice(carouselIndex, carouselIndex + 3)
+        .map((item, index) => {
+          return (
+            <>
+              <br />
+              <FeedbackCard
+                key={index}
+                item={item}
+                update={updateFeedback}
+                style={{ margin: "20px auto" }}
+                setAdminFeedbackRating={setAdminFeedbackRating}
+                setAdminFeedbackComment={setAdminFeedbackComment}
+              />
+              <br />
+            </>
+          );
+        })}
+      {/* </Paper> */}
+      {/* <button
         onClick={() => {
           if (carouselIndex === 0) {
             return;
@@ -89,7 +76,7 @@ const FeedbackTray = () => {
         }}
       >
         &lt;
-      </button>
+      </button> */}
     </>
   );
 };
