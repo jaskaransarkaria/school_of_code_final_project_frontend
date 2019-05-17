@@ -3,11 +3,40 @@ import FeedbackTray from "../FeedbackTray";
 import { api } from "../../config";
 
 const VideoRating = () => {
+  const [currentUid, setCurrentUid] = useState("");
+  const [adminFeedbackRating, setAdminFeedbackRating] = useState(0);
+  const [adminFeedbackComment, setAdminFeedbackComment] = useState("");
+  const [overallRating, setOverallRating] = useState(0);
+  const [collateFeedback, setCollateFeedback] = useState([]);
   const [pendingVideosData, setPendingVideosData] = useState([]);
   const [userInfo, setUserInfo] = useState([]);
   const [videoCounter, setVideoCounter] = useState(0);
   const [applicantCounter, setApplicantCounter] = useState(0);
   // GET in videos from APPLICATIONS for each applicant based on uid which have a status 'pending'
+
+  const calculateOverallRating = () =>
+    collateFeedback
+      .map(item => item.rating)
+      .reduce((accumulator, currentValue) => accumulator + currentValue) /
+    collateFeedback.length;
+
+  const postRatingsToServer = async () => {
+    const data = await fetch(`${api.applications}/admin-video-descion`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        applicantFirebaseUid: currentUid,
+        videoApplicationData: collateFeedback,
+        videoOverallRating: overallRating,
+        passVideoStage: overallRating >= 6 ? true : false
+      })
+    });
+    const response = await data.json();
+    console.log(response);
+  };
 
   const getUserInfo = data => {
     console.log("userinfo data", data);
@@ -32,6 +61,17 @@ const VideoRating = () => {
   }, []);
 
   useEffect(() => {
+    if (collateFeedback.length > 3) {
+      setOverallRating(calculateOverallRating());
+      console.log("from the useEffect", calculateOverallRating());
+      if (collateFeedback.length === 5) {
+        postRatingsToServer();
+        console.log("RATINGS POSTED!");
+      }
+    }
+  }, [collateFeedback]);
+
+  useEffect(() => {
     console.log("mapping over GET users info");
     const grabAll = () =>
       Promise.all(pendingVideosData.map(getUserInfo)).then(users => {
@@ -43,14 +83,22 @@ const VideoRating = () => {
 
   // GET in personal details from the USERS based on uid
 
-  // calculate overall rating
+  // calculate overall rating && overwrite videoApplicationData with new data from collateFeedback
+  // account for on last video send all of the ratings up via POST after calculating overallRating
+
+  // logic for the "previous video" ? to prevent rating something twice?
 
   // POST ratings for each video all at once && POST whether they have passed or failed this stage
+  // also reset the collateFeedback back to an empty array
 
   return (
     <>
       {console.log("pendingvideodata", pendingVideosData)}
       {console.log("userInfo", userInfo)}
+      {console.log("adminFeedbackRating", adminFeedbackRating)}
+      {console.log("adminFeedbackComment", adminFeedbackComment)}
+      {console.log("collated ratings", collateFeedback)}
+      {console.log("current uid", currentUid)}
       <div id="userTray">
         <div id="videoTray">
           {pendingVideosData.map(
@@ -80,6 +128,7 @@ const VideoRating = () => {
                     {videoApplicationData.length === 0 && (
                       <p>no video application data for: {firebaseUid} </p>
                     )}
+
                     {videoApplicationData.map(({ videoUrl }, videoIndex) => {
                       if (videoIndex === videoCounter) {
                         return (
@@ -115,20 +164,58 @@ const VideoRating = () => {
                               >
                                 previous Video
                               </button>
-                              <button
-                                onClick={() => {
-                                  if (
-                                    videoCounter + 1 <
-                                    videoApplicationData.length
-                                  )
+
+                              {videoCounter + 1 <
+                                videoApplicationData.length && (
+                                <button
+                                  onClick={() => {
+                                    setCurrentUid(firebaseUid);
+                                    setCollateFeedback([
+                                      ...collateFeedback,
+                                      {
+                                        videoUrl: videoUrl,
+                                        rating: adminFeedbackRating,
+                                        comment: adminFeedbackComment
+                                      }
+                                    ]);
                                     setVideoCounter(videoCounter + 1);
-                                }}
-                              >
-                                next Video
-                              </button>
+                                  }}
+                                >
+                                  next Video
+                                </button>
+                              )}
+
+                              {videoCounter + 1 ===
+                                videoApplicationData.length && (
+                                <button
+                                  onClick={() => {
+                                    setCollateFeedback([
+                                      ...collateFeedback,
+                                      {
+                                        videoUrl: videoUrl,
+                                        rating: adminFeedbackRating,
+                                        comment: adminFeedbackComment
+                                      }
+                                    ]);
+                                    console.log(collateFeedback.length);
+                                    // not accounting for the FIFTH rating.... not the updated
+                                    // set pending "passVideoStage" flag to true if overall rating over 6
+                                    // set to false if under 6
+                                    setVideoCounter(videoCounter + 1);
+                                    // videoCounter will equal 6
+                                    // so then remove the button and display then previous or next application
+                                    // show message then remove it with setTimeout()
+                                  }}
+                                >
+                                  Confirm Ratings
+                                </button>
+                              )}
                             </div>
-                            <video controls autoplay src={videoUrl} />
-                            <FeedbackTray />
+                            <video controls src={videoUrl} />
+                            <FeedbackTray
+                              setAdminFeedbackRating={setAdminFeedbackRating}
+                              setAdminFeedbackComment={setAdminFeedbackComment}
+                            />
                           </>
                         );
                       } else {
