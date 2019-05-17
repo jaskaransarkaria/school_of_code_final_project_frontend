@@ -48,9 +48,9 @@ const FormPart1 = ({
 
   return (
     <>
-      <h1>
-        Application Form: <span>Step 1 of 5</span>
-      </h1>
+      <div className={css.header}>
+        <h1>Application Form</h1> <h1>Step 1 of 5</h1>
+      </div>
       <div className={css.wrapper}>
         <div className={css.formContainer}>
           <br />

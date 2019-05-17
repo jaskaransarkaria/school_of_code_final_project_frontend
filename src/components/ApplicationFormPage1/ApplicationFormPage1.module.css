@@ -29,10 +29,8 @@
   font-weight: bold;
   background-color: #11cf84;
 }
-/* @media only screen and (max-width: 550px) {
-  .formContainer {
-    display: unset;
-    right: 100%;
-    position: relative;
+@media only screen and (max-width: 550px) {
+  .header {
+    font-size: 0.7em;
   }
-} */
+}

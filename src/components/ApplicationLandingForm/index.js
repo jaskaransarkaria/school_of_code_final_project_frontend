@@ -118,7 +118,7 @@ class ApplicationLandingForm extends Component {
                 />
               </div>
             </div>
-            <div className={css.webAddress}>www.schoolofcode.co.uk</div>
+            <span className={css.webAddress}>www.schoolofcode.co.uk</span>
           </div>
           <div className={css.rightContainer}>
             <div className={css.formContainer}>

@@ -38,9 +38,9 @@ h2 {
   /* background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png"); */
   grid-area: header;
   color: white;
-  border-bottom-left-radius: 5px;
-  border-top-left-radius: 5px;
-  border: #e0e0e0 solid 5px;
+  border-bottom-left-radius: 7px;
+  border-top-left-radius: 7px;
+  border: #e0e0e0 solid 7px;
 }
 .socialMediaContainer {
   width: 100%;
@@ -56,8 +56,7 @@ h2 {
 .emailContainer {
   display: inline-flex;
 
-  background-color: rgba(34, 34, 34, 0.452);
-  border-radius: 25%;
+  border-radius: 5px;
 }
 .twitterLogo,
 .facebookLogo,
@@ -122,11 +121,11 @@ h2 {
 .rightContainer {
   grid-area: form;
   position: relative;
-  border-bottom: #e0e0e0 solid 5px;
-  border-bottom-right-radius: 5px;
-  border-top-right-radius: 5px;
-  border-top: #e0e0e0 solid 5px;
-  border-right: #e0e0e0 solid 5px;
+  border-bottom: #e0e0e0 solid 7px;
+  border-bottom-right-radius: 7px;
+  border-top-right-radius: 7px;
+  border-top: #e0e0e0 solid 7px;
+  border-right: #e0e0e0 solid 7px;
   font-weight: bold;
   background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png");
   color: white;
@@ -181,12 +180,6 @@ h2 {
 
 /* MOBILE VIEW MEDIA QUERY */
 @media only screen and (max-width: 550px) {
-  .socImage {
-    display: none;
-  }
-  .leftContainer {
-    width: 100%;
-  }
   .socialMediaContainer {
     display: none;
   }
@@ -206,10 +199,26 @@ h2 {
     grid-template-columns: auto;
     grid-template-rows: auto auto;
     grid-template-areas: "header" "form";
-    margin: 2% auto;
+    margin: 5% auto;
     height: 100%;
     border: 3px solid white;
-    border-radius: 10px;
+    border-radius: 7px;
     width: 70%;
+    height: 90%;
+  }
+  .leftContainer {
+    border: 0px;
+    border-radius: 0px;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    border-bottom: #e0e0e0 solid 7px;
+  }
+  .rightContainer {
+    border: 0px;
+  }
+}
+@media only screen and (max-width: 350px) {
+  .container {
+    height: 90%;
   }
 }

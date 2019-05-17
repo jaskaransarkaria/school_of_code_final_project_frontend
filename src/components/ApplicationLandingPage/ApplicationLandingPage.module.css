@@ -51,9 +51,9 @@ h3 {
   /* background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png"); */
   grid-area: header;
   color: white;
-  border-bottom-left-radius: 5px;
-  border-top-left-radius: 5px;
-  border: #e0e0e0 solid 5px;
+  border-bottom-left-radius: 7px;
+  border-top-left-radius: 7px;
+  border: #e0e0e0 solid 7px;
 }
 .socialMediaContainer {
   width: 100%;
@@ -178,11 +178,11 @@ h3 {
 .rightContainer {
   grid-area: form;
   position: relative;
-  border-bottom-right-radius: 5px;
-  border-top-right-radius: 5px;
-  border-bottom: #e0e0e0 solid 5px;
-  border-top: #e0e0e0 solid 5px;
-  border-right: #e0e0e0 solid 5px;
+  border-bottom-right-radius: 7px;
+  border-top-right-radius: 7px;
+  border-bottom: #e0e0e0 solid 7px;
+  border-top: #e0e0e0 solid 7px;
+  border-right: #e0e0e0 solid 7px;
   font-weight: bold;
   background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png");
   color: white;
@@ -289,7 +289,7 @@ h3 {
     margin: 2% auto;
     height: 100%;
     border: 3px solid white;
-    border-radius: 10px;
+    border-radius: 7px;
     width: 70%;
   }
 }
