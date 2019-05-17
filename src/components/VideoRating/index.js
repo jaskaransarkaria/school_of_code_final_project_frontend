@@ -155,16 +155,6 @@ const VideoRating = () => {
                                 }
                               })}
                             <div>
-                              <button
-                                onClick={() => {
-                                  if (videoCounter > 0) {
-                                    setVideoCounter(videoCounter - 1);
-                                  }
-                                }}
-                              >
-                                previous Video
-                              </button>
-
                               {videoCounter + 1 <
                                 videoApplicationData.length && (
                                 <button
@@ -198,13 +188,12 @@ const VideoRating = () => {
                                       }
                                     ]);
                                     console.log(collateFeedback.length);
-                                    // not accounting for the FIFTH rating.... not the updated
                                     // set pending "passVideoStage" flag to true if overall rating over 6
                                     // set to false if under 6
                                     setVideoCounter(videoCounter + 1);
                                     // videoCounter will equal 6
                                     // so then remove the button and display then previous or next application
-                                    // show message then remove it with setTimeout()
+                                    // show message then remove it with setTimeout()??
                                   }}
                                 >
                                   Confirm Ratings
