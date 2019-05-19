@@ -1,27 +1,45 @@
 .wrapper {
   display: flex;
-  flex-direction: column;
   justify-content: center;
+  margin-top: 5%;
 }
 .container {
   color: white;
 
-  width: 70%;
+  width: 60%;
 }
 .saveAndContinueButton,
 .previousButton {
+  width: 100%;
+  margin: 10px 0px;
   color: white;
   font-weight: bold;
   text-transform: uppercase;
   border-style: none;
   outline: none;
-  margin: 20px 0px;
   padding: 10px;
   border-radius: 7px;
   font-weight: bold;
   background-color: #11cf84;
 }
+.identifyContainer,
+.situationContainer {
+  margin: 5%;
+}
 
-.saveAndContinueButton {
-  margin-left: 10px;
+.saveAndContinueButton,
+.previousButton {
+  cursor: pointer;
+}
+@media only screen and (max-width: 750px) {
+  .header {
+    font-size: 0.9em;
+  }
+  .wrapper {
+    margin-top: 0;
+  }
+  .identifyContainer,
+  .situationContainer {
+    margin: 0;
+  }
 }

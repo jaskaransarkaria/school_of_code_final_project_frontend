@@ -48,14 +48,16 @@ const FormPart2 = ({
 
   return (
     <>
-      <h1>
-        Application Form: <span>Step 2 of 5</span>
-      </h1>
+      <div className={css.header}>
+        <h1>Application Form</h1> <h1>Step 2 of 5</h1>
+      </div>
       <div className={css.wrapper}>
         <div className={css.formContainer}>
-          <div>
+          <br />
+          <div className={css.phoneContainer}>
             <label>Phone</label>
             <input
+              placeholder="Enter phone..."
               className={css.phone}
               type="number"
               name="phoneNumber"
@@ -63,9 +65,10 @@ const FormPart2 = ({
               defaultValue={formValues.phoneNumber}
             />
           </div>
-          <div>
+          <div className={css.ageContainer}>
             <label>Age</label>
             <input
+              placeholder="Enter age..."
               className={css.age}
               type="number"
               name="age"
@@ -73,9 +76,10 @@ const FormPart2 = ({
               defaultValue={formValues.age}
             />
           </div>
-          <div>
+          <div className={css.locationContainer}>
             <label>Location</label>
             <input
+              placeholder="Enter location..."
               className={css.location}
               type="text"
               name="location"
@@ -91,18 +95,19 @@ const FormPart2 = ({
             {" "}
             {formError.numberError}
           </div>
-
-          <button onClick={previous} className={css.previousButton}>
-            {" "}
-            Previous{" "}
-          </button>
-          <button
-            onClick={saveAndContinue}
-            className={css.saveAndContinueButton}
-          >
-            {" "}
-            Save and Continue{" "}
-          </button>
+          <div className={css.buttonContainer}>
+            <button onClick={previous} className={css.previousButton}>
+              {" "}
+              Previous{" "}
+            </button>
+            <button
+              onClick={saveAndContinue}
+              className={css.saveAndContinueButton}
+            >
+              {" "}
+              Save and Continue{" "}
+            </button>
+          </div>
         </div>
       </div>
     </>

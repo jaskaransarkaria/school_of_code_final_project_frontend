@@ -43,31 +43,37 @@ const FormPart4 = ({
 
   return (
     <>
-      <h1>
-        Application Form: <span>Step 4 of 5</span>
-      </h1>
+      <div className={css.header}>
+        <h1>Application Form</h1> <h1>Step 4 of 5</h1>
+      </div>
       <div className={css.wrapper}>
-        <label>
-          Please explain why you would like to do the School of Code
-        </label>
-        <br />
-        <input
-          type="text"
-          name="motivationQuestion"
-          onChange={updateField}
-          defaultValue={formValues.motivationQuestion}
-        />
-        <div style={{ color: "red", fontSize: 12 }}>{formError.inputError}</div>
+        <div className={css.formContainer}>
+          <div className={css.question}>
+            <label>
+              Please explain why you would like to do the School of Code
+            </label>
+          </div>
+          <input
+            className={css.input}
+            type="text"
+            name="motivationQuestion"
+            onChange={updateField}
+            defaultValue={formValues.motivationQuestion}
+          />
+          <div style={{ color: "red", fontSize: 12 }}>
+            {formError.inputError}
+          </div>
 
-        <button onClick={previous} className={css.previousButton}>
-          {" "}
-          Previous{" "}
-        </button>
+          <button onClick={previous} className={css.previousButton}>
+            {" "}
+            Previous{" "}
+          </button>
 
-        <button onClick={review} className={css.reviewButton}>
-          {" "}
-          Review{" "}
-        </button>
+          <button onClick={review} className={css.reviewButton}>
+            {" "}
+            Review{" "}
+          </button>
+        </div>
       </div>
     </>
   );

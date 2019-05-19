@@ -1,12 +1,12 @@
 .wrapper {
   display: flex;
   justify-content: center;
+  margin-top: 5%;
 }
-
-.container {
+.formContainer {
   color: white;
 
-  width: 70%;
+  width: 60%;
 }
 .previousButton,
 .submitButton {
@@ -15,9 +15,27 @@
   text-transform: uppercase;
   border-style: none;
   outline: none;
-  margin: 20px 0px;
-
+  margin: 10px;
+  padding: 10px;
   border-radius: 7px;
   font-weight: bold;
   background-color: #11cf84;
+}
+.buttons {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.previousButton,
+.submitButton:hover {
+  cursor: pointer;
+}
+@media only screen and (max-width: 750px) {
+  .header {
+    font-size: 0.9em;
+  }
+  .wrapper {
+    margin-top: 0;
+  }
 }

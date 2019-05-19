@@ -228,7 +228,7 @@ h3 {
   left: 5%;
   font-size: 2.4em;
 }
-/* LOGO MEDIA QUERY */
+
 @media only screen and (max-width: 550px) {
   .socialMediaContainer {
     display: none;
@@ -293,6 +293,13 @@ h3 {
   }
   .launchIntoTech {
     display: none;
+  }
+  .socImage {
+    width: 150px;
+    height: 150px;
+  }
+  .techHeading {
+    font-size: 1.3em;
   }
 }
 

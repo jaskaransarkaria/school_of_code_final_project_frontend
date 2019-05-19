@@ -179,7 +179,10 @@ h2 {
 }
 
 /* MOBILE VIEW MEDIA QUERY */
-@media only screen and (max-width: 800px) {
+/* @media only screen and (max-width: 800px) {
+ 
+} */
+@media only screen and (max-width: 750px) {
   .socialMediaContainer {
     display: none;
   }
@@ -192,8 +195,6 @@ h2 {
   .contactUs {
     display: none;
   }
-}
-@media only screen and (max-width: 799px) {
   .container {
     display: grid;
     grid-template-columns: auto;
@@ -214,6 +215,12 @@ h2 {
   }
   .rightContainer {
     border: 0px;
+  }
+  h1 {
+    font-size: 1.3em;
+  }
+  h2 {
+    font-size: 1.1em;
   }
 }
 @media only screen and (max-width: 350px) {

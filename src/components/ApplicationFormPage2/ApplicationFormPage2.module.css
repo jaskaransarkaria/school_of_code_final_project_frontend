@@ -1,35 +1,59 @@
 .wrapper {
   display: flex;
   justify-content: center;
+  margin-top: 5%;
 }
 .formContainer {
   color: white;
 
-  width: 70%;
+  width: 60%;
 }
 .phone,
 .age,
 .location {
-  width: 95%;
-  border-radius: 7px;
-  padding: 5px;
-  border: 3px solid white;
+  padding: 10px;
+  margin-top: 5px;
+  background-color: #e0e0e0;
+  width: 100%;
+  border-radius: 10px;
+  box-sizing: border-box;
+  border-style: none;
 }
-
+.phoneContainer,
+.ageContainer,
+.locationContainer,
+.buttonContainer {
+  margin: 5%;
+}
 .saveAndContinueButton,
 .previousButton {
+  width: 100%;
+  margin: 10px 0px;
   color: white;
   font-weight: bold;
   text-transform: uppercase;
   border-style: none;
   outline: none;
-  margin: 20px 0px;
   padding: 10px;
   border-radius: 7px;
   font-weight: bold;
   background-color: #11cf84;
 }
-
-.saveAndContinueButton {
-  margin-left: 10px;
+.saveAndContinueButton,
+.previousButton:hover {
+  cursor: pointer;
+}
+@media only screen and (max-width: 750px) {
+  .header {
+    font-size: 0.9em;
+  }
+  .wrapper {
+    margin-top: 0;
+  }
+  .phoneContainer,
+  .ageContainer,
+  .locationContainer,
+  .buttonContainer {
+    margin: 0;
+  }
 }

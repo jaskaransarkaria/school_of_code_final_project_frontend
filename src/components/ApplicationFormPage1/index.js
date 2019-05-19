@@ -54,18 +54,20 @@ const FormPart1 = ({
       <div className={css.wrapper}>
         <div className={css.formContainer}>
           <br />
-          <label>First Name</label>
-          <input
-            placeholder="Enter first name.."
-            className={css.firstName}
-            type="text"
-            name="firstName"
-            onChange={updateField}
-            defaultValue={formValues.firstName}
-            required
-          />
+          <div className={css.firstNameContainer}>
+            <label>First Name</label>
+            <input
+              placeholder="Enter first name.."
+              className={css.firstName}
+              type="text"
+              name="firstName"
+              onChange={updateField}
+              defaultValue={formValues.firstName}
+              required
+            />
+          </div>
 
-          <div>
+          <div className={css.lastNameContainer}>
             <label>Last Name</label>
             <input
               placeholder="Enter Last name.."
@@ -77,7 +79,7 @@ const FormPart1 = ({
               required
             />
           </div>
-          <div>
+          <div className={css.emailContainer}>
             <label>Email</label>
             <input
               placeholder="Enter email.."
@@ -97,11 +99,12 @@ const FormPart1 = ({
             {" "}
             {formError.emailError}
           </div>
-
-          <button onClick={saveAndContinue} className={css.saveAndContinue}>
-            {" "}
-            Save and Continue{" "}
-          </button>
+          <div className={css.saveAndContinueContainer}>
+            <button onClick={saveAndContinue} className={css.saveAndContinue}>
+              {" "}
+              Save and Continue{" "}
+            </button>
+          </div>
         </div>
       </div>
     </>

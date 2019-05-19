@@ -3,34 +3,56 @@
   font-family: "Oxygen", sans-serif;
 }
 .wrapper {
+  margin-top: 5%;
   display: flex;
   justify-content: center;
 }
 .formContainer {
-  width: 70%;
+  width: 60%;
 }
 .firstName,
 .lastName,
 .email {
-  width: 95%;
-  border-radius: 10px;
   padding: 10px;
+  margin-top: 5px;
+  background-color: #e0e0e0;
+  width: 100%;
+  border-radius: 10px;
+  box-sizing: border-box;
   border-style: none;
 }
+.firstNameContainer,
+.lastNameContainer,
+.emailContainer,
+.saveAndContinueContainer {
+  margin: 5%;
+}
 .saveAndContinue {
-  color: white;
-  font-weight: bold;
-  text-transform: uppercase;
-  border-style: none;
-  outline: none;
-  margin: 20px 0px;
   padding: 10px;
   border-radius: 10px;
+  width: 100%;
+  border-style: none;
+  margin-top: 10px;
+  box-sizing: border-box;
+
+  color: white;
   font-weight: bold;
   background-color: #11cf84;
 }
-@media only screen and (max-width: 550px) {
+.saveAndContinue:hover {
+  cursor: pointer;
+}
+@media only screen and (max-width: 750px) {
   .header {
-    font-size: 0.7em;
+    font-size: 0.9em;
+  }
+  .wrapper {
+    margin-top: 0;
+  }
+  .firstNameContainer,
+  .lastNameContainer,
+  .emailContainer,
+  .saveAndContinueContainer {
+    margin: 0;
   }
 }
