@@ -38,7 +38,7 @@ const Login = () => {
         <div className="App">
           <Welcome
             fullName={firebase.auth().currentUser.displayName}
-            photo={firebase.auth().currentUser.photoURL}
+            // photo={firebase.auth().currentUser.photoURL}
           />
 
           <button

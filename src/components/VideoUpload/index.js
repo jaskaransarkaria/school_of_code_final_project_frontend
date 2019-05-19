@@ -1,4 +1,3 @@
-
 import css from "../VideoUpload/VideoUpload.module.css";
 import React, { useState, useEffect, useRef } from "react";
 import AWS from "aws-sdk";
@@ -79,6 +78,10 @@ const VideoUpload = () => {
       }
     });
   }, []);
+
+  useEffect(() => {
+    return () => {};
+  }, [video]);
 
   const uploadVideosToDb = () => {
     console.log("inside upload", firebaseUid);
@@ -179,6 +182,7 @@ const VideoUpload = () => {
 
             video.current.play(); // use a ref here
             localStream = stream;
+
             recorder = new MediaRecorder(stream);
             setIsRecording(true);
             recorder.ondataavailable = e => {

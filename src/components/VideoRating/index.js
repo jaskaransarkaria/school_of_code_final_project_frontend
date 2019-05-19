@@ -7,7 +7,6 @@ import { api } from "../../config";
 // add questions
 // number of pending applications
 // force to rate before next question
-// sort out cors
 
 const VideoRating = () => {
   const [currentUid, setCurrentUid] = useState("");
