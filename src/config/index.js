@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000"; //process.env.REACT_APP_API_URL ||
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
 const FIREBASE_KEY = process.env.REACT_APP_FIREBASE_API_KEY || "";
 const FIREBASE_AUTH_DOMAIN = process.env.REACT_APP_FIREBASE_AUTH_DOMAIN || "";
 const AWS_KEY_ID = process.env.REACT_APP_AWS_ACCESS_KEY_ID || "";
@@ -6,7 +6,6 @@ const AWS_SECRET_KEY = process.env.REACT_APP_AWS_SECRET_ACCESS_KEY || "";
 
 export const api = {
   //api routes
-  register: `${API_URL}/register`,
   users: `${API_URL}/users`,
   schedule: `${API_URL}/schedule`,
   topics: `${API_URL}/topics`,
