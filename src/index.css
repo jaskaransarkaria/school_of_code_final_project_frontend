@@ -21,3 +21,24 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+/* React Transition CSS */
+
+.item-enter {
+  opacity: 0;
+}
+
+.item-enter-active {
+  opacity: 1;
+  transition: 300ms;
+}
+.item-enter-done {
+  opacity: 1;
+}
+
+.item-exit {
+  opacity: 0;
+}
+.item-exit-active {
+  opacity: 0;
+}
