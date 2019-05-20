@@ -21,7 +21,7 @@ const FormPart3 = ({
   const saveAndContinue = e => {
     e.preventDefault();
 
-    if (formValues.situation === "" || formValues.identify === "") {
+    if (formValues.background === "" || formValues.identify === "") {
       console.log("error");
       setFormError({
         ...formError,
@@ -83,11 +83,11 @@ const FormPart3 = ({
             <>
               <input
                 type="radio"
-                name="situation"
+                name="background"
                 value={item}
                 onChange={updateField}
-                checked={formValues.situation === item ? "checked" : null}
-                defaultValue={formValues.situation}
+                checked={formValues.background === item ? "checked" : null}
+                defaultValue={formValues.background}
               />
               {item}
             </>
