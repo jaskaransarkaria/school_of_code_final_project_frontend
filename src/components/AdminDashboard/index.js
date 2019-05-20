@@ -5,8 +5,6 @@ import AdminUserOptions from "../AdminUserOptions";
 import FormRating from "../FormRating";
 import VideoRating from "../VideoRating";
 import AdminUploadSchedule from "../AdminUploadSchedule";
-import NotFound from "../FormRating";
-
 import css from "../AdminDashboard/AdminDashboard.module.css";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
