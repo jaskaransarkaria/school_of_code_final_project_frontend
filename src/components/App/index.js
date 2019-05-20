@@ -223,7 +223,7 @@ function App() {
           path="/bootcamper-dashboard"
           component={BootcamperDashboardPage}
         />
-        <Route path="/ " component={AdminDashboardPage} />
+        <Route path="/admin-dashboard" component={AdminDashboardPage} />
         <Route path="/upload-schedule" component={AdminUploadSchedulePage} />
         <Route path="/schedule" component={SchedulePage} />
         <Route path="/topics" component={TopicsPage} />
