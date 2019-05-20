@@ -1,0 +1,6 @@
+.topicContainer {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  height: 20%;
+}

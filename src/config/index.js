@@ -6,9 +6,9 @@ const AWS_SECRET_KEY = process.env.REACT_APP_AWS_SECRET_ACCESS_KEY || "";
 
 export const api = {
   //api routes
-  register: `${API_URL}/register`,
   users: `${API_URL}/users`,
   schedule: `${API_URL}/schedule`,
+  topics: `${API_URL}/topics`,
   applications: `${API_URL}/applications`,
   firebase_key: FIREBASE_KEY,
   firebase_auth_domain: FIREBASE_AUTH_DOMAIN

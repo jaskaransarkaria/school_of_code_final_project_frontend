@@ -1,8 +1,9 @@
 .navContainer {
   display: inline-flex;
   justify-content: center;
-
   width: 6%;
+  height: 100vh;
+  background-color: blue;
 }
 .iconsContainer {
   display: inline-flex;
