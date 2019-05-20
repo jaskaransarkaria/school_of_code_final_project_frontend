@@ -1,0 +1,211 @@
+/*----------------------
+ General Formatting 
+ ----------------------*/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0 0 10px 0;
+}
+
+/* ---------------------------
+Application Status buttons 
+-----------------------------*/
+
+button {
+  font-size: 14px;
+}
+
+.applicationStatusContainer {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  margin: 20px auto;
+  width: 60%;
+}
+
+.applicationStatusButtonActive {
+  background: #57c7cc;
+  margin: 0 25px;
+  padding: 10px;
+  width: 250px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1;
+  transition: 100ms;
+}
+
+.applicationStatusButtonActive:hover {
+  cursor: pointer;
+}
+
+.applicationStatusButtonActive p {
+  display: flex;
+  align-items: center;
+  margin: -9px;
+  padding: 10px 10px;
+  font-size: 16px;
+}
+.applicationStatusButton {
+  margin: 0 25px;
+  padding: 10px;
+  width: 250px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1;
+  transition: 200ms;
+}
+
+.applicationStatusButton:hover {
+  cursor: pointer;
+  box-shadow: 2px 2px 3px;
+}
+
+.applicationStatusButton p {
+  display: flex;
+  align-items: center;
+  margin: -9px;
+  padding: 10px 10px;
+  font-size: 16px;
+}
+
+.applicationsNumber {
+  border-radius: 0px 4px 4px 0px;
+  background: lightcoral;
+  display: flex;
+  align-items: center;
+}
+
+/*-----------------
+Applicant Lists
+-------------------*/
+
+button.applicant {
+  color: white;
+  margin: 0 auto;
+  padding: 2px;
+  border-color: unset;
+  border: 0;
+  background: none;
+  font-size: 18px;
+  z-index: 1;
+}
+
+button.applicant:hover {
+  cursor: pointer;
+}
+
+ul.applicantListContainer {
+  max-height: 300px;
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  margin: 0 25px;
+  padding: 0;
+  background: rgba(1, 1, 1, 0.2);
+}
+
+ul.hideApplicantListContainer {
+  display: none;
+}
+
+.showSearchInput {
+  margin: 3px 2px;
+  width: 96%;
+  text-align: center;
+  padding: 0px;
+  height: 20px;
+  font-size: 14px;
+}
+
+.hideSearchInput {
+  display: none;
+}
+
+/*--------------------------------
+ Application Details Container  
+---------------------------------*/
+.applicantDetailsContainer {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.detailsSubContainer {
+  padding: 10px;
+  background: #31a4db;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px;
+}
+
+.metaData {
+  display: flex;
+  justify-content: center;
+}
+
+.metaData p {
+  margin: 0 20px;
+}
+
+.detailsSubContainer h2 {
+  text-align: center;
+}
+
+.reasonSubContainer {
+  padding: 10px;
+  margin: 10px;
+  background: #eae8e8;
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px;
+}
+
+.applicationButtonsContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.applicationButtonsContainer button {
+  margin: 0 15px;
+  width: 150px;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px;
+  transition: 200ms;
+}
+
+.applicationButtonsContainer button:hover {
+  cursor: pointer;
+  box-shadow: 2px 2px 5px;
+}
+
+.adminDashboardHome {
+  position: absolute;
+  top: 2%;
+  right: 2%;
+}
+
+.adminDashboardHome button {
+  margin: 0 15px;
+  width: 100px;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px;
+  transition: 200ms;
+}
+
+.adminDashboardHome button:hover {
+  cursor: pointer;
+  box-shadow: 2px 2px 5px;
+}
