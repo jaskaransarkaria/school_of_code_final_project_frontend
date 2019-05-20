@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import FormPart1 from "../ApplicationFormPage1";
 import FormPart2 from "../ApplicationFormPage2";
@@ -6,9 +6,21 @@ import FormPart3 from "../ApplicationFormPage3";
 import FormPart4 from "../ApplicationFormPage4";
 import ReviewForm from "../ApplicationFormReviewPage";
 
+import firebase from "firebase";
+
 import { api } from "../../config";
 
+console.log("API", api);
+
 const App = () => {
+  const [uid, setUid] = useState("");
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged(user => {
+      setUid(user.uid);
+    });
+  }, []);
+
   const [step, setStep] = useState(1);
   const [formValues, setFormValues] = useState({
     firstName: "",
@@ -18,7 +30,7 @@ const App = () => {
     age: null,
     location: "",
     identify: "",
-    situation: "",
+    background: "",
     motivationQuestion: ""
   });
   const [formError, setFormError] = useState({
@@ -34,7 +46,7 @@ const App = () => {
         Accept: "application/json"
       },
       body: JSON.stringify({
-        firebaseUid: formValues.firebaseUid,
+        firebaseUid: uid,
         firstName: formValues.firstName,
         lastName: formValues.lastName,
         email: formValues.email,
