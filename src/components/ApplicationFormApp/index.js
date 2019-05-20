@@ -6,6 +6,8 @@ import FormPart3 from "../ApplicationFormPage3";
 import FormPart4 from "../ApplicationFormPage4";
 import ReviewForm from "../ApplicationFormReviewPage";
 
+import { api } from "../../config";
+
 const App = () => {
   const [step, setStep] = useState(1);
   const [formValues, setFormValues] = useState({
@@ -25,7 +27,28 @@ const App = () => {
   });
 
   const submitForm = () => {
-    // Link up to POST request
+    fetch(`${api.users}/register`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        firebaseUid: formValues.firebaseUid,
+        firstName: formValues.firstName,
+        lastName: formValues.lastName,
+        email: formValues.email,
+        phoneNumber: formValues.phoneNumber,
+        age: formValues.age,
+        location: formValues.location,
+        identify: formValues.identify,
+        background: formValues.background,
+        motivationQuestion: formValues.motivationQuestion
+      })
+    })
+      .then(res => res.json())
+      .then(data => console.log("DATA", data))
+      .catch(err => console.log(err));
   };
 
   const renderSwitch = () => {
