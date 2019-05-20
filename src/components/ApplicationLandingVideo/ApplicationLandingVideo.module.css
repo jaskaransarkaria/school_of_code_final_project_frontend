@@ -23,13 +23,10 @@ h3 {
 }
 .container {
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: 35% 65%;
   grid-template-areas: "header form";
-  margin: 2% auto;
-  height: 90vh;
-  width: 70%;
-  border: 7px solid white;
-  border-radius: 7px;
+
+  height: 100vh;
 }
 .wrapper {
   position: fixed;
@@ -42,9 +39,9 @@ h3 {
 /* LEFT CONTAINER CONTENT */
 .leftContainer {
   grid-area: header;
-  height: 100%;
+
   color: white;
-  border-right: 3px solid white;
+
   background-image: linear-gradient(to bottom right, #04c7d9, #5f04cf);
 }
 .socImageContainer {
@@ -146,8 +143,7 @@ h3 {
   grid-area: form;
   color: white;
   position: relative;
-  border-top-right-radius: 7px;
-  border-bottom-right-radius: 7px;
+
   background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png");
   font-weight: bold;
 }

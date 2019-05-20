@@ -19,7 +19,7 @@ class ApplicationLandingForm extends Component {
 
             <h3>Application Area</h3>
 
-            <div className={css.socImageContainer}>
+            {/* <div className={css.socImageContainer}>
               <img
                 className={css.socImage}
                 src={SocImage}
@@ -118,7 +118,7 @@ class ApplicationLandingForm extends Component {
                 />
               </div>
             </div>
-            <span className={css.webAddress}>www.schoolofcode.co.uk</span>
+            <span className={css.webAddress}>www.schoolofcode.co.uk</span> */}
           </div>
           <div className={css.rightContainer}>
             <div className={css.formContainer}>

@@ -53,43 +53,50 @@ const FormPart1 = ({
       </div>
       <div className={css.wrapper}>
         <div className={css.formContainer}>
-          <br />
-          <div className={css.firstNameContainer}>
+          <div className={css.firstAndLastNameContainer}>
             <label>First Name</label>
-            <input
-              placeholder="Enter first name.."
-              className={css.firstName}
-              type="text"
-              name="firstName"
-              onChange={updateField}
-              defaultValue={formValues.firstName}
-              required
-            />
-          </div>
 
-          <div className={css.lastNameContainer}>
-            <label>Last Name</label>
-            <input
-              placeholder="Enter Last name.."
-              className={css.lastName}
-              type="text"
-              name="lastName"
-              onChange={updateField}
-              defaultValue={formValues.lastName}
-              required
-            />
+            <div className={css.firstNameInputContainer}>
+              <input
+                placeholder="Enter first name.."
+                className={css.firstName}
+                type="text"
+                name="firstName"
+                onChange={updateField}
+                defaultValue={formValues.firstName}
+                required
+              />
+            </div>
+
+            <div className={css.lastNameContainer}>
+              <label>Last Name</label>
+
+              <div className={css.lastNameInputContainer}>
+                <input
+                  placeholder="Enter Last name.."
+                  className={css.lastName}
+                  type="text"
+                  name="lastName"
+                  onChange={updateField}
+                  defaultValue={formValues.lastName}
+                  required
+                />
+              </div>
+            </div>
           </div>
           <div className={css.emailContainer}>
             <label>Email</label>
-            <input
-              placeholder="Enter email.."
-              className={css.email}
-              type="email"
-              name="email"
-              onChange={updateField}
-              defaultValue={formValues.email}
-              required
-            />
+            <div className={css.emailInputContainer}>
+              <input
+                placeholder="Enter email.."
+                className={css.email}
+                type="email"
+                name="email"
+                onChange={updateField}
+                defaultValue={formValues.email}
+                required
+              />
+            </div>
           </div>
           <div style={{ color: "red", fontSize: 12 }}>
             {" "}
@@ -99,10 +106,10 @@ const FormPart1 = ({
             {" "}
             {formError.emailError}
           </div>
-          <div className={css.saveAndContinueContainer}>
-            <button onClick={saveAndContinue} className={css.saveAndContinue}>
+          <div className={css.nextButton}>
+            <button onClick={saveAndContinue} className={css.nextInput}>
               {" "}
-              Save and Continue{" "}
+              Next{" "}
             </button>
           </div>
         </div>

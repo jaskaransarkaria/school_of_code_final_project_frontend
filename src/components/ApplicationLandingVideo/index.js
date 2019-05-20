@@ -29,8 +29,8 @@ class ApplicationLandingVideo extends Component {
                 alt="School of code logo"
               />
             </div>
-            <h3 className={css.followUs}>Follow us:</h3>
-            <div className={css.socialMediaContainer}>
+            {/* <h3 className={css.followUs}>Follow us:</h3> */}
+            {/* <div className={css.socialMediaContainer}>
               <div className={css.twitterContainer}>
                 <a
                   href="https://twitter.com/theschoolofcode?lang=en"
@@ -96,8 +96,8 @@ class ApplicationLandingVideo extends Component {
                   />
                 </a>
               </div>
-            </div>
-            <h3 className={css.contactUs}>Contact Us:</h3>
+            </div> */}
+            {/* <h3 className={css.contactUs}>Contact Us:</h3>
             <div className={css.contactContainer}>
               <div className={css.locationContainer}>
                 <a
@@ -119,8 +119,8 @@ class ApplicationLandingVideo extends Component {
                   alt="email logo"
                 />
               </div>
-            </div>
-            <div className={css.webAddress}>www.schoolofcode.co.uk</div>
+            </div> */}
+            {/* <div className={css.webAddress}>www.schoolofcode.co.uk</div> */}
           </div>
           <div className={css.rightContainer}>
             <h3 className={css.techHeading}>Video Questions</h3>

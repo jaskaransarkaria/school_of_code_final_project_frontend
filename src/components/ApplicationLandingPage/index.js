@@ -11,23 +11,12 @@ import LocationImage from "../../Images/location.svg";
 import EmailImage from "../../Images/close-envelope.svg";
 import MoonImage from "../../Images/SOCMoon.png";
 import AstronautImage from "../../Images/SOCAstronaut.webp";
-import PlanetImage from "../../Images/SOCPlanet.png";
+import PlanetImage from "../../Images/planet_soc.png";
 class ApplicationLandingPage extends Component {
   render() {
     return (
       <div className={css.wrapper}>
-        <div className={css.container}>
-          <div className={css.leftContainer}>
-            <div className={css.headers}>
-              <h1>School of Code</h1>
-
-              <h3>Register Area</h3>
-            </div>
-            <div className={css.loginContainer}>
-              <Login />
-            </div>
-
-            <h3 className={css.followUs}>Follow us:</h3>
+        {/* <h3 className={css.followUs}>Follow us:</h3>
             <div className={css.socialMediaContainer}>
               <div className={css.twitterContainer}>
                 <a
@@ -117,42 +106,44 @@ class ApplicationLandingPage extends Component {
                   alt="email logo"
                 />
               </div>
-            </div>
-            <div className={css.webAddress}>www.schoolofcode.co.uk</div>
+            </div> */}
+
+        <img
+          src={SocImage}
+          className={css.socImage}
+          alt="school of code logo"
+        />
+
+        {/* <h3 className={css.techHeading}>Bootcamp</h3> */}
+        <div className={css.subHeader}>
+          <div className={css.sentenceOne}>
+            <h4>Free 16 week intensive web development </h4>
           </div>
-          <div className={css.rightContainer}>
-            <div className={css.socImageContainer}>
-              <img
-                src={SocImage}
-                className={css.socImage}
-                alt="school of code logo"
-              />
-            </div>
-            <h3 className={css.techHeading}>Bootcamp</h3>
-            <div className={css.subHeader}>
-              <div className={css.sentenceOne}>
-                <h4>Free 16 week intensive web development </h4>
-              </div>
-              <div className={css.sentenceTwo}>
-                <h4> course open to everyone</h4>
-              </div>
-            </div>
-            <div className={css.launchIntoTech}>
-              <h4 style={{ borderBottom: "3px solid #5F04CF" }}>Launch</h4>
-              <span style={{ borderBottom: "3px solid #5F04CF" }}>Into</span>
-              <br />
-              <span style={{ borderBottom: "3px solid #5F04CF" }}>Tech</span>
-            </div>
-            <img src={PlanetImage} className={css.planetImage} alt="planet" />
-            <img src={MoonImage} className={css.moonImage} alt="moon" />
-            <img
-              src={AstronautImage}
-              className={css.astronautImage}
-              alt="astronaut"
-            />
-            {/* <img src={PlanetImage} className={css.planetImage} alt="planet" /> */}
+
+          <div className={css.sentenceTwo}>
+            <h4> course open to everyone</h4>
           </div>
         </div>
+
+        <div className={css.loginContainer}>
+          <Login />
+        </div>
+
+        <div className={css.launchIntoTech}>
+          <span style={{ borderBottom: "7px solid #5F04CF" }}>Launch</span>
+          <br />
+          <span style={{ borderBottom: "7px solid #5F04CF" }}>Into</span>
+          <br />
+          <span style={{ borderBottom: "7px solid #5F04CF" }}>Tech</span>
+        </div>
+        <img src={PlanetImage} className={css.planetImage} alt="planet" />
+        <img src={MoonImage} className={css.moonImage} alt="moon" />
+        <img
+          src={AstronautImage}
+          className={css.astronautImage}
+          alt="astronaut"
+        />
+        {/* <img src={PlanetImage} className={css.planetImage} alt="planet" /> */}
       </div>
     );
   }
