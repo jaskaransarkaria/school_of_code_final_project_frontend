@@ -155,18 +155,18 @@ h3 {
   height: 30%;
 }
 .planetImage {
-  top: 30%;
+  top: 20%;
   position: absolute;
-  left: 90%;
+  left: 88%;
 
-  width: 20%;
+  height: 60%;
 }
 
 .launchIntoTech {
   color: white;
   display: inline-block;
   position: absolute;
-  top: 30%;
+  top: 25%;
   left: 5%;
   font-size: 4em;
 }

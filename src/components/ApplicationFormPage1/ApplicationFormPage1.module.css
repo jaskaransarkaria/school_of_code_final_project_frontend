@@ -2,68 +2,80 @@
 .body {
   font-family: "Oxygen", sans-serif;
 }
-.wrapper {
-  margin-top: 5%;
-}
-.formContainer {
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: column;
-}
+.container {
+  display: grid;
+  grid-template-columns: 35% 65%;
+  grid-template-areas: "header form";
 
-/* INPUTS */
-.firstName,
-.lastName {
-  padding: 10px;
-  margin-top: 5px;
-  background-color: #e0e0e0;
-  width: 50%;
-  border-radius: 10px;
-  box-sizing: border-box;
-  border-style: none;
+  height: 100vh;
 }
-
-.email {
-  padding: 10px;
-  margin-top: 5px;
-  background-color: #e0e0e0;
-  width: 50%;
-  border-radius: 10px;
-  box-sizing: border-box;
-  border-style: none;
-}
-/* FIRST AND LAST NAME CONTAINER */
-.firstAndLastNameContainer {
-  display: flex;
-}
-/* BUTTONS */
-.nextInput {
-  padding: 10px;
-  border-radius: 10px;
-
-  border-style: none;
-  margin-top: 10px;
-  box-sizing: border-box;
+.leftContainer {
+  grid-area: header;
 
   color: white;
+
+  background-image: linear-gradient(to bottom right, #04c7d9, #5f04cf);
+}
+.rightContainer {
+  grid-area: form;
+  color: white;
+  position: relative;
+
+  background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png");
   font-weight: bold;
+}
+.socImage {
+  width: 200px;
+  height: 200px;
+}
+.firstName,
+.lastName,
+.email {
+  color: white;
+  padding: 10px;
+  width: 50%;
+  background-color: transparent;
+  border: 5px solid #11cf84;
+  box-sizing: border-box;
+}
+
+.nextInput {
+  margin-bottom: 50px;
+
+  position: absolute;
+  bottom: 0;
+  width: 50%;
+  color: white;
+  padding: 10px;
+  border-style: none;
   background-color: #11cf84;
 }
-.next:hover {
-  cursor: pointer;
+::placeholder {
+  color: white;
 }
-@media only screen and (max-width: 750px) {
-  .header {
-    font-size: 0.9em;
-  }
-  .wrapper {
-    margin-top: 0;
-  }
-  .firstNameContainer,
-  .lastNameContainer,
-  .emailContainer,
-  .saveAndContinueContainer {
-    margin: 0;
-  }
+.firstNameLabel,
+.lastNameLabel,
+.emailLabel {
+  font-weight: bold;
+  color: white;
+}
+
+.firstNameContainer,
+.lastNameContainer,
+.emailContainer,
+.instructionsContainer {
+  margin-bottom: 60px;
+}
+.header {
+  color: white;
+}
+.formContainer {
+  color: white;
+}
+.instructionsContainer {
+  box-sizing: border-box;
+
+  padding: 70px;
+  width: 50%;
+  border: 5px solid #11cf84;
 }
