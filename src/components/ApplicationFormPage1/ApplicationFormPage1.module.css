@@ -20,28 +20,50 @@
   grid-area: form;
   color: white;
   position: relative;
-
+  margin: 0 5%;
   background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png");
   font-weight: bold;
+}
+.firstAndLastNameContainer {
+  display: flex;
+}
+.firstNameContainer {
+  flex: 1;
+}
+.lastNameContainer {
+  margin-left: 10px;
+  flex: 1;
 }
 .socImage {
   width: 200px;
   height: 200px;
 }
 .firstName,
-.lastName,
+.lastName {
+  font-size: 1.2em;
+  color: white;
+  padding: 10px;
+  width: 100%;
+  background-color: transparent;
+  border: 5px solid #11cf84;
+  box-sizing: border-box;
+  margin-top: 10px;
+}
 .email {
+  font-size: 1.2em;
   color: white;
   padding: 10px;
   width: 50%;
   background-color: transparent;
   border: 5px solid #11cf84;
   box-sizing: border-box;
+  margin-top: 10px;
 }
-
 .nextInput {
+  font-size: 1.2em;
+  font-weight: bold;
   margin-bottom: 50px;
-
+  cursor: pointer;
   position: absolute;
   bottom: 0;
   width: 50%;
@@ -62,20 +84,102 @@
 
 .firstNameContainer,
 .lastNameContainer,
-.emailContainer,
-.instructionsContainer {
+.emailContainer {
   margin-bottom: 60px;
 }
 .header {
   color: white;
 }
 .formContainer {
+  position: relative;
+  top: 30%;
   color: white;
 }
 .instructionsContainer {
-  box-sizing: border-box;
+  float: left;
 
-  padding: 70px;
-  width: 50%;
-  border: 5px solid #11cf84;
+  position: absolute;
+  top: 40%;
+}
+.applicationFormText {
+  position: absolute;
+}
+.applicationStepText {
+  position: absolute;
+  margin-top: 80px;
+}
+.socImageContainer {
+  top: 5%;
+  position: relative;
+  text-align: center;
+}
+
+/* QUESTION SELECT BOX */
+/* .questionBoxContainer {
+  display: block;
+  width: 100%;
+  position: relative;
+  top: 50%;
+} */
+.selectdiv {
+  margin-left: 20px;
+  position: absolute;
+  /*Don't really need this just for demo styling*/
+  width: 30%;
+  float: left;
+  top: 70%;
+}
+
+.selectdiv:after {
+  content: "\f078";
+  font: normal normal normal 17px/1 FontAwesome;
+  color: #0ebeff;
+  right: 11px;
+  top: 6px;
+  height: 34px;
+  padding: 15px 0px 0px 8px;
+  border-left: 1px solid #0ebeff;
+  position: absolute;
+  pointer-events: none;
+}
+
+/* IE11 hide native button (thanks Matt!) */
+select::-ms-expand {
+  display: none;
+}
+
+.selectdiv select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* Add some styling */
+
+  display: block;
+  width: 100%;
+
+  height: 50px;
+  float: right;
+  margin: 5px 0px;
+  padding: 0px 24px;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #333;
+  background-color: #ffffff;
+  background-image: none;
+  border: 1px solid #0ebeff;
+  -ms-word-break: normal;
+  word-break: normal;
+}
+.instructionsText {
+  margin-left: 20px;
+  float: left;
+  border-bottom: 3px solid white;
+}
+.instructionsParagraph {
+  font-size: 1.2em;
+  width: 30%;
+  margin-left: 20px;
+  position: relative;
+  text-align: justify;
+  word-wrap: break-word;
 }
