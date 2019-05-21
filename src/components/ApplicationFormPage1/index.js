@@ -146,8 +146,8 @@ const FormPart1 = ({
                 {formError.emailError}
               </div>
             </div>
-            <div className={css.nextButton}>
-              <button onClick={saveAndContinue} className={css.nextInput}>
+            <div className={css.nextButtonContainer}>
+              <button onClick={saveAndContinue} className={css.nextButton}>
                 {" "}
                 Next{" "}
               </button>
