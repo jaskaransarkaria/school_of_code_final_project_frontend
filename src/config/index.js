@@ -1,4 +1,4 @@
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+const API_URL = "http://localhost:5000"; //  process.env.REACT_APP_API_URL ||
 const FIREBASE_KEY = process.env.REACT_APP_FIREBASE_API_KEY || "";
 const FIREBASE_AUTH_DOMAIN = process.env.REACT_APP_FIREBASE_AUTH_DOMAIN || "";
 const AWS_KEY_ID = process.env.REACT_APP_AWS_ACCESS_KEY_ID || "";
