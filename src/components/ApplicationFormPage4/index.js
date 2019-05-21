@@ -1,5 +1,5 @@
 import React from "react";
-import css from "../ApplicationFormPage3/ApplicationFormPage3.module.css";
+import css from "../ApplicationFormPage4/ApplicationFormPage4.module.css";
 import SocImage from "../../Images/soc-logo.png";
 
 const FormPart4 = ({
@@ -61,8 +61,8 @@ const FormPart4 = ({
               <p className={css.instructionsParagraph}>
                 Please fill out steps 1-5 of the application form so we can get
                 to know more about you. Once you have submitted the information
-                you will receive and email which will notify you if you have
-                successfully made it to the next process.
+                you will receive an email which will notify you if you have
+                successfully made it to the next stage.
               </p>
             </div>
             <div className={css.questionBoxContainer}>
@@ -85,12 +85,13 @@ const FormPart4 = ({
             <h1 className={css.applicationStepText}>Step 4</h1>
             <div className={css.formContainer}>
               <div className={css.question}>
-                <label>
-                  Please explain why you would like to do the School of Code
+                <label className={css.questionOne}>
+                  Please explain why you would like to join the School of Code
+                  Bootcamp
                 </label>
               </div>
-              <input
-                className={css.input}
+              <textarea
+                className={css.inputBox}
                 type="text"
                 name="motivationQuestion"
                 onChange={updateField}

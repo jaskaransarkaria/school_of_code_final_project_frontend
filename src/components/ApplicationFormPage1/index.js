@@ -65,8 +65,8 @@ const FormPart1 = ({
               <p className={css.instructionsParagraph}>
                 Please fill out steps 1-5 of the application form so we can get
                 to know more about you. Once you have submitted the information
-                you will receive and email which will notify you if you have
-                successfully made it to the next process.
+                you will receive an email which will notify you if you have
+                successfully made it to the next stage.
               </p>
             </div>
             <div className={css.questionBoxContainer}>
@@ -146,12 +146,11 @@ const FormPart1 = ({
                 {formError.emailError}
               </div>
             </div>
-            <div className={css.nextButtonContainer}>
-              <button onClick={saveAndContinue} className={css.nextButton}>
-                {" "}
-                Next{" "}
-              </button>
-            </div>
+
+            <button onClick={saveAndContinue} className={css.nextButton}>
+              {" "}
+              Next{" "}
+            </button>
           </div>
         </div>
       </div>

@@ -13,11 +13,14 @@
   background-image: linear-gradient(to bottom right, #04c7d9, #5f04cf);
 }
 .formContainer {
+  font-size: 1.4em;
   position: relative;
   top: 20%;
   color: white;
 }
-
+ul {
+  list-style: none;
+}
 .rightContainer {
   grid-area: form;
   color: white;
@@ -55,6 +58,7 @@
   border-style: none;
   background-color: #11cf84;
 }
+
 /* LEFT CONTAINER CONTENT */
 /* SOC IMAGE */
 .socImage {

@@ -14,7 +14,7 @@
 }
 .formContainer {
   position: relative;
-  top: 20%;
+  top: 15%;
   color: white;
 }
 
@@ -148,6 +148,15 @@ select::-ms-expand {
 .saveAndContinueButton,
 .previousButton {
   cursor: pointer;
+}
+.identifyText,
+.situationText {
+  font-size: 1.4em;
+}
+.questionOneContainer,
+.questionTwoContainer {
+  margin-top: 10px;
+  font-size: 1.1em;
 }
 @media only screen and (max-width: 750px) {
   .header {

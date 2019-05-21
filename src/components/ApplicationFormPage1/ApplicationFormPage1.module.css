@@ -41,7 +41,7 @@
 .selectdiv {
   margin-left: 20px;
   position: absolute;
-  /*Don't really need this just for demo styling*/
+
   width: 30%;
   float: left;
   top: 70%;
@@ -153,6 +153,7 @@ select::-ms-expand {
   border-style: none;
   background-color: #11cf84;
 }
+
 ::placeholder {
   color: white;
 }

@@ -71,8 +71,8 @@ const FormPart3 = ({
               <p className={css.instructionsParagraph}>
                 Please fill out steps 1-5 of the application form so we can get
                 to know more about you. Once you have submitted the information
-                you will receive and email which will notify you if you have
-                successfully made it to the next process.
+                you will receive an email which will notify you if you have
+                successfully made it to the next stage.
               </p>
             </div>
             <div className={css.questionBoxContainer}>
@@ -95,37 +95,47 @@ const FormPart3 = ({
             <h1 className={css.applicationStepText}>Step 3</h1>
             <div className={css.formContainer}>
               <div className={css.identifyContainer}>
-                <label>How do you identify?</label>
+                <label className={css.identifyText}>How do you identify?</label>
                 <br />
                 {identityAnswers.map(item => (
                   <>
-                    <input
-                      type="radio"
-                      name="identify"
-                      value={item}
-                      onChange={updateField}
-                      checked={formValues.identify === item ? "checked" : null}
-                      defaultValue={formValues.identify}
-                    />
-                    {item}
+                    <div className={css.questionOneContainer}>
+                      <input
+                        type="radio"
+                        name="identify"
+                        value={item}
+                        onChange={updateField}
+                        checked={
+                          formValues.identify === item ? "checked" : null
+                        }
+                        defaultValue={formValues.identify}
+                      />
+                      {item}
+                    </div>
                   </>
                 ))}
               </div>
 
               <div className={css.situationContainer}>
-                <label>Which best describes your current situation</label>
+                <label className={css.situationText}>
+                  Which best describes your current situation?
+                </label>
                 <br />
                 {situationAnswers.map(item => (
                   <>
-                    <input
-                      type="radio"
-                      name="situation"
-                      value={item}
-                      onChange={updateField}
-                      checked={formValues.situation === item ? "checked" : null}
-                      defaultValue={formValues.situation}
-                    />
-                    {item}
+                    <div className={css.questionTwoContainer}>
+                      <input
+                        type="radio"
+                        name="situation"
+                        value={item}
+                        onChange={updateField}
+                        checked={
+                          formValues.situation === item ? "checked" : null
+                        }
+                        defaultValue={formValues.situation}
+                      />
+                      {item}
+                    </div>
                   </>
                 ))}
               </div>
