@@ -180,6 +180,7 @@ select::-ms-expand {
 }
 
 .applicationFormText {
+  margin: 10px 0;
   position: absolute;
 }
 .applicationStepText {

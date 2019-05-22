@@ -140,6 +140,7 @@ select::-ms-expand {
   margin-top: 5%;
 }
 .applicationFormText {
+  margin: 10px 0;
   position: absolute;
 }
 .applicationStepText {
