@@ -54,7 +54,10 @@ const ReviewForm = ({ step, setStep, formValues, submitForm }) => {
               <div>
                 <ul>
                   {Object.keys(formValues).map(item => (
-                    <li>{formValues[item]}</li>
+                    <>
+                      <li>{item}</li>
+                      <li>{formValues[item]}</li>
+                    </>
                   ))}
                 </ul>
               </div>
@@ -64,7 +67,7 @@ const ReviewForm = ({ step, setStep, formValues, submitForm }) => {
                 {" "}
                 Previous{" "}
               </button>
-              <button onClick={submitForm} className={css.submitButton}>
+              <button onClick={() => submitForm()} className={css.submitButton}>
                 {" "}
                 Submit{" "}
               </button>
