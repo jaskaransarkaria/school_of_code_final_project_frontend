@@ -1,5 +1,6 @@
 import React from "react";
 import css from "../ApplicationFormPage1/ApplicationFormPage1.module.css";
+import SocImage from "../../Images/soc-logo.png";
 const FormPart1 = ({
   step,
   setStep,
@@ -48,60 +49,110 @@ const FormPart1 = ({
 
   return (
     <>
-      <h1>
-        Application Form: <span>Step 1 of 5</span>
-      </h1>
       <div className={css.wrapper}>
-        <div className={css.formContainer}>
-          <br />
-          <label>First Name</label>
-          <input
-            placeholder="Enter first name.."
-            className={css.firstName}
-            type="text"
-            name="firstName"
-            onChange={updateField}
-            defaultValue={formValues.firstName}
-            required
-          />
-
-          <div>
-            <label>Last Name</label>
-            <input
-              placeholder="Enter Last name.."
-              className={css.lastName}
-              type="text"
-              name="lastName"
-              onChange={updateField}
-              defaultValue={formValues.lastName}
-              required
-            />
-          </div>
-          <div>
-            <label>Email</label>
-            <input
-              placeholder="Enter email.."
-              className={css.email}
-              type="email"
-              name="email"
-              onChange={updateField}
-              defaultValue={formValues.email}
-              required
-            />
-          </div>
-          <div style={{ color: "red", fontSize: 12 }}>
-            {" "}
-            {formError.inputError}
-          </div>
-          <div style={{ color: "red", fontSize: 12 }}>
-            {" "}
-            {formError.emailError}
+        <div className={css.container}>
+          <div className={css.leftContainer}>
+            <div className={css.socImageContainer}>
+              <img
+                src={SocImage}
+                className={css.socImage}
+                alt="School of code logo"
+              />
+            </div>
+            <div className={css.instructionsContainer}>
+              <h2 className={css.instructionsText}>Instructions</h2>
+              <br />
+              <p className={css.instructionsParagraph}>
+                Please fill out steps 1-5 of the application form so we can get
+                to know more about you. Once you have submitted the information
+                you will receive an email which will notify you if you have
+                successfully made it to the next stage. You will then be able to
+                log back in which will take you to the video interview stage.
+              </p>
+            </div>
+            <div className={css.questionBoxContainer}>
+              <div className={css.selectdiv}>
+                <label>
+                  <select>
+                    <option selected>-- Questions --</option>
+                    <option>Step 1 of 5</option>
+                    <option>Step 2 of 5</option>
+                    <option>Step 3 of 5</option>
+                    <option>Step 4 of 5</option>
+                    <option>Step 5 of 5</option>
+                  </select>
+                </label>
+              </div>
+            </div>
           </div>
 
-          <button onClick={saveAndContinue} className={css.saveAndContinue}>
-            {" "}
-            Save and Continue{" "}
-          </button>
+          <div className={css.rightContainer}>
+            <h1 className={css.applicationFormText}>Application Form</h1>
+            <h1 className={css.applicationStepText}>Step 1/5</h1>
+            <div className={css.formContainer}>
+              {/* <div className={css.instructionsContainer} /> */}
+              <div className={css.firstAndLastNameContainer}>
+                <div className={css.firstNameContainer}>
+                  <label className={css.firstNameLabel}>First Name</label>
+                  <div className={css.firstNameInputContainer}>
+                    <input
+                      placeholder="Enter first name.."
+                      className={css.firstName}
+                      type="text"
+                      name="firstName"
+                      onChange={updateField}
+                      defaultValue={formValues.firstName}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className={css.lastNameContainer}>
+                  <label className={css.lastNameLabel}>Last Name</label>
+
+                  <div className={css.lastNameInputContainer}>
+                    <input
+                      placeholder="Enter last name.."
+                      className={css.lastName}
+                      type="text"
+                      name="lastName"
+                      onChange={updateField}
+                      defaultValue={formValues.lastName}
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className={css.emailContainer}>
+                <label className={css.emailLabel}>Email</label>
+                <div className={css.emailInputContainer}>
+                  <input
+                    placeholder="Enter email.."
+                    className={css.email}
+                    type="email"
+                    name="email"
+                    onChange={updateField}
+                    defaultValue={formValues.email}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div style={{ color: "red", fontSize: 12 }}>
+                {" "}
+                {formError.inputError}
+              </div>
+              <div style={{ color: "red", fontSize: 12 }}>
+                {" "}
+                {formError.emailError}
+              </div>
+            </div>
+
+            <button onClick={saveAndContinue} className={css.nextButton}>
+              {" "}
+              Next{" "}
+            </button>
+          </div>
         </div>
       </div>
     </>
