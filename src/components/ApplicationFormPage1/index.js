@@ -62,6 +62,7 @@ const FormPart1 = ({
             <div className={css.instructionsContainer}>
               <h2 className={css.instructionsText}>Instructions</h2>
               <br />
+
               <p className={css.instructionsParagraph}>
                 Please fill out steps 1-5 of the application form so we can get
                 to know more about you. Once you have submitted the information
@@ -70,7 +71,7 @@ const FormPart1 = ({
                 log back in which will take you to the video interview stage.
               </p>
             </div>
-            <div className={css.questionBoxContainer}>
+            {/* <div className={css.questionBoxContainer}>
               <div className={css.selectdiv}>
                 <label>
                   <select>
@@ -83,7 +84,7 @@ const FormPart1 = ({
                   </select>
                 </label>
               </div>
-            </div>
+            </div> */}
           </div>
 
           <div className={css.rightContainer}>

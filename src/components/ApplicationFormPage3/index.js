@@ -76,7 +76,7 @@ const FormPart3 = ({
                 log back in which will take you to the video interview stage.
               </p>
             </div>
-            <div className={css.questionBoxContainer}>
+            {/* <div className={css.questionBoxContainer}>
               <div className={css.selectdiv}>
                 <label>
                   <select>
@@ -89,7 +89,7 @@ const FormPart3 = ({
                   </select>
                 </label>
               </div>
-            </div>
+            </div> */}
           </div>
           <div className={css.rightContainer}>
             <h1 className={css.applicationFormText}>Application Form</h1>
@@ -117,7 +117,6 @@ const FormPart3 = ({
                 ))}
               </div>
 
-
               <div className={css.situationContainer}>
                 <label className={css.situationText}>
                   Which best describes your current situation?
@@ -128,13 +127,13 @@ const FormPart3 = ({
                     <div className={css.questionTwoContainer}>
                       <input
                         type="radio"
-                        name="situation"
+                        name="background"
                         value={item}
                         onChange={updateField}
                         checked={
-                          formValues.situation === item ? "checked" : null
+                          formValues.background === item ? "checked" : null
                         }
-                        defaultValue={formValues.situation}
+                        defaultValue={formValues.background}
                       />
                       {item}
                     </div>
@@ -158,7 +157,6 @@ const FormPart3 = ({
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </>

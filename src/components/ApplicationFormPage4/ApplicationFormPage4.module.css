@@ -14,7 +14,7 @@
 }
 .formContainer {
   position: relative;
-  top: 20%;
+  top: 30%;
   color: white;
 }
 
@@ -95,6 +95,7 @@ select::-ms-expand {
   font-size: 1.2em;
   width: 30%;
   margin-left: 20px;
+  margin-top: 20px;
   position: relative;
   text-align: justify;
   word-wrap: break-word;
@@ -139,6 +140,7 @@ select::-ms-expand {
   margin-top: 5%;
 }
 .applicationFormText {
+  margin: 10px 0;
   position: absolute;
 }
 .applicationStepText {
@@ -156,6 +158,22 @@ select::-ms-expand {
 }
 .questionOne {
   font-size: 1.2em;
+}
+textarea {
+  display: block;
+  position: absolute;
+
+  margin-top: 20px;
+  /* border: 2px solid #11cf84; */
+  box-shadow: 0 0 0 5px #11cf84;
+  color: white;
+  background-color: transparent;
+  /* overflow: scroll; */
+  resize: none;
+  height: 200px;
+}
+.questionContainer {
+  display: inline-block;
 }
 @media only screen and (max-width: 750px) {
   .header {

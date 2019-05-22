@@ -94,6 +94,7 @@ select::-ms-expand {
   font-size: 1.2em;
   width: 30%;
   margin-left: 20px;
+  margin-top: 20px;
   position: relative;
   text-align: justify;
   word-wrap: break-word;
@@ -195,6 +196,7 @@ select::-ms-expand {
 }
 
 .applicationFormText {
+  margin: 10px 0;
   position: absolute;
 }
 .applicationStepText {

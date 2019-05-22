@@ -13,9 +13,6 @@ import { api } from "../../config";
 console.log("API", api);
 
 const App = () => {
-
- 
-
   const [uid, setUid] = useState("");
 
   useEffect(() => {
@@ -24,7 +21,7 @@ const App = () => {
     });
   }, []);
 
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(5);
 
   const [formValues, setFormValues] = useState({
     firstName: "",
