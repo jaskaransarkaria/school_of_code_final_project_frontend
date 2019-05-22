@@ -64,6 +64,7 @@ const VideoRating = () => {
       setPendingVideosData(data.result);
     };
     getPendingVideos();
+    console.log("PENDINGVIDEODATA", pendingVideosData);
   }, []);
 
   useEffect(() => {
