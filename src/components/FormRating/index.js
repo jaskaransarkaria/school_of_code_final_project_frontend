@@ -2,6 +2,7 @@ import React, { useState, useReducer, useEffect } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import css from "./FormRating.module.css";
 import { api } from "../../config";
+import UserName from "../UserName";
 
 // GET for draw in users
 // POST users on accept/ reject
@@ -10,6 +11,7 @@ function FormRating(props) {
   const [showSpecificApplications, setShowSpecificApplications] = useState([]);
   const [searchedApplications, setSearchedApplications] = useState([]);
   const [input, setInput] = useState("");
+  const [pendingApplicants, setPendingApplicants] = useState([]);
   const [applicants, setApplicants] = useState([
     {
       firstName: "Matt",
@@ -235,9 +237,22 @@ function FormRating(props) {
     }
   }, null);
 
+  const getPendingForm = async () => {
+    console.log("firing fetch GET");
+    const data = await fetch(`${api.applications}/pending-forms`);
+    const response = await data.json();
+    console.log("inside getpendingform", response);
+    console.log("inside getpendingform", response.result);
+    setPendingApplicants([...response.result]);
+  };
+
+  useEffect(() => {
+    getPendingForm();
+  }, []);
+
   const postForm = async (descion, id) => {
     // admin makes a descion here
-    const data = await fetch(`${api.users}/admin-descion`, {
+    const data = await fetch(`${api.applications}/admin-descion`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -306,6 +321,7 @@ function FormRating(props) {
   return (
     <>
       <h1> Admin Form Processing</h1>
+      <UserName uid={"ksdkF5iGTOP358JFPuu9qtdqn7F2"} />
       <div className={css.applicationStatusContainer}>
         <div>
           <button
@@ -349,13 +365,21 @@ function FormRating(props) {
                 applicationStatus === "pending" &&
                 applicant.passForm === applicationStatus &&
                 input === "" && (
-                  <button
-                    className={css.applicant}
-                    onClick={e => viewApplications(e, applicant.id)}
-                    onKeyUp={e => viewApplications(e, applicant.id)}
-                  >
-                    {applicant.firstName} {applicant.lastName}
-                  </button>
+                  <>
+                    <UserName
+                      classToBe={css.applicant}
+                      click={e => viewApplications(e, applicant.id)}
+                      key={e => viewApplications(e, applicant.id)}
+                      uid={applicant.id}
+                    />
+                    <button
+                      className={css.applicant}
+                      onClick={e => viewApplications(e, applicant.id)}
+                      onKeyUp={e => viewApplications(e, applicant.id)}
+                    >
+                      {applicant.firstName} {applicant.lastName}
+                    </button>
+                  </>
                 )
               );
             })}
@@ -517,20 +541,26 @@ function FormRating(props) {
       <div>
         <TransitionGroup className={css.item}>
           {applicants.map(
+            /// ALL OF THE APPLICANTS this will be all my applications
             applicant =>
               showSpecificApplications[0] === applicant.passForm &&
-              applicant.id === showSpecificApplications[1] && (
+              applicant.id === showSpecificApplications[1] && ( // an array with 2 args (1st arg is application status)
+                // and the 2nd arg is id
                 <CSSTransition timeout={200} classNames="item">
                   <div className={css.applicantDetailsContainer}>
                     <div className={css.detailsSubContainer} key={applicant.id}>
                       <h2>Applicant Details </h2>
                       <h3>
-                        {applicant.firstName} {applicant.lastName}
+                        {applicant.firstName} {applicant.lastName}{" "}
+                        {/*access the user database for this info*/}
                       </h3>
                       <div className={css.metaData}>
-                        <p>Age: {applicant.age}</p>
-                        <p>Location: {applicant.location}</p>
-                        <p>Background: {applicant.background}</p>
+                        <p>Age: {applicant.age}</p>{" "}
+                        {/*access the user database for this info*/}
+                        <p>Location: {applicant.location}</p>{" "}
+                        {/*access the user database for this info*/}
+                        <p>Background: {applicant.background}</p>{" "}
+                        {/*access the user database for this info*/}
                       </div>
                     </div>
                     <div className={css.reasonSubContainer}>

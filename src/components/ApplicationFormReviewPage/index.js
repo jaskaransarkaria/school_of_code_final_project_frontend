@@ -22,7 +22,7 @@ const ReviewForm = ({ step, setStep, formValues, submitForm }) => {
           {" "}
           Previous{" "}
         </button>
-        <button onClick={submitForm} className={css.submitButton}>
+        <button onClick={() => submitForm()} className={css.submitButton}>
           {" "}
           Submit{" "}
         </button>
