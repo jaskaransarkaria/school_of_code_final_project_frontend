@@ -30,7 +30,7 @@ const ReviewForm = ({ step, setStep, formValues, submitForm }) => {
                 interview stage area.
               </p>
             </div>
-            <div className={css.questionBoxContainer}>
+            {/* <div className={css.questionBoxContainer}>
               <div className={css.selectdiv}>
                 <label>
                   <select>
@@ -43,7 +43,7 @@ const ReviewForm = ({ step, setStep, formValues, submitForm }) => {
                   </select>
                 </label>
               </div>
-            </div>
+            </div> */}
           </div>
           <div className={css.rightContainer}>
             <h1 className={css.applicationFormText}>Application Form</h1>
@@ -55,7 +55,7 @@ const ReviewForm = ({ step, setStep, formValues, submitForm }) => {
                 <ul>
                   {Object.keys(formValues).map(item => (
                     <>
-                      <li>{item}</li>
+                      {/* <li>{item}</li> */}
                       <li>{formValues[item]}</li>
                     </>
                   ))}

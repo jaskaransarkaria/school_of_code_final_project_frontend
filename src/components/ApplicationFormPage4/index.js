@@ -66,7 +66,7 @@ const FormPart4 = ({
                 log back in which will take you to the video interview stage.
               </p>
             </div>
-            <div className={css.questionBoxContainer}>
+            {/* <div className={css.questionBoxContainer}>
               <div className={css.selectdiv}>
                 <label>
                   <select>
@@ -79,25 +79,26 @@ const FormPart4 = ({
                   </select>
                 </label>
               </div>
-            </div>
+            </div> */}
           </div>
           <div className={css.rightContainer}>
             <h1 className={css.applicationFormText}>Application Form</h1>
             <h1 className={css.applicationStepText}>Step 4/5</h1>
             <div className={css.formContainer}>
-              <div className={css.question}>
+              <div className={css.questionContainer}>
                 <label className={css.questionOne}>
                   Please explain why you would like to join the School of Code
                   Bootcamp
                 </label>
+                <textarea
+                  className={css.inputBox}
+                  type="text"
+                  name="motivationQuestion"
+                  onChange={updateField}
+                  defaultValue={formValues.motivationQuestion}
+                />
               </div>
-              <textarea
-                className={css.inputBox}
-                type="text"
-                name="motivationQuestion"
-                onChange={updateField}
-                defaultValue={formValues.motivationQuestion}
-              />
+
               <div style={{ color: "red", fontSize: 12 }}>
                 {formError.inputError}
               </div>

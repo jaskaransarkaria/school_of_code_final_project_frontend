@@ -20,6 +20,7 @@ class ApplicationLandingVideo extends Component {
             <div className={css.instructionsContainer}>
               <h2 className={css.instructionsText}>Instructions</h2>
               <br />
+
               <p className={css.instructionsParagraph}>
                 Please fill out steps 1-5 of the application form so we can get
                 to know more about you. Once you have submitted the information
@@ -27,7 +28,7 @@ class ApplicationLandingVideo extends Component {
                 successfully made it to the next stage.
               </p>
             </div>
-            <div className={css.questionBoxContainer}>
+            {/* <div className={css.questionBoxContainer}>
               <div className={css.selectdiv}>
                 <label>
                   <select>
@@ -40,7 +41,7 @@ class ApplicationLandingVideo extends Component {
                   </select>
                 </label>
               </div>
-            </div>
+            </div> */}
           </div>
           <div className={css.rightContainer}>
             <h1 className={css.applicationFormText}>

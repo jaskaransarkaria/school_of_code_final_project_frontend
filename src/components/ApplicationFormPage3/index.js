@@ -76,7 +76,7 @@ const FormPart3 = ({
                 log back in which will take you to the video interview stage.
               </p>
             </div>
-            <div className={css.questionBoxContainer}>
+            {/* <div className={css.questionBoxContainer}>
               <div className={css.selectdiv}>
                 <label>
                   <select>
@@ -89,7 +89,7 @@ const FormPart3 = ({
                   </select>
                 </label>
               </div>
-            </div>
+            </div> */}
           </div>
           <div className={css.rightContainer}>
             <h1 className={css.applicationFormText}>Application Form</h1>
