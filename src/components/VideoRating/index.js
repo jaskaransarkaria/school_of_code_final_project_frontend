@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import FeedbackTray from "../FeedbackTray";
 import { api } from "../../config";
+import UserName from "../UserName";
 
 // TODO
 
@@ -47,11 +48,22 @@ const VideoRating = () => {
     const response = await data.json();
     console.log(response);
   };
-
-  const getAllUsers = async () => {
-    const data = await fetch(`${api.users}`);
+  const updatePassStage = async () => {
+    const data = await fetch(
+      `${api.applications}/admin-video-descion-update-many`,
+      {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify({
+          ratingsData: [...acceptedVideosData, ...rejectedVideosData]
+        })
+      }
+    );
     const response = await data.json();
-    setAllUsers(response.result);
+    console.log(response);
   };
 
   const getUserInfo = data => {
@@ -77,22 +89,10 @@ const VideoRating = () => {
     return `${matchedUser.firstName} ${matchedUser.lastName}`;
   };
 
-  const updatePassStage = async () => {
-    const data = await fetch(
-      `${api.applications}/admin-video-descion-update-many`,
-      {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json"
-        },
-        body: JSON.stringify({
-          ratingsData: [...acceptedVideosData, ...rejectedVideosData]
-        })
-      }
-    );
+  const getAllUsers = async () => {
+    const data = await fetch(`${api.users}`);
     const response = await data.json();
-    console.log(response);
+    setAllUsers(response.result);
   };
 
   useEffect(() => {
@@ -250,6 +250,7 @@ const VideoRating = () => {
                       if (videoIndex === videoCounter) {
                         return (
                           <>
+                            {/* <UserName uid={firebaseUid} /> */}
                             <p>{firebaseUid}</p>
                             {userInfo &&
                               userInfo.map(({ result: user }, userIndex) => {

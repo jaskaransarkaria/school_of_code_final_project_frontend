@@ -1,6 +1,10 @@
 import React, { useState, useReducer, useEffect } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import css from "./FormRating.module.css";
+import { api } from "../../config";
+
+// GET for draw in users
+// POST users on accept/ reject
 
 function FormRating(props) {
   const [showSpecificApplications, setShowSpecificApplications] = useState([]);
@@ -230,6 +234,24 @@ function FormRating(props) {
         return state;
     }
   }, null);
+
+  const postForm = async (descion, id) => {
+    // admin makes a descion here
+    const data = await fetch(`${api.users}/admin-descion`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        firebaseUid: id,
+        stage: "passFormStage",
+        descion: descion
+      })
+    });
+    const response = await data.json();
+    console.log(response);
+  };
 
   const goToHome = () => {
     props.history.push(`/admin-dashboard`);
@@ -520,13 +542,19 @@ function FormRating(props) {
                         onClick={() => {
                           changeStatus(applicant.id, "accepted");
                         }}
-                        onMouseUp={() => dispatch(applicant.passForm)}
+                        onMouseUp={() => {
+                          dispatch(applicant.passForm);
+                          postForm(true, applicant.id);
+                        }}
                       >
                         ACCEPT
                       </button>
                       <button
                         onClick={() => changeStatus(applicant.id, "rejected")}
-                        onMouseUp={() => dispatch(applicant.passForm)}
+                        onMouseUp={() => {
+                          dispatch(applicant.passForm);
+                          postForm(false, applicant.id);
+                        }}
                       >
                         DECLINE
                       </button>
