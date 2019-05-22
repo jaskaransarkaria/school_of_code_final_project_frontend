@@ -19,6 +19,7 @@ firebase.initializeApp({
   apiKey: api.firebase_key,
   authDomain: api.firebase_auth_domain
 });
+console.log("APIKEY:", api.firebase_key);
 const allContent = [
   {
     date: "30/04/2019",
@@ -172,6 +173,7 @@ export const Store = createContext([allContent, () => {}]);
 
 function App() {
   const [fullScheduleData, setFullScheduleData] = useState(allContent);
+  const [state, setState] = useState("test");
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {

@@ -22,7 +22,7 @@ const FormPart3 = ({
   const saveAndContinue = e => {
     e.preventDefault();
 
-    if (formValues.situation === "" || formValues.identify === "") {
+    if (formValues.background === "" || formValues.identify === "") {
       console.log("error");
       setFormError({
         ...formError,
@@ -117,6 +117,7 @@ const FormPart3 = ({
                 ))}
               </div>
 
+
               <div className={css.situationContainer}>
                 <label className={css.situationText}>
                   Which best describes your current situation?
@@ -157,6 +158,7 @@ const FormPart3 = ({
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </>

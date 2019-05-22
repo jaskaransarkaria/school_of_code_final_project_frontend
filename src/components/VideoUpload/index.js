@@ -79,6 +79,10 @@ const VideoUpload = () => {
     });
   }, []);
 
+  useEffect(() => {
+    return () => {};
+  }, [video]);
+
   const uploadVideosToDb = () => {
     console.log("inside upload", firebaseUid);
     console.log(allVideoLinks);
@@ -178,6 +182,7 @@ const VideoUpload = () => {
 
             video.current.play(); // use a ref here
             localStream = stream;
+
             recorder = new MediaRecorder(stream);
             setIsRecording(true);
             recorder.ondataavailable = e => {

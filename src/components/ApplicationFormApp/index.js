@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import FormPart1 from "../ApplicationFormPage1";
 import FormPart2 from "../ApplicationFormPage2";
@@ -6,8 +6,26 @@ import FormPart3 from "../ApplicationFormPage3";
 import FormPart4 from "../ApplicationFormPage4";
 import ReviewForm from "../ApplicationFormReviewPage";
 
+import firebase from "firebase";
+
+import { api } from "../../config";
+
+console.log("API", api);
+
 const App = () => {
-  const [step, setStep] = useState(5);
+
+ 
+
+  const [uid, setUid] = useState("");
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged(user => {
+      setUid(user.uid);
+    });
+  }, []);
+
+  const [step, setStep] = useState(1);
+
   const [formValues, setFormValues] = useState({
     firstName: "",
     lastName: "",
@@ -16,7 +34,7 @@ const App = () => {
     age: null,
     location: "",
     identify: "",
-    situation: "",
+    background: "",
     motivationQuestion: ""
   });
   const [formError, setFormError] = useState({
@@ -25,7 +43,28 @@ const App = () => {
   });
 
   const submitForm = () => {
-    // Link up to POST request
+    fetch(`${api.users}/register`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        firebaseUid: uid,
+        firstName: formValues.firstName,
+        lastName: formValues.lastName,
+        email: formValues.email,
+        phoneNumber: formValues.phoneNumber,
+        age: formValues.age,
+        location: formValues.location,
+        identify: formValues.identify,
+        background: formValues.background,
+        motivationQuestion: formValues.motivationQuestion
+      })
+    })
+      .then(res => res.json())
+      .then(data => console.log("DATA", data))
+      .catch(err => console.log(err));
   };
 
   const renderSwitch = () => {

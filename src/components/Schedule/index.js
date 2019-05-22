@@ -53,11 +53,9 @@ const Schedule = ({ props }) => {
 
   useEffect(() => {
     async function fetchMostRecentSchedule() {
-      console.log(`${api.schedule}/most-recent`);
       const response = await fetch(`${api.schedule}/most-recent`);
       const data = await response.json();
       console.log("most recent get request", data);
-      console.log(data.result);
       if (data.result === null) {
         return;
       } else {
