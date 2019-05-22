@@ -26,6 +26,9 @@ const AdminUserOptions = props => {
             <div onClick={goToSchedule} className={css.optionsCard}>
               <p>Teacher Resource Upload</p>
             </div>
+            <div onClick={goToSchedule} className={css.optionsCard}>
+              <p>View all accepted Applications</p>
+            </div>
           </div>
         </>
       }

@@ -1,15 +1,11 @@
 import React from "react";
 
-import VideoUpload from "../components/VideoUpload";
+import ApplicationDashboard from "../components/ApplicantDashboard";
 
-import ApplicationFormApp from "../components/ApplicationFormApp";
-
-
-const ApplicantDashboardPage = () => {
+const ApplicantDashboardPage = props => {
   return (
     <>
-      <ApplicationFormApp />
-      <VideoUpload />
+      <ApplicationDashboard props={props} />
     </>
   );
 };

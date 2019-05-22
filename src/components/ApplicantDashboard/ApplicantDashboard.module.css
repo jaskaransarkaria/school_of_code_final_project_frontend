@@ -1,14 +1,272 @@
+/*-----------------
+  Main Container & General Editing
+------------------*/
 .container {
-  display: inline-block;
-
-  position: absolute;
-  left: 6%;
-  top: 15%;
-  width: 94%;
-  height: 85%;
   background-image: linear-gradient(to bottom right, #04c7d9, #5f04cf);
 }
 
-.wrapper {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+/*-------------------
+  Modal Container 
+--------------------*/
+
+.modalContainer {
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.8);
+
+  z-index: 2;
+}
+
+.hideModalContainer {
+  display: none;
+}
+
+.modal {
+  position: absolute;
+  top: 25%;
+  bottom: 25%;
+  left: 25%;
+  right: 25%;
+  border-radius: 5px;
+  background: rgba(48, 143, 214, 0.97);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+
+.modalContainer h3 {
+  font-size: 35px;
+}
+.modalContainer p {
+  font-size: 20px;
+}
+.modalContainer button {
+  height: 50px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px;
+  color: #1cafd7;
+}
+
+.modalContainer button p {
+  color: black;
+  margin: 0;
+  font-size: 16px;
+}
+
+.modalContainer button:hover {
+  cursor: pointer;
+}
+/*-----------------
+  Header Section 
+------------------*/
+.header {
   background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png");
+  height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header h2 {
+  font-size: 40px;
+}
+
+/*------------------------
+  Main Content Container 
+------------------------*/
+.mainContentContainer {
+  padding: 10px 10px;
+}
+
+/* Intro */
+.introductionContainer {
+  text-align: center;
+  padding: 10px;
+  color: white;
+}
+
+.introductionContainer h3 {
+  font-size: 24px;
+}
+
+/* Steps */
+.stepsContainer {
+  display: flex;
+  flex: 1 100%;
+  height: 70vh;
+}
+
+.stepOne,
+.stepTwo,
+.stepThree {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin: 5px;
+  position: relative;
+}
+
+.stepOne {
+  justify-content: flex-end;
+}
+
+.stepTwo {
+  justify-content: center;
+}
+
+.stageTitle {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 30px;
+  color: white;
+}
+.finalStageTitle {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 30px;
+  color: white;
+}
+
+.stepNotAvailable {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.95);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  z-index: 1;
+}
+
+.stepPassed {
+  position: absolute;
+  background: radial-gradient(rgb(224, 224, 224), rgba(87, 213, 64, 0.5));
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: #7219ff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  z-index: 1;
+}
+
+.progressImgContainer {
+  display: flex;
+  justify-content: center;
+  margin: 5px;
+  position: relative;
+  height: 25%;
+}
+
+.progressImgContainer img {
+  width: 100px;
+  height: 100%;
+  object-fit: contain;
+}
+
+.stepCard {
+  display: flex;
+  margin: 5px;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px;
+  position: relative;
+}
+
+.stepCard:hover {
+  cursor: pointer;
+}
+
+.stepsContainer h3 {
+  background: #bcf2ff;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 15px 5px;
+}
+
+.stepsContainer p {
+  flex: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 35px 5px;
+  text-align: center;
+}
+
+.acceptanceContainer {
+  display: flex;
+}
+
+/*----------------------
+    Media Queries
+----------------------*/
+
+@media screen and (max-width: 768px) {
+  .stepsContainer {
+    flex-direction: column;
+  }
+  .stepOne,
+  .stepTwo,
+  .stepThree {
+    width: 60%;
+    margin: 10px auto;
+  }
+
+  .progressImgContainer {
+    height: unset;
+  }
+
+  .stepsContainer {
+    height: 100%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .stepOne,
+  .stepTwo,
+  .stepThree {
+    width: 75%;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .stepOne,
+  .stepTwo,
+  .stepThree {
+    width: 95%;
+  }
 }

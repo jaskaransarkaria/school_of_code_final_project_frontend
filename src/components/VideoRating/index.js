@@ -106,7 +106,10 @@ const VideoRating = () => {
       // map over this array on the back end and send all the relevant info back
       setPendingVideosData(data.result);
     };
-    getVideos();
+
+    getPendingVideos();
+    console.log("PENDINGVIDEODATA", pendingVideosData);
+
   }, []);
 
   useEffect(() => {
