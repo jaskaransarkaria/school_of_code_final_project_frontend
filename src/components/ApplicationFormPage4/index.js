@@ -62,7 +62,8 @@ const FormPart4 = ({
                 Please fill out steps 1-5 of the application form so we can get
                 to know more about you. Once you have submitted the information
                 you will receive an email which will notify you if you have
-                successfully made it to the next stage.
+                successfully made it to the next stage. You will then be able to
+                log back in which will take you to the video interview stage.
               </p>
             </div>
             <div className={css.questionBoxContainer}>
@@ -82,7 +83,7 @@ const FormPart4 = ({
           </div>
           <div className={css.rightContainer}>
             <h1 className={css.applicationFormText}>Application Form</h1>
-            <h1 className={css.applicationStepText}>Step 4</h1>
+            <h1 className={css.applicationStepText}>Step 4/5</h1>
             <div className={css.formContainer}>
               <div className={css.question}>
                 <label className={css.questionOne}>

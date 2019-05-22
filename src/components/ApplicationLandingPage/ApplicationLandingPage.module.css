@@ -52,57 +52,7 @@ h3 {
   justify-content: space-around;
   margin-bottom: 10%;
 }
-.twitterContainer,
-.facebookContainer,
-.youtubeContainer,
-.linkedInContainer,
-.mediumContainer,
-.locationContainer,
-.emailContainer {
-  display: flex;
-  align-items: center;
 
-  border-radius: 20%;
-}
-.twitterLogo,
-.facebookLogo,
-.youtubeLogo,
-.linkedInLogo,
-.mediumLogo,
-.locationLogo,
-.emailLogo {
-  width: 40px;
-  height: 40px;
-}
-
-.twitterContainer:hover {
-  cursor: pointer;
-  background-color: #00acee;
-}
-.facebookContainer:hover {
-  cursor: pointer;
-  background-color: #3b5998;
-}
-.youtubeContainer:hover {
-  cursor: pointer;
-  background-color: #c4302b;
-}
-.linkedInContainer:hover {
-  cursor: pointer;
-  background-color: #0077b5;
-}
-.mediumContainer:hover {
-  cursor: pointer;
-  background-color: #00ab6c;
-}
-.locationContainer:hover {
-  cursor: pointer;
-  background-color: #c4302b;
-}
-.emailContainer:hover {
-  cursor: pointer;
-  background-color: #3b5998;
-}
 .webAddress {
   display: flex;
   justify-content: center;
@@ -111,17 +61,6 @@ h3 {
   display: flex;
   justify-content: center;
   margin-bottom: 5%;
-}
-.locationContainer {
-  margin-right: 20px;
-}
-
-.followUs {
-  margin: 3%;
-}
-
-.contactUs {
-  margin: 3%;
 }
 
 /* RIGHT CONTAINER */

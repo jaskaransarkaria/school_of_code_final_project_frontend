@@ -22,10 +22,12 @@ const ReviewForm = ({ step, setStep, formValues, submitForm }) => {
               <h2 className={css.instructionsText}>Instructions</h2>
               <br />
               <p className={css.instructionsParagraph}>
-                Please fill out steps 1-5 of the application form so we can get
-                to know more about you. Once you have submitted the information
-                you will receive an email which will notify you if you have
-                successfully made it to the next stage.
+                Please make sure that the information you have submitted is
+                correct before submitting the application form. We will review
+                your information and notify you by email if you have been
+                successful getting through to the online video interview stage.
+                You will then be able to log back in and access the video
+                interview stage area.
               </p>
             </div>
             <div className={css.questionBoxContainer}>
@@ -45,13 +47,17 @@ const ReviewForm = ({ step, setStep, formValues, submitForm }) => {
           </div>
           <div className={css.rightContainer}>
             <h1 className={css.applicationFormText}>Application Form</h1>
-            <h1 className={css.applicationStepText}>Step 5</h1>
+            <h1 className={css.applicationStepText}>
+              Please review your information
+            </h1>
             <div className={css.formContainer}>
-              <ul>
-                {Object.keys(formValues).map(item => (
-                  <li>{formValues[item]}</li>
-                ))}
-              </ul>
+              <div>
+                <ul>
+                  {Object.keys(formValues).map(item => (
+                    <li>{formValues[item]}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
             <div className={css.buttons}>
               <button onClick={previous} className={css.previousButton}>

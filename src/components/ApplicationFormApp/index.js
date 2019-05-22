@@ -7,7 +7,7 @@ import FormPart4 from "../ApplicationFormPage4";
 import ReviewForm from "../ApplicationFormReviewPage";
 
 const App = () => {
-  const [step, setStep] = useState(4);
+  const [step, setStep] = useState(5);
   const [formValues, setFormValues] = useState({
     firstName: "",
     lastName: "",
