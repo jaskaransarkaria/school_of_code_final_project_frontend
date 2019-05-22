@@ -15,9 +15,13 @@ const VideoRating = () => {
   const [overallRating, setOverallRating] = useState(0);
   const [collateFeedback, setCollateFeedback] = useState([]);
   const [pendingVideosData, setPendingVideosData] = useState([]);
+  const [acceptedVideosData, setAcceptedVideosData] = useState([]);
+  const [rejectedVideosData, setRejectedVideosData] = useState([]);
   const [userInfo, setUserInfo] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
   const [videoCounter, setVideoCounter] = useState(0);
   const [applicantCounter, setApplicantCounter] = useState(0);
+  const [sliderPassValue, setSliderPassValue] = useState(6);
   // GET in videos from APPLICATIONS for each applicant based on uid which have a status 'pending'
 
   const calculateOverallRating = () =>
@@ -37,11 +41,17 @@ const VideoRating = () => {
         applicantFirebaseUid: currentUid,
         videoApplicationData: collateFeedback,
         videoOverallRating: overallRating,
-        passVideoStage: overallRating >= 6 ? true : false
+        passVideoStage: overallRating >= sliderPassValue ? true : false
       })
     });
     const response = await data.json();
     console.log(response);
+  };
+
+  const getAllUsers = async () => {
+    const data = await fetch(`${api.users}`);
+    const response = await data.json();
+    setAllUsers(response.result);
   };
 
   const getUserInfo = data => {
@@ -55,16 +65,104 @@ const VideoRating = () => {
       });
   };
 
+  const matchUidToName = uid => {
+    const matchedUser = allUsers.find(user => user.firebaseUid === uid);
+    if (
+      "firstName" in matchedUser === false &&
+      "lastName" in matchedUser === false
+    ) {
+      matchedUser.firstName = "defaultFIRSTName";
+      matchedUser.lastName = "defaultLASTName";
+    }
+    return `${matchedUser.firstName} ${matchedUser.lastName}`;
+  };
+
+  const updatePassStage = async () => {
+    const data = await fetch(
+      `${api.applications}/admin-video-descion-update-many`,
+      {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify({
+          ratingsData: [...acceptedVideosData, ...rejectedVideosData]
+        })
+      }
+    );
+    const response = await data.json();
+    console.log(response);
+  };
+
   useEffect(() => {
-    const getPendingVideos = async () => {
-      const response = await fetch(`${api.applications}/pending-videos`);
+    const getVideos = async () => {
+      const response = await fetch(
+        `${api.applications}/make-descion-videos/pending`
+      );
       const data = await response.json();
       console.log(data);
-      console.log(data.result);
+      console.log("applications/pending-videos", data.result);
+      // map over this array on the back end and send all the relevant info back
       setPendingVideosData(data.result);
     };
-    getPendingVideos();
+    getVideos();
   }, []);
+
+  useEffect(() => {
+    const getVideos = async () => {
+      const response = await fetch(
+        `${api.applications}/make-descion-videos/accepted`
+      );
+      const data = await response.json();
+      console.log(data);
+      console.log("applications/pending-videos", data.result);
+      // map over this array on the back end and send all the relevant info back
+      setAcceptedVideosData(data.result);
+    };
+    getVideos();
+  }, []);
+
+  useEffect(() => {
+    const getVideos = async () => {
+      const response = await fetch(
+        `${api.applications}/make-descion-videos/rejected`
+      );
+      const data = await response.json();
+      console.log(data);
+      console.log("applications/pending-videos", data.result);
+      // map over this array on the back end and send all the relevant info back
+      setRejectedVideosData(data.result);
+    };
+    getVideos();
+  }, []);
+
+  useEffect(() => {
+    // go through accepted and rejected arrays and change the relevant data
+    let updatedAccepted = acceptedVideosData.slice().map(user => {
+      user.passVideoStage =
+        user.videoOverallRating >= sliderPassValue ? true : false;
+      return user;
+    });
+    let updatedRejected = rejectedVideosData.slice().map((user, indx) => {
+      user.passVideoStage =
+        user.videoOverallRating >= sliderPassValue ? true : false;
+      return user;
+    });
+
+    setAcceptedVideosData(
+      [...updatedAccepted, ...updatedRejected].filter(
+        user => user.passVideoStage
+      )
+    );
+    setRejectedVideosData(
+      [...updatedAccepted, ...updatedRejected].filter(
+        user => !user.passVideoStage
+      )
+    );
+
+    //return updatePassStage();
+  }, [sliderPassValue]);
 
   useEffect(() => {
     if (collateFeedback.length > 3) {
@@ -85,6 +183,7 @@ const VideoRating = () => {
         setUserInfo(users);
       });
     grabAll();
+    getAllUsers();
   }, [pendingVideosData]);
 
   // GET in personal details from the USERS based on uid
@@ -100,11 +199,21 @@ const VideoRating = () => {
   return (
     <>
       {console.log("pendingvideodata", pendingVideosData)}
+      {console.log("acceptedvideodata", acceptedVideosData)}
+      {console.log("rejectedvideodata", rejectedVideosData)}
       {console.log("userInfo", userInfo)}
       {console.log("adminFeedbackRating", adminFeedbackRating)}
       {console.log("adminFeedbackComment", adminFeedbackComment)}
       {console.log("collated ratings", collateFeedback)}
       {console.log("current uid", currentUid)}
+      {console.log("current slider pass value", sliderPassValue)}
+      {console.log("get ALL USERS", allUsers)}
+      {allUsers.map(user =>
+        console.log(
+          "MAPPING AND UID TO NAME!!",
+          matchUidToName(user.firebaseUid)
+        )
+      )}
       <div id="userTray">
         <div id="videoTray">
           {pendingVideosData.map(
@@ -193,7 +302,6 @@ const VideoRating = () => {
                                         comment: adminFeedbackComment
                                       }
                                     ]);
-                                    console.log(collateFeedback.length);
                                     // set pending "passVideoStage" flag to true if overall rating over 6
                                     // set to false if under 6
                                     setVideoCounter(videoCounter + 1);
@@ -224,6 +332,13 @@ const VideoRating = () => {
               }
             }
           )}
+          <input
+            type="text"
+            onChange={e => {
+              setSliderPassValue(e.target.value);
+            }}
+          />
+          <button onClick={() => updatePassStage()}>Confirm Accepted!</button>
         </div>
       </div>
     </>
