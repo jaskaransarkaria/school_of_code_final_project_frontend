@@ -196,8 +196,14 @@ select::-ms-expand {
   height: 150px;
 }
 .rightContentWrapper {
-  position: relative;
+  border-radius: 10px;
+  border: 10px solid #11cf84;
+  position: absolute;
+  left: 25%;
+  right: 25%;
   top: 25%;
+  padding: 20px;
+  display: inline-block;
 }
 .subTextOne {
   margin: 2%;
