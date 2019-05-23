@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import firebase from "firebase";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import Welcome from "../Welcome";
 
 import { api } from "../../config";
+import { UserUidContext } from "../App";
 
 const Login = () => {
   const [signedIn, setSignedIn] = useState(false);
+  const userUid = useContext(UserUidContext);
 
   const uiConfig = {
     signInFlow: "popup",
@@ -40,7 +42,6 @@ const Login = () => {
             fullName={firebase.auth().currentUser.displayName}
             // photo={firebase.auth().currentUser.photoURL}
           />
-
           <button
             onClick={() => {
               firebase.auth().signOut();

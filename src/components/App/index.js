@@ -170,10 +170,11 @@ const allContent = [
   }
 ];
 export const Store = createContext([allContent, () => {}]);
+export const UserUidContext = createContext(null);
 
 function App() {
   const [fullScheduleData, setFullScheduleData] = useState(allContent);
-  const [state, setState] = useState("test");
+  const [userUid, setUserUid] = useState(null);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
@@ -181,6 +182,7 @@ function App() {
       // if they need to register push them to the applicant dashboard page
       let newFirebaseUid = user.uid;
       async function isUserRegistered(user) {
+        setUserUid(user.uid);
         console.log("in async post", newFirebaseUid);
         const response = await fetch(`${api.users}`, {
           method: "post",
@@ -215,28 +217,33 @@ function App() {
     });
   }, []);
   return (
-    <Store.Provider value={[fullScheduleData, setFullScheduleData]}>
-      <Router>
-        <Route exact path="/" component={LoginPage} />
-        <Route path="/applicant-dashboard" component={ApplicantDashboardPage} />
-        <Route
-          path="/bootcamper-dashboard"
-          component={BootcamperDashboardPage}
-        />
-        <Route path="/admin-dashboard" component={AdminDashboardPage} />
-        <Route path="/upload-schedule" component={AdminUploadSchedulePage} />
-        <Route path="/schedule" component={SchedulePage} />
-        <Route path="/topics" component={TopicsPage} />
-        <Route path="/credits" component={CreditsPage} />
-        <Route
-          path="/admin-application-processing"
-          component={AdminApplicationProcessingPage}
-        />
-        <Route path="/application-video" component={ApplicantVideoPage} />
-        <Route path="/application-form" component={ApplicantFormPage} />
-        <Route path="/template" component={TemplatePage} />
-      </Router>
-    </Store.Provider>
+    <UserUidContext.Provider value={userUid}>
+      <Store.Provider value={[fullScheduleData, setFullScheduleData]}>
+        <Router>
+          <Route exact path="/" component={LoginPage} />
+          <Route
+            path="/applicant-dashboard"
+            component={ApplicantDashboardPage}
+          />
+          <Route
+            path="/bootcamper-dashboard"
+            component={BootcamperDashboardPage}
+          />
+          <Route path="/admin-dashboard" component={AdminDashboardPage} />
+          <Route path="/upload-schedule" component={AdminUploadSchedulePage} />
+          <Route path="/schedule" component={SchedulePage} />
+          <Route path="/topics" component={TopicsPage} />
+          <Route path="/credits" component={CreditsPage} />
+          <Route
+            path="/admin-application-processing"
+            component={AdminApplicationProcessingPage}
+          />
+          <Route path="/application-video" component={ApplicantVideoPage} />
+          <Route path="/application-form" component={ApplicantFormPage} />
+          <Route path="/template" component={TemplatePage} />
+        </Router>
+      </Store.Provider>
+    </UserUidContext.Provider>
   );
 }
 
