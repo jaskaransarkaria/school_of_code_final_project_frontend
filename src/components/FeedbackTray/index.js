@@ -1,13 +1,25 @@
 import React, { useState } from "react";
 import FeedbackCard from "../FeedbackCard";
 import moment from "moment";
+import css from "./FeedbackTray.module.css";
 
 const todaysDate = moment().format("DD/MM/YYYY");
 const data = [
-  { title: "Rate this vid.", rating: 0, complete: false, date: todaysDate }
+  { title: "Please Rate", rating: 0, complete: false, date: todaysDate }
 ];
 
-const FeedbackTray = ({ setAdminFeedbackRating, setAdminFeedbackComment }) => {
+const FeedbackTray = ({
+  adminFeedbackRating,
+  setAdminFeedbackRating,
+  setAdminFeedbackComment,
+  collateFeedback,
+  setCollateFeedback,
+  videoUrl,
+  rateVideoAlert,
+  setRateVideoAlert,
+  setVideoCounter,
+  videoCounter
+}) => {
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [dummyFeedbackData, setDummyFeedbackData] = useState(data);
 
@@ -53,16 +65,24 @@ const FeedbackTray = ({ setAdminFeedbackRating, setAdminFeedbackComment }) => {
         .map((item, index) => {
           return (
             <>
-              <br />
-              <FeedbackCard
-                key={index}
-                item={item}
-                update={updateFeedback}
-                style={{ margin: "20px auto" }}
-                setAdminFeedbackRating={setAdminFeedbackRating}
-                setAdminFeedbackComment={setAdminFeedbackComment}
-              />
-              <br />
+              <div className={css.feedbackContainer}>
+                <FeedbackCard
+                  key={index}
+                  item={item}
+                  update={updateFeedback}
+                  style={{ margin: "20px auto" }}
+                  adminFeedbackRating={adminFeedbackRating}
+                  setAdminFeedbackRating={setAdminFeedbackRating}
+                  setAdminFeedbackComment={setAdminFeedbackComment}
+                  collateFeedback={collateFeedback}
+                  setCollateFeedback={setCollateFeedback}
+                  videoUrl={videoUrl}
+                  rateVideoAlert={rateVideoAlert}
+                  setRateVideoAlert={setRateVideoAlert}
+                  videoCounter={videoCounter}
+                  setVideoCounter={setVideoCounter}
+                />
+              </div>
             </>
           );
         })}
