@@ -90,10 +90,11 @@ select::-ms-expand {
 .instructionsText {
   margin-left: 20px;
   float: left;
+  font-size: 1.8em;
   border-bottom: 3px solid white;
 }
 .instructionsParagraph {
-  font-size: 1.2em;
+  font-size: 1.4em;
   width: 30%;
   margin-left: 20px;
   margin-top: 20px;

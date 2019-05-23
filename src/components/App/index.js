@@ -14,6 +14,8 @@ import firebase from "firebase";
 import ApplicantVideoPage from "../../pages/ApplicantVideoPage";
 import ApplicantFormPage from "../../pages/ApplicantFormPage";
 import TemplatePage from "../../pages/TemplatePage";
+import ContractPage from "../../pages/ContractPage";
+import ThankYouPage from "../../pages/ThankYouPage";
 
 firebase.initializeApp({
   apiKey: api.firebase_key,
@@ -234,6 +236,8 @@ function App() {
         />
         <Route path="/application-video" component={ApplicantVideoPage} />
         <Route path="/application-form" component={ApplicantFormPage} />
+        <Route path="/contract" component={ContractPage} />
+        <Route path="/thankyou" component={ThankYouPage} />
         <Route path="/template" component={TemplatePage} />
       </Router>
     </Store.Provider>
