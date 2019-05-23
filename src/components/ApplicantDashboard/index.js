@@ -35,6 +35,12 @@ const ApplicantDashBoard = props => {
     }
   ]);
 
+  // const changeStage = info => {
+  //   if (info.stage === 1) {
+  //     setUsers([{ ...users }]);
+  //   }
+  // };
+
   const toggleModal = () => {
     setModal(!modal);
   };
@@ -76,6 +82,7 @@ const ApplicantDashBoard = props => {
               <p>You passed Stage {info.stage}!</p>
             </div>
           ) : null}
+          {/* <button onClick={() => changeStage(info)}> Pass </button> */}
           <div
             className={
               info.stage === 1 || info.stage === 2

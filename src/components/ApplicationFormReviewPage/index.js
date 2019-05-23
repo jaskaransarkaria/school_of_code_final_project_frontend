@@ -13,9 +13,14 @@ const ReviewForm = ({ step, setStep, formValues, submitForm }) => {
       <h2>Review Information</h2>
       <div className={css.wrapper}>
         <ul>
-          {Object.keys(formValues).map(item => (
-            <li>{formValues[item]}</li>
-          ))}
+          {Object.keys(formValues).map(item => {
+            console.log("FORMVALUES", item);
+            return (
+              <>
+                <li>{formValues[item]}</li>
+              </>
+            );
+          })}
         </ul>
 
         <button onClick={previous} className={css.previousButton}>
