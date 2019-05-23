@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import firebase from "firebase";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-import Welcome from "../Welcome";
-
+import { Redirect } from "react-router-dom";
 import { api } from "../../config";
 import { UserUidContext } from "../App";
 
-const Login = () => {
+function Login(props) {
   const [signedIn, setSignedIn] = useState(false);
   const userUid = useContext(UserUidContext);
 
@@ -29,6 +28,8 @@ const Login = () => {
     });
   }, []);
 
+  console.log("uid from context", userUid);
+
   return (
     <>
       {!signedIn ? (
@@ -37,22 +38,10 @@ const Login = () => {
           firebaseAuth={firebase.auth()}
         />
       ) : (
-        <div className="App">
-          <Welcome
-            fullName={firebase.auth().currentUser.displayName}
-            // photo={firebase.auth().currentUser.photoURL}
-          />
-          <button
-            onClick={() => {
-              firebase.auth().signOut();
-            }}
-          >
-            Sign Out
-          </button>
-        </div>
+        <Redirect to="applicant-dashboard" />
       )}
     </>
   );
-};
+}
 
 export default Login;

@@ -19,7 +19,6 @@ firebase.initializeApp({
   apiKey: api.firebase_key,
   authDomain: api.firebase_auth_domain
 });
-console.log("APIKEY:", api.firebase_key);
 const allContent = [
   {
     date: "30/04/2019",
@@ -182,7 +181,7 @@ function App() {
       // if they need to register push them to the applicant dashboard page
       let newFirebaseUid = user.uid;
       async function isUserRegistered(user) {
-        setUserUid(user.uid);
+        setUserUid({ uid: user.uid, displayName: user.displayName });
         console.log("in async post", newFirebaseUid);
         const response = await fetch(`${api.users}`, {
           method: "post",
@@ -198,7 +197,9 @@ function App() {
         console.log(data.result);
         if (data.result === null) {
           // send them to the register page
+          // because the have shown that their uid doesn't exist in the database
         } else {
+          // there uid does exist in the database
           // set user signed in to true
           // setSignedIn(
           //   !!user
@@ -211,9 +212,6 @@ function App() {
       }
 
       isUserRegistered(user);
-
-      console.log("user", user);
-      console.log("uid", user.uid);
     });
   }, []);
   return (

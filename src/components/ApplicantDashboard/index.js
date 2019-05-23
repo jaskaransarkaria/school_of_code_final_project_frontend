@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import css from "../ApplicantDashboard/ApplicantDashboard.module.css";
 import socPlanet from "../../Images/SOCPlanet.png";
+import { api } from "../../config";
+import firebase from "firebase";
 
 const ApplicantDashBoard = props => {
+  const [userUid, setUserUid] = useState("");
   const [modal, setModal] = useState(true);
   const [stepInfo, setStepInfo] = useState([
     {
@@ -24,16 +27,29 @@ const ApplicantDashBoard = props => {
       className: css.stepThree
     }
   ]);
-  const [users, setUsers] = useState([
-    {
-      uid: "ijdofij932098",
-      name: "Matthew Wendzina",
-      stagePassed: 1,
-      applicationForm: false,
-      applicationVideos: false,
-      applicationDay: false
+  const [users, setUsers] = useState({});
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged(user => {
+      console.log(user.uid);
+      setUserUid(user.uid);
+    });
+  }, []);
+
+  useEffect(() => {
+    // GET the current uid's application info
+    if (userUid) {
+      console.log("applicant dashboard userUid", userUid);
+      const getUidApplicationData = async () => {
+        const data = await fetch(`${api.applications}/${userUid}`);
+        const response = await data.json();
+        console.log("GET uid application", response);
+        setUsers({ ...response.result });
+      };
+
+      getUidApplicationData();
     }
-  ]);
+  }, [userUid]);
 
   const toggleModal = () => {
     setModal(!modal);
@@ -43,13 +59,29 @@ const ApplicantDashBoard = props => {
     props.props.history.push(`application-form`);
   };
 
+  const goToApplicationVideo = () => {
+    props.props.history.push(`application-video`);
+  };
+
+  const redirectTo = stage => {
+    if (stage === 1) {
+      return goToApplicationForm();
+    }
+    if (stage === 2) {
+      return goToApplicationVideo();
+    }
+
+    if (stage === 3) {
+      props.props.history.push("bootcamper-dashboard");
+    }
+  };
   const ApplicationStage = () => {
     let stage = "";
-    if (users[0].applicationDay === true) {
+    if (userUid.passInterviewStage === true) {
       stage = "You passed them all! ";
-    } else if (users[0].applicationVideos === true) {
+    } else if (userUid.passVideoStage) {
       stage = "You are at stage 3";
-    } else if (users[0].applicationForm === true) {
+    } else if (userUid.passFormStage === true) {
       stage = "You are at stage 2";
     } else {
       stage = "You are at stage 1";
@@ -62,6 +94,7 @@ const ApplicantDashBoard = props => {
       return (
         <div className={info.className}>
           {(info.stage === 2 && passFirstStage !== true) ||
+          (info.stage === 3 && passFirstStage !== true) ||
           (info.stage === 3 && passSecondStage === false) ? (
             <div className={css.stepNotAvailable}>
               <p>Stage {info.stage}</p>
@@ -89,7 +122,7 @@ const ApplicantDashBoard = props => {
           <div className={css.progressImgContainer}>
             <img src={socPlanet} alt="socPlanet icon" />
           </div>
-          <div onClick={goToApplicationForm} className={css.stepCard}>
+          <div onClick={() => redirectTo(info.stage)} className={css.stepCard}>
             <h3> {info.title}</h3>
             <p> {info.desc} </p>
           </div>
@@ -100,13 +133,14 @@ const ApplicantDashBoard = props => {
 
   return (
     <div className={css.container}>
+      {console.log("in APP DASH USERS", users)}
       <div className={css.header}>
         <h2> Applicant Dashboard </h2>
       </div>
       <div className={css.mainContentContainer}>
         <div
           className={
-            modal && users[0].applicationForm === false
+            modal && users.passFormStage === false
               ? css.modalContainer
               : css.hideModalContainer
           }
@@ -127,9 +161,9 @@ const ApplicantDashBoard = props => {
         </div>
         <div className={css.stepsContainer}>
           <Step
-            passFirstStage={users[0].applicationForm}
-            passSecondStage={users[0].applicationVideos}
-            passFinalStage={users[0].applicationDay}
+            passFirstStage={users.passFormStage}
+            passSecondStage={users.passVideoStage}
+            passFinalStage={users.passInterviewStage}
           />
         </div>
 

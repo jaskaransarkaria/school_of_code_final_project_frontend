@@ -4,14 +4,17 @@ import css from "./FormRating.module.css";
 import { api } from "../../config";
 import UserName from "../UserName";
 
-// GET for draw in users
-// POST users on accept/ reject
+// every time it re-renders it's adding another list of people to the dropdown (which are buttons)
+// search functionality is not hooked up
 
 function FormRating(props) {
   const [showSpecificApplications, setShowSpecificApplications] = useState([]);
   const [searchedApplications, setSearchedApplications] = useState([]);
   const [input, setInput] = useState("");
   const [pendingApplicants, setPendingApplicants] = useState([]);
+  const [acceptedApplicants, setAcceptedApplicants] = useState([]);
+  const [rejectedApplicants, setRejectedApplicants] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
   const [applicants, setApplicants] = useState([
     {
       firstName: "Matt",
@@ -222,20 +225,27 @@ function FormRating(props) {
       id: 15
     }
   ]);
-  // This function has been created to avoid a double call of dispacth on the useReducer the first time.
+  // This function has been created to avoid a double call of
+  // dispacth on the useReducer the first time.
 
   const [applicationStatus, dispatch] = useReducer((state, action, e) => {
     switch (action) {
       case "pending":
         return state === "pending" ? null : "pending";
-      case "accepted":
-        return state === "accepted" ? null : "accepted";
-      case "rejected":
-        return state === "rejected" ? null : "rejected";
+      case true:
+        return state === true ? null : true;
+      case false:
+        return state === false ? null : false;
       default:
         return state;
     }
   }, null);
+
+  const getAllUsers = async () => {
+    const data = await fetch(`${api.users}`);
+    const response = await data.json();
+    setAllUsers(response.result);
+  };
 
   const getPendingForm = async () => {
     console.log("firing fetch GET");
@@ -245,9 +255,28 @@ function FormRating(props) {
     console.log("inside getpendingform", response.result);
     setPendingApplicants([...response.result]);
   };
+  const getAcceptedForm = async () => {
+    console.log("firing fetch GET");
+    const data = await fetch(`${api.applications}/accepted-forms`);
+    const response = await data.json();
+    console.log("inside getacceptedform", response);
+    console.log("inside getacceptedform", response.result);
+    setAcceptedApplicants([...response.result]);
+  };
+  const getRejectedForm = async () => {
+    console.log("firing fetch GET");
+    const data = await fetch(`${api.applications}/rejected-forms`);
+    const response = await data.json();
+    console.log("inside getrejectedform", response);
+    console.log("inside getrejectedform", response.result);
+    setRejectedApplicants([...response.result]);
+  };
 
   useEffect(() => {
     getPendingForm();
+    getAcceptedForm();
+    getRejectedForm();
+    getAllUsers();
   }, []);
 
   const postForm = async (descion, id) => {
@@ -266,6 +295,9 @@ function FormRating(props) {
     });
     const response = await data.json();
     console.log(response);
+    getPendingForm();
+    getAcceptedForm();
+    getRejectedForm();
   };
 
   const goToHome = () => {
@@ -321,7 +353,9 @@ function FormRating(props) {
   return (
     <>
       <h1> Admin Form Processing</h1>
-      <UserName uid={"ksdkF5iGTOP358JFPuu9qtdqn7F2"} />
+      {console.log("pending applications", pendingApplicants)}
+      {console.log("accepted applications", acceptedApplicants)}
+      {console.log("rejected applications", rejectedApplicants)}
       <div className={css.applicationStatusContainer}>
         <div>
           <button
@@ -335,8 +369,10 @@ function FormRating(props) {
             <p> Pending Applications</p>
             <p className={css.applicationsNumber}>
               {
-                applicants.filter(applicant => applicant.passForm === "pending")
-                  .length
+                // this is the applications number
+                pendingApplicants.filter(
+                  applicant => applicant.passFormStage === "pending"
+                ).length
               }
             </p>
           </button>
@@ -359,27 +395,18 @@ function FormRating(props) {
               placeholder="Search Applicants"
             />
             {/* List all applicants, unless the search input is used  */}
-            {applicants.map(applicant => {
+            {pendingApplicants.map(applicant => {
               return (
                 showSpecificApplications.length === 0 &&
                 applicationStatus === "pending" &&
-                applicant.passForm === applicationStatus &&
+                applicant.passFormStage === applicationStatus &&
                 input === "" && (
-                  <>
-                    <UserName
-                      classToBe={css.applicant}
-                      click={e => viewApplications(e, applicant.id)}
-                      key={e => viewApplications(e, applicant.id)}
-                      uid={applicant.id}
-                    />
-                    <button
-                      className={css.applicant}
-                      onClick={e => viewApplications(e, applicant.id)}
-                      onKeyUp={e => viewApplications(e, applicant.id)}
-                    >
-                      {applicant.firstName} {applicant.lastName}
-                    </button>
-                  </>
+                  <UserName
+                    classToBe={css.applicant}
+                    click={e => viewApplications(e, applicant.firebaseUid)}
+                    key={e => viewApplications(e, applicant.firebaseUid)}
+                    uid={applicant.firebaseUid}
+                  />
                 )
               );
             })}
@@ -387,14 +414,13 @@ function FormRating(props) {
             {searchedApplications.map(applicant => {
               return (
                 input !== "" &&
-                applicant.passForm === "pending" && (
-                  <button
-                    className={css.applicant}
-                    onMouseDown={() => viewApplications(applicant.id)}
-                    onKeyUp={e => viewApplications(e, applicant.id)}
-                  >
-                    {applicant.firstName} {applicant.lastName}
-                  </button>
+                applicant.passFormStage === "pending" && (
+                  <UserName
+                    classToBe={css.applicant}
+                    click={e => viewApplications(e, applicant.firebaseUid)}
+                    key={e => viewApplications(e, applicant.firebaseUid)}
+                    uid={applicant.firebaseUid}
+                  />
                 )
               );
             })}
@@ -403,24 +429,24 @@ function FormRating(props) {
         <div>
           <button
             className={
-              applicationStatus === "accepted"
+              applicationStatus === true
                 ? css.applicationStatusButtonActive
                 : css.applicationStatusButton
             }
-            onClick={() => dispatch("accepted")}
+            onClick={() => dispatch(true)}
           >
             <p> Accepted Applications </p>
             <p className={css.applicationsNumber}>
               {
-                applicants.filter(
-                  applicant => applicant.passForm === "accepted"
+                acceptedApplicants.filter(
+                  applicant => applicant.passFormStage === true
                 ).length
               }
             </p>
           </button>
           <ul
             className={
-              applicationStatus === "accepted"
+              applicationStatus === true
                 ? css.applicantListContainer
                 : css.hideApplicantListContainer
             }
@@ -428,26 +454,25 @@ function FormRating(props) {
             <input
               onChange={e => handleInput(e)}
               className={
-                applicationStatus === "accepted"
+                applicationStatus === true
                   ? css.showSearchInput
                   : css.hideSearchInput
               }
               placeholder="Search Applicants"
             />
             {/* List all applicants, unless the search input is used  */}
-            {applicants.map(applicant => {
+            {acceptedApplicants.map(applicant => {
               return (
                 showSpecificApplications.length === 0 &&
-                applicationStatus === "accepted" &&
-                applicant.passForm === applicationStatus &&
+                applicationStatus === true &&
+                applicant.passFormStage === applicationStatus &&
                 input === "" && (
-                  <button
-                    className={css.applicant}
-                    onClick={e => viewApplications(e, applicant.id)}
-                    onKeyUp={e => viewApplications(e, applicant.id)}
-                  >
-                    {applicant.firstName} {applicant.lastName}
-                  </button>
+                  <UserName
+                    classToBe={css.applicant}
+                    click={e => viewApplications(e, applicant.firebaseUid)}
+                    key={e => viewApplications(e, applicant.firebaseUid)}
+                    uid={applicant.firebaseUid}
+                  />
                 )
               );
             })}
@@ -455,14 +480,13 @@ function FormRating(props) {
             {searchedApplications.map(applicant => {
               return (
                 input !== "" &&
-                applicant.passForm === "accepted" && (
-                  <button
-                    className={css.applicant}
-                    onMouseDown={() => viewApplications(applicant.id)}
-                    onKeyUp={e => viewApplications(e, applicant.id)}
-                  >
-                    {applicant.firstName} {applicant.lastName}
-                  </button>
+                applicant.passFormStage === true && (
+                  <UserName
+                    classToBe={css.applicant}
+                    click={e => viewApplications(e, applicant.firebaseUid)}
+                    key={e => viewApplications(e, applicant.firebaseUid)}
+                    uid={applicant.firebaseUid}
+                  />
                 )
               );
             })}
@@ -471,24 +495,24 @@ function FormRating(props) {
         <div>
           <button
             className={
-              applicationStatus === "rejected"
+              applicationStatus === false
                 ? css.applicationStatusButtonActive
                 : css.applicationStatusButton
             }
-            onClick={() => dispatch("rejected")}
+            onClick={() => dispatch(false)}
           >
             <p> Rejected Applications </p>
             <p className={css.applicationsNumber}>
               {
-                applicants.filter(
-                  applicant => applicant.passForm === "rejected"
+                rejectedApplicants.filter(
+                  applicant => applicant.passFormStage === false
                 ).length
               }
             </p>
           </button>
           <ul
             className={
-              applicationStatus === "rejected"
+              applicationStatus === false
                 ? css.applicantListContainer
                 : css.hideApplicantListContainer
             }
@@ -496,26 +520,25 @@ function FormRating(props) {
             <input
               onChange={e => handleInput(e)}
               className={
-                applicationStatus === "rejected"
+                applicationStatus === false
                   ? css.showSearchInput
                   : css.hideSearchInput
               }
               placeholder="Search Applicants"
             />
             {/* List all applicants, unless the search input is used  */}
-            {applicants.map(applicant => {
+            {rejectedApplicants.map(applicant => {
               return (
                 showSpecificApplications.length === 0 &&
-                applicationStatus === "rejected" &&
-                applicant.passForm === applicationStatus &&
+                applicationStatus === false &&
+                applicant.passFormStage === applicationStatus &&
                 input === "" && (
-                  <button
-                    className={css.applicant}
-                    onClick={e => viewApplications(e, applicant.id)}
-                    onKeyUp={e => viewApplications(e, applicant.id)}
-                  >
-                    {applicant.firstName} {applicant.lastName}
-                  </button>
+                  <UserName
+                    classToBe={css.applicant}
+                    click={e => viewApplications(e, applicant.firebaseUid)}
+                    key={e => viewApplications(e, applicant.firebaseUid)}
+                    uid={applicant.firebaseUid}
+                  />
                 )
               );
             })}
@@ -523,14 +546,13 @@ function FormRating(props) {
             {searchedApplications.map(applicant => {
               return (
                 input !== "" &&
-                applicant.passForm === "rejected" && (
-                  <button
-                    className={css.applicant}
-                    onMouseDown={() => viewApplications(applicant.id)}
-                    onKeyUp={e => viewApplications(e, applicant.id)}
-                  >
-                    {applicant.firstName} {applicant.lastName}
-                  </button>
+                applicant.passFormStage === false && (
+                  <UserName
+                    classToBe={css.applicant}
+                    click={e => viewApplications(e, applicant.firebaseUid)}
+                    key={e => viewApplications(e, applicant.firebaseUid)}
+                    uid={applicant.firebaseUid}
+                  />
                 )
               );
             })}
@@ -540,66 +562,106 @@ function FormRating(props) {
 
       <div>
         <TransitionGroup className={css.item}>
-          {applicants.map(
+          {[
+            ...pendingApplicants,
+            ...acceptedApplicants,
+            ...rejectedApplicants
+          ].map(
             /// ALL OF THE APPLICANTS this will be all my applications
-            applicant =>
-              showSpecificApplications[0] === applicant.passForm &&
-              applicant.id === showSpecificApplications[1] && ( // an array with 2 args (1st arg is application status)
-                // and the 2nd arg is id
-                <CSSTransition timeout={200} classNames="item">
-                  <div className={css.applicantDetailsContainer}>
-                    <div className={css.detailsSubContainer} key={applicant.id}>
-                      <h2>Applicant Details </h2>
-                      <h3>
-                        {applicant.firstName} {applicant.lastName}{" "}
-                        {/*access the user database for this info*/}
-                      </h3>
-                      <div className={css.metaData}>
-                        <p>Age: {applicant.age}</p>{" "}
-                        {/*access the user database for this info*/}
-                        <p>Location: {applicant.location}</p>{" "}
-                        {/*access the user database for this info*/}
-                        <p>Background: {applicant.background}</p>{" "}
-                        {/*access the user database for this info*/}
+            // nned to add ...acceptedApplicants, ...rejectedApplicants
+            applicant => {
+              const matchedUser =
+                allUsers.find(
+                  user => user.firebaseUid === applicant.firebaseUid
+                ) || "no matched User";
+
+              return (
+                showSpecificApplications[0] === applicant.passFormStage && // this will be passFormStage
+                applicant.firebaseUid === showSpecificApplications[1] && ( // an array with 2 args (1st arg is application status)
+                  // and the 2nd arg is id - this needs to be set as at the minute the function is pointing to just the id not the uid
+                  <CSSTransition timeout={200} classNames="item">
+                    <div className={css.applicantDetailsContainer}>
+                      <div
+                        className={css.detailsSubContainer}
+                        key={applicant.firebaseUid}
+                      >
+                        <h2>Applicant Details </h2>
+                        <h3>
+                          {matchedUser.firstName || "noFirstName"}{" "}
+                          {matchedUser.lastName || "noLastName"}{" "}
+                          {/*access the user database for this info*/}
+                        </h3>
+                        <div className={css.metaData}>
+                          <p>Age: {matchedUser.age || "noAge"}</p>{" "}
+                          {/*access the user database for this info*/}
+                          <p>
+                            Location: {matchedUser.location || "noLocation"}
+                          </p>{" "}
+                          {/*access the user database for this info*/}
+                          <p>
+                            Background:{" "}
+                            {matchedUser.background || "noBackground"}
+                          </p>{" "}
+                          {/*access the user database for this info*/}
+                        </div>
+                      </div>
+                      <div className={css.reasonSubContainer}>
+                        <h3>Reason for applying </h3>
+                        <p>
+                          {applicant.formApplicationData.motivationQuestion ||
+                            "noMotivationQuestion"}
+                        </p>
+                      </div>
+                      <div className={css.applicationButtonsContainer}>
+                        <button
+                          onClick={() => {
+                            //changeStatus(applicant.firebaseUid, "accepted");
+                            setShowSpecificApplications([]);
+
+                            // this is not connected up correctly
+                            // this function changes the status in the list which contains all the the
+                            // data locally
+
+                            // this won't be neccessary if I fill the accepted and rejected trays from the
+                            // database
+                          }}
+                          onMouseUp={() => {
+                            dispatch(applicant.passFormStage); // this isnt connected up either
+                            postForm(true, applicant.firebaseUid);
+                          }}
+                        >
+                          ACCEPT
+                        </button>
+                        <button
+                          onClick={() =>
+                            //changeStatus(applicant.firebaseUid, "rejected")
+                            setShowSpecificApplications([])
+                          } // this is not connected up correctly
+                          onMouseUp={() => {
+                            dispatch(applicant.passFormStage); // this isnt connected up either
+                            postForm(false, applicant.firebaseUid);
+                          }}
+                        >
+                          DECLINE
+                        </button>
+                        <button
+                          onClick={() =>
+                            // changeStatus(
+                            //   applicant.firebaseUid,
+                            //   applicant.passFormStage
+                            // )
+                            setShowSpecificApplications([])
+                          }
+                          onMouseUp={() => dispatch(applicant.passFormStage)}
+                        >
+                          CANCEL
+                        </button>
                       </div>
                     </div>
-                    <div className={css.reasonSubContainer}>
-                      <h3>Reason for applying </h3>
-                      <p>{applicant.motivationQuestion}</p>
-                    </div>
-                    <div className={css.applicationButtonsContainer}>
-                      <button
-                        onClick={() => {
-                          changeStatus(applicant.id, "accepted");
-                        }}
-                        onMouseUp={() => {
-                          dispatch(applicant.passForm);
-                          postForm(true, applicant.id);
-                        }}
-                      >
-                        ACCEPT
-                      </button>
-                      <button
-                        onClick={() => changeStatus(applicant.id, "rejected")}
-                        onMouseUp={() => {
-                          dispatch(applicant.passForm);
-                          postForm(false, applicant.id);
-                        }}
-                      >
-                        DECLINE
-                      </button>
-                      <button
-                        onClick={() =>
-                          changeStatus(applicant.id, applicant.passForm)
-                        }
-                        onMouseUp={() => dispatch(applicant.passForm)}
-                      >
-                        CANCEL
-                      </button>
-                    </div>
-                  </div>
-                </CSSTransition>
-              )
+                  </CSSTransition>
+                )
+              );
+            }
           )}
         </TransitionGroup>
       </div>

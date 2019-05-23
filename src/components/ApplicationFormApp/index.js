@@ -10,8 +10,6 @@ import firebase from "firebase";
 
 import { api } from "../../config";
 
-console.log("API", api);
-
 const App = () => {
   const [uid, setUid] = useState("");
 
