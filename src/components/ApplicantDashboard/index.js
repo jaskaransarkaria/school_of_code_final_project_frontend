@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import css from "../ApplicantDashboard/ApplicantDashboard.module.css";
-import socPlanet from "../../Images/SOCPlanet.png";
+// import socPlanet from "../../Images/SOCPlanet.png";
 
 const ApplicantDashBoard = props => {
   const [modal, setModal] = useState(true);
@@ -94,7 +94,7 @@ const ApplicantDashBoard = props => {
             Stage {info.stage}{" "}
           </div>
           <div className={css.progressImgContainer}>
-            <img src={socPlanet} alt="socPlanet icon" />
+            {/* <img src={socPlanet} alt="socPlanet icon" /> */}
           </div>
           <div onClick={goToApplicationForm} className={css.stepCard}>
             <h3> {info.title}</h3>

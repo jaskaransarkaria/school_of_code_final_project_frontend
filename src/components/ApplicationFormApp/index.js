@@ -21,7 +21,8 @@ const App = () => {
     });
   }, []);
 
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(5);
+
   const [formValues, setFormValues] = useState({
     firstName: "",
     lastName: "",
