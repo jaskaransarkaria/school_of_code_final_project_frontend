@@ -9,6 +9,7 @@ import ReviewForm from "../ApplicationFormReviewPage";
 import firebase from "firebase";
 
 import { api } from "../../config";
+import ThankYou from "../ThankYou";
 
 const App = () => {
   const [uid, setUid] = useState("");
@@ -20,6 +21,7 @@ const App = () => {
   }, []);
 
   const [step, setStep] = useState(1);
+
   const [formValues, setFormValues] = useState({
     firstName: "",
     lastName: "",
@@ -59,6 +61,8 @@ const App = () => {
       .then(res => res.json())
       .then(data => console.log("DATA", data))
       .catch(err => console.log(err));
+
+    setStep(step + 1);
   };
 
   const renderSwitch = () => {
@@ -119,6 +123,19 @@ const App = () => {
         return (
           <div className="formCard">
             <ReviewForm
+              formValues={formValues}
+              setStep={setStep}
+              step={step}
+              submitForm={submitForm}
+              formError={formError}
+              setFormError={setFormError}
+            />
+          </div>
+        );
+      case 6:
+        return (
+          <div className="formCard">
+            <ThankYou
               formValues={formValues}
               setStep={setStep}
               step={step}

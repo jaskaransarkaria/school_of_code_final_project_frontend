@@ -1,0 +1,260 @@
+/*-------------------------
+  Main Containers 
+-----------------------*/
+.userTray {
+  height: 85vh;
+  position: relative;
+}
+
+/*----------------------------
+  Application Status Section
+------------------------------*/
+.applicationStatusContainer {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  margin: 20px auto;
+  width: 60%;
+}
+
+ul.applicantListContainer {
+  max-height: 300px;
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  margin: 0 25px;
+  padding: 0;
+  background: rgba(1, 1, 1, 0.2);
+}
+
+ul.hideApplicantListContainer {
+  display: none;
+}
+
+/*----------------------------
+  Admin Home Button
+----------------------------*/
+.adminDashboardHome {
+  position: absolute;
+  top: 2%;
+  right: 2%;
+}
+
+.adminDashboardHome button {
+  margin: 0 15px;
+  width: 100px;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px;
+  transition: 200ms;
+}
+
+.adminDashboardHome button:hover {
+  cursor: pointer;
+  box-shadow: 2px 2px 5px;
+}
+
+/* ---------------------------
+Application Status buttons 
+-----------------------------*/
+
+button {
+  font-size: 14px;
+}
+
+.applicationStatusContainer {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  margin: 20px auto;
+  width: 60%;
+}
+
+.applicationStatusButtonActive {
+  background: #57c7cc;
+  margin: 0 25px;
+  padding: 10px;
+  width: 250px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1;
+  transition: 100ms;
+}
+
+.applicationStatusButtonActive:hover {
+  cursor: pointer;
+}
+
+.applicationStatusButtonActive p {
+  display: flex;
+  align-items: center;
+  margin: -9px;
+  padding: 10px 10px;
+  font-size: 16px;
+}
+.applicationStatusButton {
+  margin: 0 25px;
+  padding: 10px;
+  width: 250px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1;
+  transition: 200ms;
+}
+
+.applicationStatusButton:hover {
+  cursor: pointer;
+  box-shadow: 2px 2px 3px;
+}
+
+.applicationStatusButton p {
+  display: flex;
+  align-items: center;
+  margin: -9px;
+  padding: 10px 10px;
+  font-size: 16px;
+}
+
+.applicationsNumber {
+  border-radius: 0px 4px 4px 0px;
+  background: lightcoral;
+  display: flex;
+  align-items: center;
+}
+
+/*-----------------
+Applicant Lists
+-------------------*/
+
+button.applicant {
+  color: white;
+  margin: 0 auto;
+  padding: 2px;
+  border-color: unset;
+  border: 0;
+  background: none;
+  font-size: 18px;
+  z-index: 1;
+}
+
+button.applicant:hover {
+  cursor: pointer;
+}
+
+ul.applicantListContainer {
+  max-height: 300px;
+  max-width: 250px;
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  margin: 0 25px;
+  padding: 0;
+  background: rgba(1, 1, 1, 0.2);
+}
+
+ul.hideApplicantListContainer {
+  display: none;
+}
+
+/*----------------------------
+    Videos Rating Container 
+-----------------------------*/
+.videoRatingsContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/*--------------------
+    User Details 
+---------------------*/
+
+.detailsContainer {
+  flex: 0 50%;
+  margin: 0 auto;
+  padding: 10px;
+  background: #31a4db;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px;
+}
+
+.metaData {
+  display: flex;
+  justify-content: center;
+}
+
+.metaData p {
+  margin: 0 20px;
+}
+
+.detailsSubContainer h2 {
+  text-align: center;
+}
+
+/*-------------------------
+        Videos
+------------------------*/
+
+.videoStageTitle {
+  flex: 0 60%;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.videoStageTitle p {
+  width: 20%;
+  margin: 10px auto 0 auto;
+  padding: 10px;
+  font-size: 20px;
+  color: black;
+  border-radius: 5px;
+  font-size: 18px;
+  box-shadow: 1px 1px 3px;
+}
+
+.videoStageTitle p:nth-last-of-type(1) {
+  position: absolute;
+  right: 10%;
+  width: auto;
+}
+
+.videoStageTitle span {
+  color: white;
+}
+.videosContainer {
+  flex: 0 100%;
+  margin: 10px auto;
+  text-align: center;
+  position: relative;
+}
+
+.videoPlayer {
+  padding: 5px;
+  width: 500px;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px;
+}
+
+.toggleVideosContainer button {
+  margin: 0 15px;
+  width: 150px;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px;
+  transition: 200ms;
+  background: white;
+}
+
+.toggleVideosContainer button:hover {
+  cursor: pointer;
+  box-shadow: 2px 2px 5px;
+}

@@ -4,6 +4,7 @@ import socPlanet from "../../Images/SOCPlanet.png";
 import { api } from "../../config";
 import firebase from "firebase";
 
+
 const ApplicantDashBoard = props => {
   const [userUid, setUserUid] = useState("");
   const [modal, setModal] = useState(true);
@@ -50,6 +51,12 @@ const ApplicantDashBoard = props => {
       getUidApplicationData();
     }
   }, [userUid]);
+
+  // const changeStage = info => {
+  //   if (info.stage === 1) {
+  //     setUsers([{ ...users }]);
+  //   }
+  // };
 
   const toggleModal = () => {
     setModal(!modal);
@@ -109,6 +116,7 @@ const ApplicantDashBoard = props => {
               <p>You passed Stage {info.stage}!</p>
             </div>
           ) : null}
+          {/* <button onClick={() => changeStage(info)}> Pass </button> */}
           <div
             className={
               info.stage === 1 || info.stage === 2
@@ -120,7 +128,7 @@ const ApplicantDashBoard = props => {
             Stage {info.stage}{" "}
           </div>
           <div className={css.progressImgContainer}>
-            <img src={socPlanet} alt="socPlanet icon" />
+            {/* <img src={socPlanet} alt="socPlanet icon" /> */}
           </div>
           <div onClick={() => redirectTo(info.stage)} className={css.stepCard}>
             <h3> {info.title}</h3>

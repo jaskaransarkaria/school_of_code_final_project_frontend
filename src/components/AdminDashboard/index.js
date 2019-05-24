@@ -12,31 +12,32 @@ class AdminDashBoard extends Component {
   render() {
     return (
       <>
-        <DashboardBanner />
-        <NavBar propsUser="Admin" />
-        <div className={css.container}>
-          <BrowserRouter>
-            <Switch>
-              <Route
-                exact
-                path="/admin-dashboard/"
-                component={AdminUserOptions}
-              />
-              <Route
-                path="/admin-dashboard/form-processing"
-                component={FormRating}
-              />
-              <Route
-                path="/admin-dashboard/video-processing"
-                component={VideoRating}
-              />
-              <Route
-                path="/admin-dashboard/upload-schedule"
-                component={AdminUploadSchedule}
-              />
-              {/* <Route component={NotFound} /> */}
-            </Switch>
-          </BrowserRouter>
+        <div className={css.dashBoardContainer}>
+          <NavBar propsUser="Admin" />
+          <div className={css.optionsContainer}>
+            <BrowserRouter>
+              <Switch>
+                <Route
+                  exact
+                  path="/admin-dashboard/"
+                  component={AdminUserOptions}
+                />
+                <Route
+                  path="/admin-dashboard/form-processing"
+                  component={FormRating}
+                />
+                <Route
+                  path="/admin-dashboard/video-processing"
+                  component={VideoRating}
+                />
+                <Route
+                  path="/admin-dashboard/upload-schedule"
+                  component={AdminUploadSchedule}
+                />
+                {/* <Route component={NotFound} /> */}
+              </Switch>
+            </BrowserRouter>
+          </div>
         </div>
       </>
     );

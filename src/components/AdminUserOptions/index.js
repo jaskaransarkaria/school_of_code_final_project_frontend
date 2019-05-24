@@ -1,5 +1,6 @@
 import React from "react";
 import css from "./AdminUserOptions.module.css";
+import DashboardBanner from "../DashboardBanner";
 
 const AdminUserOptions = props => {
   const goToForms = () => {
@@ -14,6 +15,7 @@ const AdminUserOptions = props => {
 
   return (
     <div className={css.container}>
+      <DashboardBanner title={"Admin Dashboard"} />
       {
         <>
           <div className={css.optionsContainer}>
@@ -26,9 +28,9 @@ const AdminUserOptions = props => {
             <div onClick={goToSchedule} className={css.optionsCard}>
               <p>Teacher Resource Upload</p>
             </div>
-            <div onClick={goToSchedule} className={css.optionsCard}>
+            {/* <div onClick={goToSchedule} className={css.optionsCard}>
               <p>View all accepted Applications</p>
-            </div>
+            </div> */}
           </div>
         </>
       }

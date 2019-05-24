@@ -14,6 +14,8 @@ import firebase from "firebase";
 import ApplicantVideoPage from "../../pages/ApplicantVideoPage";
 import ApplicantFormPage from "../../pages/ApplicantFormPage";
 import TemplatePage from "../../pages/TemplatePage";
+import ContractPage from "../../pages/ContractPage";
+import ThankYouPage from "../../pages/ThankYouPage";
 
 firebase.initializeApp({
   apiKey: api.firebase_key,
@@ -242,6 +244,7 @@ function App() {
         </Router>
       </Store.Provider>
     </UserUidContext.Provider>
+
   );
 }
 

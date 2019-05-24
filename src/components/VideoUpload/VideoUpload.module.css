@@ -1,38 +1,62 @@
 .startRecording {
+  width: 30%;
   color: white;
-  font-weight: bold;
-  text-transform: uppercase;
+
   border-style: none;
-  outline: none;
-  margin: 20px 0px;
-  padding: 10px;
-  border-radius: 10px;
-  font-weight: bold;
   background-color: #11cf84;
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .stopRecording {
+  width: 30%;
   color: white;
-  font-weight: bold;
-  text-transform: uppercase;
+
   border-style: none;
-  outline: none;
-  margin: 20px 0px;
-  padding: 10px;
-  border-radius: 10px;
-  font-weight: bold;
   background-color: red;
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .submitRecording {
+  width: 30%;
   color: white;
-  font-weight: bold;
-  text-transform: uppercase;
-  border-style: none;
-  outline: none;
-  margin: 20px 0px;
   padding: 10px;
-  border-radius: 10px;
-  font-weight: bold;
+  border-style: none;
   background-color: #11cf84;
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: pointer;
+}
+.submitFinalVideos {
+  width: 25%;
+  color: white;
+  padding: 10px;
+  border-style: none;
+  background-color: #11cf84;
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: pointer;
+}
+.startRecording,
+.stopRecording,
+.submitRecording {
+}
+.buttonContainer {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.stepText {
+  font-size: 1.9em;
+  margin: 0px;
+  text-align: start;
+}
+.questionsText {
+  font-size: 1.6em;
+  text-align: center;
+  margin: 5px 0;
 }

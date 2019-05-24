@@ -1,3 +1,8 @@
+@import url("https://fonts.googleapis.com/css?family=Oxygen:300,400");
+/* MAIN CONTAINERS */
+.body {
+  font-family: "Oxygen", sans-serif;
+}
 .container {
   display: grid;
   grid-template-columns: 35% 65%;
@@ -12,17 +17,11 @@
 
   background-image: linear-gradient(to bottom right, #04c7d9, #5f04cf);
 }
-.formContainer {
-  position: relative;
-  top: 15%;
-  color: white;
-}
-
 .rightContainer {
   grid-area: form;
   color: white;
   position: relative;
-  margin: 0 5%;
+
   background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png");
   font-weight: bold;
 }
@@ -61,6 +60,7 @@
   pointer-events: none;
 }
 
+/* IE11 hide native button (thanks Matt!) */
 select::-ms-expand {
   display: none;
 }
@@ -69,6 +69,7 @@ select::-ms-expand {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  /* Add some styling */
 
   display: block;
   width: 100%;
@@ -88,12 +89,11 @@ select::-ms-expand {
 }
 .instructionsText {
   margin-left: 20px;
-  font-size: 1.8em;
   float: left;
   border-bottom: 3px solid white;
 }
 .instructionsParagraph {
-  font-size: 1.4em;
+  font-size: 1.2em;
   width: 30%;
   margin-left: 20px;
   margin-top: 20px;
@@ -108,9 +108,40 @@ select::-ms-expand {
   top: 40%;
 }
 
-.nextButton {
+/* RIGHT CONTAINER CONTENT */
+.firstAndLastNameContainer {
+  display: flex;
+}
+.firstNameContainer {
+  flex: 1;
+}
+.lastNameContainer {
   margin-left: 10px;
-  left: 50%;
+  flex: 1;
+}
+
+.firstName,
+.lastName {
+  font-size: 1.2em;
+  color: white;
+  padding: 10px;
+  width: 100%;
+  background-color: transparent;
+  border: 5px solid #11cf84;
+  box-sizing: border-box;
+  margin-top: 10px;
+}
+.email {
+  font-size: 1.2em;
+  color: white;
+  padding: 10px;
+  width: 50%;
+  background-color: transparent;
+  border: 5px solid #11cf84;
+  box-sizing: border-box;
+  margin-top: 10px;
+}
+.nextButton {
   font-size: 1.2em;
   font-weight: bold;
   margin-bottom: 50px;
@@ -123,23 +154,31 @@ select::-ms-expand {
   border-style: none;
   background-color: #11cf84;
 }
-.previousButton {
-  font-size: 1.2em;
-  font-weight: bold;
-  margin-bottom: 50px;
-  cursor: pointer;
-  position: absolute;
-  bottom: 0;
-  width: 50%;
+
+::placeholder {
   color: white;
-  padding: 10px;
-  border-style: none;
-  background-color: #11cf84;
 }
-.identifyContainer,
-.situationContainer {
-  margin-top: 5%;
+.firstNameLabel,
+.lastNameLabel,
+.emailLabel {
+  font-weight: bold;
+  color: white;
 }
+
+.firstNameContainer,
+.lastNameContainer,
+.emailContainer {
+  margin-bottom: 60px;
+}
+.header {
+  color: white;
+}
+.formContainer {
+  position: relative;
+  top: 30%;
+  color: white;
+}
+
 .applicationFormText {
   margin: 10px 0;
   position: absolute;
@@ -148,41 +187,31 @@ select::-ms-expand {
   position: absolute;
   margin-top: 80px;
 }
-.saveAndContinueButton,
-.previousButton {
-  cursor: pointer;
+.tickImage {
+  position: relative;
+  transform: translate(-50%);
+  left: 50%;
+  margin-bottom: 1%;
+  width: 150px;
+  height: 150px;
 }
-.identifyText,
-.situationText {
-  font-size: 1.4em;
+.rightContentWrapper {
+  border-radius: 10px;
+  border: 10px solid #11cf84;
+  position: absolute;
+  left: 25%;
+  right: 25%;
+  top: 25%;
+  padding: 20px;
+  display: inline-block;
 }
-.questionOneContainer,
-.questionTwoContainer {
-  margin-top: 10px;
+.subTextOne {
+  margin: 2%;
+  text-transform: uppercase;
   font-size: 1.1em;
+  text-align: center;
+  font-style: italic;
 }
-@media only screen and (max-width: 750px) {
-  .header {
-    font-size: 0.9em;
-  }
-  .wrapper {
-    margin-top: 0;
-  }
-  .identifyContainer,
-  .situationContainer {
-    margin: 0;
-  }
-}
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-textarea:-webkit-autofill,
-textarea:-webkit-autofill:hover,
-textarea:-webkit-autofill:focus,
-select:-webkit-autofill,
-select:-webkit-autofill:hover,
-select:-webkit-autofill:focus {
-  -webkit-text-fill-color: white;
-  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
-  transition: background-color 5000s ease-in-out 0s;
+.thanksMessage {
+  text-transform: uppercase;
 }

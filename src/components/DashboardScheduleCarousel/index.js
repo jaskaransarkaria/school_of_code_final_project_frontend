@@ -10,21 +10,28 @@ class DashboardScheduleCarousel extends Component {
   }
 
   nextButton = () => {
+    debugger;
     this.setState(state => {
-      return {
-        counter: state.counter + 3
-      };
+      return state.counter <= 2
+        ? { counter: state.counter + 1 }
+        : { counter: 2 };
     });
   };
   previousButton = () => {
     this.setState(state => {
       return {
-        counter: state.counter - 3
+        counter: state.counter - 1
       };
     });
   };
 
-  array = ["Functions", "React", "Google Analytics", "CSS", "Node", "Hooks"];
+  array = [
+    { lesson: "Lesson 1", topic: "JS Functions" },
+    { lesson: "Lesson 2", topic: "React Hooks" },
+    { lesson: "Lesson 3", topic: "Google Analytics" },
+    { lesson: "Lesson 4", topic: "CSS Flexbox" },
+    { lesson: "Lesson 5", topic: "JS Currying" }
+  ];
 
   render() {
     return (
@@ -36,12 +43,29 @@ class DashboardScheduleCarousel extends Component {
             className={css.leftArrow}
             onClick={this.previousButton}
           />
-          <div className={css.itemOne}>{this.array[this.state.counter]}</div>
+          <div className={css.itemOne}>
+            <p className={css.title}>
+              <b> {this.array[this.state.counter].lesson}</b>
+            </p>
+            <p className={css.content}>
+              {this.array[this.state.counter].topic}
+            </p>
+          </div>
           <div className={css.itemTwo}>
-            {this.array[this.state.counter + 1]}
+            <p className={css.title}>
+              <b> {this.array[this.state.counter + 1].lesson}</b>
+            </p>
+            <p className={css.content}>
+              {this.array[this.state.counter + 1].topic}
+            </p>
           </div>
           <div className={css.itemThree}>
-            {this.array[this.state.counter + 2]}
+            <p className={css.title}>
+              <b> {this.array[this.state.counter + 2].lesson}</b>
+            </p>
+            <p className={css.content}>
+              {this.array[this.state.counter + 2].topic}
+            </p>
           </div>
 
           <img
