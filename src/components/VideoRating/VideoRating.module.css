@@ -1,3 +1,11 @@
+/*-------------------------
+  Main Containers 
+-----------------------*/
+.userTray {
+  height: 85vh;
+  position: relative;
+}
+
 /*----------------------------
   Application Status Section
 ------------------------------*/
@@ -21,6 +29,29 @@ ul.applicantListContainer {
 
 ul.hideApplicantListContainer {
   display: none;
+}
+
+/*----------------------------
+  Admin Home Button
+----------------------------*/
+.adminDashboardHome {
+  position: absolute;
+  top: 2%;
+  right: 2%;
+}
+
+.adminDashboardHome button {
+  margin: 0 15px;
+  width: 100px;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px;
+  transition: 200ms;
+}
+
+.adminDashboardHome button:hover {
+  cursor: pointer;
+  box-shadow: 2px 2px 5px;
 }
 
 /* ---------------------------
@@ -173,24 +204,33 @@ ul.hideApplicantListContainer {
   flex: 0 60%;
   margin: 0 auto;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  position: relative;
 }
 
 .videoStageTitle p {
   width: 20%;
   margin: 10px auto 0 auto;
   padding: 10px;
-  background: #4954d2;
+  font-size: 20px;
   color: black;
   border-radius: 5px;
   font-size: 18px;
   box-shadow: 1px 1px 3px;
 }
 
+.videoStageTitle p:nth-last-of-type(1) {
+  position: absolute;
+  right: 10%;
+  width: auto;
+}
+
 .videoStageTitle span {
   color: white;
 }
 .videosContainer {
-  flex: 0 70%;
+  flex: 0 100%;
   margin: 10px auto;
   text-align: center;
   position: relative;
@@ -202,13 +242,6 @@ ul.hideApplicantListContainer {
   background: white;
   border-radius: 5px;
   box-shadow: 1px 1px 5px;
-}
-
-.toggleVideosContainer {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
 }
 
 .toggleVideosContainer button {

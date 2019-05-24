@@ -1,5 +1,6 @@
 import React, { useState, useReducer, useEffect } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import DashboardBanner from "../DashboardBanner";
 import css from "./FormRating.module.css";
 
 function FormRating(props) {
@@ -283,7 +284,7 @@ function FormRating(props) {
 
   return (
     <>
-      <h1> Admin Form Processing</h1>
+      <DashboardBanner title={"Form Applications"} />
       <div className={css.applicationStatusContainer}>
         <div>
           <button
@@ -490,6 +491,9 @@ function FormRating(props) {
             })}
           </ul>
         </div>
+        <div onClick={goToHome} className={css.adminDashboardHome}>
+          <button> Admin Home</button>
+        </div>
       </div>
 
       <div>
@@ -544,9 +548,6 @@ function FormRating(props) {
               )
           )}
         </TransitionGroup>
-      </div>
-      <div onClick={goToHome} className={css.adminDashboardHome}>
-        <button> Admin Home</button>
       </div>
     </>
   );

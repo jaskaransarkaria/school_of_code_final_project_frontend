@@ -3,6 +3,7 @@ import DashboardBanner from "../DashboardBanner";
 import NavBar from "../NavBar";
 import DashBoardSchedule from "../DashboardSchedule";
 import DashboardTopicsCarousel from "../DashboardTopicsCarousel";
+import TopicsTray from "../TopicsTray";
 import css from "../BootcamperDashBoard/BootcamperDashboard.module.css";
 
 class BootcamperDashBoard extends Component {
@@ -10,9 +11,10 @@ class BootcamperDashBoard extends Component {
     return (
       <div className={css.dashBoardContainer}>
         <NavBar propsUser="Bootcamper" />
-        <DashboardBanner />
+        <DashboardBanner title={"Welcome Bootcamper!"} />
         <DashBoardSchedule />
-        <DashboardTopicsCarousel />
+        {/* <DashboardTopicsCarousel /> */}
+        <TopicsTray style={{ margin: "20%" }} />
       </div>
     );
   }

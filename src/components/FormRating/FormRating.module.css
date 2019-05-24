@@ -10,8 +10,8 @@ button {
   display: flex;
   justify-content: center;
   padding: 10px;
-  margin: 20px auto;
-  width: 60%;
+  height: 85vh;
+  position: relative;
 }
 
 .applicationStatusButtonActive {

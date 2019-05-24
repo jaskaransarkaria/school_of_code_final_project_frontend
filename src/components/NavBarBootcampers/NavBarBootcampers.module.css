@@ -1,4 +1,78 @@
+/* Original CSS has been replaced. It is below and it commented out.*/
+
 .navContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 6%;
+  background-color: #0834ac;
+  z-index: 1;
+}
+.iconsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100vh;
+  text-align: center;
+}
+.homeIcon,
+.formsIcon,
+.videosIcon,
+.resourcesIcon {
+  height: 60px;
+  width: 60px;
+  padding: 10px;
+}
+
+.homeIconContainer,
+.formsIconContainer,
+.videosIconContainer,
+.resourcesIconContainer {
+  position: relative;
+}
+.homeIconContainer:before,
+.formsIconContainer:before,
+.videosIconContainer:before,
+.resourcesIconContainer:before {
+  content: "Home";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(92, 19, 206, 0.92);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: scale(0);
+  transition: transform 200ms ease-in-out;
+}
+
+.homeIconContainer:hover:before,
+.formsIconContainer:hover:before,
+.videosIconContainer:hover:before,
+.resourcesIconContainer:hover:before {
+  transform: scale(1);
+  cursor: pointer;
+}
+
+a {
+  cursor: pointer;
+}
+
+.formsIconContainer:before {
+  content: "Forms";
+}
+.videosIconContainer:before {
+  content: "Videos";
+}
+.resourcesIconContainer:before {
+  content: "Resources";
+}
+
+/* .navContainer {
   display: inline-flex;
   justify-content: center;
   width: 6%;
@@ -16,4 +90,4 @@
 .infoIcon {
   height: 40px;
   width: 40px;
-}
+} */

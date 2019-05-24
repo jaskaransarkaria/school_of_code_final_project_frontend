@@ -158,7 +158,7 @@ select::-ms-expand {
   width: 65%;
   display: block;
   position: absolute;
-  font-size: 2em;
+  font-size: 1.1em;
   margin-top: 20px;
   /* border: 2px solid #11cf84; */
   box-shadow: 0 0 0 5px #11cf84;

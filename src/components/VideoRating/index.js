@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useReducer } from "react";
 import FeedbackTray from "../FeedbackTray";
+import DashboardBanner from "../DashboardBanner";
 import { api } from "../../config";
 import css from "./VideoRating.module.css";
 // TODO
@@ -8,7 +9,7 @@ import css from "./VideoRating.module.css";
 // number of pending applications
 // force to rate before next question
 
-const VideoRating = () => {
+const VideoRating = props => {
   const [currentUid, setCurrentUid] = useState("");
   const [adminFeedbackRating, setAdminFeedbackRating] = useState(0);
   const [adminFeedbackComment, setAdminFeedbackComment] = useState("");
@@ -40,12 +41,20 @@ const VideoRating = () => {
   // GET in videos from APPLICATIONS for each applicant based on uid which have a status 'pending'
 
   const AverageScore = () => {
-    // debugger;
-    return (
-      collateFeedback
+    let score;
+
+    score =
+      (collateFeedback
         .map(item => item.rating)
         .reduce((accumulator, currentValue) => accumulator + currentValue) /
-      collateFeedback.length
+        collateFeedback.length /
+        10) *
+      100;
+
+    return (
+      <p>
+        <span>Overall Score: {score.toFixed(0)}%</span>
+      </p>
     );
   };
   // {
@@ -68,6 +77,10 @@ const VideoRating = () => {
       .map(item => item.rating)
       .reduce((accumulator, currentValue) => accumulator + currentValue) /
     collateFeedback.length;
+
+  const goToHome = () => {
+    props.history.push(`/admin-dashboard`);
+  };
 
   const postRatingsToServer = async () => {
     const data = await fetch(`${api.applications}/admin-video-descion`, {
@@ -265,7 +278,8 @@ const VideoRating = () => {
           matchUidToName(user.firebaseUid)
         )
       )}
-      <div id="userTray">
+      <DashboardBanner title={"Video Applications"} />
+      <div id="userTray" className={css.userTray}>
         <div id="videoTray">
           {pendingVideosData.map(
             ({ videoApplicationData, firebaseUid }, applicantIndex) => {
@@ -379,6 +393,12 @@ const VideoRating = () => {
                             );
                           })}
                         </ul>
+                        <div
+                          onClick={goToHome}
+                          className={css.adminDashboardHome}
+                        >
+                          <button> Admin Home</button>
+                        </div>
                       </div>
                       <div>
                         <button
@@ -465,7 +485,9 @@ const VideoRating = () => {
                                             </span>{" "}
                                           </p>
                                           {collateFeedback.length === 0 ? (
-                                            <p>nothing</p>
+                                            <p>
+                                              <span>Overall Score: 0</span>
+                                            </p>
                                           ) : (
                                             <AverageScore
                                               collateFeedback={collateFeedback}
@@ -483,7 +505,29 @@ const VideoRating = () => {
                                               css.toggleVideosContainer
                                             }
                                           >
-                                            {videoCounter + 1 <
+                                            <FeedbackTray
+                                              adminFeedbackRating={
+                                                adminFeedbackRating
+                                              }
+                                              setAdminFeedbackRating={
+                                                setAdminFeedbackRating
+                                              }
+                                              videoCounter={videoCounter}
+                                              setVideoCounter={setVideoCounter}
+                                              collateFeedback={collateFeedback}
+                                              setCollateFeedback={
+                                                setCollateFeedback
+                                              }
+                                              videoUrl={videoUrl}
+                                              rateVideoAlert={rateVideoAlert}
+                                              setRateVideoAlert={
+                                                setRateVideoAlert
+                                              }
+                                              setAdminFeedbackComment={
+                                                setAdminFeedbackComment
+                                              }
+                                            />
+                                            {/* {videoCounter + 1 <
                                               videoApplicationData.length && (
                                               <button
                                                 onClick={() => {
@@ -514,7 +558,7 @@ const VideoRating = () => {
                                               >
                                                 Next Video
                                               </button>
-                                            )}
+                                            )} */}
                                           </div>
                                         </div>
                                       </div>
@@ -549,19 +593,6 @@ const VideoRating = () => {
                                 </button>
                               )}
                             </div>
-
-                            <FeedbackTray
-                              adminFeedbackRating={adminFeedbackRating}
-                              setAdminFeedbackRating={setAdminFeedbackRating}
-                              videoCounter={videoCounter}
-                              setVideoCounter={setVideoCounter}
-                              collateFeedback={collateFeedback}
-                              setCollateFeedback={setCollateFeedback}
-                              videoUrl={videoUrl}
-                              rateVideoAlert={rateVideoAlert}
-                              setRateVideoAlert={setRateVideoAlert}
-                              setAdminFeedbackComment={setAdminFeedbackComment}
-                            />
                           </>
                         );
                       } else {
