@@ -2,6 +2,8 @@ import React, { useState, useEffect, useReducer } from "react";
 import FeedbackTray from "../FeedbackTray";
 import DashboardBanner from "../DashboardBanner";
 import { api } from "../../config";
+import UserName from "../UserName";
+
 import css from "./VideoRating.module.css";
 // TODO
 
@@ -99,11 +101,22 @@ const VideoRating = props => {
     const response = await data.json();
     console.log(response);
   };
-
-  const getAllUsers = async () => {
-    const data = await fetch(`${api.users}`);
+  const updatePassStage = async () => {
+    const data = await fetch(
+      `${api.applications}/admin-video-descion-update-many`,
+      {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify({
+          ratingsData: [...acceptedVideosData, ...rejectedVideosData]
+        })
+      }
+    );
     const response = await data.json();
-    setAllUsers(response.result);
+    console.log(response);
   };
 
   const getUserInfo = data => {
@@ -129,6 +142,12 @@ const VideoRating = props => {
     return `${matchedUser.firstName} ${matchedUser.lastName}`;
   };
 
+  const getAllUsers = async () => {
+    const data = await fetch(`${api.users}`);
+
+    const response = await data.json();
+    setAllUsers(response.result);
+  };
   const viewApplication = (e, id) => {
     // if (showSpecificApplications[0] === applicationStatus) {
     //   return setShowSpecificApplications([]);
@@ -153,9 +172,7 @@ const VideoRating = props => {
         })
       }
     );
-    const response = await data.json();
-    console.log(response);
-  };
+
 
   useEffect(() => {
     const getVideos = async () => {
@@ -454,6 +471,9 @@ const VideoRating = props => {
                       ) {
                         return (
                           <>
+                            {/* <UserName uid={firebaseUid} /> */}
+                            <p>{firebaseUid}</p>
+
                             {userInfo &&
                               userInfo.map(({ result: user }, userIndex) => {
                                 if (applicantIndex === userIndex) {

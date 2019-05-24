@@ -11,8 +11,6 @@ import firebase from "firebase";
 import { api } from "../../config";
 import ThankYou from "../ThankYou";
 
-console.log("API", api);
-
 const App = () => {
   const [uid, setUid] = useState("");
 
