@@ -1,46 +1,70 @@
 .navContainer {
-  display: flex;
-  justify-content: center;
-
-  background-color: #0834ac;
-  width: 6%;
+  position: absolute;
+  top: 0;
+  left: 0;
   height: 100vh;
+  width: 6%;
+  background-color: #0834ac;
 }
 .iconsContainer {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  height: 100vh;
+  text-align: center;
 }
 .homeIcon,
-.calendarIcon,
-.glassesIcon,
-.infoIcon,
-.scheduleUploadIcon {
-  height: 40px;
-  width: 40px;
+.formsIcon,
+.videosIcon,
+.resourcesIcon {
+  height: 60px;
+  width: 60px;
+  padding: 10px;
 }
-.homeContainer:hover {
-  background-color: #00249a;
 
-  border-left: white solid 2px;
+.homeIconContainer,
+.formsIconContainer,
+.videosIconContainer,
+.resourcesIconContainer {
+  position: relative;
 }
-.calendarContainer:hover {
-  background-color: #00249a;
-
-  border-left: white solid 2px;
+.homeIconContainer:before,
+.formsIconContainer:before,
+.videosIconContainer:before,
+.resourcesIconContainer:before {
+  content: "Home";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(92, 19, 206, 0.92);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: scale(0);
+  transition: transform 200ms ease-in-out;
 }
-.glassesContainer:hover {
-  background-color: #00249a;
 
-  border-left: white solid 2px;
+.homeIconContainer:hover:before,
+.formsIconContainer:hover:before,
+.videosIconContainer:hover:before,
+.resourcesIconContainer:hover:before {
+  transform: scale(1);
+  cursor: pointer;
 }
-.infoContainer:hover {
-  background-color: #00249a;
 
-  border-left: white solid 2px;
+a {
+  cursor: pointer;
 }
-.scheduleUploadIcon:hover {
-  background-color: #00249a;
 
-  border-left: white solid 2px;
+.formsIconContainer:before {
+  content: "Forms";
+}
+.videosIconContainer:before {
+  content: "Videos";
+}
+.resourcesIconContainer:before {
+  content: "Resources";
 }

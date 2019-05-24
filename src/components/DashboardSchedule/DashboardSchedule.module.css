@@ -1,10 +1,6 @@
 .dashboardScheduleContainer {
   display: inline-block;
-
-  position: absolute;
-  left: 6%;
-  bottom: 45%;
-  width: 94%;
+  width: 100%;
   height: 40%;
   background-image: linear-gradient(to bottom right, #04c7d9, #5f04cf);
   opacity: 0.9;

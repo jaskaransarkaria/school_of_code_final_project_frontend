@@ -1,5 +1,5 @@
 .commentContainer {
-  width: 400px;
+  width: 35 0px;
   text-align: center;
   position: relative;
 }
@@ -29,6 +29,7 @@
   position: absolute;
   bottom: 0;
   right: 0;
+  width: 50px;
   margin: 0 15px;
   padding: 5px;
   border-radius: 5px;

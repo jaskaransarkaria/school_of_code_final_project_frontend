@@ -25,7 +25,7 @@ const FeedbackCard = ({
     <>
       <div
         className={
-          !rateVideoAlert ? css.ratingsContainer : css.ratingsContainerAlert
+          ratingValue === 0 ? css.ratingsContainer : css.commentsContainer
         }
       >
         <div>

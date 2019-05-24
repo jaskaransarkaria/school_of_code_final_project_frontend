@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import AdminScheduleTimes from "../AdminScheduleTimes";
+import DashboardBanner from "../DashboardBanner";
 import css from "../AdminUploadSchedule/AdminUploadSchedule.module.css";
 import moment from "moment";
 import { api } from "../../config";
@@ -144,169 +145,173 @@ const AdminUploadSchedule = props => {
     ]);
   };
   return (
-    <div className={css.formContainer}>
-      <form>
-        <fieldset>
-          <legend>Session Information:</legend>
-          <div>
-            Date:{" "}
-            <input
-              style={{ width: "100%", height: "30px" }}
-              aria-label="Session date"
-              id="sessionDate"
-              type="text"
-              value={selectedDate}
-              onChange={e => {
-                e.preventDefault();
-                setSelectedDate(e.target.value);
-              }}
-            />
-          </div>
-          {daysSchedule.map((_, ind) => {
-            return (
-              <>
-                <br />
-                <AdminScheduleTimes
-                  props={(ind, newTime) => handleSessionTime(ind, newTime)}
-                  index={ind}
-                  startValue={daysSchedule[ind].sessionTimes}
-                />
-                <input
-                  type="text"
-                  name="sessionTitle"
-                  placeholder="Session title"
-                  onChange={event =>
-                    setDaysSchedule([
-                      ...daysSchedule.slice(0, ind),
-                      {
-                        ...daysSchedule[ind],
-                        contentTitle: event.target.value
-                      },
-                      ...daysSchedule.slice(ind + 1)
-                    ])
-                  }
-                />
-                <br />
-                <br />
+    <>
+      <DashboardBanner title={"Form Applications"} />
+      <div className={css.formContainer}>
+        <form>
+          <fieldset>
+            <legend>Session Information:</legend>
+            <div>
+              Date:{" "}
+              <input
+                style={{ width: "100%", height: "30px" }}
+                aria-label="Session date"
+                id="sessionDate"
+                type="text"
+                value={selectedDate}
+                onChange={e => {
+                  e.preventDefault();
+                  setSelectedDate(e.target.value);
+                }}
+              />
+            </div>
+            {daysSchedule.map((_, ind) => {
+              return (
                 <>
-                  Learning Objectives: <br />
-                  <textarea
-                    style={{ width: "100%", height: "60px" }}
-                    name="Learning Objectives"
-                    placeholder="Learning Objectives"
+                  <br />
+                  <AdminScheduleTimes
+                    props={(ind, newTime) => handleSessionTime(ind, newTime)}
+                    index={ind}
+                    startValue={daysSchedule[ind].sessionTimes}
+                  />
+                  <input
+                    type="text"
+                    name="sessionTitle"
+                    placeholder="Session title"
                     onChange={event =>
                       setDaysSchedule([
                         ...daysSchedule.slice(0, ind),
                         {
                           ...daysSchedule[ind],
-                          learningObjectives: event.target.value
+                          contentTitle: event.target.value
                         },
                         ...daysSchedule.slice(ind + 1)
                       ])
                     }
                   />
-                </>
-                <br />
-                <br />
-                <input type="file" id="fileUpload" multiple />
-                <br />
-                {daysSchedule[ind].contentURL.length > 0 ? (
-                  daysSchedule[ind].contentURL.map((_, contentIndex) =>
-                    contentIndex + 1 === daysSchedule[ind].contentURL.length ? (
-                      <>
-                        <br />
-                        <label htmlFor="contentUrlInput">Useful Links:</label>
-                        <input
-                          id="contentUrlInput"
-                          autoFocus
-                          value={daysSchedule[ind].contentURL[contentIndex]}
-                          type="text"
-                          onChange={event =>
-                            addContentURLField(
-                              ind,
-                              contentIndex,
-                              event.target.value
-                            )
-                          }
-                        />
-                        <button
-                          onClick={e => {
-                            e.preventDefault();
-                            addURL(ind);
-                          }}
-                        >
-                          +
-                        </button>
-                      </>
-                    ) : (
-                      <>
-                        <br />
-                        <label>Useful Links: </label>
-                        <input
-                          value={daysSchedule[ind].contentURL[contentIndex]}
-                          type="text"
-                          onChange={event =>
-                            addContentURLField(
-                              ind,
-                              contentIndex,
-                              event.target.value
-                            )
-                          }
-                        />
-                      </>
-                    )
-                  )
-                ) : (
+                  <br />
+                  <br />
                   <>
-                    <br />
-                    <label>Useful Links: </label>
-                    <input
-                      value={daysSchedule[ind].contentURL[0]}
-                      type="text"
+                    Learning Objectives: <br />
+                    <textarea
+                      style={{ width: "100%", height: "60px" }}
+                      name="Learning Objectives"
+                      placeholder="Learning Objectives"
                       onChange={event =>
-                        addContentURLField(ind, 0, event.target.value)
+                        setDaysSchedule([
+                          ...daysSchedule.slice(0, ind),
+                          {
+                            ...daysSchedule[ind],
+                            learningObjectives: event.target.value
+                          },
+                          ...daysSchedule.slice(ind + 1)
+                        ])
                       }
                     />
-                    <button
-                      onClick={e => {
-                        e.preventDefault();
-                        addURL(ind);
-                      }}
-                    >
-                      +
-                    </button>
                   </>
-                )}
-                <br />
-              </>
-            );
-          })}
+                  <br />
+                  <br />
+                  <input type="file" id="fileUpload" multiple />
+                  <br />
+                  {daysSchedule[ind].contentURL.length > 0 ? (
+                    daysSchedule[ind].contentURL.map((_, contentIndex) =>
+                      contentIndex + 1 ===
+                      daysSchedule[ind].contentURL.length ? (
+                        <>
+                          <br />
+                          <label htmlFor="contentUrlInput">Useful Links:</label>
+                          <input
+                            id="contentUrlInput"
+                            autoFocus
+                            value={daysSchedule[ind].contentURL[contentIndex]}
+                            type="text"
+                            onChange={event =>
+                              addContentURLField(
+                                ind,
+                                contentIndex,
+                                event.target.value
+                              )
+                            }
+                          />
+                          <button
+                            onClick={e => {
+                              e.preventDefault();
+                              addURL(ind);
+                            }}
+                          >
+                            +
+                          </button>
+                        </>
+                      ) : (
+                        <>
+                          <br />
+                          <label>Useful Links: </label>
+                          <input
+                            value={daysSchedule[ind].contentURL[contentIndex]}
+                            type="text"
+                            onChange={event =>
+                              addContentURLField(
+                                ind,
+                                contentIndex,
+                                event.target.value
+                              )
+                            }
+                          />
+                        </>
+                      )
+                    )
+                  ) : (
+                    <>
+                      <br />
+                      <label>Useful Links: </label>
+                      <input
+                        value={daysSchedule[ind].contentURL[0]}
+                        type="text"
+                        onChange={event =>
+                          addContentURLField(ind, 0, event.target.value)
+                        }
+                      />
+                      <button
+                        onClick={e => {
+                          e.preventDefault();
+                          addURL(ind);
+                        }}
+                      >
+                        +
+                      </button>
+                    </>
+                  )}
+                  <br />
+                </>
+              );
+            })}
 
-          <br />
-          <>
-            <button
-              onClick={e => {
-                e.preventDefault();
-                setDaysSchedule([
-                  ...daysSchedule.slice(),
-                  {
-                    sessionTimes: "09.00 - 10.00",
-                    contentTitle: "",
-                    contentURL: []
-                  }
-                ]);
-              }}
-            >
-              add row
-            </button>
-            <button onClick={event => formHandler(event)}>Submit</button>
-          </>
-        </fieldset>
-      </form>
-      <div onClick={goToHome} className={css.adminDashboardHome}>
-        <button> Admin Home</button>
+            <br />
+            <>
+              <button
+                onClick={e => {
+                  e.preventDefault();
+                  setDaysSchedule([
+                    ...daysSchedule.slice(),
+                    {
+                      sessionTimes: "09.00 - 10.00",
+                      contentTitle: "",
+                      contentURL: []
+                    }
+                  ]);
+                }}
+              >
+                add row
+              </button>
+              <button onClick={event => formHandler(event)}>Submit</button>
+            </>
+          </fieldset>
+        </form>
+        <div onClick={goToHome} className={css.adminDashboardHome}>
+          <button> Admin Home</button>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

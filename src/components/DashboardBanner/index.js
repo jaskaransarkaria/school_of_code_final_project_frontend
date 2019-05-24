@@ -3,7 +3,7 @@ import SOCImage from "../../Images/soc-logo.png";
 import css from "../DashboardBanner/DashboardBanner.module.css";
 import firebase from "firebase";
 
-function DashboardBanner() {
+function DashboardBanner({ title }) {
   const [displayName, setDisplayName] = useState("");
 
   useEffect(() => {
@@ -15,7 +15,7 @@ function DashboardBanner() {
   return (
     <>
       <div className={css.bannerContainer}>
-        <h1 className={css.bannerWelcomeText}>{`Welcome, ${displayName}`}</h1>
+        <h1 className={css.bannerWelcomeText}>{title}</h1>
         <img className={css.socLogo} src={SOCImage} alt="school of code logo" />
       </div>
     </>
