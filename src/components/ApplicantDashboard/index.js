@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import css from "../ApplicantDashboard/ApplicantDashboard.module.css";
-import socPlanet from "../../Images/SOCPlanet.png";
+import socPlanet from "../../Images/planet_soc.png";
 import { api } from "../../config";
 import firebase from "firebase";
-
 
 const ApplicantDashBoard = props => {
   const [userUid, setUserUid] = useState("");
@@ -128,7 +127,7 @@ const ApplicantDashBoard = props => {
             Stage {info.stage}{" "}
           </div>
           <div className={css.progressImgContainer}>
-            {/* <img src={socPlanet} alt="socPlanet icon" /> */}
+            <img src={socPlanet} alt="socPlanet icon" />
           </div>
           <div onClick={() => redirectTo(info.stage)} className={css.stepCard}>
             <h3> {info.title}</h3>
