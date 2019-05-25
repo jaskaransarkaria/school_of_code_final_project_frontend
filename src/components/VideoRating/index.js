@@ -85,6 +85,13 @@ const VideoRating = props => {
   };
 
   const postRatingsToServer = async () => {
+    console.log("current uid is not set", currentUid);
+    console.log(
+      "FROM POST RATINGS",
+      currentUid,
+      collateFeedback,
+      overallRating
+    );
     const data = await fetch(`${api.applications}/admin-video-descion`, {
       method: "post",
       headers: {
@@ -154,6 +161,7 @@ const VideoRating = props => {
     // } else if (e.type !== "click" && e.key !== "Enter") {
     //   return;
     // }
+    setCurrentUid(id);
     setShowSpecificApplication([id]);
     console.log("ShowSpecificApplications:", showSpecificApplication);
   };
