@@ -160,3 +160,27 @@ select::-ms-expand {
     margin-top: 0;
   }
 } */
+.instructionsContainer {
+  position: relative;
+  top: 10%;
+  font-size: 1.3em;
+  margin: 0;
+  margin-top: 20px;
+  margin-left: 20px;
+  padding: 0;
+}
+.instructionsContainer li {
+  margin-left: 20px;
+  margin-bottom: 10px;
+  list-style: circle;
+}
+
+.instructionsBox {
+  text-decoration: underline;
+  font-weight: bold;
+  font-size: 1.8em;
+  position: relative;
+  top: 10%;
+  display: flex;
+  justify-content: center;
+}

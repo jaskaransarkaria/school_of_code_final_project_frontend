@@ -101,12 +101,6 @@ select::-ms-expand {
   text-align: justify;
   word-wrap: break-word;
 }
-.instructionsContainer {
-  float: left;
-
-  position: absolute;
-  top: 40%;
-}
 
 .nextButton {
   margin-left: 10px;
@@ -185,4 +179,28 @@ select:-webkit-autofill:focus {
   -webkit-text-fill-color: white;
   -webkit-box-shadow: 0 0 0px 1000px transparent inset;
   transition: background-color 5000s ease-in-out 0s;
+}
+.instructionsContainer {
+  position: relative;
+  top: 10%;
+  font-size: 1.3em;
+  margin: 0;
+  margin-top: 20px;
+  margin-left: 20px;
+  padding: 0;
+}
+.instructionsContainer li {
+  margin-left: 20px;
+  margin-bottom: 10px;
+  list-style: circle;
+}
+
+.instructionsBox {
+  text-decoration: underline;
+  font-weight: bold;
+  font-size: 1.8em;
+  position: relative;
+  top: 10%;
+  display: flex;
+  justify-content: center;
 }

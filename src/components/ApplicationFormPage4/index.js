@@ -55,31 +55,16 @@ const FormPart4 = ({
                 alt="School of code logo"
               />
             </div>
-            <div className={css.instructionsContainer}>
-              <h2 className={css.instructionsText}>Instructions</h2>
-              <br />
-              <p className={css.instructionsParagraph}>
-                Please fill out steps 1-5 of the application form so we can get
-                to know more about you. Once you have submitted the information
-                you will receive an email which will notify you if you have
-                successfully made it to the next stage. You will then be able to
-                log back in which will take you to the video interview stage.
-              </p>
-            </div>
-            {/* <div className={css.questionBoxContainer}>
-              <div className={css.selectdiv}>
-                <label>
-                  <select>
-                    <option selected>-- Questions --</option>
-                    <option>Step 1 of 5</option>
-                    <option>Step 2 of 5</option>
-                    <option>Step 3 of 5</option>
-                    <option>Step 4 of 5</option>
-                    <option>Step 5 of 5</option>
-                  </select>
-                </label>
-              </div>
-            </div> */}
+            <div className={css.instructionsBox}>Instructions</div>
+            <ol className={css.instructionsContainer}>
+              <li>Please fill out the form</li>
+              <li>There are 5 sections in total which need completed</li>
+
+              <li>
+                You will be sent an email notifying if you have made it to the
+                next stage
+              </li>
+            </ol>
           </div>
           <div className={css.rightContainer}>
             <h1 className={css.applicationFormText}>Application Form</h1>
