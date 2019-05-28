@@ -48,7 +48,7 @@ const FeedbackCard = ({
             <div className={css.ratingTitleContainer}>
               <div className={css.containerTitle}>
                 <p className={css.title}> Leave Comment </p>
-                <p className={css.rating}> Rating: {ratingValue * 2}</p>
+                <p className={css.rating}> Rating: {ratingValue}</p>
               </div>
               <CommentBox
                 title={item.title}

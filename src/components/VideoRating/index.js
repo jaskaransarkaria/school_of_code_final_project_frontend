@@ -166,7 +166,6 @@ const VideoRating = props => {
       : setShowSpecificApplication([id]);
 
     setCurrentUid(id);
-    setShowSpecificApplication([id]);
     console.log("ShowSpecificApplications:", showSpecificApplication);
   };
 
