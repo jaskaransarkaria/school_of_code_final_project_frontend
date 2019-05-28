@@ -215,3 +215,19 @@ select::-ms-expand {
 .thanksMessage {
   text-transform: uppercase;
 }
+.signOutButton {
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 20px;
+  cursor: pointer;
+
+  bottom: 0;
+  width: 50%;
+  color: white;
+  padding: 10px;
+  border-style: none;
+  background-color: #11cf84;
+}
