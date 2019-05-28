@@ -21,7 +21,6 @@ firebase.initializeApp({
   apiKey: api.firebase_key,
   authDomain: api.firebase_auth_domain
 });
-console.log("APIKEY:", api.firebase_key);
 const allContent = [
   {
     date: "30/04/2019",
@@ -172,10 +171,11 @@ const allContent = [
   }
 ];
 export const Store = createContext([allContent, () => {}]);
+export const UserUidContext = createContext(null);
 
 function App() {
   const [fullScheduleData, setFullScheduleData] = useState(allContent);
-  const [state, setState] = useState("test");
+  const [userUid, setUserUid] = useState(null);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
@@ -183,6 +183,7 @@ function App() {
       // if they need to register push them to the applicant dashboard page
       let newFirebaseUid = user.uid;
       async function isUserRegistered(user) {
+        setUserUid({ uid: user.uid, displayName: user.displayName });
         console.log("in async post", newFirebaseUid);
         const response = await fetch(`${api.users}`, {
           method: "post",
@@ -198,7 +199,9 @@ function App() {
         console.log(data.result);
         if (data.result === null) {
           // send them to the register page
+          // because the have shown that their uid doesn't exist in the database
         } else {
+          // there uid does exist in the database
           // set user signed in to true
           // setSignedIn(
           //   !!user
@@ -211,36 +214,37 @@ function App() {
       }
 
       isUserRegistered(user);
-
-      console.log("user", user);
-      console.log("uid", user.uid);
     });
   }, []);
   return (
-    <Store.Provider value={[fullScheduleData, setFullScheduleData]}>
-      <Router>
-        <Route exact path="/" component={LoginPage} />
-        <Route path="/applicant-dashboard" component={ApplicantDashboardPage} />
-        <Route
-          path="/bootcamper-dashboard"
-          component={BootcamperDashboardPage}
-        />
-        <Route path="/admin-dashboard" component={AdminDashboardPage} />
-        <Route path="/upload-schedule" component={AdminUploadSchedulePage} />
-        <Route path="/schedule" component={SchedulePage} />
-        <Route path="/topics" component={TopicsPage} />
-        <Route path="/credits" component={CreditsPage} />
-        <Route
-          path="/admin-application-processing"
-          component={AdminApplicationProcessingPage}
-        />
-        <Route path="/application-video" component={ApplicantVideoPage} />
-        <Route path="/application-form" component={ApplicantFormPage} />
-        <Route path="/contract" component={ContractPage} />
-        <Route path="/thankyou" component={ThankYouPage} />
-        <Route path="/template" component={TemplatePage} />
-      </Router>
-    </Store.Provider>
+    <UserUidContext.Provider value={userUid}>
+      <Store.Provider value={[fullScheduleData, setFullScheduleData]}>
+        <Router>
+          <Route exact path="/" component={LoginPage} />
+          <Route
+            path="/applicant-dashboard"
+            component={ApplicantDashboardPage}
+          />
+          <Route
+            path="/bootcamper-dashboard"
+            component={BootcamperDashboardPage}
+          />
+          <Route path="/admin-dashboard" component={AdminDashboardPage} />
+          <Route path="/upload-schedule" component={AdminUploadSchedulePage} />
+          <Route path="/schedule" component={SchedulePage} />
+          <Route path="/topics" component={TopicsPage} />
+          <Route path="/credits" component={CreditsPage} />
+          <Route
+            path="/admin-application-processing"
+            component={AdminApplicationProcessingPage}
+          />
+          <Route path="/application-video" component={ApplicantVideoPage} />
+          <Route path="/application-form" component={ApplicantFormPage} />
+          <Route path="/template" component={TemplatePage} />
+        </Router>
+      </Store.Provider>
+    </UserUidContext.Provider>
+
   );
 }
 

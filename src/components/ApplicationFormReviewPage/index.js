@@ -9,6 +9,7 @@ const ReviewForm = ({ step, setStep, formValues, submitForm }) => {
   return (
     <>
       <div className={css.wrapper}>
+
         <div className={css.container}>
           <div className={css.leftContainer}>
             <div className={css.socImageContainer}>

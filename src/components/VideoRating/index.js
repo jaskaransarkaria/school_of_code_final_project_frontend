@@ -2,6 +2,8 @@ import React, { useState, useEffect, useReducer } from "react";
 import FeedbackTray from "../FeedbackTray";
 import DashboardBanner from "../DashboardBanner";
 import { api } from "../../config";
+import UserName from "../UserName";
+
 import css from "./VideoRating.module.css";
 // TODO
 
@@ -83,6 +85,13 @@ const VideoRating = props => {
   };
 
   const postRatingsToServer = async () => {
+    console.log("current uid is not set", currentUid);
+    console.log(
+      "FROM POST RATINGS",
+      currentUid,
+      collateFeedback,
+      overallRating
+    );
     const data = await fetch(`${api.applications}/admin-video-descion`, {
       method: "post",
       headers: {
@@ -99,11 +108,22 @@ const VideoRating = props => {
     const response = await data.json();
     console.log(response);
   };
-
-  const getAllUsers = async () => {
-    const data = await fetch(`${api.users}`);
+  const updatePassStage = async () => {
+    const data = await fetch(
+      `${api.applications}/admin-video-descion-update-many`,
+      {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify({
+          ratingsData: [...acceptedVideosData, ...rejectedVideosData]
+        })
+      }
+    );
     const response = await data.json();
-    setAllUsers(response.result);
+    console.log(response);
   };
 
   const getUserInfo = data => {
@@ -129,6 +149,12 @@ const VideoRating = props => {
     return `${matchedUser.firstName} ${matchedUser.lastName}`;
   };
 
+  const getAllUsers = async () => {
+    const data = await fetch(`${api.users}`);
+
+    const response = await data.json();
+    setAllUsers(response.result);
+  };
   const viewApplication = (e, id) => {
     // if (showSpecificApplications[0] === applicationStatus) {
     //   return setShowSpecificApplications([]);
@@ -138,25 +164,10 @@ const VideoRating = props => {
     showSpecificApplication
       ? setShowSpecificApplication(null)
       : setShowSpecificApplication([id]);
-    console.log("ShowSpecificApplications:", showSpecificApplication);
-  };
 
-  const updatePassStage = async () => {
-    const data = await fetch(
-      `${api.applications}/admin-video-descion-update-many`,
-      {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json"
-        },
-        body: JSON.stringify({
-          ratingsData: [...acceptedVideosData, ...rejectedVideosData]
-        })
-      }
-    );
-    const response = await data.json();
-    console.log(response);
+    setCurrentUid(id);
+    setShowSpecificApplication([id]);
+    console.log("ShowSpecificApplications:", showSpecificApplication);
   };
 
   useEffect(() => {
@@ -318,7 +329,9 @@ const VideoRating = props => {
                               ? css.applicationStatusButtonActive
                               : css.applicationStatusButton
                           }
-                          onClick={() => dispatch("pending")}
+                          onClick={() => {
+                            dispatch("pending");
+                          }}
                         >
                           <p> Pending Applications</p>
                           <p className={css.applicationsNumber}>
@@ -338,21 +351,26 @@ const VideoRating = props => {
                           }
                         >
                           {/* List all applicants, unless the search input is used  */}
-                          {pendingVideosData.map(applicant => {
-                            return (
-                              <>
-                                <button
-                                  className={css.applicant}
-                                  onClick={e =>
-                                    viewApplication(e, applicant.firebaseUid)
-                                  }
-                                  // onKeyUp={e => viewApplication(e, applicant.id)}
-                                >
-                                  {applicant.firebaseUid}
-                                </button>
-                              </>
-                            );
-                          })}
+                          {pendingVideosData.map(
+                            (applicant, pendingApplicationIndex) => {
+                              return (
+                                <>
+                                  <button
+                                    className={css.applicant}
+                                    onClick={e => {
+                                      viewApplication(e, applicant.firebaseUid);
+                                      setApplicantCounter(
+                                        pendingApplicationIndex
+                                      );
+                                    }}
+                                    // onKeyUp={e => viewApplication(e, applicant.id)}
+                                  >
+                                    {applicant.firebaseUid}
+                                  </button>
+                                </>
+                              );
+                            }
+                          )}
                         </ul>
                       </div>
                       <div>
@@ -456,6 +474,9 @@ const VideoRating = props => {
                       ) {
                         return (
                           <>
+                            {/* <UserName uid={firebaseUid} /> */}
+                            <p>{firebaseUid}</p>
+
                             {userInfo &&
                               userInfo.map(({ result: user }, userIndex) => {
                                 if (applicantIndex === userIndex) {
