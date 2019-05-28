@@ -551,7 +551,26 @@ const VideoRating = props => {
                                           </p>
                                           {collateFeedback.length === 0 ? (
                                             <p>
-                                              <span>Overall Score: 0</span>
+                                              <span>
+                                                Overall Rating:
+                                                <div
+                                                  className={
+                                                    css.ratingTitleContainer
+                                                  }
+                                                >
+                                                  <Rating
+                                                    initialRating={0}
+                                                    emptySymbol="fa fa-star-o fa-2x"
+                                                    fullSymbol="fa fa-star fa-2x"
+                                                    style={{
+                                                      color:
+                                                        "rgba(248, 180, 22, 1)"
+                                                    }}
+                                                    fractions={2}
+                                                    readonly
+                                                  />
+                                                </div>
+                                              </span>
                                             </p>
                                           ) : (
                                             <AverageScore
