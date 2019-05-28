@@ -23,13 +23,13 @@ class ApplicationLandingVideo extends Component {
               <li>There are 5 sections in total which need completed</li>
               <li>
                 <span style={{ fontWeight: "bold" }}>
-                  Process for recording each video :
+                  Process for recording each video:
                 </span>
                 <ol className={css.subVideoInstructions}>
                   <li className={css.startRecording}>Start Recording</li>
                   <li className={css.stopRecording}>Stop Recording</li>
                   <li className={css.playRecording}>
-                    Press play and re-record if needed
+                    Play to review and re-record if needed
                   </li>
                   <li className={css.submitRecording}>Submit the video</li>
                 </ol>
