@@ -19,10 +19,22 @@ class ApplicationLandingVideo extends Component {
             </div>
             <div className={css.instructionsBox}>Instructions</div>
             <ol className={css.instructionsContainer}>
-              <li>Please fill out the form</li>
+              <li>Please record and submit each of the 5 videos</li>
               <li>There are 5 sections in total which need completed</li>
-
               <li>
+                <span style={{ fontWeight: "bold" }}>
+                  Process for recording each video :
+                </span>
+                <ol className={css.subVideoInstructions}>
+                  <li className={css.startRecording}>Start Recording</li>
+                  <li className={css.stopRecording}>Stop Recording</li>
+                  <li className={css.playRecording}>
+                    Press play and re-record if needed
+                  </li>
+                  <li className={css.submitRecording}>Submit the video</li>
+                </ol>
+              </li>
+              <li style={{ marginTop: "20px" }}>
                 You will be sent an email notifying if you have made it to the
                 next stage
               </li>

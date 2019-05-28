@@ -1,11 +1,6 @@
 import React from "react";
 import css from "../ApplicationFormPage1/ApplicationFormPage1.module.css";
 import SocImage from "../../Images/soc-logo.png";
-import OneImage from "../../Images/one.svg";
-import TwoImage from "../../Images/two.svg";
-import ThreeImage from "../../Images/three-1.svg";
-import FourImage from "../../Images/four.svg";
-import FiveImage from "../../Images/five.svg";
 
 const FormPart1 = ({
   step,

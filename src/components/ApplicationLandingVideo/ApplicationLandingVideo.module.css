@@ -51,7 +51,8 @@ body {
 }
 .instructionsContainer li {
   margin-left: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
+  margin-top: 5px;
   list-style: circle;
 }
 
@@ -81,7 +82,59 @@ body {
   margin: 10px 0;
   float: left;
 }
+/* .subVideoInstructions li {
+  list-style: decimal;
+  list-style-image: url(../../Images/one.svg);
+} */
+.subVideoInstructions li {
+  list-style-type: none;
+}
 
+.subVideoInstructions .startRecording:before {
+  content: "";
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  background-size: 40px;
+  position: relative;
+  top: 20px;
+  background-image: url(../../Images/one.svg);
+  background-repeat: no-repeat;
+}
+.subVideoInstructions .stopRecording:before {
+  content: "";
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  background-size: 40px;
+  position: relative;
+  top: 20px;
+  background-image: url(../../Images/twoRed.svg);
+  background-repeat: no-repeat;
+}
+.subVideoInstructions .playRecording:before {
+  content: "";
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  background-size: 40px;
+  position: relative;
+  top: 20px;
+  background-image: url(../../Images/play-button.svg);
+  background-repeat: no-repeat;
+}
+.subVideoInstructions .submitRecording:before {
+  content: "";
+
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  background-size: 40px;
+  position: relative;
+  top: 20px;
+  background-image: url(../../Images/four.svg);
+  background-repeat: no-repeat;
+}
 /* LOGO MEDIA QUERY */
 /* @media only screen and (max-width: 1290px) {
   .socImage {
