@@ -92,7 +92,7 @@ const ApplicantDashBoard = props => {
     } else {
       stage = "You are at stage 1";
     }
-    return <h3> There are three stages. {stage} </h3>;
+    return <h3> Track your journey to becoming a Bootcamper. {stage} </h3>;
   };
 
   const Step = ({ passFirstStage, passSecondStage, passFinalStage }) => {
@@ -107,7 +107,12 @@ const ApplicantDashBoard = props => {
           (info.stage === 3 && passSecondStage === false) ? (
             <div className={css.stepNotAvailable}>
               <p>Stage {info.stage}</p>
-              <p>Not available yet</p>
+              <img
+                src="/lock_white.png"
+                alt="padlocked stage"
+                style={{ width: "40%" }}
+              />
+              <p>Locked</p>
             </div>
           ) : null}
 
@@ -115,7 +120,7 @@ const ApplicantDashBoard = props => {
           (info.stage === 2 && passSecondStage === true) ||
           (info.stage === 3 && passFinalStage === true) ? (
             <div className={css.stepPassed}>
-              <p>You passed Stage {info.stage}!</p>
+              <p>Congratulations! You passed Stage {info.stage}!</p>
             </div>
           ) : null}
           {/* <button onClick={() => changeStage(info)}> Pass </button> */}

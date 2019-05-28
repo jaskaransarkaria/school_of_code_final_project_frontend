@@ -3,6 +3,7 @@ import FeedbackTray from "../FeedbackTray";
 import DashboardBanner from "../DashboardBanner";
 import { api } from "../../config";
 import UserName from "../UserName";
+import Rating from "react-rating";
 
 import css from "./VideoRating.module.css";
 // TODO
@@ -47,16 +48,27 @@ const VideoRating = props => {
     let score;
 
     score =
-      (collateFeedback
+      collateFeedback
         .map(item => item.rating)
         .reduce((accumulator, currentValue) => accumulator + currentValue) /
-        collateFeedback.length /
-        10) *
-      100;
+      collateFeedback.length;
+    ///
+    //   10) *
+    // 100;
 
     return (
       <p>
-        <span>Overall Score: {score.toFixed(0)}%</span>
+        Overall Rating:
+        <div className={css.ratingTitleContainer}>
+          <Rating
+            initialRating={score / 2}
+            emptySymbol="fa fa-star-o fa-2x"
+            fullSymbol="fa fa-star fa-2x"
+            style={{ color: "rgba(248, 180, 22, 1)" }}
+            fractions={2}
+            readonly
+          />
+        </div>
       </p>
     );
   };
@@ -110,21 +122,19 @@ const VideoRating = props => {
     console.log(response);
   };
   const updatePassStage = async () => {
-    const data = await fetch(
-      `${api.applications}/admin-video-descion-update-many`,
-      {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json"
-        },
-        body: JSON.stringify({
-          ratingsData: [...acceptedVideosData, ...rejectedVideosData]
-        })
-      }
-    );
-    const response = await data.json();
-    console.log(response);
+    console.log("UPDAATATATATATAT PASS STAGE UPDATE PRE");
+    return await fetch(`${api.applications}/admin-video-descion-update-many`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        ratingsData: [...acceptedVideosData, ...rejectedVideosData]
+      })
+    });
+    // const response = await data.json();
+    // console.log("PASS STAGE UPDATE", response); // there is no response sent
   };
 
   const getUserInfo = data => {
@@ -661,13 +671,29 @@ const VideoRating = props => {
               }
             }
           )}
-          <input
+          <div className={css.ratingTitleContainer}>
+            <p> Pass Threshold </p>
+            <Rating
+              initialRating={sliderPassValue / 2}
+              emptySymbol="fa fa-star-o fa-2x"
+              fullSymbol="fa fa-star fa-2x"
+              style={{ color: "rgba(82, 226, 80, 1)" }}
+              fractions={2}
+              onClick={value => {
+                // setRatingValue(value);
+                // setAdminFeedbackRating(value * 2);
+                setSliderPassValue(value * 2);
+                updatePassStage();
+              }}
+            />
+          </div>
+          {/* <input
             type="text"
             onChange={e => {
               setSliderPassValue(e.target.value);
             }}
           />
-          <button onClick={() => updatePassStage()}>Confirm Accepted!</button>
+          <button onClick={() => updatePassStage()}>Confirm Accepted!</button> */}
         </div>
       </div>
     </>
