@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { api } from "../../config";
+import css from "./Topics.module.css";
 
 const Topics = ({ topicKey }) => {
   const [topicData, setTopicData] = useState({});
@@ -21,7 +22,7 @@ const Topics = ({ topicKey }) => {
         topicData.entries.map(item => (
           <>
             <br />
-            {item.subTopic && <p>{item.subTopic}</p>}
+            {item.subTopic && <p classname={css.topic}>{item.subTopic}</p>}
             <a href={item.url}>{item.url}</a>
           </>
         ))}
