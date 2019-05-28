@@ -20,13 +20,13 @@ class DashboardSchedule extends Component {
         <div className={css.wrapper}>
           <div className={css.dashboardScheduleContainer}>
             <div className={css.daysOfWeekContainer}>
-              <div className={css.mondayBox} onClick={this.handleClick}>
+              <div className={css.dayBox} onClick={this.handleClick}>
                 Monday
               </div>
-              <div className={css.tuesdayBox}>Tuesday</div>
-              <div className={css.wednesdayBox}>Wednseday</div>
-              <div className={css.thursdayBox}>Thursday</div>
-              <div className={css.fridayBox}>Friday</div>
+              <div className={css.dayBox}>Tuesday</div>
+              <div className={css.dayBox}>Wednseday</div>
+              <div className={css.dayBox}>Thursday</div>
+              <div className={css.dayBox}>Friday</div>
             </div>
 
             <DashboardScheduleCarousel />
