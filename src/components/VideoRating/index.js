@@ -25,12 +25,13 @@ const VideoRating = props => {
   const [videoCounter, setVideoCounter] = useState(0);
   const [applicantCounter, setApplicantCounter] = useState(0);
   const [sliderPassValue, setSliderPassValue] = useState(6);
-  const [showSpecificApplication, setShowSpecificApplication] = useState(null);
+  const [showSpecificApplication, setShowSpecificApplication] = useState();
   const [rateVideoAlert, setRateVideoAlert] = useState(false);
   const [showApplicants, dispatch] = useReducer((state, action, e) => {
     switch (action) {
       case "pending":
         return state === "pending" ? null : "pending";
+
       case "accepted":
         return state === "accepted" ? null : "accepted";
       case "rejected":
@@ -161,11 +162,8 @@ const VideoRating = props => {
     // } else if (e.type !== "click" && e.key !== "Enter") {
     //   return;
     // }
-    showSpecificApplication
-      ? setShowSpecificApplication(null)
-      : setShowSpecificApplication([id]);
-
     setCurrentUid(id);
+    setShowSpecificApplication([id]);
     console.log("ShowSpecificApplications:", showSpecificApplication);
   };
 
@@ -425,11 +423,6 @@ const VideoRating = props => {
                                     viewApplication(e, applicant.firebaseUid)
                                   }
                                   uid={applicant.firebaseUid}
-                                  // onClick={() =>
-                                  //     setApplicantCounter(
-                                  //     pendingApplicationIndex
-                                  //   )
-                                  // }
                                 />
                                 {/* <button
                                   className={css.applicant}
@@ -487,11 +480,6 @@ const VideoRating = props => {
                                     viewApplication(e, applicant.firebaseUid)
                                   }
                                   uid={applicant.firebaseUid}
-                                  // onClick={() =>
-                                  //     setApplicantCounter(
-                                  //     pendingApplicationIndex
-                                  //   )
-                                  // }
                                 />
                                 {/* <button
                                   className={css.applicant}
@@ -562,17 +550,16 @@ const VideoRating = props => {
                                           )}
                                         </div>
                                         <div className={css.videosContainer}>
-                                          <div className={css.emptyContainer} />
+                                          <video
+                                            className={css.videoPlayer}
+                                            controls
+                                            src={videoUrl}
+                                          />
                                           <div
-                                            className={css.videoPlayerContainer}
+                                            className={
+                                              css.toggleVideosContainer
+                                            }
                                           >
-                                            <video
-                                              className={css.videoPlayer}
-                                              controls
-                                              src={videoUrl}
-                                            />
-                                          </div>
-                                          <div className={css.emptyContainer}>
                                             <FeedbackTray
                                               adminFeedbackRating={
                                                 adminFeedbackRating
@@ -595,17 +582,7 @@ const VideoRating = props => {
                                                 setAdminFeedbackComment
                                               }
                                             />
-                                            <button
-                                              className={
-                                                css.toggleVideosContainer
-                                              }
-                                              onClick={viewApplication}
-                                            >
-                                              Cancel
-                                            </button>
-                                          </div>
-
-                                          {/* {videoCounter + 1 <
+                                            {/* {videoCounter + 1 <
                                               videoApplicationData.length && (
                                               <button
                                                 onClick={() => {
@@ -637,6 +614,7 @@ const VideoRating = props => {
                                                 Next Video
                                               </button>
                                             )} */}
+                                          </div>
                                         </div>
                                       </div>
                                     </>

@@ -85,7 +85,7 @@ const ApplicantDashBoard = props => {
     let stage = "";
     if (userUid.passInterviewStage === true) {
       stage = "You passed them all! ";
-    } else if (userUid.passVideoStage) {
+    } else if (userUid.passVideoStage === true) {
       stage = "You are at stage 3";
     } else if (userUid.passFormStage === true) {
       stage = "You are at stage 2";
@@ -99,8 +99,11 @@ const ApplicantDashBoard = props => {
     return stepInfo.map((info, idx) => {
       return (
         <div className={info.className}>
-          {(info.stage === 2 && passFirstStage !== true) ||
-          (info.stage === 3 && passFirstStage !== true) ||
+          {(info.stage === 2 && passFirstStage === false) ||
+          (info.stage === 2 && passFirstStage === "pending") ||
+          (info.stage === 3 && passFirstStage === false) ||
+          (info.stage === 3 && passFirstStage === "pending") ||
+          (info.stage === 3 && passSecondStage === "pending") ||
           (info.stage === 3 && passSecondStage === false) ? (
             <div className={css.stepNotAvailable}>
               <p>Stage {info.stage}</p>
