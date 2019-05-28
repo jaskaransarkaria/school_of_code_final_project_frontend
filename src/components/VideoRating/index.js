@@ -354,7 +354,22 @@ const VideoRating = props => {
                             (applicant, pendingApplicationIndex) => {
                               return (
                                 <>
-                                  <button
+                                  <UserName
+                                    classToBe={css.applicant}
+                                    click={e =>
+                                      viewApplication(e, applicant.firebaseUid)
+                                    }
+                                    key={e =>
+                                      viewApplication(e, applicant.firebaseUid)
+                                    }
+                                    uid={applicant.firebaseUid}
+                                    onClick={() =>
+                                      setApplicantCounter(
+                                        pendingApplicationIndex
+                                      )
+                                    }
+                                  />
+                                  {/* <button
                                     className={css.applicant}
                                     onClick={e => {
                                       viewApplication(e, applicant.firebaseUid);
@@ -365,7 +380,7 @@ const VideoRating = props => {
                                     // onKeyUp={e => viewApplication(e, applicant.id)}
                                   >
                                     {applicant.firebaseUid}
-                                  </button>
+                                  </button> */}
                                 </>
                               );
                             }
@@ -401,13 +416,28 @@ const VideoRating = props => {
                           {acceptedVideosData.map(applicant => {
                             return (
                               <>
-                                <button
+                                <UserName
+                                  classToBe={css.applicant}
+                                  click={e =>
+                                    viewApplication(e, applicant.firebaseUid)
+                                  }
+                                  key={e =>
+                                    viewApplication(e, applicant.firebaseUid)
+                                  }
+                                  uid={applicant.firebaseUid}
+                                  // onClick={() =>
+                                  //     setApplicantCounter(
+                                  //     pendingApplicationIndex
+                                  //   )
+                                  // }
+                                />
+                                {/* <button
                                   className={css.applicant}
                                   // onClick={e => viewApplication(e, applicant.id)}
                                   // onKeyUp={e => viewApplication(e, applicant.id)}
                                 >
                                   {applicant.firebaseUid}
-                                </button>
+                                </button> */}
                               </>
                             );
                           })}
@@ -448,13 +478,28 @@ const VideoRating = props => {
                           {rejectedVideosData.map(applicant => {
                             return (
                               <>
-                                <button
+                                <UserName
+                                  classToBe={css.applicant}
+                                  click={e =>
+                                    viewApplication(e, applicant.firebaseUid)
+                                  }
+                                  key={e =>
+                                    viewApplication(e, applicant.firebaseUid)
+                                  }
+                                  uid={applicant.firebaseUid}
+                                  // onClick={() =>
+                                  //     setApplicantCounter(
+                                  //     pendingApplicationIndex
+                                  //   )
+                                  // }
+                                />
+                                {/* <button
                                   className={css.applicant}
                                   // onClick={e => viewApplication(e, applicant.id)}
                                   // onKeyUp={e => viewApplication(e, applicant.id)}
                                 >
                                   {applicant.firebaseUid}
-                                </button>
+                                </button> */}
                               </>
                             );
                           })}

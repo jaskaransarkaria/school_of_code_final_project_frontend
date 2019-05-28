@@ -398,17 +398,20 @@ function FormRating(props) {
             />
             {/* List all applicants, unless the search input is used  */}
             {pendingApplicants.map(applicant => {
+              console.log("PENDING APPLICATION FORMS", pendingApplicants);
               return (
                 showSpecificApplications.length === 0 &&
                 applicationStatus === "pending" &&
                 applicant.passFormStage === applicationStatus &&
                 input === "" && (
-                  <UserName
-                    classToBe={css.applicant}
-                    click={e => viewApplications(e, applicant.firebaseUid)}
-                    key={e => viewApplications(e, applicant.firebaseUid)}
-                    uid={applicant.firebaseUid}
-                  />
+                  <>
+                    <UserName
+                      classToBe={css.applicant}
+                      click={e => viewApplications(e, applicant.firebaseUid)}
+                      key={e => viewApplications(e, applicant.firebaseUid)}
+                      uid={applicant.firebaseUid}
+                    />
+                  </>
                 )
               );
             })}
@@ -417,12 +420,14 @@ function FormRating(props) {
               return (
                 input !== "" &&
                 applicant.passFormStage === "pending" && (
-                  <UserName
-                    classToBe={css.applicant}
-                    click={e => viewApplications(e, applicant.firebaseUid)}
-                    key={e => viewApplications(e, applicant.firebaseUid)}
-                    uid={applicant.firebaseUid}
-                  />
+                  <>
+                    <UserName
+                      classToBe={css.applicant}
+                      click={e => viewApplications(e, applicant.firebaseUid)}
+                      key={e => viewApplications(e, applicant.firebaseUid)}
+                      uid={applicant.firebaseUid}
+                    />
+                  </>
                 )
               );
             })}
@@ -469,12 +474,14 @@ function FormRating(props) {
                 applicationStatus === true &&
                 applicant.passFormStage === applicationStatus &&
                 input === "" && (
-                  <UserName
-                    classToBe={css.applicant}
-                    click={e => viewApplications(e, applicant.firebaseUid)}
-                    key={e => viewApplications(e, applicant.firebaseUid)}
-                    uid={applicant.firebaseUid}
-                  />
+                  <>
+                    <UserName
+                      classToBe={css.applicant}
+                      click={e => viewApplications(e, applicant.firebaseUid)}
+                      key={e => viewApplications(e, applicant.firebaseUid)}
+                      uid={applicant.firebaseUid}
+                    />
+                  </>
                 )
               );
             })}
@@ -483,12 +490,14 @@ function FormRating(props) {
               return (
                 input !== "" &&
                 applicant.passFormStage === true && (
-                  <UserName
-                    classToBe={css.applicant}
-                    click={e => viewApplications(e, applicant.firebaseUid)}
-                    key={e => viewApplications(e, applicant.firebaseUid)}
-                    uid={applicant.firebaseUid}
-                  />
+                  <>
+                    <UserName
+                      classToBe={css.applicant}
+                      click={e => viewApplications(e, applicant.firebaseUid)}
+                      key={e => viewApplications(e, applicant.firebaseUid)}
+                      uid={applicant.firebaseUid}
+                    />
+                  </>
                 )
               );
             })}
@@ -535,12 +544,14 @@ function FormRating(props) {
                 applicationStatus === false &&
                 applicant.passFormStage === applicationStatus &&
                 input === "" && (
-                  <UserName
-                    classToBe={css.applicant}
-                    click={e => viewApplications(e, applicant.firebaseUid)}
-                    key={e => viewApplications(e, applicant.firebaseUid)}
-                    uid={applicant.firebaseUid}
-                  />
+                  <>
+                    <UserName
+                      classToBe={css.applicant}
+                      click={e => viewApplications(e, applicant.firebaseUid)}
+                      key={e => viewApplications(e, applicant.firebaseUid)}
+                      uid={applicant.firebaseUid}
+                    />
+                  </>
                 )
               );
             })}
@@ -549,12 +560,14 @@ function FormRating(props) {
               return (
                 input !== "" &&
                 applicant.passFormStage === false && (
-                  <UserName
-                    classToBe={css.applicant}
-                    click={e => viewApplications(e, applicant.firebaseUid)}
-                    key={e => viewApplications(e, applicant.firebaseUid)}
-                    uid={applicant.firebaseUid}
-                  />
+                  <>
+                    <UserName
+                      classToBe={css.applicant}
+                      click={e => viewApplications(e, applicant.firebaseUid)}
+                      key={e => viewApplications(e, applicant.firebaseUid)}
+                      uid={applicant.firebaseUid}
+                    />
+                  </>
                 )
               );
             })}
