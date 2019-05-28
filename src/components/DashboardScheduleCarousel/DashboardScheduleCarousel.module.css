@@ -1,10 +1,18 @@
+.carouselContainer {
+  display: flex;
+  position: relative;
+  justify-content: space-around;
+  align-items: center;
+  padding: 35px 10px;
+}
+
 .leftArrow {
   display: inline-flex;
   position: relative;
   transform: rotate(180deg);
-
   height: 40px;
   width: 40px;
+  transition: 300ms ease-in-out;
 }
 .leftArrow:hover {
   cursor: pointer;
@@ -15,6 +23,9 @@
   position: relative;
   height: 40px;
   width: 40px;
+  transition: 300ms ease-in-out;
+  position: relative;
+  z-index: 1;
 }
 .rightArrow:hover {
   cursor: pointer;
@@ -41,7 +52,7 @@
 .itemOne:hover,
 .itemTwo:hover,
 .itemThree:hover {
-  transform: scale(1.1);
+  box-shadow: 3px 3px 5px;
   cursor: pointer;
 }
 
@@ -50,15 +61,6 @@
   font-size: 20px;
 }
 
-.content {
-}
-
-.carouselContainer {
-  display: flex;
-  position: relative;
-  justify-content: space-around;
-  padding: 35px 10px;
-}
 .lessonTitle {
   margin: 0px;
   text-align: center;

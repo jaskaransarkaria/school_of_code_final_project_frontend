@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ArrowImage from "../../Images/right-arrow.svg";
+import ArrowImage from "../../Images/arrow.png";
 import css from "../DashboardScheduleCarousel/DashboardScheduleCarousel.module.css";
 class DashboardScheduleCarousel extends Component {
   constructor(props) {
@@ -10,7 +10,6 @@ class DashboardScheduleCarousel extends Component {
   }
 
   nextButton = () => {
-    debugger;
     this.setState(state => {
       return state.counter <= 2
         ? { counter: state.counter + 1 }

@@ -25,7 +25,7 @@ const VideoRating = props => {
   const [videoCounter, setVideoCounter] = useState(0);
   const [applicantCounter, setApplicantCounter] = useState(0);
   const [sliderPassValue, setSliderPassValue] = useState(6);
-  const [showSpecificApplication, setShowSpecificApplication] = useState();
+  const [showSpecificApplication, setShowSpecificApplication] = useState(null);
   const [rateVideoAlert, setRateVideoAlert] = useState(false);
   const [showApplicants, dispatch] = useReducer((state, action, e) => {
     switch (action) {
@@ -161,6 +161,10 @@ const VideoRating = props => {
     // } else if (e.type !== "click" && e.key !== "Enter") {
     //   return;
     // }
+    showSpecificApplication
+      ? setShowSpecificApplication(null)
+      : setShowSpecificApplication([id]);
+
     setCurrentUid(id);
     setShowSpecificApplication([id]);
     console.log("ShowSpecificApplications:", showSpecificApplication);
@@ -514,16 +518,17 @@ const VideoRating = props => {
                                           )}
                                         </div>
                                         <div className={css.videosContainer}>
-                                          <video
-                                            className={css.videoPlayer}
-                                            controls
-                                            src={videoUrl}
-                                          />
+                                          <div className={css.emptyContainer} />
                                           <div
-                                            className={
-                                              css.toggleVideosContainer
-                                            }
+                                            className={css.videoPlayerContainer}
                                           >
+                                            <video
+                                              className={css.videoPlayer}
+                                              controls
+                                              src={videoUrl}
+                                            />
+                                          </div>
+                                          <div className={css.emptyContainer}>
                                             <FeedbackTray
                                               adminFeedbackRating={
                                                 adminFeedbackRating
@@ -546,7 +551,17 @@ const VideoRating = props => {
                                                 setAdminFeedbackComment
                                               }
                                             />
-                                            {/* {videoCounter + 1 <
+                                            <button
+                                              className={
+                                                css.toggleVideosContainer
+                                              }
+                                              onClick={viewApplication}
+                                            >
+                                              Cancel
+                                            </button>
+                                          </div>
+
+                                          {/* {videoCounter + 1 <
                                               videoApplicationData.length && (
                                               <button
                                                 onClick={() => {
@@ -578,7 +593,6 @@ const VideoRating = props => {
                                                 Next Video
                                               </button>
                                             )} */}
-                                          </div>
                                         </div>
                                       </div>
                                     </>
