@@ -63,15 +63,15 @@ class ThankYou extends Component {
                   You will receive an email within the next few weeks
                 </p>
 
-                <div>
+                <>
                   {this.renderRedirect()}
                   <button
                     className={css.signOutButton}
                     onClick={this.setRedirect}
                   >
-                    Logout
+                    Bootcamper Dashboard
                   </button>
-                </div>
+                </>
               </div>
             </div>
           </div>
