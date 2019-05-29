@@ -31,7 +31,6 @@ const ApplicantDashBoard = props => {
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
-      console.log(user.uid);
       setUserUid(user.uid);
     });
   }, []);
@@ -99,7 +98,9 @@ const ApplicantDashBoard = props => {
     return stepInfo.map((info, idx) => {
       return (
         <div className={info.className}>
-          {(info.stage === 2 && passFirstStage === false) ||
+          {(info.stage === 2 && Object.entries(users).length === 0) ||
+          (info.stage === 3 && Object.entries(users).length === 0) ||
+          (info.stage === 2 && passFirstStage === false) ||
           (info.stage === 2 && passFirstStage === "pending") ||
           (info.stage === 3 && passFirstStage === false) ||
           (info.stage === 3 && passFirstStage === "pending") ||

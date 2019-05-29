@@ -59,16 +59,14 @@ const VideoRating = props => {
     return (
       <p>
         Overall Rating:
-        <div className={css.ratingTitleContainer}>
-          <Rating
-            initialRating={score / 2}
-            emptySymbol="fa fa-star-o fa-2x"
-            fullSymbol="fa fa-star fa-2x"
-            style={{ color: "rgba(248, 180, 22, 1)" }}
-            fractions={2}
-            readonly
-          />
-        </div>
+        <Rating
+          initialRating={score / 2}
+          emptySymbol="fa fa-star-o fa-2x"
+          fullSymbol="fa fa-star fa-2x"
+          style={{ color: "rgba(248, 180, 22, 1)" }}
+          fractions={2}
+          readonly
+        />
       </p>
     );
   };
@@ -300,6 +298,22 @@ const VideoRating = props => {
       )}
       <DashboardBanner title={"Video Applications"} />
       <div id="userTray" className={css.userTray}>
+        <div className={css.ratingTitleContainer}>
+          <p> Pass Threshold </p>
+          <Rating
+            initialRating={sliderPassValue / 2}
+            emptySymbol="fa fa-star-o fa-2x"
+            fullSymbol="fa fa-star fa-2x"
+            style={{ color: "rgba(82, 226, 80, 1)" }}
+            fractions={2}
+            onClick={value => {
+              // setRatingValue(value);
+              // setAdminFeedbackRating(value * 2);
+              setSliderPassValue(value * 2);
+              updatePassStage();
+            }}
+          />
+        </div>
         <div id="videoTray">
           {pendingVideosData.map(
             ({ videoApplicationData, firebaseUid }, applicantIndex) => {
@@ -308,7 +322,7 @@ const VideoRating = props => {
               if (applicantIndex === applicantCounter) {
                 return (
                   <>
-                    <div>
+                    {/* <div>
                       <button
                         onClick={() => {
                           if (applicantIndex > 0) {
@@ -326,7 +340,7 @@ const VideoRating = props => {
                       >
                         next Video
                       </button>
-                    </div>
+                    </div> */}
 
                     <div className={css.applicationStatusContainer}>
                       <div>
@@ -371,7 +385,7 @@ const VideoRating = props => {
                                       viewApplication(e, applicant.firebaseUid)
                                     }
                                     uid={applicant.firebaseUid}
-                                    onClick={() =>
+                                    applicantCounter={() =>
                                       setApplicantCounter(
                                         pendingApplicationIndex
                                       )
@@ -516,7 +530,6 @@ const VideoRating = props => {
                       ) {
                         return (
                           <>
-                            {/* <UserName uid={firebaseUid} /> */}
                             <p>{firebaseUid}</p>
 
                             {userInfo &&
@@ -690,22 +703,7 @@ const VideoRating = props => {
               }
             }
           )}
-          <div className={css.ratingTitleContainer}>
-            <p> Pass Threshold </p>
-            <Rating
-              initialRating={sliderPassValue / 2}
-              emptySymbol="fa fa-star-o fa-2x"
-              fullSymbol="fa fa-star fa-2x"
-              style={{ color: "rgba(82, 226, 80, 1)" }}
-              fractions={2}
-              onClick={value => {
-                // setRatingValue(value);
-                // setAdminFeedbackRating(value * 2);
-                setSliderPassValue(value * 2);
-                updatePassStage();
-              }}
-            />
-          </div>
+
           {/* <input
             type="text"
             onChange={e => {

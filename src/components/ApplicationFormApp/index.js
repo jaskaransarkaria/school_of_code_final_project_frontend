@@ -60,9 +60,8 @@ const App = () => {
     })
       .then(res => res.json())
       .then(data => console.log("DATA", data))
+      .then(setStep(step + 1))
       .catch(err => console.log(err));
-
-    setStep(step + 1);
   };
 
   const renderSwitch = () => {

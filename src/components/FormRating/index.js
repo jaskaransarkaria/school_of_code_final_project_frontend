@@ -306,11 +306,11 @@ function FormRating(props) {
   };
 
   const viewApplications = (e, id) => {
-    if (showSpecificApplications[0] === applicationStatus) {
-      return setShowSpecificApplications([]);
-    } else if (e.type !== "click" && e.key !== "Enter") {
-      return;
-    }
+    // if (showSpecificApplications[0] === applicationStatus) {
+    //   return setShowSpecificApplications([]);
+    // } else if (e.type !== "click" && e.key !== "Enter") {
+    //   return;
+    // }
     setShowSpecificApplications([applicationStatus, id]);
     setInput("");
   };
