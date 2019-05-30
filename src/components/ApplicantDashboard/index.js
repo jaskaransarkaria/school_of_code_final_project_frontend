@@ -31,7 +31,11 @@ const ApplicantDashBoard = props => {
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
-      setUserUid(user.uid);
+      if (user === null) {
+        return;
+      } else {
+        setUserUid(user.uid);
+      }
     });
   }, []);
 

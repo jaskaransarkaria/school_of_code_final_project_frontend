@@ -8,7 +8,11 @@ function DashboardBanner({ title }) {
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
-      setDisplayName(user.displayName);
+      if (user === null) {
+        return;
+      } else {
+        setDisplayName(user.displayName);
+      }
     });
   }, []);
 
