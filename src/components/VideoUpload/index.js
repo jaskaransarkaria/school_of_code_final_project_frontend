@@ -6,7 +6,8 @@ import shortid from "shortid";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import firebase from "firebase";
 import { api } from "../../config";
-
+import { Redirect } from "react-router-dom";
+import ThankYouPage from "../../pages/ThankYouPage";
 AWS.config.update({
   region: "eu-west-1",
   accessKeyId: `${aws.key_id}`,
@@ -52,6 +53,7 @@ const VideoUpload = () => {
   const [allVideoLinks, setAllVideoLinks] = useState([]);
   const [autoplay, setAutoplay] = useState(true);
   const [chunks, setChunks] = useState([]);
+  const [redirect, setRedirect] = useState(false);
   const video = useRef(null);
 
   useEffect(
@@ -98,6 +100,7 @@ const VideoUpload = () => {
       .then(res => res.json())
       .then(data => console.log(data))
       .then(_ => console.log("sent", allVideoLinks))
+      .then(setRedirect(true))
       .catch(err => console.error(err));
   };
 
@@ -333,7 +336,7 @@ const VideoUpload = () => {
               </div>
             );
           })}
-      {!showVideo && (
+      {!showVideo && !redirect && (
         <button
           onClick={() => {
             uploadVideosToDb();
@@ -343,6 +346,7 @@ const VideoUpload = () => {
           confirm upload
         </button>
       )}
+      {redirect && <Redirect to="thankyou" />}
     </div>
   );
 };

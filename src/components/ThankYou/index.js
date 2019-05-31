@@ -1,10 +1,28 @@
-import React from "react";
+import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import SocImage from "../../Images/soc-logo.png";
 import css from "../ThankYou/ThankYou.module.css";
 import TickImage from "../../Images/checked.svg";
-function ThankYou() {
-  return (
-    <div>
+class ThankYou extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      redirect: false
+    };
+  }
+
+  setRedirect = () => {
+    this.setState({
+      redirect: true
+    });
+  };
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to="/applicant-dashboard" />;
+    }
+  };
+  render() {
+    return (
       <>
         <div className={css.wrapper}>
           <div className={css.container}>
@@ -28,20 +46,6 @@ function ThankYou() {
                   the next stage.
                 </p>
               </div>
-              {/* <div className={css.questionBoxContainer}>
-              <div className={css.selectdiv}>
-                <label>
-                  <select>
-                    <option selected>-- Questions --</option>
-                    <option>Step 1 of 5</option>
-                    <option>Step 2 of 5</option>
-                    <option>Step 3 of 5</option>
-                    <option>Step 4 of 5</option>
-                    <option>Step 5 of 5</option>
-                  </select>
-                </label>
-              </div>
-            </div> */}
             </div>
 
             <div className={css.rightContainer}>
@@ -58,12 +62,22 @@ function ThankYou() {
                 <p className={css.subTextOne}>
                   You will receive an email within the next few weeks
                 </p>
+
+                <>
+                  {this.renderRedirect()}
+                  <button
+                    className={css.signOutButton}
+                    onClick={this.setRedirect}
+                  >
+                    Bootcamper Dashboard
+                  </button>
+                </>
               </div>
             </div>
           </div>
         </div>
       </>
-    </div>
-  );
+    );
+  }
 }
 export default ThankYou;

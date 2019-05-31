@@ -23,10 +23,12 @@ class DashboardSchedule extends Component {
               <div className={css.dayBox} onClick={this.handleClick}>
                 Monday
               </div>
+
               <div className={css.dayBox}>Tuesday</div>
               <div className={css.dayBox}>Wednesday</div>
               <div className={css.dayBox}>Thursday</div>
               <div className={css.dayBox}>Friday</div>
+
             </div>
 
             <DashboardScheduleCarousel />
