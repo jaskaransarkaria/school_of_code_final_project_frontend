@@ -408,7 +408,6 @@ function FormRating(props) {
                   <>
                     <UserName
                       classToBe={css.applicant}
-
                       dispatch={() => dispatch("pending")}
                       click={e => viewApplications(e, applicant.firebaseUid)}
                       key={e => viewApplications(e, applicant.firebaseUid)}
@@ -426,8 +425,7 @@ function FormRating(props) {
                   <>
                     <UserName
                       classToBe={css.applicant}
-
-                      dispatch={dispatch("pending")}
+                      dispatch={() => dispatch("pending")}
                       click={e => viewApplications(e, applicant.firebaseUid)}
                       key={e => viewApplications(e, applicant.firebaseUid)}
                       uid={applicant.firebaseUid}
@@ -485,6 +483,7 @@ function FormRating(props) {
                       click={e => viewApplications(e, applicant.firebaseUid)}
                       key={e => viewApplications(e, applicant.firebaseUid)}
                       uid={applicant.firebaseUid}
+                      dispatch={() => dispatch(true)}
                     />
                   </>
                 )
@@ -501,6 +500,7 @@ function FormRating(props) {
                       click={e => viewApplications(e, applicant.firebaseUid)}
                       key={e => viewApplications(e, applicant.firebaseUid)}
                       uid={applicant.firebaseUid}
+                      dispatch={() => dispatch(true)}
                     />
                   </>
                 )
@@ -555,6 +555,7 @@ function FormRating(props) {
                       click={e => viewApplications(e, applicant.firebaseUid)}
                       key={e => viewApplications(e, applicant.firebaseUid)}
                       uid={applicant.firebaseUid}
+                      dispatch={() => dispatch(false)}
                     />
                   </>
                 )
@@ -571,6 +572,7 @@ function FormRating(props) {
                       click={e => viewApplications(e, applicant.firebaseUid)}
                       key={e => viewApplications(e, applicant.firebaseUid)}
                       uid={applicant.firebaseUid}
+                      dispatch={() => dispatch(false)}
                     />
                   </>
                 )
