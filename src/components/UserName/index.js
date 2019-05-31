@@ -10,7 +10,8 @@ const UserName = ({
   applicantCounter = "noData",
   setAdminFeedbackRating,
   setVideoCounter,
-  setCollateFeedback
+  setCollateFeedback,
+  applicantFormPage
 }) => {
   const [allUsers, setAllUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState("");
@@ -48,9 +49,11 @@ const UserName = ({
     <button
       className={classToBe}
       onClick={() => {
-        setAdminFeedbackRating(0);
-        setVideoCounter(0);
-        setCollateFeedback([]);
+        if (!applicantFormPage) {
+          setAdminFeedbackRating(0);
+          setVideoCounter(0);
+          setCollateFeedback([]);
+        }
         click();
         dispatch();
         if (applicantCounter === "noData") {
