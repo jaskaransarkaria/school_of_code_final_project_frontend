@@ -413,7 +413,6 @@ function FormRating(props) {
                       click={e => viewApplications(e, applicant.firebaseUid)}
                       key={e => viewApplications(e, applicant.firebaseUid)}
                       uid={applicant.firebaseUid}
-                      applicantFormPage={true}
                     />
                   </>
                 )
@@ -431,7 +430,6 @@ function FormRating(props) {
                       click={e => viewApplications(e, applicant.firebaseUid)}
                       key={e => viewApplications(e, applicant.firebaseUid)}
                       uid={applicant.firebaseUid}
-                      applicantFormPage={true}
                     />
                   </>
                 )
@@ -487,7 +485,6 @@ function FormRating(props) {
                       key={e => viewApplications(e, applicant.firebaseUid)}
                       uid={applicant.firebaseUid}
                       dispatch={() => dispatch(true)}
-                      applicantFormPage={true}
                     />
                   </>
                 )
@@ -505,7 +502,6 @@ function FormRating(props) {
                       key={e => viewApplications(e, applicant.firebaseUid)}
                       uid={applicant.firebaseUid}
                       dispatch={() => dispatch(true)}
-                      applicantFormPage={true}
                     />
                   </>
                 )
@@ -561,7 +557,6 @@ function FormRating(props) {
                       key={e => viewApplications(e, applicant.firebaseUid)}
                       uid={applicant.firebaseUid}
                       dispatch={() => dispatch(false)}
-                      applicantFormPage={true}
                     />
                   </>
                 )
@@ -579,7 +574,6 @@ function FormRating(props) {
                       key={e => viewApplications(e, applicant.firebaseUid)}
                       uid={applicant.firebaseUid}
                       dispatch={() => dispatch(false)}
-                      applicantFormPage={true}
                     />
                   </>
                 )
