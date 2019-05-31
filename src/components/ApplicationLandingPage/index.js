@@ -31,11 +31,11 @@ class ApplicationLandingPage extends Component {
         </div>
 
         <div className={css.launchIntoTech}>
-          <span style={{ borderBottom: "7px solid #5F04CF" }}>Launch</span>
+          <span>Launch</span>
           <br />
-          <span style={{ borderBottom: "7px solid #5F04CF" }}>Into</span>
+          <span>Into</span>
           <br />
-          <span style={{ borderBottom: "7px solid #5F04CF" }}>Tech</span>
+          <span>Tech</span>
         </div>
         <img src={PlanetImage} className={css.planetImage} alt="planet" />
         <img src={MoonImage} className={css.moonImage} alt="moon" />
