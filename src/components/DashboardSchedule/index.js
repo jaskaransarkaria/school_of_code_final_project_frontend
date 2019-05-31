@@ -24,7 +24,7 @@ class DashboardSchedule extends Component {
                 Monday
               </div>
               <div className={css.tuesdayBox}>Tuesday</div>
-              <div className={css.wednesdayBox}>Wednseday</div>
+              <div className={css.wednesdayBox}>Wednesday</div>
               <div className={css.thursdayBox}>Thursday</div>
               <div className={css.fridayBox}>Friday</div>
             </div>
