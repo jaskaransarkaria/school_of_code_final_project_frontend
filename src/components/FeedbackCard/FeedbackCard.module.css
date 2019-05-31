@@ -6,11 +6,6 @@
   border-radius: 5px;
   box-shadow: 1px 1px 5px;
   padding: 5px;
-  position: absolute;
-  justify-content: center;
-  right: 10%;
-  top: 50%;
-  transform: translateY(-50%);
 }
 .commentsContainer {
   display: flex;

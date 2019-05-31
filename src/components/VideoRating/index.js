@@ -472,8 +472,6 @@ const VideoRating = props => {
                       ) {
                         return (
                           <>
-                            {/* <p>{firebaseUid}</p> */}
-
                             {userInfo &&
                               userInfo.map(({ result: user }, userIndex) => {
                                 if (applicantIndex === userIndex) {
@@ -496,47 +494,14 @@ const VideoRating = props => {
                                             <p>Background: {user.background}</p>
                                           </div>
                                         </div>
-                                        <div className={css.videoStageTitle}>
-                                          <p>
-                                            {" "}
-                                            <span>
-                                              {" "}
-                                              {
-                                                videoQuestions[videoCounter]
-                                                  .question
-                                              }
-                                            </span>{" "}
-                                          </p>
-                                          {collateFeedback.length === 0 ? (
-                                            <p>
-                                              <span>
-                                                Overall Rating:
-                                                <div
-                                                  className={
-                                                    css.ratingTitleContainer
-                                                  }
-                                                >
-                                                  <Rating
-                                                    initialRating={0}
-                                                    emptySymbol="fa fa-star-o fa-2x"
-                                                    fullSymbol="fa fa-star fa-2x"
-                                                    style={{
-                                                      color:
-                                                        "rgba(248, 180, 22, 1)"
-                                                    }}
-                                                    fractions={2}
-                                                    readonly
-                                                  />
-                                                </div>
-                                              </span>
-                                            </p>
-                                          ) : (
-                                            <AverageScore
-                                              collateFeedback={collateFeedback}
-                                            />
-                                          )}
-                                        </div>
                                         <div className={css.videosContainer}>
+                                          <h2>
+                                            Question {videoCounter + 1}:{" "}
+                                            {
+                                              videoQuestions[videoCounter]
+                                                .question
+                                            }
+                                          </h2>
                                           <video
                                             className={css.videoPlayer}
                                             controls
@@ -547,37 +512,73 @@ const VideoRating = props => {
                                               css.toggleVideosContainer
                                             }
                                           >
-                                            <FeedbackTray
-                                              adminFeedbackRating={
-                                                adminFeedbackRating
-                                              }
-                                              setAdminFeedbackRating={
-                                                setAdminFeedbackRating
-                                              }
-                                              videoCounter={videoCounter}
-                                              setVideoCounter={setVideoCounter}
-                                              collateFeedback={collateFeedback}
-                                              setCollateFeedback={
-                                                setCollateFeedback
-                                              }
-                                              videoUrl={videoUrl}
-                                              rateVideoAlert={rateVideoAlert}
-                                              setRateVideoAlert={
-                                                setRateVideoAlert
-                                              }
-                                              setAdminFeedbackComment={
-                                                setAdminFeedbackComment
-                                              }
-                                            />
                                             <button
                                               className={
                                                 css.toggleVideosContainer
                                               }
-                                              onClick={viewApplication}
+                                              onClick={() => {
+                                                viewApplication();
+                                                setAdminFeedbackRating(0);
+                                                setVideoCounter(0);
+                                                setCollateFeedback([]);
+                                              }}
                                             >
                                               Cancel
                                             </button>
                                           </div>
+                                        </div>
+                                        <div
+                                          className={css.rateVideosContainer}
+                                        >
+                                          <h2>Rating</h2>
+                                          {collateFeedback.length === 0 ? (
+                                            <div className={css.overallRating}>
+                                              <h3>Overall Rating</h3>
+                                              <div
+                                                className={
+                                                  css.ratingTitleContainer
+                                                }
+                                              >
+                                                <Rating
+                                                  initialRating={0}
+                                                  emptySymbol="fa fa-star-o fa-2x"
+                                                  fullSymbol="fa fa-star fa-2x"
+                                                  style={{
+                                                    color:
+                                                      "rgba(248, 180, 22, 1)"
+                                                  }}
+                                                  fractions={2}
+                                                  readonly
+                                                />
+                                              </div>
+                                            </div>
+                                          ) : (
+                                            <AverageScore
+                                              collateFeedback={collateFeedback}
+                                            />
+                                          )}
+                                          <FeedbackTray
+                                            adminFeedbackRating={
+                                              adminFeedbackRating
+                                            }
+                                            setAdminFeedbackRating={
+                                              setAdminFeedbackRating
+                                            }
+                                            videoCounter={videoCounter}
+                                            setVideoCounter={setVideoCounter}
+                                            collateFeedback={collateFeedback}
+                                            setCollateFeedback={
+                                              setCollateFeedback
+                                            }
+                                            videoUrl={videoUrl}
+                                            rateVideoAlert={rateVideoAlert}
+                                            setRateVideoAlert={
+                                              setRateVideoAlert
+                                            }
+                                            setAdminFeedbackComment={
+                                              setAdminFeedbackComment
+                                            }
+                                          />
                                         </div>
                                       </div>
                                     </>
