@@ -31,8 +31,11 @@ const ApplicantDashBoard = props => {
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
-      console.log(user.uid);
-      setUserUid(user.uid);
+      if (user === null) {
+        return;
+      } else {
+        setUserUid(user.uid);
+      }
     });
   }, []);
 
@@ -85,26 +88,36 @@ const ApplicantDashBoard = props => {
     let stage = "";
     if (userUid.passInterviewStage === true) {
       stage = "You passed them all! ";
-    } else if (userUid.passVideoStage) {
+    } else if (userUid.passVideoStage === true) {
       stage = "You are at stage 3";
     } else if (userUid.passFormStage === true) {
       stage = "You are at stage 2";
     } else {
       stage = "You are at stage 1";
     }
-    return <h3> There are three stages. {stage} </h3>;
+    return <h3> Track your journey to becoming a Bootcamper. {stage} </h3>;
   };
 
   const Step = ({ passFirstStage, passSecondStage, passFinalStage }) => {
     return stepInfo.map((info, idx) => {
       return (
         <div className={info.className}>
-          {(info.stage === 2 && passFirstStage !== true) ||
-          (info.stage === 3 && passFirstStage !== true) ||
+          {(info.stage === 2 && Object.entries(users).length === 0) ||
+          (info.stage === 3 && Object.entries(users).length === 0) ||
+          (info.stage === 2 && passFirstStage === false) ||
+          (info.stage === 2 && passFirstStage === "pending") ||
+          (info.stage === 3 && passFirstStage === false) ||
+          (info.stage === 3 && passFirstStage === "pending") ||
+          (info.stage === 3 && passSecondStage === "pending") ||
           (info.stage === 3 && passSecondStage === false) ? (
             <div className={css.stepNotAvailable}>
               <p>Stage {info.stage}</p>
-              <p>Not available yet</p>
+              <img
+                src="/lock_white.png"
+                alt="padlocked stage"
+                style={{ width: "40%" }}
+              />
+              <p>Locked</p>
             </div>
           ) : null}
 
@@ -112,7 +125,7 @@ const ApplicantDashBoard = props => {
           (info.stage === 2 && passSecondStage === true) ||
           (info.stage === 3 && passFinalStage === true) ? (
             <div className={css.stepPassed}>
-              <p>You passed Stage {info.stage}!</p>
+              <p>Congratulations! You passed Stage {info.stage}!</p>
             </div>
           ) : null}
           {/* <button onClick={() => changeStage(info)}> Pass </button> */}

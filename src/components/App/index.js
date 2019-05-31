@@ -181,39 +181,43 @@ function App() {
     firebase.auth().onAuthStateChanged(user => {
       // logic which dictates if they are already in the db or they need to register
       // if they need to register push them to the applicant dashboard page
-      let newFirebaseUid = user.uid;
-      async function isUserRegistered(user) {
-        setUserUid({ uid: user.uid, displayName: user.displayName });
-        console.log("in async post", newFirebaseUid);
-        const response = await fetch(`${api.users}`, {
-          method: "post",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json"
-          },
-          body: JSON.stringify({
-            firebaseUid: newFirebaseUid
-          })
-        });
-        const data = await response.json();
-        console.log(data.result);
-        if (data.result === null) {
-          // send them to the register page
-          // because the have shown that their uid doesn't exist in the database
-        } else {
-          // there uid does exist in the database
-          // set user signed in to true
-          // setSignedIn(
-          //   !!user
-          //   // not not meaning if the user is an object it will revert to true
-          //   // and if it isn't an object it will revert to false
-          // );
-          console.log(user.uid);
-          console.log("user exists in db");
+      if (user === null) {
+        return;
+      } else {
+        let newFirebaseUid = user.uid;
+        async function isUserRegistered(user) {
+          setUserUid({ uid: user.uid, displayName: user.displayName });
+          console.log("in async post", newFirebaseUid);
+          const response = await fetch(`${api.users}`, {
+            method: "post",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json"
+            },
+            body: JSON.stringify({
+              firebaseUid: newFirebaseUid
+            })
+          });
+          const data = await response.json();
+          console.log(data.result);
+          if (data.result === null) {
+            // send them to the register page
+            // because the have shown that their uid doesn't exist in the database
+          } else {
+            // there uid does exist in the database
+            // set user signed in to true
+            // setSignedIn(
+            //   !!user
+            //   // not not meaning if the user is an object it will revert to true
+            //   // and if it isn't an object it will revert to false
+            // );
+            console.log(user.uid);
+            console.log("user exists in db");
+          }
         }
-      }
 
-      isUserRegistered(user);
+        isUserRegistered(user);
+      }
     });
   }, []);
   return (

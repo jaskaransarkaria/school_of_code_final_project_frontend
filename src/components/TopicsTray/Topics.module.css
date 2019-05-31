@@ -1,6 +1,23 @@
-.topicContainer {
+.topicsContainer {
   display: flex;
-  flex-direction: column;
-  width: 20%;
-  height: 20%;
+  justify-content: center;
+}
+
+.topicsTitle {
+  padding: 10px;
+}
+
+.topicsContainer button {
+  flex: 0 1 15%;
+  font-size: 16px;
+  margin: 0 10px;
+  height: 100px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px;
+  transition: 200ms ease-in-out;
+}
+
+.topicsContainer button:hover {
+  cursor: pointer;
+  box-shadow: 3px 3px 5px;
 }

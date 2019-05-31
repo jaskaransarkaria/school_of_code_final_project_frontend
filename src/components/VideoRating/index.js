@@ -3,7 +3,7 @@ import FeedbackTray from "../FeedbackTray";
 import DashboardBanner from "../DashboardBanner";
 import { api } from "../../config";
 import UserName from "../UserName";
-
+import Rating from "react-rating";
 import css from "./VideoRating.module.css";
 // TODO
 
@@ -25,54 +25,58 @@ const VideoRating = props => {
   const [videoCounter, setVideoCounter] = useState(0);
   const [applicantCounter, setApplicantCounter] = useState(0);
   const [sliderPassValue, setSliderPassValue] = useState(6);
-  const [showSpecificApplication, setShowSpecificApplication] = useState();
+  const [showSpecificApplication, setShowSpecificApplication] = useState(null);
   const [rateVideoAlert, setRateVideoAlert] = useState(false);
   const [showApplicants, dispatch] = useReducer((state, action, e) => {
     switch (action) {
       case "pending":
         return state === "pending" ? null : "pending";
-      case "accepted":
-        return state === "accepted" ? null : "accepted";
-      case "rejected":
-        return state === "rejected" ? null : "rejected";
+
+      case true:
+        return state === true ? null : true;
+      case false:
+        return state === false ? null : false;
       default:
         return state;
     }
   }, null);
-
+  const videoQuestions = [
+    { question: "Tell us about yourself" },
+    { question: "Why do you want to learn to code?" },
+    { question: "What drives you?" },
+    { question: "Why do you want to join School of Code?" },
+    { question: "Explain something complex in simple terms" }
+  ];
   // GET in videos from APPLICATIONS for each applicant based on uid which have a status 'pending'
+
+  console.log("VIDEOQUESTIONS", videoQuestions[0].question);
 
   const AverageScore = () => {
     let score;
 
     score =
-      (collateFeedback
+      collateFeedback
         .map(item => item.rating)
         .reduce((accumulator, currentValue) => accumulator + currentValue) /
-        collateFeedback.length /
-        10) *
-      100;
+      collateFeedback.length;
+    ///
+    //   10) *
+    // 100;
 
     return (
       <p>
-        <span>Overall Score: {score.toFixed(0)}%</span>
+        Overall Rating:
+        <Rating
+          initialRating={score / 2}
+          emptySymbol="fa fa-star-o fa-2x"
+          fullSymbol="fa fa-star fa-2x"
+          style={{ color: "rgba(248, 180, 22, 1)" }}
+          fractions={2}
+          readonly
+        />
       </p>
     );
   };
-  // {
-  //   debugger;
-  //   let score = Object.keys(collateFeedback).reduce(function(
-  //     total,
-  //     current,
-  //     idx
-  //   ) {
-  //     const nextItem = collateFeedback[current];
-  //     console.log(nextItem[idx].rating);
-  //     return total + nextItem[idx].rating;
-  //   },
-  //   0);
-  //   return score;
-  // };
 
   const calculateOverallRating = () =>
     collateFeedback
@@ -106,24 +110,22 @@ const VideoRating = props => {
       })
     });
     const response = await data.json();
-    console.log(response);
+    console.log("post ratings to server response", response);
   };
   const updatePassStage = async () => {
-    const data = await fetch(
-      `${api.applications}/admin-video-descion-update-many`,
-      {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json"
-        },
-        body: JSON.stringify({
-          ratingsData: [...acceptedVideosData, ...rejectedVideosData]
-        })
-      }
-    );
-    const response = await data.json();
-    console.log(response);
+    console.log("UPDAATATATATATAT PASS STAGE UPDATE PRE");
+    return await fetch(`${api.applications}/admin-video-descion-update-many`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        ratingsData: [...acceptedVideosData, ...rejectedVideosData]
+      })
+    });
+    // const response = await data.json();
+    // console.log("PASS STAGE UPDATE", response); // there is no response sent
   };
 
   const getUserInfo = data => {
@@ -132,7 +134,6 @@ const VideoRating = props => {
     return fetch(`${api.users}/${firebaseUid}`)
       .then(res => res.json())
       .then(json => {
-        console.log("JSON response", json);
         return json;
       });
   };
@@ -151,7 +152,6 @@ const VideoRating = props => {
 
   const getAllUsers = async () => {
     const data = await fetch(`${api.users}`);
-
     const response = await data.json();
     setAllUsers(response.result);
   };
@@ -162,8 +162,9 @@ const VideoRating = props => {
     //   return;
     // }
     setCurrentUid(id);
-    setShowSpecificApplication([id]);
-    console.log("ShowSpecificApplications:", showSpecificApplication);
+    showSpecificApplication
+      ? setShowSpecificApplication(null)
+      : setShowSpecificApplication([id]);
   };
 
   useEffect(() => {
@@ -172,7 +173,6 @@ const VideoRating = props => {
         `${api.applications}/make-descion-videos/pending`
       );
       const data = await response.json();
-      console.log(data);
       console.log("applications/pending-videos", data.result);
       // map over this array on the back end and send all the relevant info back
       setPendingVideosData(data.result);
@@ -188,7 +188,6 @@ const VideoRating = props => {
         `${api.applications}/make-descion-videos/accepted`
       );
       const data = await response.json();
-      console.log(data);
       console.log("applications/pending-videos", data.result);
       // map over this array on the back end and send all the relevant info back
       setAcceptedVideosData(data.result);
@@ -202,7 +201,6 @@ const VideoRating = props => {
         `${api.applications}/make-descion-videos/rejected`
       );
       const data = await response.json();
-      console.log(data);
       console.log("applications/pending-videos", data.result);
       // map over this array on the back end and send all the relevant info back
       setRejectedVideosData(data.result);
@@ -233,8 +231,6 @@ const VideoRating = props => {
         user => !user.passVideoStage
       )
     );
-
-    //return updatePassStage();
   }, [sliderPassValue]);
 
   useEffect(() => {
@@ -289,34 +285,28 @@ const VideoRating = props => {
       )}
       <DashboardBanner title={"Video Applications"} />
       <div id="userTray" className={css.userTray}>
+        <div className={css.ratingTitleContainer}>
+          <p> Pass Threshold </p>
+          <Rating
+            initialRating={sliderPassValue / 2}
+            emptySymbol="fa fa-star-o fa-2x"
+            fullSymbol="fa fa-star fa-2x"
+            style={{ color: "rgba(82, 226, 80, 1)" }}
+            fractions={2}
+            onClick={value => {
+              // setRatingValue(value);
+              // setAdminFeedbackRating(value * 2);
+              setSliderPassValue(value * 2);
+              updatePassStage();
+            }}
+          />
+        </div>
         <div id="videoTray">
           {pendingVideosData.map(
             ({ videoApplicationData, firebaseUid }, applicantIndex) => {
-              console.log("VIDEOAPPLICATIONDATA:", videoApplicationData);
-              console.log("FIREBASE-ID:", firebaseUid);
               if (applicantIndex === applicantCounter) {
                 return (
                   <>
-                    <div>
-                      <button
-                        onClick={() => {
-                          if (applicantIndex > 0) {
-                            setApplicantCounter(applicantCounter - 1);
-                          }
-                        }}
-                      >
-                        previous Video
-                      </button>
-                      <button
-                        onClick={() => {
-                          if (applicantCounter + 1 < pendingVideosData.length)
-                            setApplicantCounter(applicantCounter + 1);
-                        }}
-                      >
-                        next Video
-                      </button>
-                    </div>
-
                     <div className={css.applicationStatusContainer}>
                       <div>
                         <button
@@ -351,18 +341,22 @@ const VideoRating = props => {
                             (applicant, pendingApplicationIndex) => {
                               return (
                                 <>
-                                  <button
-                                    className={css.applicant}
-                                    onClick={e => {
-                                      viewApplication(e, applicant.firebaseUid);
+                                  <UserName
+                                    classToBe={css.applicant}
+                                    click={e =>
+                                      viewApplication(e, applicant.firebaseUid)
+                                    }
+                                    key={e =>
+                                      viewApplication(e, applicant.firebaseUid)
+                                    }
+                                    uid={applicant.firebaseUid}
+                                    applicantCounter={() =>
                                       setApplicantCounter(
                                         pendingApplicationIndex
-                                      );
-                                    }}
-                                    // onKeyUp={e => viewApplication(e, applicant.id)}
-                                  >
-                                    {applicant.firebaseUid}
-                                  </button>
+                                      )
+                                    }
+                                    dispatch={() => dispatch("pending")}
+                                  />
                                 </>
                               );
                             }
@@ -372,11 +366,11 @@ const VideoRating = props => {
                       <div>
                         <button
                           className={
-                            showApplicants === "accepted"
+                            showApplicants === true
                               ? css.applicationStatusButtonActive
                               : css.applicationStatusButton
                           }
-                          onClick={() => dispatch("accepted")}
+                          onClick={() => dispatch(true)}
                         >
                           <p> Accepted Applications</p>
                           <p className={css.applicationsNumber}>
@@ -389,7 +383,7 @@ const VideoRating = props => {
                         </button>
                         <ul
                           className={
-                            showApplicants === "accepted"
+                            showApplicants === true
                               ? css.applicantListContainer
                               : css.hideApplicantListContainer
                           }
@@ -398,13 +392,17 @@ const VideoRating = props => {
                           {acceptedVideosData.map(applicant => {
                             return (
                               <>
-                                <button
-                                  className={css.applicant}
-                                  // onClick={e => viewApplication(e, applicant.id)}
-                                  // onKeyUp={e => viewApplication(e, applicant.id)}
-                                >
-                                  {applicant.firebaseUid}
-                                </button>
+                                <UserName
+                                  classToBe={css.applicant}
+                                  click={e =>
+                                    viewApplication(e, applicant.firebaseUid)
+                                  }
+                                  key={e =>
+                                    viewApplication(e, applicant.firebaseUid)
+                                  }
+                                  uid={applicant.firebaseUid}
+                                  dispatch={() => dispatch(true)}
+                                />
                               </>
                             );
                           })}
@@ -419,11 +417,11 @@ const VideoRating = props => {
                       <div>
                         <button
                           className={
-                            showApplicants === "rejected"
+                            showApplicants === false
                               ? css.applicationStatusButtonActive
                               : css.applicationStatusButton
                           }
-                          onClick={() => dispatch("rejected")}
+                          onClick={() => dispatch(false)}
                         >
                           <p> Rejected Applications</p>
                           <p className={css.applicationsNumber}>
@@ -436,7 +434,7 @@ const VideoRating = props => {
                         </button>
                         <ul
                           className={
-                            showApplicants === "rejected"
+                            showApplicants === false
                               ? css.applicantListContainer
                               : css.hideApplicantListContainer
                           }
@@ -445,13 +443,17 @@ const VideoRating = props => {
                           {rejectedVideosData.map(applicant => {
                             return (
                               <>
-                                <button
-                                  className={css.applicant}
-                                  // onClick={e => viewApplication(e, applicant.id)}
-                                  // onKeyUp={e => viewApplication(e, applicant.id)}
-                                >
-                                  {applicant.firebaseUid}
-                                </button>
+                                <UserName
+                                  classToBe={css.applicant}
+                                  click={e =>
+                                    viewApplication(e, applicant.firebaseUid)
+                                  }
+                                  key={e =>
+                                    viewApplication(e, applicant.firebaseUid)
+                                  }
+                                  uid={applicant.firebaseUid}
+                                  dispatch={() => dispatch(false)}
+                                />
                               </>
                             );
                           })}
@@ -470,7 +472,6 @@ const VideoRating = props => {
                       ) {
                         return (
                           <>
-                            {/* <UserName uid={firebaseUid} /> */}
                             <p>{firebaseUid}</p>
 
                             {userInfo &&
@@ -500,12 +501,34 @@ const VideoRating = props => {
                                             {" "}
                                             <span>
                                               {" "}
-                                              Video {videoCounter + 1}
+                                              {
+                                                videoQuestions[videoCounter]
+                                                  .question
+                                              }
                                             </span>{" "}
                                           </p>
                                           {collateFeedback.length === 0 ? (
                                             <p>
-                                              <span>Overall Score: 0</span>
+                                              <span>
+                                                Overall Rating:
+                                                <div
+                                                  className={
+                                                    css.ratingTitleContainer
+                                                  }
+                                                >
+                                                  <Rating
+                                                    initialRating={0}
+                                                    emptySymbol="fa fa-star-o fa-2x"
+                                                    fullSymbol="fa fa-star fa-2x"
+                                                    style={{
+                                                      color:
+                                                        "rgba(248, 180, 22, 1)"
+                                                    }}
+                                                    fractions={2}
+                                                    readonly
+                                                  />
+                                                </div>
+                                              </span>
                                             </p>
                                           ) : (
                                             <AverageScore
@@ -546,38 +569,14 @@ const VideoRating = props => {
                                                 setAdminFeedbackComment
                                               }
                                             />
-                                            {/* {videoCounter + 1 <
-                                              videoApplicationData.length && (
-                                              <button
-                                                onClick={() => {
-                                                  console.log(
-                                                    "ADMINFEEDBACKRATING:",
-                                                    adminFeedbackRating
-                                                  );
-                                                  if (
-                                                    rateVideoAlert === false
-                                                  ) {
-                                                    return setRateVideoAlert(
-                                                      true
-                                                    );
-                                                  }
-                                                  setCurrentUid(firebaseUid);
-                                                  setCollateFeedback([
-                                                    ...collateFeedback,
-                                                    {
-                                                      videoUrl: videoUrl,
-                                                      rating: adminFeedbackRating,
-                                                      comment: adminFeedbackComment
-                                                    }
-                                                  ]);
-                                                  setVideoCounter(
-                                                    videoCounter + 1
-                                                  );
-                                                }}
-                                              >
-                                                Next Video
-                                              </button>
-                                            )} */}
+                                            <button
+                                              className={
+                                                css.toggleVideosContainer
+                                              }
+                                              onClick={viewApplication}
+                                            >
+                                              Cancel
+                                            </button>
                                           </div>
                                         </div>
                                       </div>
@@ -625,13 +624,6 @@ const VideoRating = props => {
               }
             }
           )}
-          <input
-            type="text"
-            onChange={e => {
-              setSliderPassValue(e.target.value);
-            }}
-          />
-          <button onClick={() => updatePassStage()}>Confirm Accepted!</button>
         </div>
       </div>
     </>

@@ -306,11 +306,11 @@ function FormRating(props) {
   };
 
   const viewApplications = (e, id) => {
-    if (showSpecificApplications[0] === applicationStatus) {
-      return setShowSpecificApplications([]);
-    } else if (e.type !== "click" && e.key !== "Enter") {
-      return;
-    }
+    // if (showSpecificApplications[0] === applicationStatus) {
+    //   return setShowSpecificApplications([]);
+    // } else if (e.type !== "click" && e.key !== "Enter") {
+    //   return;
+    // }
     setShowSpecificApplications([applicationStatus, id]);
     setInput("");
   };
@@ -353,7 +353,8 @@ function FormRating(props) {
 
   return (
     <>
-      <h1> Admin Form Processing</h1>
+      <DashboardBanner title={"Form Applications"} />
+
       {console.log("pending applications", pendingApplicants)}
       {console.log("accepted applications", acceptedApplicants)}
       {console.log("rejected applications", rejectedApplicants)}
@@ -398,17 +399,21 @@ function FormRating(props) {
             />
             {/* List all applicants, unless the search input is used  */}
             {pendingApplicants.map(applicant => {
+              console.log("PENDING APPLICATION FORMS", pendingApplicants);
               return (
                 showSpecificApplications.length === 0 &&
                 applicationStatus === "pending" &&
                 applicant.passFormStage === applicationStatus &&
                 input === "" && (
-                  <UserName
-                    classToBe={css.applicant}
-                    click={e => viewApplications(e, applicant.firebaseUid)}
-                    key={e => viewApplications(e, applicant.firebaseUid)}
-                    uid={applicant.firebaseUid}
-                  />
+                  <>
+                    <UserName
+                      classToBe={css.applicant}
+                      dispatch={() => dispatch("pending")}
+                      click={e => viewApplications(e, applicant.firebaseUid)}
+                      key={e => viewApplications(e, applicant.firebaseUid)}
+                      uid={applicant.firebaseUid}
+                    />
+                  </>
                 )
               );
             })}
@@ -417,12 +422,15 @@ function FormRating(props) {
               return (
                 input !== "" &&
                 applicant.passFormStage === "pending" && (
-                  <UserName
-                    classToBe={css.applicant}
-                    click={e => viewApplications(e, applicant.firebaseUid)}
-                    key={e => viewApplications(e, applicant.firebaseUid)}
-                    uid={applicant.firebaseUid}
-                  />
+                  <>
+                    <UserName
+                      classToBe={css.applicant}
+                      dispatch={() => dispatch("pending")}
+                      click={e => viewApplications(e, applicant.firebaseUid)}
+                      key={e => viewApplications(e, applicant.firebaseUid)}
+                      uid={applicant.firebaseUid}
+                    />
+                  </>
                 )
               );
             })}
@@ -469,12 +477,15 @@ function FormRating(props) {
                 applicationStatus === true &&
                 applicant.passFormStage === applicationStatus &&
                 input === "" && (
-                  <UserName
-                    classToBe={css.applicant}
-                    click={e => viewApplications(e, applicant.firebaseUid)}
-                    key={e => viewApplications(e, applicant.firebaseUid)}
-                    uid={applicant.firebaseUid}
-                  />
+                  <>
+                    <UserName
+                      classToBe={css.applicant}
+                      click={e => viewApplications(e, applicant.firebaseUid)}
+                      key={e => viewApplications(e, applicant.firebaseUid)}
+                      uid={applicant.firebaseUid}
+                      dispatch={() => dispatch(true)}
+                    />
+                  </>
                 )
               );
             })}
@@ -483,12 +494,15 @@ function FormRating(props) {
               return (
                 input !== "" &&
                 applicant.passFormStage === true && (
-                  <UserName
-                    classToBe={css.applicant}
-                    click={e => viewApplications(e, applicant.firebaseUid)}
-                    key={e => viewApplications(e, applicant.firebaseUid)}
-                    uid={applicant.firebaseUid}
-                  />
+                  <>
+                    <UserName
+                      classToBe={css.applicant}
+                      click={e => viewApplications(e, applicant.firebaseUid)}
+                      key={e => viewApplications(e, applicant.firebaseUid)}
+                      uid={applicant.firebaseUid}
+                      dispatch={() => dispatch(true)}
+                    />
+                  </>
                 )
               );
             })}
@@ -535,12 +549,15 @@ function FormRating(props) {
                 applicationStatus === false &&
                 applicant.passFormStage === applicationStatus &&
                 input === "" && (
-                  <UserName
-                    classToBe={css.applicant}
-                    click={e => viewApplications(e, applicant.firebaseUid)}
-                    key={e => viewApplications(e, applicant.firebaseUid)}
-                    uid={applicant.firebaseUid}
-                  />
+                  <>
+                    <UserName
+                      classToBe={css.applicant}
+                      click={e => viewApplications(e, applicant.firebaseUid)}
+                      key={e => viewApplications(e, applicant.firebaseUid)}
+                      uid={applicant.firebaseUid}
+                      dispatch={() => dispatch(false)}
+                    />
+                  </>
                 )
               );
             })}
@@ -549,12 +566,15 @@ function FormRating(props) {
               return (
                 input !== "" &&
                 applicant.passFormStage === false && (
-                  <UserName
-                    classToBe={css.applicant}
-                    click={e => viewApplications(e, applicant.firebaseUid)}
-                    key={e => viewApplications(e, applicant.firebaseUid)}
-                    uid={applicant.firebaseUid}
-                  />
+                  <>
+                    <UserName
+                      classToBe={css.applicant}
+                      click={e => viewApplications(e, applicant.firebaseUid)}
+                      key={e => viewApplications(e, applicant.firebaseUid)}
+                      uid={applicant.firebaseUid}
+                      dispatch={() => dispatch(false)}
+                    />
+                  </>
                 )
               );
             })}
@@ -563,112 +583,111 @@ function FormRating(props) {
         <div onClick={goToHome} className={css.adminDashboardHome}>
           <button> Admin Home</button>
         </div>
-      </div>
+        <div className={css.applicantDetailsContainer}>
+          <TransitionGroup className={css.item}>
+            {[
+              ...pendingApplicants,
+              ...acceptedApplicants,
+              ...rejectedApplicants
+            ].map(
+              /// ALL OF THE APPLICANTS this will be all my applications
+              // nned to add ...acceptedApplicants, ...rejectedApplicants
+              applicant => {
+                const matchedUser =
+                  allUsers.find(
+                    user => user.firebaseUid === applicant.firebaseUid
+                  ) || "no matched User";
 
-      <div>
-        <TransitionGroup className={css.item}>
-          {[
-            ...pendingApplicants,
-            ...acceptedApplicants,
-            ...rejectedApplicants
-          ].map(
-            /// ALL OF THE APPLICANTS this will be all my applications
-            // nned to add ...acceptedApplicants, ...rejectedApplicants
-            applicant => {
-              const matchedUser =
-                allUsers.find(
-                  user => user.firebaseUid === applicant.firebaseUid
-                ) || "no matched User";
+                return (
+                  showSpecificApplications[0] === applicant.passFormStage && // this will be passFormStage
+                  applicant.firebaseUid === showSpecificApplications[1] && ( // an array with 2 args (1st arg is application status)
+                    // and the 2nd arg is id - this needs to be set as at the minute the function is pointing to just the id not the uid
+                    <CSSTransition timeout={200} classNames="item">
+                      <div>
+                        <div
+                          className={css.detailsSubContainer}
+                          key={applicant.firebaseUid}
+                        >
+                          <h2>Applicant Details </h2>
+                          <h3>
+                            {matchedUser.firstName || "noFirstName"}{" "}
+                            {matchedUser.lastName || "noLastName"}{" "}
+                            {/*access the user database for this info*/}
+                          </h3>
+                          <div className={css.metaData}>
+                            <p>Age: {matchedUser.age || "noAge"}</p>{" "}
+                            {/*access the user database for this info*/}
+                            <p>
+                              Location: {matchedUser.location || "noLocation"}
+                            </p>{" "}
+                            {/*access the user database for this info*/}
+                            <p>
+                              Background:{" "}
+                              {matchedUser.background || "noBackground"}
+                            </p>{" "}
+                            {/*access the user database for this info*/}
+                          </div>
+                        </div>
+                        <div className={css.reasonSubContainer}>
+                          <h3>Reason for applying </h3>
+                          <p>
+                            {applicant.formApplicationData.motivationQuestion ||
+                              "noMotivationQuestion"}
+                          </p>
+                        </div>
+                        <div className={css.applicationButtonsContainer}>
+                          <button
+                            onClick={() => {
+                              //changeStatus(applicant.firebaseUid, "accepted");
+                              setShowSpecificApplications([]);
 
-              return (
-                showSpecificApplications[0] === applicant.passFormStage && // this will be passFormStage
-                applicant.firebaseUid === showSpecificApplications[1] && ( // an array with 2 args (1st arg is application status)
-                  // and the 2nd arg is id - this needs to be set as at the minute the function is pointing to just the id not the uid
-                  <CSSTransition timeout={200} classNames="item">
-                    <div className={css.applicantDetailsContainer}>
-                      <div
-                        className={css.detailsSubContainer}
-                        key={applicant.firebaseUid}
-                      >
-                        <h2>Applicant Details </h2>
-                        <h3>
-                          {matchedUser.firstName || "noFirstName"}{" "}
-                          {matchedUser.lastName || "noLastName"}{" "}
-                          {/*access the user database for this info*/}
-                        </h3>
-                        <div className={css.metaData}>
-                          <p>Age: {matchedUser.age || "noAge"}</p>{" "}
-                          {/*access the user database for this info*/}
-                          <p>
-                            Location: {matchedUser.location || "noLocation"}
-                          </p>{" "}
-                          {/*access the user database for this info*/}
-                          <p>
-                            Background:{" "}
-                            {matchedUser.background || "noBackground"}
-                          </p>{" "}
-                          {/*access the user database for this info*/}
+                              // this is not connected up correctly
+                              // this function changes the status in the list which contains all the the
+                              // data locally
+
+                              // this won't be neccessary if I fill the accepted and rejected trays from the
+                              // database
+                            }}
+                            onMouseUp={() => {
+                              dispatch(applicant.passFormStage); // this isnt connected up either
+                              postForm(true, applicant.firebaseUid);
+                            }}
+                          >
+                            ACCEPT
+                          </button>
+                          <button
+                            onClick={() =>
+                              //changeStatus(applicant.firebaseUid, "rejected")
+                              setShowSpecificApplications([])
+                            } // this is not connected up correctly
+                            onMouseUp={() => {
+                              dispatch(applicant.passFormStage); // this isnt connected up either
+                              postForm(false, applicant.firebaseUid);
+                            }}
+                          >
+                            DECLINE
+                          </button>
+                          <button
+                            onClick={() =>
+                              // changeStatus(
+                              //   applicant.firebaseUid,
+                              //   applicant.passFormStage
+                              // )
+                              setShowSpecificApplications([])
+                            }
+                            onMouseUp={() => dispatch(applicant.passFormStage)}
+                          >
+                            CANCEL
+                          </button>
                         </div>
                       </div>
-                      <div className={css.reasonSubContainer}>
-                        <h3>Reason for applying </h3>
-                        <p>
-                          {applicant.formApplicationData.motivationQuestion ||
-                            "noMotivationQuestion"}
-                        </p>
-                      </div>
-                      <div className={css.applicationButtonsContainer}>
-                        <button
-                          onClick={() => {
-                            //changeStatus(applicant.firebaseUid, "accepted");
-                            setShowSpecificApplications([]);
-
-                            // this is not connected up correctly
-                            // this function changes the status in the list which contains all the the
-                            // data locally
-
-                            // this won't be neccessary if I fill the accepted and rejected trays from the
-                            // database
-                          }}
-                          onMouseUp={() => {
-                            dispatch(applicant.passFormStage); // this isnt connected up either
-                            postForm(true, applicant.firebaseUid);
-                          }}
-                        >
-                          ACCEPT
-                        </button>
-                        <button
-                          onClick={() =>
-                            //changeStatus(applicant.firebaseUid, "rejected")
-                            setShowSpecificApplications([])
-                          } // this is not connected up correctly
-                          onMouseUp={() => {
-                            dispatch(applicant.passFormStage); // this isnt connected up either
-                            postForm(false, applicant.firebaseUid);
-                          }}
-                        >
-                          DECLINE
-                        </button>
-                        <button
-                          onClick={() =>
-                            // changeStatus(
-                            //   applicant.firebaseUid,
-                            //   applicant.passFormStage
-                            // )
-                            setShowSpecificApplications([])
-                          }
-                          onMouseUp={() => dispatch(applicant.passFormStage)}
-                        >
-                          CANCEL
-                        </button>
-                      </div>
-                    </div>
-                  </CSSTransition>
-                )
-              );
-            }
-          )}
-        </TransitionGroup>
+                    </CSSTransition>
+                  )
+                );
+              }
+            )}
+          </TransitionGroup>
+        </div>
       </div>
     </>
   );

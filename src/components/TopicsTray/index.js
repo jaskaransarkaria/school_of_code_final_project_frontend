@@ -50,21 +50,20 @@ const TopicsTray = () => {
   }, []);
   return (
     <>
-      <div className={css.topicsContainer}>
-        <h2>Resources</h2>
-        {!showTopic ? (
-          topicKeys.map(topic => (
-            <div className={css.topicContainer}>
+      <div>
+        <h2 className={css.topicsTitle}>Resources</h2>
+        <div className={css.topicsContainer}>
+          {!showTopic ? (
+            topicKeys.map(topic => (
               <button onClick={() => setShowTopic(topic)}>{topic}</button>
-              {/* <Topics topicKey={topic} /> */}
-            </div>
-          ))
-        ) : (
-          <>
-            <button onClick={() => setShowTopic(false)}>back</button>
-            <Topics topicKey={showTopic} />
-          </>
-        )}
+            ))
+          ) : (
+            <>
+              <button onClick={() => setShowTopic(false)}>back</button>
+              <Topics topicKey={showTopic} />
+            </>
+          )}
+        </div>
       </div>
     </>
   );
