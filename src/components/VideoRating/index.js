@@ -4,7 +4,6 @@ import DashboardBanner from "../DashboardBanner";
 import { api } from "../../config";
 import UserName from "../UserName";
 import Rating from "react-rating";
-
 import css from "./VideoRating.module.css";
 // TODO
 
@@ -70,20 +69,6 @@ const VideoRating = props => {
       </p>
     );
   };
-  // {
-  //   debugger;
-  //   let score = Object.keys(collateFeedback).reduce(function(
-  //     total,
-  //     current,
-  //     idx
-  //   ) {
-  //     const nextItem = collateFeedback[current];
-  //     console.log(nextItem[idx].rating);
-  //     return total + nextItem[idx].rating;
-  //   },
-  //   0);
-  //   return score;
-  // };
 
   const calculateOverallRating = () =>
     collateFeedback
@@ -117,7 +102,7 @@ const VideoRating = props => {
       })
     });
     const response = await data.json();
-    console.log(response);
+    console.log("post ratings to server response", response);
   };
   const updatePassStage = async () => {
     console.log("UPDAATATATATATAT PASS STAGE UPDATE PRE");
@@ -141,7 +126,6 @@ const VideoRating = props => {
     return fetch(`${api.users}/${firebaseUid}`)
       .then(res => res.json())
       .then(json => {
-        console.log("JSON response", json);
         return json;
       });
   };
@@ -160,7 +144,6 @@ const VideoRating = props => {
 
   const getAllUsers = async () => {
     const data = await fetch(`${api.users}`);
-
     const response = await data.json();
     setAllUsers(response.result);
   };
@@ -181,7 +164,6 @@ const VideoRating = props => {
         `${api.applications}/make-descion-videos/pending`
       );
       const data = await response.json();
-      console.log(data);
       console.log("applications/pending-videos", data.result);
       // map over this array on the back end and send all the relevant info back
       setPendingVideosData(data.result);
@@ -197,7 +179,6 @@ const VideoRating = props => {
         `${api.applications}/make-descion-videos/accepted`
       );
       const data = await response.json();
-      console.log(data);
       console.log("applications/pending-videos", data.result);
       // map over this array on the back end and send all the relevant info back
       setAcceptedVideosData(data.result);
@@ -211,7 +192,6 @@ const VideoRating = props => {
         `${api.applications}/make-descion-videos/rejected`
       );
       const data = await response.json();
-      console.log(data);
       console.log("applications/pending-videos", data.result);
       // map over this array on the back end and send all the relevant info back
       setRejectedVideosData(data.result);
@@ -242,8 +222,6 @@ const VideoRating = props => {
         user => !user.passVideoStage
       )
     );
-
-    //return updatePassStage();
   }, [sliderPassValue]);
 
   useEffect(() => {
@@ -317,31 +295,9 @@ const VideoRating = props => {
         <div id="videoTray">
           {pendingVideosData.map(
             ({ videoApplicationData, firebaseUid }, applicantIndex) => {
-              console.log("VIDEOAPPLICATIONDATA:", videoApplicationData);
-              console.log("FIREBASE-ID:", firebaseUid);
               if (applicantIndex === applicantCounter) {
                 return (
                   <>
-                    {/* <div>
-                      <button
-                        onClick={() => {
-                          if (applicantIndex > 0) {
-                            setApplicantCounter(applicantCounter - 1);
-                          }
-                        }}
-                      >
-                        previous Video
-                      </button>
-                      <button
-                        onClick={() => {
-                          if (applicantCounter + 1 < pendingVideosData.length)
-                            setApplicantCounter(applicantCounter + 1);
-                        }}
-                      >
-                        next Video
-                      </button>
-                    </div> */}
-
                     <div className={css.applicationStatusContainer}>
                       <div>
                         <button
@@ -391,18 +347,6 @@ const VideoRating = props => {
                                       )
                                     }
                                   />
-                                  {/* <button
-                                    className={css.applicant}
-                                    onClick={e => {
-                                      viewApplication(e, applicant.firebaseUid);
-                                      setApplicantCounter(
-                                        pendingApplicationIndex
-                                      );
-                                    }}
-                                    // onKeyUp={e => viewApplication(e, applicant.id)}
-                                  >
-                                    {applicant.firebaseUid}
-                                  </button> */}
                                 </>
                               );
                             }
@@ -448,13 +392,6 @@ const VideoRating = props => {
                                   }
                                   uid={applicant.firebaseUid}
                                 />
-                                {/* <button
-                                  className={css.applicant}
-                                  // onClick={e => viewApplication(e, applicant.id)}
-                                  // onKeyUp={e => viewApplication(e, applicant.id)}
-                                >
-                                  {applicant.firebaseUid}
-                                </button> */}
                               </>
                             );
                           })}
@@ -505,13 +442,6 @@ const VideoRating = props => {
                                   }
                                   uid={applicant.firebaseUid}
                                 />
-                                {/* <button
-                                  className={css.applicant}
-                                  // onClick={e => viewApplication(e, applicant.id)}
-                                  // onKeyUp={e => viewApplication(e, applicant.id)}
-                                >
-                                  {applicant.firebaseUid}
-                                </button> */}
                               </>
                             );
                           })}
@@ -624,38 +554,6 @@ const VideoRating = props => {
                                                 setAdminFeedbackComment
                                               }
                                             />
-                                            {/* {videoCounter + 1 <
-                                              videoApplicationData.length && (
-                                              <button
-                                                onClick={() => {
-                                                  console.log(
-                                                    "ADMINFEEDBACKRATING:",
-                                                    adminFeedbackRating
-                                                  );
-                                                  if (
-                                                    rateVideoAlert === false
-                                                  ) {
-                                                    return setRateVideoAlert(
-                                                      true
-                                                    );
-                                                  }
-                                                  setCurrentUid(firebaseUid);
-                                                  setCollateFeedback([
-                                                    ...collateFeedback,
-                                                    {
-                                                      videoUrl: videoUrl,
-                                                      rating: adminFeedbackRating,
-                                                      comment: adminFeedbackComment
-                                                    }
-                                                  ]);
-                                                  setVideoCounter(
-                                                    videoCounter + 1
-                                                  );
-                                                }}
-                                              >
-                                                Next Video
-                                              </button>
-                                            )} */}
                                           </div>
                                         </div>
                                       </div>
@@ -703,14 +601,6 @@ const VideoRating = props => {
               }
             }
           )}
-
-          {/* <input
-            type="text"
-            onChange={e => {
-              setSliderPassValue(e.target.value);
-            }}
-          />
-          <button onClick={() => updatePassStage()}>Confirm Accepted!</button> */}
         </div>
       </div>
     </>
