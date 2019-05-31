@@ -25,17 +25,17 @@ const VideoRating = props => {
   const [videoCounter, setVideoCounter] = useState(0);
   const [applicantCounter, setApplicantCounter] = useState(0);
   const [sliderPassValue, setSliderPassValue] = useState(6);
-  const [showSpecificApplication, setShowSpecificApplication] = useState();
+  const [showSpecificApplication, setShowSpecificApplication] = useState(null);
   const [rateVideoAlert, setRateVideoAlert] = useState(false);
   const [showApplicants, dispatch] = useReducer((state, action, e) => {
     switch (action) {
       case "pending":
         return state === "pending" ? null : "pending";
 
-      case "accepted":
-        return state === "accepted" ? null : "accepted";
-      case "rejected":
-        return state === "rejected" ? null : "rejected";
+      case true:
+        return state === true ? null : true;
+      case false:
+        return state === false ? null : false;
       default:
         return state;
     }
@@ -162,6 +162,9 @@ const VideoRating = props => {
     //   return;
     // }
     setCurrentUid(id);
+    showSpecificApplication
+      ? setShowSpecificApplication(null)
+      : setShowSpecificApplication([id]);
   };
 
   useEffect(() => {
@@ -352,6 +355,7 @@ const VideoRating = props => {
                                         pendingApplicationIndex
                                       )
                                     }
+                                    dispatch={() => dispatch("pending")}
                                   />
                                 </>
                               );
@@ -362,11 +366,11 @@ const VideoRating = props => {
                       <div>
                         <button
                           className={
-                            showApplicants === "accepted"
+                            showApplicants === true
                               ? css.applicationStatusButtonActive
                               : css.applicationStatusButton
                           }
-                          onClick={() => dispatch("accepted")}
+                          onClick={() => dispatch(true)}
                         >
                           <p> Accepted Applications</p>
                           <p className={css.applicationsNumber}>
@@ -379,7 +383,7 @@ const VideoRating = props => {
                         </button>
                         <ul
                           className={
-                            showApplicants === "accepted"
+                            showApplicants === true
                               ? css.applicantListContainer
                               : css.hideApplicantListContainer
                           }
@@ -397,6 +401,7 @@ const VideoRating = props => {
                                     viewApplication(e, applicant.firebaseUid)
                                   }
                                   uid={applicant.firebaseUid}
+                                  dispatch={() => dispatch(true)}
                                 />
                               </>
                             );
@@ -412,11 +417,11 @@ const VideoRating = props => {
                       <div>
                         <button
                           className={
-                            showApplicants === "rejected"
+                            showApplicants === false
                               ? css.applicationStatusButtonActive
                               : css.applicationStatusButton
                           }
-                          onClick={() => dispatch("rejected")}
+                          onClick={() => dispatch(false)}
                         >
                           <p> Rejected Applications</p>
                           <p className={css.applicationsNumber}>
@@ -429,7 +434,7 @@ const VideoRating = props => {
                         </button>
                         <ul
                           className={
-                            showApplicants === "rejected"
+                            showApplicants === false
                               ? css.applicantListContainer
                               : css.hideApplicantListContainer
                           }
@@ -447,6 +452,7 @@ const VideoRating = props => {
                                     viewApplication(e, applicant.firebaseUid)
                                   }
                                   uid={applicant.firebaseUid}
+                                  dispatch={() => dispatch(false)}
                                 />
                               </>
                             );
@@ -563,6 +569,14 @@ const VideoRating = props => {
                                                 setAdminFeedbackComment
                                               }
                                             />
+                                            <button
+                                              className={
+                                                css.toggleVideosContainer
+                                              }
+                                              onClick={viewApplication}
+                                            >
+                                              Cancel
+                                            </button>
                                           </div>
                                         </div>
                                       </div>
