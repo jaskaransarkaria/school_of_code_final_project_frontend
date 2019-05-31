@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { api } from "../../config";
 
-const UserName = ({ uid, classToBe, click, key }) => {
+const UserName = ({ uid, classToBe, click, key, dispatch }) => {
   const [allUsers, setAllUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState("");
 
@@ -36,7 +36,7 @@ const UserName = ({ uid, classToBe, click, key }) => {
   return (
     <button
       className={classToBe}
-      onClick={click}
+      onClick={(dispatch, click)}
       key={key}
     >{`${currentUser}`}</button>
   );
