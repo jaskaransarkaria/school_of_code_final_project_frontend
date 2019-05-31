@@ -304,7 +304,10 @@ const VideoRating = props => {
         <div id="videoTray">
           {pendingVideosData.map(
             ({ videoApplicationData, firebaseUid }, applicantIndex) => {
-              if (applicantIndex === applicantCounter) {
+              if (
+                applicantIndex === applicantCounter &&
+                videoApplicationData.length > 0
+              ) {
                 return (
                   <>
                     <div className={css.applicationStatusContainer}>

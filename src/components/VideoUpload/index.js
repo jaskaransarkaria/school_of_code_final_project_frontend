@@ -6,8 +6,8 @@ import shortid from "shortid";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import firebase from "firebase";
 import { api } from "../../config";
-import { Redirect } from "react-router-dom";
-import ThankYouPage from "../../pages/ThankYouPage";
+import ThankYou from "../ThankYou";
+
 AWS.config.update({
   region: "eu-west-1",
   accessKeyId: `${aws.key_id}`,
@@ -84,8 +84,6 @@ const VideoUpload = () => {
   }, [video]);
 
   const uploadVideosToDb = () => {
-    console.log("inside upload", firebaseUid);
-    console.log(allVideoLinks);
     fetch(`${api.applications}/video-upload`, {
       method: "post",
       headers: {
@@ -141,7 +139,7 @@ const VideoUpload = () => {
         });
       })
       .catch(function(err) {
-        console.log("err caught");
+        console.log("err caught in Video upload component");
         console.log(err.name + ": " + err.message);
       });
     return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
@@ -346,7 +344,7 @@ const VideoUpload = () => {
           confirm upload
         </button>
       )}
-      {redirect && <Redirect to="thankyou" />}
+      {redirect && <ThankYou />}
     </div>
   );
 };
