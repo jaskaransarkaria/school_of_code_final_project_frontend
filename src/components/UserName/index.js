@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { api } from "../../config";
 
-const UserName = ({ uid, classToBe, click, key, dispatch }) => {
+
+const UserName = ({ uid, classToBe, click, key, dispatch, applicantCounter = "noData" }) => {
   const [allUsers, setAllUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState("");
 
@@ -15,6 +16,7 @@ const UserName = ({ uid, classToBe, click, key, dispatch }) => {
   useEffect(() => {
     getAllUsers();
   }, []);
+
   useEffect(() => {
     const matchUidToName = () => {
       let matchedUser = allUsers.find(user => user.firebaseUid === uid);
@@ -36,7 +38,16 @@ const UserName = ({ uid, classToBe, click, key, dispatch }) => {
   return (
     <button
       className={classToBe}
-      onClick={(dispatch, click)}
+      onClick={() => {
+        click();
+        dispatch();
+        if (applicantCounter === "noData") {
+          return;
+        } else {
+          applicantCounter();
+        }
+      }}
+
       key={key}
     >{`${currentUser}`}</button>
   );

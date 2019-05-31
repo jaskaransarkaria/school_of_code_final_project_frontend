@@ -48,9 +48,7 @@ const VideoUpload = () => {
   const [hasVideo, setHasVideo] = useState(false);
   const [hasAudio, setHasAudio] = useState(false);
   const [showVideo, setShowVideo] = useState(true);
-  const [src, setSrc] = useState(
-    "https://school-of-code-applicant-videos.s3.eu-west-1.amazonaws.com/video6.webm"
-  );
+  const [src, setSrc] = useState("");
   const [allVideoLinks, setAllVideoLinks] = useState([]);
   const [autoplay, setAutoplay] = useState(true);
   const [chunks, setChunks] = useState([]);

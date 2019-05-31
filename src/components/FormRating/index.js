@@ -306,11 +306,11 @@ function FormRating(props) {
   };
 
   const viewApplications = (e, id) => {
-    if (showSpecificApplications[0] === applicationStatus) {
-      return setShowSpecificApplications([]);
-    } else if (e.type !== "click" && e.key !== "Enter") {
-      return;
-    }
+    // if (showSpecificApplications[0] === applicationStatus) {
+    //   return setShowSpecificApplications([]);
+    // } else if (e.type !== "click" && e.key !== "Enter") {
+    //   return;
+    // }
     setShowSpecificApplications([applicationStatus, id]);
     setInput("");
   };
@@ -399,6 +399,7 @@ function FormRating(props) {
             />
             {/* List all applicants, unless the search input is used  */}
             {pendingApplicants.map(applicant => {
+              console.log("PENDING APPLICATION FORMS", pendingApplicants);
               return (
                 showSpecificApplications.length === 0 &&
                 applicationStatus === "pending" &&
@@ -407,6 +408,7 @@ function FormRating(props) {
                   <>
                     <UserName
                       classToBe={css.applicant}
+
                       dispatch={() => dispatch("pending")}
                       click={e => viewApplications(e, applicant.firebaseUid)}
                       key={e => viewApplications(e, applicant.firebaseUid)}
@@ -424,6 +426,7 @@ function FormRating(props) {
                   <>
                     <UserName
                       classToBe={css.applicant}
+
                       dispatch={dispatch("pending")}
                       click={e => viewApplications(e, applicant.firebaseUid)}
                       key={e => viewApplications(e, applicant.firebaseUid)}

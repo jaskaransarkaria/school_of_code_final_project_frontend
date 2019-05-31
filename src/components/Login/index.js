@@ -23,8 +23,13 @@ function Login(props) {
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
       setSignedIn(!!user); // not not meaning if the user is an object it will revert to true and if it isn't an object it will revert to false
-      console.log("user", user);
-      console.log("uid", user.uid);
+
+      if (user === null) {
+        return;
+      } else {
+        console.log("user", user);
+        console.log("uid", user.uid);
+      }
     });
   }, []);
 
