@@ -40,8 +40,16 @@ const VideoRating = props => {
         return state;
     }
   }, null);
-
+  const videoQuestions = [
+    { question: "Tell us about yourself" },
+    { question: "Why do you want to learn to code?" },
+    { question: "What drives you?" },
+    { question: "Why do you want to join School of Code?" },
+    { question: "Explain something complex in simple terms" }
+  ];
   // GET in videos from APPLICATIONS for each applicant based on uid which have a status 'pending'
+
+  console.log("VIDEOQUESTIONS", videoQuestions[0].question);
 
   const AverageScore = () => {
     let score;
@@ -154,8 +162,6 @@ const VideoRating = props => {
     //   return;
     // }
     setCurrentUid(id);
-    setShowSpecificApplication([id]);
-    console.log("ShowSpecificApplications:", showSpecificApplication);
   };
 
   useEffect(() => {
@@ -489,7 +495,10 @@ const VideoRating = props => {
                                             {" "}
                                             <span>
                                               {" "}
-                                              Video {videoCounter + 1}
+                                              {
+                                                videoQuestions[videoCounter]
+                                                  .question
+                                              }
                                             </span>{" "}
                                           </p>
                                           {collateFeedback.length === 0 ? (
