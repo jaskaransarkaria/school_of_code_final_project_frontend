@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { api } from "../../config";
 
-
-const UserName = ({ uid, classToBe, click, key, dispatch, applicantCounter = "noData" }) => {
+const UserName = ({
+  uid,
+  classToBe,
+  click,
+  key,
+  dispatch,
+  applicantCounter = "noData"
+}) => {
   const [allUsers, setAllUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState("");
 
@@ -47,7 +53,6 @@ const UserName = ({ uid, classToBe, click, key, dispatch, applicantCounter = "no
           applicantCounter();
         }
       }}
-
       key={key}
     >{`${currentUser}`}</button>
   );
