@@ -472,7 +472,7 @@ const VideoRating = props => {
                       ) {
                         return (
                           <>
-                            <p>{firebaseUid}</p>
+                            {/* <p>{firebaseUid}</p> */}
 
                             {userInfo &&
                               userInfo.map(({ result: user }, userIndex) => {
