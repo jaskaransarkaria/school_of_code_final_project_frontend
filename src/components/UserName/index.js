@@ -7,7 +7,10 @@ const UserName = ({
   click,
   key,
   dispatch,
-  applicantCounter = "noData"
+  applicantCounter = "noData",
+  setAdminFeedbackRating,
+  setVideoCounter,
+  setCollateFeedback
 }) => {
   const [allUsers, setAllUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState("");
@@ -15,8 +18,8 @@ const UserName = ({
   const getAllUsers = async () => {
     const data = await fetch(`${api.users}`);
     const response = await data.json();
-    console.log("get all USERS", response);
-    console.log("getAll users", response.result);
+    // console.log("get all USERS", response);
+    // console.log("getAll users", response.result);
     setAllUsers([...response.result]);
   };
   useEffect(() => {
@@ -45,6 +48,9 @@ const UserName = ({
     <button
       className={classToBe}
       onClick={() => {
+        setAdminFeedbackRating(0);
+        setVideoCounter(0);
+        setCollateFeedback([]);
         click();
         dispatch();
         if (applicantCounter === "noData") {

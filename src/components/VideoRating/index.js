@@ -31,7 +31,6 @@ const VideoRating = props => {
     switch (action) {
       case "pending":
         return state === "pending" ? null : "pending";
-
       case true:
         return state === true ? null : true;
       case false:
@@ -40,6 +39,7 @@ const VideoRating = props => {
         return state;
     }
   }, null);
+
   const videoQuestions = [
     { question: "Tell us about yourself" },
     { question: "Why do you want to learn to code?" },
@@ -49,7 +49,7 @@ const VideoRating = props => {
   ];
   // GET in videos from APPLICATIONS for each applicant based on uid which have a status 'pending'
 
-  console.log("VIDEOQUESTIONS", videoQuestions[0].question);
+  // console.log("VIDEOQUESTIONS", videoQuestions[0].question);
 
   const AverageScore = () => {
     let score;
@@ -89,13 +89,13 @@ const VideoRating = props => {
   };
 
   const postRatingsToServer = async () => {
-    console.log("current uid is not set", currentUid);
-    console.log(
-      "FROM POST RATINGS",
-      currentUid,
-      collateFeedback,
-      overallRating
-    );
+    // console.log("current uid is not set", currentUid);
+    // console.log(
+    //   "FROM POST RATINGS",
+    //   currentUid,
+    //   collateFeedback,
+    //   overallRating
+    // );
     const data = await fetch(`${api.applications}/admin-video-descion`, {
       method: "post",
       headers: {
@@ -110,10 +110,10 @@ const VideoRating = props => {
       })
     });
     const response = await data.json();
-    console.log("post ratings to server response", response);
+    // console.log("post ratings to server response", response);
   };
   const updatePassStage = async () => {
-    console.log("UPDAATATATATATAT PASS STAGE UPDATE PRE");
+    // console.log("UPDAATATATATATAT PASS STAGE UPDATE PRE");
     return await fetch(`${api.applications}/admin-video-descion-update-many`, {
       method: "post",
       headers: {
@@ -129,7 +129,7 @@ const VideoRating = props => {
   };
 
   const getUserInfo = data => {
-    console.log("userinfo data", data);
+    // console.log("userinfo data", data);
     const { firebaseUid } = data;
     return fetch(`${api.users}/${firebaseUid}`)
       .then(res => res.json())
@@ -173,13 +173,13 @@ const VideoRating = props => {
         `${api.applications}/make-descion-videos/pending`
       );
       const data = await response.json();
-      console.log("applications/pending-videos", data.result);
+      // console.log("applications/pending-videos", data.result);
       // map over this array on the back end and send all the relevant info back
       setPendingVideosData(data.result);
     };
 
     getVideos();
-    console.log("PENDINGVIDEODATA", pendingVideosData);
+    // console.log("PENDINGVIDEODATA", pendingVideosData);
   }, []);
 
   useEffect(() => {
@@ -188,7 +188,7 @@ const VideoRating = props => {
         `${api.applications}/make-descion-videos/accepted`
       );
       const data = await response.json();
-      console.log("applications/pending-videos", data.result);
+      // console.log("applications/pending-videos", data.result);
       // map over this array on the back end and send all the relevant info back
       setAcceptedVideosData(data.result);
     };
@@ -201,7 +201,7 @@ const VideoRating = props => {
         `${api.applications}/make-descion-videos/rejected`
       );
       const data = await response.json();
-      console.log("applications/pending-videos", data.result);
+      // console.log("applications/pending-videos", data.result);
       // map over this array on the back end and send all the relevant info back
       setRejectedVideosData(data.result);
     };
@@ -236,19 +236,19 @@ const VideoRating = props => {
   useEffect(() => {
     if (collateFeedback.length > 3) {
       setOverallRating(calculateOverallRating());
-      console.log("from the useEffect", calculateOverallRating());
+      // console.log("from the useEffect", calculateOverallRating());
       if (collateFeedback.length === 5) {
         postRatingsToServer();
-        console.log("RATINGS POSTED!");
+        // console.log("RATINGS POSTED!");
       }
     }
   }, [collateFeedback]);
 
   useEffect(() => {
-    console.log("mapping over GET users info");
+    // console.log("mapping over GET users info");
     const grabAll = () =>
       Promise.all(pendingVideosData.map(getUserInfo)).then(users => {
-        console.log("USERS in grab all", users);
+        // console.log("USERS in grab all", users);
         setUserInfo(users);
       });
     grabAll();
@@ -267,7 +267,7 @@ const VideoRating = props => {
 
   return (
     <>
-      {console.log("pendingvideodata", pendingVideosData)}
+      {/* {console.log("pendingvideodata", pendingVideosData)}
       {console.log("acceptedvideodata", acceptedVideosData)}
       {console.log("rejectedvideodata", rejectedVideosData)}
       {console.log("userInfo", userInfo)}
@@ -276,13 +276,13 @@ const VideoRating = props => {
       {console.log("collated ratings", collateFeedback)}
       {console.log("current uid", currentUid)}
       {console.log("current slider pass value", sliderPassValue)}
-      {console.log("get ALL USERS", allUsers)}
-      {allUsers.map(user =>
-        console.log(
+      {console.log("get ALL USERS", allUsers)} */}
+      {allUsers.map(user => {
+        /* console.log(
           "MAPPING AND UID TO NAME!!",
           matchUidToName(user.firebaseUid)
-        )
-      )}
+        ) */
+      })}
       <DashboardBanner title={"Video Applications"} />
       <div id="userTray" className={css.userTray}>
         <div className={css.ratingTitleContainer}>
@@ -356,6 +356,12 @@ const VideoRating = props => {
                                       )
                                     }
                                     dispatch={() => dispatch("pending")}
+                                    showApplicants={showApplicants}
+                                    setAdminFeedbackRating={
+                                      setAdminFeedbackRating
+                                    }
+                                    setVideoCounter={setVideoCounter}
+                                    setCollateFeedback={setCollateFeedback}
                                   />
                                 </>
                               );
