@@ -469,6 +469,7 @@ function FormRating(props) {
                   ? css.showSearchInput
                   : css.hideSearchInput
               }
+              
               placeholder="Search Applicants"
             />
             {/* List all applicants, unless the search input is used  */}
