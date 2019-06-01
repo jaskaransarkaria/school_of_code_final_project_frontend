@@ -5,6 +5,12 @@ import { api } from "../../config";
 import UserName from "../UserName";
 import Rating from "react-rating";
 import css from "./VideoRating.module.css";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+
+// Images
+import approved from "../../Images/approved.png";
+import location from "../../Images/location.png";
+import age from "../../Images/calendar.png";
 // TODO
 
 // add questions
@@ -64,17 +70,19 @@ const VideoRating = props => {
     // 100;
 
     return (
-      <p>
-        Overall Rating:
-        <Rating
-          initialRating={score / 2}
-          emptySymbol="fa fa-star-o fa-2x"
-          fullSymbol="fa fa-star fa-2x"
-          style={{ color: "rgba(248, 180, 22, 1)" }}
-          fractions={2}
-          readonly
-        />
-      </p>
+      <div className={css.overallRating}>
+        <h3>Overall Rating</h3>
+        <div className={css.ratingTitleContainer}>
+          <Rating
+            initialRating={score / 2}
+            emptySymbol="fa fa-star-o fa-2x"
+            fullSymbol="fa fa-star fa-2x"
+            style={{ color: "rgba(248, 180, 22, 1)" }}
+            fractions={2}
+            readonly
+          />
+        </div>
+      </div>
     );
   };
 
@@ -162,9 +170,9 @@ const VideoRating = props => {
     //   return;
     // }
     setCurrentUid(id);
-    showSpecificApplication
-      ? setShowSpecificApplication(null)
-      : setShowSpecificApplication([id]);
+    // showSpecificApplication
+    //   ? setShowSpecificApplication(null)
+    setShowSpecificApplication([id]);
   };
 
   useEffect(() => {
@@ -264,7 +272,7 @@ const VideoRating = props => {
 
   // POST ratings for each video all at once && POST whether they have passed or failed this stage
   // also reset the collateFeedback back to an empty array
-
+  console.log("acceptedVideosData", acceptedVideosData);
   return (
     <>
       {/* {console.log("pendingvideodata", pendingVideosData)}
@@ -317,6 +325,7 @@ const VideoRating = props => {
                           }
                           onClick={() => {
                             dispatch("pending");
+                            viewApplication();
                           }}
                         >
                           <p> Pending Applications</p>
@@ -376,7 +385,10 @@ const VideoRating = props => {
                               ? css.applicationStatusButtonActive
                               : css.applicationStatusButton
                           }
-                          onClick={() => dispatch(true)}
+                          onClick={() => {
+                            dispatch(true);
+                            viewApplication();
+                          }}
                         >
                           <p> Accepted Applications</p>
                           <p className={css.applicationsNumber}>
@@ -408,6 +420,11 @@ const VideoRating = props => {
                                   }
                                   uid={applicant.firebaseUid}
                                   dispatch={() => dispatch(true)}
+                                  setAdminFeedbackRating={
+                                    setAdminFeedbackRating
+                                  }
+                                  setVideoCounter={setVideoCounter}
+                                  setCollateFeedback={setCollateFeedback}
                                 />
                               </>
                             );
@@ -427,7 +444,10 @@ const VideoRating = props => {
                               ? css.applicationStatusButtonActive
                               : css.applicationStatusButton
                           }
-                          onClick={() => dispatch(false)}
+                          onClick={() => {
+                            dispatch(false);
+                            viewApplication();
+                          }}
                         >
                           <p> Rejected Applications</p>
                           <p className={css.applicationsNumber}>
@@ -459,6 +479,11 @@ const VideoRating = props => {
                                   }
                                   uid={applicant.firebaseUid}
                                   dispatch={() => dispatch(false)}
+                                  setAdminFeedbackRating={
+                                    setAdminFeedbackRating
+                                  }
+                                  setVideoCounter={setVideoCounter}
+                                  setCollateFeedback={setCollateFeedback}
                                 />
                               </>
                             );
@@ -483,110 +508,140 @@ const VideoRating = props => {
                                 if (applicantIndex === userIndex) {
                                   return (
                                     <>
-                                      <div
-                                        className={css.videoRatingsContainer}
-                                      >
-                                        <div
-                                          className={css.detailsContainer}
-                                          key={userIndex}
+                                      <TransitionGroup>
+                                        <CSSTransition
+                                          timeout={200}
+                                          classNames="item"
                                         >
-                                          <h2>Applicant Details </h2>
-                                          <h3>
-                                            {user.firstName} {user.lastName}
-                                          </h3>
-                                          <div className={css.metaData}>
-                                            <p>Age: {user.age}</p>
-                                            <p>Location: {user.location}</p>
-                                            <p>Background: {user.background}</p>
-                                          </div>
-                                        </div>
-                                        <div className={css.videosContainer}>
-                                          <h2>
-                                            Question {videoCounter + 1}:{" "}
-                                            {
-                                              videoQuestions[videoCounter]
-                                                .question
-                                            }
-                                          </h2>
-                                          <video
-                                            className={css.videoPlayer}
-                                            controls
-                                            src={videoUrl}
-                                          />
                                           <div
                                             className={
-                                              css.toggleVideosContainer
+                                              css.videoRatingsContainer
                                             }
                                           >
-                                            <button
-                                              className={
-                                                css.toggleVideosContainer
-                                              }
-                                              onClick={() => {
-                                                viewApplication();
-                                                setAdminFeedbackRating(0);
-                                                setVideoCounter(0);
-                                                setCollateFeedback([]);
-                                              }}
+                                            <div
+                                              className={css.detailsContainer}
+                                              key={userIndex}
                                             >
-                                              Cancel
-                                            </button>
-                                          </div>
-                                        </div>
-                                        <div
-                                          className={css.rateVideosContainer}
-                                        >
-                                          <h2>Rating</h2>
-                                          {collateFeedback.length === 0 ? (
-                                            <div className={css.overallRating}>
-                                              <h3>Overall Rating</h3>
-                                              <div
-                                                className={
-                                                  css.ratingTitleContainer
-                                                }
-                                              >
-                                                <Rating
-                                                  initialRating={0}
-                                                  emptySymbol="fa fa-star-o fa-2x"
-                                                  fullSymbol="fa fa-star fa-2x"
-                                                  style={{
-                                                    color:
-                                                      "rgba(248, 180, 22, 1)"
-                                                  }}
-                                                  fractions={2}
-                                                  readonly
-                                                />
+                                              <h2>Applicant Details </h2>
+                                              <h3>
+                                                {user.firstName} {user.lastName}
+                                              </h3>
+                                              <div className={css.metaData}>
+                                                <div>
+                                                  <img src={age} />
+                                                  <p>{user.age} Years old</p>
+                                                </div>
+                                                <div>
+                                                  <img src={location} />
+                                                  <p>{user.location}</p>
+                                                </div>
+                                                <div>
+                                                  <img src={approved} />
+                                                  <p>{user.background}</p>
+                                                </div>
                                               </div>
                                             </div>
-                                          ) : (
-                                            <AverageScore
-                                              collateFeedback={collateFeedback}
-                                            />
-                                          )}
-                                          <FeedbackTray
-                                            adminFeedbackRating={
-                                              adminFeedbackRating
-                                            }
-                                            setAdminFeedbackRating={
-                                              setAdminFeedbackRating
-                                            }
-                                            videoCounter={videoCounter}
-                                            setVideoCounter={setVideoCounter}
-                                            collateFeedback={collateFeedback}
-                                            setCollateFeedback={
-                                              setCollateFeedback
-                                            }
-                                            videoUrl={videoUrl}
-                                            rateVideoAlert={rateVideoAlert}
-                                            setRateVideoAlert={
-                                              setRateVideoAlert
-                                            }
-                                            setAdminFeedbackComment={
-                                              setAdminFeedbackComment
-                                            }
-                                          />
-                                        </div>
-                                      </div>
+                                            <div
+                                              className={css.videosContainer}
+                                            >
+                                              <h2>
+                                                {videoCounter + 1}/5:{" "}
+                                                {
+                                                  videoQuestions[videoCounter]
+                                                    .question
+                                                }
+                                              </h2>
+                                              <video
+                                                className={css.videoPlayer}
+                                                controls
+                                                src={videoUrl}
+                                              />
+                                              <div
+                                                className={
+                                                  css.toggleVideosContainer
+                                                }
+                                              >
+                                                <button
+                                                  className={
+                                                    css.toggleVideosContainer
+                                                  }
+                                                  onClick={() => {
+                                                    viewApplication();
+                                                    setAdminFeedbackRating(0);
+                                                    setVideoCounter(0);
+                                                    setCollateFeedback([]);
+                                                  }}
+                                                >
+                                                  <p> Cancel </p>
+                                                </button>
+                                              </div>
+                                            </div>
+                                            <div
+                                              className={
+                                                css.rateVideosContainer
+                                              }
+                                            >
+                                              <h2>Rating</h2>
+                                              {collateFeedback.length === 0 ? (
+                                                <div
+                                                  className={css.overallRating}
+                                                >
+                                                  <h3>Overall Rating</h3>
+                                                  <div
+                                                    className={
+                                                      css.ratingTitleContainer
+                                                    }
+                                                  >
+                                                    <Rating
+                                                      initialRating={0}
+                                                      emptySymbol="fa fa-star-o fa-2x"
+                                                      fullSymbol="fa fa-star fa-2x"
+                                                      style={{
+                                                        color:
+                                                          "rgba(248, 180, 22, 1)"
+                                                      }}
+                                                      fractions={2}
+                                                      readonly
+                                                    />
+                                                  </div>
+                                                </div>
+                                              ) : (
+                                                <AverageScore
+                                                  collateFeedback={
+                                                    collateFeedback
+                                                  }
+                                                />
+                                              )}
+                                              <FeedbackTray
+                                                adminFeedbackRating={
+                                                  adminFeedbackRating
+                                                }
+                                                setAdminFeedbackRating={
+                                                  setAdminFeedbackRating
+                                                }
+                                                videoCounter={videoCounter}
+                                                setVideoCounter={
+                                                  setVideoCounter
+                                                }
+                                                collateFeedback={
+                                                  collateFeedback
+                                                }
+                                                setCollateFeedback={
+                                                  setCollateFeedback
+                                                }
+                                                videoUrl={videoUrl}
+                                                rateVideoAlert={rateVideoAlert}
+                                                setRateVideoAlert={
+                                                  setRateVideoAlert
+                                                }
+                                                setAdminFeedbackComment={
+                                                  setAdminFeedbackComment
+                                                }
+                                              />
+                                            </div>
+                                          </div>
+                                        </CSSTransition>
+                                      </TransitionGroup>
                                     </>
                                   );
                                 } else {
