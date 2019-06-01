@@ -1,22 +1,200 @@
-import React, { Component } from "react";
-import DashboardBanner from "../DashboardBanner";
-import NavBar from "../NavBar";
-import VideoUpload from "../VideoUpload";
+import React, { useState, useEffect } from "react";
 import css from "../ApplicantDashboard/ApplicantDashboard.module.css";
+import socPlanet from "../../Images/planet_soc.png";
+import { api } from "../../config";
+import firebase from "firebase";
 
-class ApplicantDashBoard extends Component {
-  render() {
-    return (
-      <>
-        <div className={css.wrapper}>
-          <DashboardBanner />
-          <NavBar propsUser="Applicant" />
-          <div className={css.container}>
-            <VideoUpload />
+const ApplicantDashBoard = props => {
+  const [userUid, setUserUid] = useState("");
+  const [modal, setModal] = useState(true);
+  const [stepInfo, setStepInfo] = useState([
+    {
+      title: "Complete Form",
+      desc: "Click here to complete the form",
+      stage: 1,
+      className: css.stepOne
+    },
+    {
+      title: "Complete Videos",
+      desc: "Click here to complete the videos",
+      stage: 2,
+      className: css.stepTwo
+    },
+    {
+      title: "Interview Day",
+      desc: "Click here to accept place for interview",
+      stage: 3,
+      className: css.stepThree
+    }
+  ]);
+  const [users, setUsers] = useState({});
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user === null) {
+        return;
+      } else {
+        setUserUid(user.uid);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    // GET the current uid's application info
+    if (userUid) {
+      console.log("applicant dashboard userUid", userUid);
+      const getUidApplicationData = async () => {
+        const data = await fetch(`${api.applications}/${userUid}`);
+        const response = await data.json();
+        console.log("GET uid application", response);
+        setUsers({ ...response.result });
+      };
+
+      getUidApplicationData();
+    }
+  }, [userUid]);
+
+  // const changeStage = info => {
+  //   if (info.stage === 1) {
+  //     setUsers([{ ...users }]);
+  //   }
+  // };
+
+  const toggleModal = () => {
+    setModal(!modal);
+  };
+
+  const goToApplicationForm = () => {
+    props.props.history.push(`application-form`);
+  };
+
+  const goToApplicationVideo = () => {
+    props.props.history.push(`application-video`);
+  };
+
+  const redirectTo = stage => {
+    if (stage === 1) {
+      return goToApplicationForm();
+    }
+    if (stage === 2) {
+      return goToApplicationVideo();
+    }
+
+    if (stage === 3) {
+      props.props.history.push("bootcamper-dashboard");
+    }
+  };
+  const ApplicationStage = () => {
+    let stage = "";
+    if (userUid.passInterviewStage === true) {
+      stage = "You passed them all! ";
+    } else if (userUid.passVideoStage === true) {
+      stage = "You are at stage 3";
+    } else if (userUid.passFormStage === true) {
+      stage = "You are at stage 2";
+    } else {
+      stage = "You are at stage 1";
+    }
+    return <h3> Track your journey to becoming a Bootcamper. {stage} </h3>;
+  };
+
+  const Step = ({ passFirstStage, passSecondStage, passFinalStage }) => {
+    return stepInfo.map((info, idx) => {
+      return (
+        <div className={info.className}>
+          {(info.stage === 2 && Object.entries(users).length === 0) ||
+          (info.stage === 3 && Object.entries(users).length === 0) ||
+          (info.stage === 2 && passFirstStage === false) ||
+          (info.stage === 2 && passFirstStage === "pending") ||
+          (info.stage === 3 && passFirstStage === false) ||
+          (info.stage === 3 && passFirstStage === "pending") ||
+          (info.stage === 3 && passSecondStage === "pending") ||
+          (info.stage === 3 && passSecondStage === false) ? (
+            <div className={css.stepNotAvailable}>
+              <p>Stage {info.stage}</p>
+              <img
+                src="/lock_white.png"
+                alt="padlocked stage"
+                style={{ width: "40%" }}
+              />
+              <p>Locked</p>
+            </div>
+          ) : null}
+
+          {(info.stage === 1 && passFirstStage === true) ||
+          (info.stage === 2 && passSecondStage === true) ||
+          (info.stage === 3 && passFinalStage === true) ? (
+            <div className={css.stepPassed}>
+              <p>Congratulations! You passed Stage {info.stage}!</p>
+            </div>
+          ) : null}
+          {/* <button onClick={() => changeStage(info)}> Pass </button> */}
+          <div
+            className={
+              info.stage === 1 || info.stage === 2
+                ? css.stageTitle
+                : css.finalStageTitle
+            }
+          >
+            {" "}
+            Stage {info.stage}{" "}
+          </div>
+          <div className={css.progressImgContainer}>
+            <img src={socPlanet} alt="socPlanet icon" />
+          </div>
+          <div onClick={() => redirectTo(info.stage)} className={css.stepCard}>
+            <h3> {info.title}</h3>
+            <p> {info.desc} </p>
           </div>
         </div>
-      </>
-    );
-  }
-}
+      );
+    });
+  };
+
+  return (
+    <div className={css.container}>
+      {console.log("in APP DASH USERS", users)}
+      <div className={css.header}>
+        <h2> Applicant Dashboard </h2>
+      </div>
+      <div className={css.mainContentContainer}>
+        <div
+          className={
+            modal && users.passFormStage === false
+              ? css.modalContainer
+              : css.hideModalContainer
+          }
+        >
+          <div className={css.modal}>
+            <h3>Welcome</h3>
+            <p>
+              This dashboard will guide you through the application process.
+            </p>
+            <p>Good luck!</p>
+            <button onClick={toggleModal}>
+              <p> Close and continue</p>
+            </button>
+          </div>
+        </div>
+        <div className={css.introductionContainer}>
+          <ApplicationStage />
+        </div>
+        <div className={css.stepsContainer}>
+          <Step
+            passFirstStage={users.passFormStage}
+            passSecondStage={users.passVideoStage}
+            passFinalStage={users.passInterviewStage}
+          />
+        </div>
+
+        {/* <div className={css.acceptanceContainer}>
+            <h3> Secondary Container</h3>
+            <div className={css.acceptCard}>
+              <h3> Accept place</h3>
+            </div>
+          </div> */}
+      </div>
+    </div>
+  );
+};
 export default ApplicantDashBoard;

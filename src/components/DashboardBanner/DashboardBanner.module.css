@@ -1,26 +1,22 @@
 .bannerContainer {
-  position: absolute;
   background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png");
-  display: inline-block;
-  width: 94%;
-
-  height: 15%;
-  left: 6%;
+  width: 100%;
+  height: 15vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 .bannerWelcomeText {
-  display: inline-block;
-  position: relative;
-  left: 100px;
   color: white;
   font-family: "Oxygen", sans-serif;
 }
 .socLogo {
-  display: inline-block;
-  position: relative;
-  top: 10%;
-  left: 60%;
-  height: 100px;
-  width: 170px;
+  position: absolute;
+  width: 75px;
+  right: 1%;
+  top: 50%;
+  transform: translateY(-50%);
 }
 .todaysScheduleText {
   display: inline-block;

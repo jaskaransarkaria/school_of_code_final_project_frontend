@@ -1,5 +1,7 @@
 import React from "react";
 import css from "../ApplicationFormPage1/ApplicationFormPage1.module.css";
+import SocImage from "../../Images/soc-logo.png";
+
 const FormPart1 = ({
   step,
   setStep,
@@ -48,60 +50,95 @@ const FormPart1 = ({
 
   return (
     <>
-      <h1>
-        Application Form: <span>Step 1 of 5</span>
-      </h1>
       <div className={css.wrapper}>
-        <div className={css.formContainer}>
-          <br />
-          <label>First Name</label>
-          <input
-            placeholder="Enter first name.."
-            className={css.firstName}
-            type="text"
-            name="firstName"
-            onChange={updateField}
-            defaultValue={formValues.firstName}
-            required
-          />
+        <div className={css.container}>
+          <div className={css.leftContainer}>
+            <div className={css.socImageContainer}>
+              <img
+                src={SocImage}
+                className={css.socImage}
+                alt="School of code logo"
+              />
+            </div>
+            <div className={css.instructionsBox}>Instructions</div>
+            <ol className={css.instructionsContainer}>
+              <li>Please fill out the form</li>
+              <li>There are 5 sections in total which need completed</li>
 
-          <div>
-            <label>Last Name</label>
-            <input
-              placeholder="Enter Last name.."
-              className={css.lastName}
-              type="text"
-              name="lastName"
-              onChange={updateField}
-              defaultValue={formValues.lastName}
-              required
-            />
-          </div>
-          <div>
-            <label>Email</label>
-            <input
-              placeholder="Enter email.."
-              className={css.email}
-              type="email"
-              name="email"
-              onChange={updateField}
-              defaultValue={formValues.email}
-              required
-            />
-          </div>
-          <div style={{ color: "red", fontSize: 12 }}>
-            {" "}
-            {formError.inputError}
-          </div>
-          <div style={{ color: "red", fontSize: 12 }}>
-            {" "}
-            {formError.emailError}
+              <li>
+                You will be sent an email notifying if you have made it to the
+                next stage
+              </li>
+            </ol>
           </div>
 
-          <button onClick={saveAndContinue} className={css.saveAndContinue}>
-            {" "}
-            Save and Continue{" "}
-          </button>
+          <div className={css.rightContainer}>
+            <h1 className={css.applicationFormText}>Application Form</h1>
+            <h1 className={css.applicationStepText}>Step 1/5</h1>
+            <div className={css.formContainer}>
+              {/* <div className={css.instructionsContainer} /> */}
+              <div className={css.firstAndLastNameContainer}>
+                <div className={css.firstNameContainer}>
+                  <label className={css.firstNameLabel}>First Name</label>
+                  <div className={css.firstNameInputContainer}>
+                    <input
+                      placeholder="Enter first name.."
+                      className={css.firstName}
+                      type="text"
+                      name="firstName"
+                      onChange={updateField}
+                      defaultValue={formValues.firstName}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className={css.lastNameContainer}>
+                  <label className={css.lastNameLabel}>Last Name</label>
+
+                  <div className={css.lastNameInputContainer}>
+                    <input
+                      placeholder="Enter last name.."
+                      className={css.lastName}
+                      type="text"
+                      name="lastName"
+                      onChange={updateField}
+                      defaultValue={formValues.lastName}
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className={css.emailContainer}>
+                <label className={css.emailLabel}>Email</label>
+                <div className={css.emailInputContainer}>
+                  <input
+                    placeholder="Enter email.."
+                    className={css.email}
+                    type="email"
+                    name="email"
+                    onChange={updateField}
+                    defaultValue={formValues.email}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div style={{ color: "red", fontSize: 12 }}>
+                {" "}
+                {formError.inputError}
+              </div>
+              <div style={{ color: "red", fontSize: 12 }}>
+                {" "}
+                {formError.emailError}
+              </div>
+            </div>
+
+            <button onClick={saveAndContinue} className={css.nextButton}>
+              {" "}
+              Next{" "}
+            </button>
+          </div>
         </div>
       </div>
     </>

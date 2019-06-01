@@ -116,8 +116,8 @@ const VideoUploadQuestion = () => {
         controls
         autoPlay={autoplay}
         id="videoUpload"
-        height="50%"
-        width="80%"
+        height="70%"
+        width="100%"
         display="block"
         poster="/school-of-code.jpg"
         key={src}
@@ -139,9 +139,7 @@ const VideoUploadQuestion = () => {
             handleRecording("stop");
           }
         }}
-      >
-        Stop Recording
-      </button>
+      />
       <button
         onClick={() => {
           // upload to datbase;

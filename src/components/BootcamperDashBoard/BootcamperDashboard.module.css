@@ -1,4 +1,6 @@
 .dashBoardContainer {
-  width: 100%;
-  background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png");
+  width: 94%;
+  margin-left: 6%;
+  height: 100vh;
+  background-image: linear-gradient(to bottom right, #04c7d9, #5f04cf);
 }

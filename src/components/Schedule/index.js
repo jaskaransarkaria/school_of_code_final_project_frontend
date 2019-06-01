@@ -10,7 +10,6 @@ import { api } from "../../config";
 
 import { Store } from "../App";
 import NavBar from "../NavBar";
-
 import SubBanner from "../SubBanner";
 
 let initialState = {
@@ -53,11 +52,9 @@ const Schedule = ({ props }) => {
 
   useEffect(() => {
     async function fetchMostRecentSchedule() {
-      console.log(`${api.schedule}/most-recent`);
       const response = await fetch(`${api.schedule}/most-recent`);
       const data = await response.json();
       console.log("most recent get request", data);
-      console.log(data.result);
       if (data.result === null) {
         return;
       } else {
@@ -144,66 +141,68 @@ const Schedule = ({ props }) => {
   };
 
   return (
-    <div className={css.schedulePageContainer}>
-      <SubBanner />
-      <NavBar propsUser="Bootcamper" />
-      <Calendar
-        onClickDay={value => {
-          convertDate(value);
-        }}
-      />
-      <button onClick={() => changeDate(-1)}>&lt;</button>
-      Schedule
-      <button onClick={() => changeDate(1)}>&gt;</button>
-      <br />
-      {(
-        <>
-          {scheduleData.defaultUsed}
-          <br />
-          Showing: {scheduleData.date}
-        </>
-      ) || <>{scheduleData.date}</>}
-      <div className={css.timelineContainer}>
+    <>
+      <div className={css.schedulePageContainer}>
+        <SubBanner />
+        <NavBar propsUser="Bootcamper" />
+        <Calendar
+          onClickDay={value => {
+            convertDate(value);
+          }}
+        />
+        <button onClick={() => changeDate(-1)}>&lt;</button>
+        Schedule
+        <button onClick={() => changeDate(1)}>&gt;</button>
+        <br />
+        {(
+          <>
+            {scheduleData.defaultUsed}
+            <br />
+            Showing: {scheduleData.date}
+          </>
+        ) || <>{scheduleData.date}</>}
+        <div className={css.timelineContainer}>
+          <Timeline>
+            {scheduleData.daysContent.map(item => (
+              <TimelineEvent title={item.sessionTimes}>
+                {item.contentURL !== "" ? (
+                  <div>
+                    {item.contentTitle}
+                    <br />
+                    <a href={`https://${item.contentURL}`} target="_blank">
+                      {item.contentURL}
+                    </a>
+                  </div>
+                ) : (
+                  <div>{item.contentTitle}</div>
+                )}
+              </TimelineEvent>
+            ))}
+          </Timeline>
+        </div>
         <Timeline>
           {scheduleData.daysContent.map(item => (
             <TimelineEvent title={item.sessionTimes}>
               {item.contentURL !== "" ? (
                 <div>
                   {item.contentTitle}
+                  <p>{item.learningObjectives}</p>
                   <br />
                   <a href={`https://${item.contentURL}`} target="_blank">
                     {item.contentURL}
                   </a>
                 </div>
               ) : (
-                <div>{item.contentTitle}</div>
+                <>
+                  <div>{item.contentTitle}</div>
+                  <p>{item.learningObjectives}</p>
+                </>
               )}
             </TimelineEvent>
           ))}
         </Timeline>
       </div>
-      <Timeline>
-        {scheduleData.daysContent.map(item => (
-          <TimelineEvent title={item.sessionTimes}>
-            {item.contentURL !== "" ? (
-              <div>
-                {item.contentTitle}
-                <p>{item.learningObjectives}</p>
-                <br />
-                <a href={`https://${item.contentURL}`} target="_blank">
-                  {item.contentURL}
-                </a>
-              </div>
-            ) : (
-              <>
-                <div>{item.contentTitle}</div>
-                <p>{item.learningObjectives}</p>
-              </>
-            )}
-          </TimelineEvent>
-        ))}
-      </Timeline>
-    </div>
+    </>
   );
 };
 

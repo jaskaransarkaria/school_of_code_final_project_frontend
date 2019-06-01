@@ -1,5 +1,7 @@
 /* FULL CONTAINER */
-body {
+body,
+button,
+input {
   font-family: "Oxygen", sans-serif;
 }
 .wrapper {

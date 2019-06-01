@@ -1,10 +1,6 @@
 .dashboardScheduleContainer {
   display: inline-block;
-
-  position: absolute;
-  left: 6%;
-  bottom: 45%;
-  width: 94%;
+  width: 100%;
   height: 40%;
   background-image: linear-gradient(to bottom right, #04c7d9, #5f04cf);
   opacity: 0.9;
@@ -18,80 +14,18 @@
   justify-content: space-between;
   background-color: white;
 }
-.mondayBox {
+.dayBox {
   font-size: 1.3em;
   display: inline-flex;
   border-right: 1px solid lightgrey;
   align-items: center;
   justify-content: center;
   width: 20%;
+  padding: 15px;
+  transition: 200ms ease-in-out;
 }
-.mondayBox:hover {
+.dayBox:hover {
   background-color: #11cf84;
   color: white;
   cursor: pointer;
 }
-
-.tuesdayBox {
-  font-size: 1.3em;
-  display: inline-flex;
-  border-right: 0.5px solid lightgrey;
-  align-items: center;
-  justify-content: center;
-  width: 20%;
-}
-.tuesdayBox:hover {
-  background-color: #11cf84;
-  color: white;
-  cursor: pointer;
-}
-.wednesdayBox {
-  font-size: 1.3em;
-  display: inline-flex;
-  border-right: 0.5px solid lightgrey;
-  align-items: center;
-  justify-content: center;
-  width: 20%;
-}
-.wednesdayBox:hover {
-  background-color: #11cf84;
-  color: white;
-  cursor: pointer;
-}
-.thursdayBox {
-  font-size: 1.3em;
-  display: inline-flex;
-  border-right: 0.5px solid lightgrey;
-  align-items: center;
-  justify-content: center;
-  width: 20%;
-}
-.thursdayBox:hover {
-  background-color: #11cf84;
-  color: white;
-  cursor: pointer;
-}
-.fridayBox {
-  font-size: 1.3em;
-  display: inline-flex;
-  border-right: 0.5px solid lightgrey;
-  align-items: center;
-  justify-content: center;
-  width: 20%;
-}
-.fridayBox:hover {
-  background-color: #11cf84;
-  color: white;
-  cursor: pointer;
-}
-
-/* .wrapper {
-  display: inline-block;
-
-  position: absolute;
-
-  bottom: 40%;
-  width: 100%;
-  height: 40%;
-  background-image: linear-gradient(to bottom right, #04c7d9, #5f04cf);
-} */

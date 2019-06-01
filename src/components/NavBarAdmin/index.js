@@ -2,57 +2,47 @@ import React from "react";
 import { Link } from "react-router-dom";
 import css from "../NavBarAdmin/NavBarAdmin.module.css";
 
-import CalendarIcon from "../../Images/calendar.svg";
-import GlassesIcon from "../../Images/glasses.svg";
-import InfoIcon from "../../Images/information.svg";
-import ApplyIcon from "../../Images/apply.svg";
-import ScheduleUploadIcon from "../../Images/upload.svg";
+import LessonsIcon from "../../Images/lessons.png";
+import Home from "../../Images/home-white.png";
+import CheckForm from "../../Images/check-form.png";
+import VideoCamera from "../../Images/video-camera.png";
 function NavBarBootcampers() {
   return (
     <>
       <nav className={css.navContainer}>
         <div className={css.iconsContainer}>
-          <div className={css.applicationContainer}>
-            <Link to="/adminApplication">
+          <Link to="/admin-dashboard">
+            <div className={css.homeIconContainer}>
+              <img className={css.homeIcon} src={Home} alt="application icon" />
+            </div>
+          </Link>
+          <Link to="/admin-dashboard/form-processing/">
+            <div className={css.formsIconContainer}>
               <img
-                className={css.calendarIcon}
-                src={ApplyIcon}
-                alt="application icon"
-              />
-            </Link>
-          </div>
-          <div className={css.scheduleUploadContainer}>
-            <Link to="/scheduleUploads">
-              <img
-                className={css.scheduleUploadIcon}
-                src={ScheduleUploadIcon}
+                className={css.formsIcon}
+                src={CheckForm}
                 alt="schedule upload icon"
               />
-            </Link>
-          </div>
-          <div className={css.calendarContainer}>
-            <Link to="/schedule">
+            </div>
+          </Link>
+          <Link to="/schedule">
+            <div className={css.videosIconContainer}>
               <img
-                className={css.calendarIcon}
-                src={CalendarIcon}
+                className={css.videosIcon}
+                src={VideoCamera}
                 alt="calendar icon"
               />
-            </Link>
-          </div>
-          <div className={css.glassesContainer}>
-            <Link to="/topics">
+            </div>
+          </Link>
+          <Link to="/topics">
+            <div className={css.resourcesIconContainer}>
               <img
-                className={css.glassesIcon}
-                src={GlassesIcon}
+                className={css.resourcesIcon}
+                src={LessonsIcon}
                 alt="glasses icon"
               />
-            </Link>
-          </div>
-          <div className={css.infoContainer}>
-            <Link to="/information">
-              <img className={css.infoIcon} src={InfoIcon} alt="info icon" />
-            </Link>
-          </div>
+            </div>
+          </Link>
         </div>
       </nav>
     </>

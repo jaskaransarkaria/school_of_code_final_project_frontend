@@ -4,7 +4,7 @@ import NavBarApplicants from "../NavBarApplicants";
 import NavBarBootcampers from "../NavBarBootcampers";
 
 const NavBar = ({ propsUser }) => {
-  console.log(propsUser);
+  console.log("From NavBar", propsUser);
   return (
     <>
       {propsUser === "Admin" && <NavBarAdmin />}

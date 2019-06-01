@@ -1,10 +1,18 @@
+.carouselContainer {
+  display: flex;
+  position: relative;
+  justify-content: space-around;
+  align-items: center;
+  padding: 35px 10px;
+}
+
 .leftArrow {
   display: inline-flex;
   position: relative;
   transform: rotate(180deg);
-
-  height: 70px;
-  width: 70px;
+  height: 40px;
+  width: 40px;
+  transition: 300ms ease-in-out;
 }
 .leftArrow:hover {
   cursor: pointer;
@@ -13,8 +21,11 @@
 .rightArrow {
   display: inline-flex;
   position: relative;
-  height: 70px;
-  width: 70px;
+  height: 40px;
+  width: 40px;
+  transition: 300ms ease-in-out;
+  position: relative;
+  z-index: 1;
 }
 .rightArrow:hover {
   cursor: pointer;
@@ -24,36 +35,32 @@
 .itemOne,
 .itemTwo,
 .itemThree {
-  display: inline-flex;
   position: relative;
   width: 15%;
   height: 80%;
   bottom: 15%;
+  padding: 25px;
   background-color: whitesmoke;
-  border-radius: 4px;
-}
-.itemOne:hover {
-  transition-duration: 0.25s;
-  transform: scale(1.2);
-  cursor: pointer;
-}
-.itemTwo:hover {
-  transition-duration: 0.25s;
-  transform: scale(1.2);
-  cursor: pointer;
-}
-.itemThree:hover {
-  transition-duration: 0.25s;
-  transform: scale(1.2);
-  cursor: pointer;
-}
-.carouselContainer {
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px;
   display: flex;
-  position: relative;
-  justify-content: space-around;
-  top: 25%;
-  height: 50%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: 200ms ease-in-out;
 }
+.itemOne:hover,
+.itemTwo:hover,
+.itemThree:hover {
+  box-shadow: 3px 3px 5px;
+  cursor: pointer;
+}
+
+.title {
+  padding: 10px;
+  font-size: 20px;
+}
+
 .lessonTitle {
   margin: 0px;
   text-align: center;

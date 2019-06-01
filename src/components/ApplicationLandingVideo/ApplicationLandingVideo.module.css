@@ -2,34 +2,16 @@
 body {
   font-family: "Oxygen", sans-serif;
 }
-h1 {
-  font-weight: bold;
-}
-h1,
-h3 {
-  text-align: center;
-}
-h2 {
-  margin: 0px;
-  text-align: center;
-  color: white;
-}
-h3 {
-  margin: 2px;
-}
 
 .videoUploadContainer {
   display: inline-block;
 }
 .container {
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: 35% 65%;
   grid-template-areas: "header form";
-  margin: 2% auto;
-  height: 90vh;
-  width: 70%;
-  border: 3px solid white;
-  border-radius: 10px;
+
+  height: 100vh;
 }
 .wrapper {
   position: fixed;
@@ -41,121 +23,120 @@ h3 {
 }
 /* LEFT CONTAINER CONTENT */
 .leftContainer {
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
   grid-area: header;
-  height: 100%;
+
   color: white;
-  border-right: 3px solid white;
+
   background-image: linear-gradient(to bottom right, #04c7d9, #5f04cf);
 }
-.socImageContainer {
-  position: relative;
-  top: 5%;
-  width: 100%;
-
-  display: inline-flex;
-  justify-content: center;
-}
+/* SOC IMAGE */
 .socImage {
   width: 200px;
   height: 200px;
 }
-.webAddress {
-  display: flex;
-  justify-content: center;
-}
-.followUs {
-  margin: 3%;
+.socImageContainer {
+  top: 5%;
+  position: relative;
+  text-align: center;
 }
 
-.contactUs {
-  margin: 3%;
+.instructionsContainer {
+  position: relative;
+  top: 10%;
+  font-size: 1.3em;
+  margin: 0;
+  margin-top: 20px;
+  margin-left: 20px;
+  padding: 0;
+}
+.instructionsContainer li {
+  margin-left: 20px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  list-style: circle;
+}
+
+.instructionsBox {
+  text-decoration: underline;
+  font-weight: bold;
+  font-size: 1.8em;
+  position: relative;
+  top: 10%;
+  display: flex;
+  justify-content: center;
 }
 .headers {
   margin-bottom: 10%;
 }
 
-.locationContainer {
-  margin-right: 20px;
-}
-
-.socialMediaContainer {
-  width: 100%;
-  display: inline-flex;
-  justify-content: space-around;
-}
-.twitterContainer,
-.facebookContainer,
-.youtubeContainer,
-.linkedInContainer,
-.mediumContainer,
-.locationContainer,
-.emailContainer {
-  display: inline-flex;
-
-  background-color: rgba(34, 34, 34, 0.452);
-  border-radius: 20%;
-}
-.twitterLogo,
-.facebookLogo,
-.youtubeLogo,
-.linkedInLogo,
-.mediumLogo,
-.locationLogo,
-.emailLogo {
-  width: 40px;
-  height: 40px;
-}
-
-.twitterContainer:hover {
-  cursor: pointer;
-  background-color: #00acee;
-}
-.facebookContainer:hover {
-  cursor: pointer;
-  background-color: #3b5998;
-}
-.youtubeContainer:hover {
-  cursor: pointer;
-  background-color: #c4302b;
-}
-.linkedInContainer:hover {
-  cursor: pointer;
-  background-color: #0077b5;
-}
-.mediumContainer:hover {
-  cursor: pointer;
-  background-color: #00ab6c;
-}
-.locationContainer:hover {
-  cursor: pointer;
-  background-color: #c4302b;
-}
-.emailContainer:hover {
-  cursor: pointer;
-  background-color: #3b5998;
-}
-.contactContainer {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 5%;
-}
-.locationContainer {
-  margin-right: 20px;
-}
 /* RIGHT CONTAINER CONTENT */
 .rightContainer {
   grid-area: form;
   color: white;
   position: relative;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
+  margin: 0 5%;
   background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png");
   font-weight: bold;
 }
+.applicationFormText {
+  margin: 10px 0;
+  float: left;
+}
+/* .subVideoInstructions li {
+  list-style: decimal;
+  list-style-image: url(../../Images/one.svg);
+} */
+.subVideoInstructions li {
+  list-style-type: none;
+}
+
+.subVideoInstructions .startRecording:before {
+  content: "";
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  background-size: 40px;
+  position: relative;
+  top: 20px;
+  background-image: url(../../Images/one.svg);
+  background-repeat: no-repeat;
+}
+.subVideoInstructions .stopRecording:before {
+  content: "";
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  background-size: 40px;
+  position: relative;
+  top: 20px;
+  background-image: url(../../Images/twoRed.svg);
+  background-repeat: no-repeat;
+}
+.subVideoInstructions .playRecording:before {
+  content: "";
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  background-size: 40px;
+  position: relative;
+  top: 20px;
+  background-image: url(../../Images/play-button.svg);
+  background-repeat: no-repeat;
+}
+.subVideoInstructions .submitRecording:before {
+  content: "";
+
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  background-size: 40px;
+  position: relative;
+  top: 20px;
+  background-image: url(../../Images/three.svg);
+  background-repeat: no-repeat;
+}
 /* LOGO MEDIA QUERY */
-@media only screen and (max-width: 1290px) {
+/* @media only screen and (max-width: 1290px) {
   .socImage {
     height: 220px;
     width: 220px;
@@ -186,29 +167,17 @@ h3 {
     height: 140px;
     width: 140px;
   }
-}
+} */
 
 /* RIGHT CONTAINER MEDIA QUERY */
 
 /* MOBILE VIEW */
-@media only screen and (max-width: 550px) {
+/* @media only screen and (max-width: 550px) {
   .socImage {
     display: none;
   }
   .leftContainer {
     width: 100%;
-  }
-  .socialMediaContainer {
-    display: none;
-  }
-  .contactContainer {
-    display: none;
-  }
-  .followUs {
-    display: none;
-  }
-  .contactUs {
-    display: none;
   }
 }
 @media only screen and (max-width: 549px) {
@@ -219,8 +188,8 @@ h3 {
     grid-template-areas: "header" "form";
     margin: 2% auto;
     height: 100%;
-    border: 3px solid white;
-    border-radius: 10px;
+    border: 7px solid white;
+    border-radius: 7px;
     width: 70%;
   }
-}
+} */

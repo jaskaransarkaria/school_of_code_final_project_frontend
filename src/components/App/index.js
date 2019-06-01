@@ -14,6 +14,8 @@ import firebase from "firebase";
 import ApplicantVideoPage from "../../pages/ApplicantVideoPage";
 import ApplicantFormPage from "../../pages/ApplicantFormPage";
 import TemplatePage from "../../pages/TemplatePage";
+import ContractPage from "../../pages/ContractPage";
+import ThankYouPage from "../../pages/ThankYouPage";
 
 firebase.initializeApp({
   apiKey: api.firebase_key,
@@ -169,72 +171,84 @@ const allContent = [
   }
 ];
 export const Store = createContext([allContent, () => {}]);
+export const UserUidContext = createContext(null);
 
 function App() {
   const [fullScheduleData, setFullScheduleData] = useState(allContent);
+  const [userUid, setUserUid] = useState(null);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
       // logic which dictates if they are already in the db or they need to register
       // if they need to register push them to the applicant dashboard page
-      let newFirebaseUid = user.uid;
-      async function isUserRegistered(user) {
-        console.log("in async post", newFirebaseUid);
-        const response = await fetch(`${api.users}`, {
-          method: "post",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json"
-          },
-          body: JSON.stringify({
-            firebaseUid: newFirebaseUid
-          })
-        });
-        const data = await response.json();
-        console.log(data.result);
-        if (data.result === null) {
-          // send them to the register page
-        } else {
-          // set user signed in to true
-          // setSignedIn(
-          //   !!user
-          //   // not not meaning if the user is an object it will revert to true
-          //   // and if it isn't an object it will revert to false
-          // );
-          console.log(user.uid);
-          console.log("user exists in db");
+      if (user === null) {
+        return;
+      } else {
+        let newFirebaseUid = user.uid;
+        async function isUserRegistered(user) {
+          setUserUid({ uid: user.uid, displayName: user.displayName });
+          console.log("in async post", newFirebaseUid);
+          const response = await fetch(`${api.users}`, {
+            method: "post",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json"
+            },
+            body: JSON.stringify({
+              firebaseUid: newFirebaseUid
+            })
+          });
+          const data = await response.json();
+          console.log(data.result);
+          if (data.result === null) {
+            // send them to the register page
+            // because the have shown that their uid doesn't exist in the database
+          } else {
+            // there uid does exist in the database
+            // set user signed in to true
+            // setSignedIn(
+            //   !!user
+            //   // not not meaning if the user is an object it will revert to true
+            //   // and if it isn't an object it will revert to false
+            // );
+            console.log(user.uid);
+            console.log("user exists in db");
+          }
         }
+
+        isUserRegistered(user);
       }
-
-      isUserRegistered(user);
-
-      console.log("user", user);
-      console.log("uid", user.uid);
     });
   }, []);
   return (
-    <Store.Provider value={[fullScheduleData, setFullScheduleData]}>
-      <Router>
-        <Route exact path="/" component={LoginPage} />
-        <Route path="/applicant-dashboard" component={ApplicantDashboardPage} />
-        <Route
-          path="/bootcamper-dashboard"
-          component={BootcamperDashboardPage}
-        />
-        <Route path="/admin-dashboard" component={AdminDashboardPage} />
-        <Route path="/upload-schedule" component={AdminUploadSchedulePage} />
-        <Route path="/schedule" component={SchedulePage} />
-        <Route path="/topics" component={TopicsPage} />
-        <Route path="/credits" component={CreditsPage} />
-        <Route
-          path="/admin-application-processing"
-          component={AdminApplicationProcessingPage}
-        />
-        <Route path="/application-video" component={ApplicantVideoPage} />
-        <Route path="/application-form" component={ApplicantFormPage} />
-        <Route path="/template" component={TemplatePage} />
-      </Router>
-    </Store.Provider>
+    <UserUidContext.Provider value={userUid}>
+      <Store.Provider value={[fullScheduleData, setFullScheduleData]}>
+        <Router>
+          <Route exact path="/" component={LoginPage} />
+          <Route
+            path="/applicant-dashboard"
+            component={ApplicantDashboardPage}
+          />
+          <Route
+            path="/bootcamper-dashboard"
+            component={BootcamperDashboardPage}
+          />
+          <Route path="/admin-dashboard" component={AdminDashboardPage} />
+          <Route path="/upload-schedule" component={AdminUploadSchedulePage} />
+          <Route path="/schedule" component={SchedulePage} />
+          <Route path="/topics" component={TopicsPage} />
+          <Route path="/credits" component={CreditsPage} />
+          <Route
+            path="/admin-application-processing"
+            component={AdminApplicationProcessingPage}
+          />
+          <Route path="/application-video" component={ApplicantVideoPage} />
+          <Route path="/application-form" component={ApplicantFormPage} />
+          <Route path="/thankyou" component={ThankYouPage} />
+          <Route path="/template" component={TemplatePage} />
+        </Router>
+      </Store.Provider>
+    </UserUidContext.Provider>
   );
 }
 

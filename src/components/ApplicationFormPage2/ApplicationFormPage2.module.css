@@ -1,35 +1,173 @@
-.wrapper {
+@import url("https://fonts.googleapis.com/css?family=Oxygen:300,400");
+/* MAIN CONTAINERS */
+.body {
+  font-family: "Oxygen", sans-serif;
+}
+.container {
+  display: grid;
+  grid-template-columns: 35% 65%;
+  grid-template-areas: "header form";
+
+  height: 100vh;
+}
+.leftContainer {
+  grid-area: header;
+
+  color: white;
+
+  background-image: linear-gradient(to bottom right, #04c7d9, #5f04cf);
+}
+.rightContainer {
+  grid-area: form;
+  color: white;
+  position: relative;
+  margin: 0 5%;
+  background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png");
+  font-weight: bold;
+}
+/* LEFT CONTAINER CONTENT */
+/* SOC IMAGE */
+.socImage {
+  width: 200px;
+  height: 200px;
+}
+.socImageContainer {
+  top: 5%;
+  position: relative;
+  text-align: center;
+}
+.instructionsContainer {
+  position: relative;
+  top: 10%;
+  font-size: 1.3em;
+  margin: 0;
+  margin-top: 20px;
+  margin-left: 20px;
+  padding: 0;
+}
+.instructionsContainer li {
+  margin-left: 20px;
+  margin-bottom: 10px;
+  list-style: circle;
+}
+
+.instructionsBox {
+  text-decoration: underline;
+  font-weight: bold;
+  font-size: 1.8em;
+  position: relative;
+  top: 10%;
   display: flex;
   justify-content: center;
 }
-.formContainer {
-  color: white;
 
-  width: 70%;
+/* RIGHT CONTAINER CONTENT */
+.phoneAndAgeContainer {
+  display: flex;
 }
+.phoneContainer {
+  flex: 1;
+}
+.ageContainer {
+  margin-left: 10px;
+  flex: 1;
+}
+
 .phone,
-.age,
-.location {
-  width: 95%;
-  border-radius: 7px;
-  padding: 5px;
-  border: 3px solid white;
-}
-
-.saveAndContinueButton,
-.previousButton {
+.age {
+  font-size: 1.2em;
   color: white;
-  font-weight: bold;
-  text-transform: uppercase;
-  border-style: none;
-  outline: none;
-  margin: 20px 0px;
   padding: 10px;
-  border-radius: 7px;
+  width: 100%;
+  background-color: transparent;
+  border: 5px solid #11cf84;
+  box-sizing: border-box;
+  margin-top: 10px;
+}
+.location {
+  font-size: 1.2em;
+  color: white;
+  padding: 10px;
+  width: 50%;
+  background-color: transparent;
+  border: 5px solid #11cf84;
+  box-sizing: border-box;
+  margin-top: 10px;
+}
+.nextButton {
+  margin-left: 10px;
+  left: 50%;
+  font-size: 1.2em;
   font-weight: bold;
+  margin-bottom: 50px;
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+  width: 50%;
+  color: white;
+  padding: 10px;
+  border-style: none;
   background-color: #11cf84;
 }
+.previousButton {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 50px;
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+  width: 50%;
+  color: white;
+  padding: 10px;
+  border-style: none;
+  background-color: #11cf84;
+}
+.previousAndNextContainer {
+  display: flex;
+  flex-direction: row;
+}
+::placeholder {
+  color: white;
+}
+.phoneLabel,
+.ageLabel,
+.locationLabel {
+  font-weight: bold;
+  color: white;
+}
 
-.saveAndContinueButton {
-  margin-left: 10px;
+.phoneContainer,
+.ageContainer,
+.locationContainer {
+  margin-bottom: 60px;
+}
+.header {
+  color: white;
+}
+.formContainer {
+  position: relative;
+  top: 30%;
+  color: white;
+}
+
+.applicationFormText {
+  margin: 10px 0;
+  position: absolute;
+}
+.applicationStepText {
+  position: absolute;
+  margin-top: 80px;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: white;
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+  transition: background-color 5000s ease-in-out 0s;
 }

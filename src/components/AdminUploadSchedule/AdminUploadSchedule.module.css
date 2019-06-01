@@ -1,9 +1,27 @@
 .formContainer {
   display: flex;
   justify-content: center;
+  align-items: center;
+  height: 85vh;
+  position: relative;
+}
 
-  height: 70%;
-  bottom: 10%;
+.adminDashboardHome {
   position: absolute;
-  left: 6%;
+  top: 2%;
+  right: 2%;
+}
+
+.adminDashboardHome button {
+  margin: 0 15px;
+  width: 100px;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px;
+  transition: 200ms;
+}
+
+.adminDashboardHome button:hover {
+  cursor: pointer;
+  box-shadow: 2px 2px 5px;
 }

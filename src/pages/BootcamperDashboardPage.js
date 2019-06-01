@@ -1,12 +1,12 @@
 import React from "react";
-import BootcamperDashboard from "../components/BootcamperDashBoard";
-import NavBar from "../components/NavBar";
+
+import BootcamperDashBoard from "../components/BootcamperDashBoard";
+
 const BootcamperDashboardPage = () => {
   return (
-    <>
-      <BootcamperDashboard />
-      <NavBar />
-    </>
+    <div>
+      <BootcamperDashBoard />
+    </div>
   );
 };
 

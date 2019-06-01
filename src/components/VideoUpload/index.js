@@ -1,4 +1,3 @@
-
 import css from "../VideoUpload/VideoUpload.module.css";
 import React, { useState, useEffect, useRef } from "react";
 import AWS from "aws-sdk";
@@ -7,7 +6,8 @@ import shortid from "shortid";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import firebase from "firebase";
 import { api } from "../../config";
-
+import { Redirect } from "react-router-dom";
+import ThankYouPage from "../../pages/ThankYouPage";
 AWS.config.update({
   region: "eu-west-1",
   accessKeyId: `${aws.key_id}`,
@@ -31,11 +31,11 @@ let localStream;
 let recorder;
 
 const interviewQuestions = [
-  { question: "Tell us about yourself." },
+  { question: "Tell us about yourself" },
   { question: "Why do you want to learn to code?" },
   { question: "What drives you?" },
   { question: "Why do you want to join School of Code?" },
-  { question: "Explain something complex in simple terms." }
+  { question: "Explain something complex in simple terms" }
 ];
 
 // send the video to the server
@@ -49,12 +49,11 @@ const VideoUpload = () => {
   const [hasVideo, setHasVideo] = useState(false);
   const [hasAudio, setHasAudio] = useState(false);
   const [showVideo, setShowVideo] = useState(true);
-  const [src, setSrc] = useState(
-    "https://school-of-code-applicant-videos.s3.eu-west-1.amazonaws.com/video6.webm"
-  );
+  const [src, setSrc] = useState("");
   const [allVideoLinks, setAllVideoLinks] = useState([]);
   const [autoplay, setAutoplay] = useState(true);
   const [chunks, setChunks] = useState([]);
+  const [redirect, setRedirect] = useState(false);
   const video = useRef(null);
 
   useEffect(
@@ -80,6 +79,10 @@ const VideoUpload = () => {
     });
   }, []);
 
+  useEffect(() => {
+    return () => {};
+  }, [video]);
+
   const uploadVideosToDb = () => {
     console.log("inside upload", firebaseUid);
     console.log(allVideoLinks);
@@ -97,6 +100,7 @@ const VideoUpload = () => {
       .then(res => res.json())
       .then(data => console.log(data))
       .then(_ => console.log("sent", allVideoLinks))
+      .then(setRedirect(true))
       .catch(err => console.error(err));
   };
 
@@ -179,6 +183,7 @@ const VideoUpload = () => {
 
             video.current.play(); // use a ref here
             localStream = stream;
+
             recorder = new MediaRecorder(stream);
             setIsRecording(true);
             recorder.ondataavailable = e => {
@@ -235,17 +240,18 @@ const VideoUpload = () => {
           // could cause problem when it gets to the end of the list
           .map(item => {
             return (
-              <>
-                <h1>
-                  {item.question} {questionCounter + 1}/5
-                </h1>
+              <div className={css.videoContainer}>
+                <h2 className={css.stepText}>Step {questionCounter + 1}/5 </h2>
+                <br />
+                <h2 className={css.questionsText}> {item.question}</h2>
+
                 <video
                   ref={video}
                   controls
                   autoPlay={autoplay}
                   id="videoUpload"
-                  height="50%"
-                  width="80%"
+                  height="60%"
+                  width="100%"
                   display="block"
                   poster="/school-of-code.jpg"
                   key={src}
@@ -253,78 +259,84 @@ const VideoUpload = () => {
                   <source src={src} />
                 </video>
                 <br />
-                <button
-                  className={css.startRecording}
-                  onClick={() => {
-                    // check if they have a microphone and webcam here
-
-                    hasGetUserMedia();
-                    if (!hasVideo || !hasAudio) {
-                      alert(
-                        "Your device needs a microphone and a webcam your device is missing one"
-                      );
-                      return;
-                    } else {
-                      handleRecording("start");
-                    }
-                  }}
-                >
-                  Start Recording
-                </button>
-                <>
+                <div className={css.buttonContainer}>
                   <button
-                    className={css.stopRecording}
+                    className={css.startRecording}
                     onClick={() => {
-                      if (localStream) {
-                        handleRecording("stop");
+                      // check if they have a microphone and webcam here
+
+                      hasGetUserMedia();
+                      if (!hasVideo || !hasAudio) {
+                        alert(
+                          "Your device needs a microphone and a webcam your device is missing one"
+                        );
+                        return;
+                      } else {
+                        handleRecording("start");
                       }
                     }}
                   >
-                    Stop Recording
+                    Start Recording
                   </button>
-                </>
+                  <>
+                    <button
+                      className={css.stopRecording}
+                      onClick={() => {
+                        if (localStream) {
+                          handleRecording("stop");
+                        }
+                      }}
+                    >
+                      Stop Recording
+                    </button>
+                  </>
 
-                {!isLoading &&
-                  (questionCounter + 1 < interviewQuestions.length ? (
-                    <button
-                      onClick={() => {
-                        const blob = new Blob(chunks, { type: "video/webm" });
-                        console.log(blob);
-                        if (blob.size > 0 && !isRecording) {
-                          // upload to datbase
-                          setIsLoading(true);
-                          uploadToAWS(blob)
-                            .then(_ => setIsLoading(false))
-                            .then(_ => setQuestionCounter(questionCounter + 1));
-                        }
-                      }}
-                    >
-                      Submit Video
-                    </button>
-                  ) : (
-                    <button
-                      onClick={() => {
-                        const blob = new Blob(chunks, { type: "video/webm" });
-                        console.log(blob);
-                        if (blob.size > 0 && !isRecording) {
-                          setIsLoading(true);
-                          uploadToAWS(blob)
-                            .then(_ => setShowVideo(false))
-                            .catch(err => console.error(err))
-                            .finally(_ => setIsLoading(false));
-                          // add a confirm upload button which does the upload to s3
-                        }
-                        return;
-                      }}
-                    >
-                      Sumbit Final
-                    </button>
-                  ))}
-                {isLoading && <CircularProgress />}
-              </>
+                  {!isLoading &&
+                    (questionCounter + 1 < interviewQuestions.length ? (
+                      <button
+                        className={css.submitRecording}
+                        onClick={() => {
+                          const blob = new Blob(chunks, { type: "video/webm" });
+                          console.log(blob);
+                          if (blob.size > 0 && !isRecording) {
+                            // upload to datbase
+                            setIsLoading(true);
+                            uploadToAWS(blob)
+                              .then(_ => setIsLoading(false))
+                              .then(_ =>
+                                setQuestionCounter(questionCounter + 1)
+                              );
+                          }
+                        }}
+                      >
+                        Submit Video
+                      </button>
+                    ) : (
+                      <button
+                        className={css.submitFinalVideos}
+                        onClick={() => {
+                          const blob = new Blob(chunks, { type: "video/webm" });
+                          console.log(blob);
+                          if (blob.size > 0 && !isRecording) {
+                            setIsLoading(true);
+                            uploadToAWS(blob)
+                              .then(_ => setShowVideo(false))
+                              .catch(err => console.error(err))
+                              .finally(_ => setIsLoading(false));
+                            // add a confirm upload button which does the upload to s3
+                          }
+                          return;
+                        }}
+                      >
+                        Submit Final Videos
+                      </button>
+                    ))}
+                  {isLoading && <CircularProgress />}
+                </div>
+              </div>
             );
           })}
-      {!showVideo && (
+      {!showVideo && !redirect && (
         <button
           onClick={() => {
             uploadVideosToDb();
@@ -334,6 +346,7 @@ const VideoUpload = () => {
           confirm upload
         </button>
       )}
+      {redirect && <Redirect to="thankyou" />}
     </div>
   );
 };

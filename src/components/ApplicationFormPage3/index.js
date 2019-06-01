@@ -1,5 +1,6 @@
 import React from "react";
 import css from "../ApplicationFormPage3/ApplicationFormPage3.module.css";
+import SocImage from "../../Images/soc-logo.png";
 const identityAnswers = ["Male", "Female", "Non-Binary", "Prefer no to say"];
 const situationAnswers = [
   "Finishing School",
@@ -21,7 +22,7 @@ const FormPart3 = ({
   const saveAndContinue = e => {
     e.preventDefault();
 
-    if (formValues.situation === "" || formValues.identify === "") {
+    if (formValues.background === "" || formValues.identify === "") {
       console.log("error");
       setFormError({
         ...formError,
@@ -54,54 +55,94 @@ const FormPart3 = ({
 
   return (
     <>
-      <h1>
-        Application Form: <span>Step 3 of 5</span>
-      </h1>
       <div className={css.wrapper}>
-        <div>
-          <label>How do you identify?</label>
-          <br />
-          {identityAnswers.map(item => (
-            <>
-              <input
-                type="radio"
-                name="identify"
-                value={item}
-                onChange={updateField}
-                checked={formValues.identify === item ? "checked" : null}
-                defaultValue={formValues.identify}
+        <div className={css.container}>
+          <div className={css.leftContainer}>
+            <div className={css.socImageContainer}>
+              <img
+                src={SocImage}
+                className={css.socImage}
+                alt="School of code logo"
               />
-              {item}
-            </>
-          ))}
-        </div>
+            </div>
+            <div className={css.instructionsBox}>Instructions</div>
+            <ol className={css.instructionsContainer}>
+              <li>Please fill out the form</li>
+              <li>There are 5 sections in total which need completed</li>
 
-        <div>
-          <label>Which best describes your current situation</label>
-          <br />
-          {situationAnswers.map(item => (
-            <>
-              <input
-                type="radio"
-                name="situation"
-                value={item}
-                onChange={updateField}
-                checked={formValues.situation === item ? "checked" : null}
-                defaultValue={formValues.situation}
-              />
-              {item}
-            </>
-          ))}
+              <li>
+                You will be sent an email notifying if you have made it to the
+                next stage
+              </li>
+            </ol>
+          </div>
+          <div className={css.rightContainer}>
+            <h1 className={css.applicationFormText}>Application Form</h1>
+            <h1 className={css.applicationStepText}>Step 3/5</h1>
+            <div className={css.formContainer}>
+              <div className={css.identifyContainer}>
+                <label className={css.identifyText}>How do you identify?</label>
+                <br />
+                {identityAnswers.map(item => (
+                  <>
+                    <div className={css.questionOneContainer}>
+                      <input
+                        type="radio"
+                        name="identify"
+                        value={item}
+                        onChange={updateField}
+                        checked={
+                          formValues.identify === item ? "checked" : null
+                        }
+                        defaultValue={formValues.identify}
+                      />
+                      {item}
+                    </div>
+                  </>
+                ))}
+              </div>
+
+              <div className={css.situationContainer}>
+                <label className={css.situationText}>
+                  Which best describes your current situation?
+                </label>
+                <br />
+                {situationAnswers.map(item => (
+                  <>
+                    <div className={css.questionTwoContainer}>
+                      <input
+                        type="radio"
+                        name="background"
+                        value={item}
+                        onChange={updateField}
+                        checked={
+                          formValues.background === item ? "checked" : null
+                        }
+                        defaultValue={formValues.background}
+                      />
+                      {item}
+                    </div>
+                  </>
+                ))}
+              </div>
+              <div style={{ color: "red", fontSize: 12 }}>
+                {formError.inputError}
+              </div>
+            </div>
+            <div className={css.previousAndNextContainer}>
+              <button onClick={previous} className={css.previousButton}>
+                {" "}
+                Previous{" "}
+              </button>
+              <div className={css.nextButtonContainer}>
+                <button onClick={saveAndContinue} className={css.nextButton}>
+                  {" "}
+                  Next{" "}
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-        <div style={{ color: "red", fontSize: 12 }}>{formError.inputError}</div>
-        <button onClick={previous} className={css.previousButton}>
-          {" "}
-          Previous{" "}
-        </button>
-        <button onClick={saveAndContinue} className={css.saveAndContinueButton}>
-          {" "}
-          Save and Continue{" "}
-        </button>
       </div>
     </>
   );

@@ -1,12 +1,12 @@
 import React from "react";
-import VideoRating from "../components/VideoRating";
+// import VideoRating from "../components/VideoRating";
+import AdminDashboard from "../components/AdminDashboard";
 const AdminApplicationProcessingPage = () => {
   return (
     <>
-      <VideoRating />
+      <AdminDashboard />
     </>
   );
 };
-
 
 export default AdminApplicationProcessingPage;

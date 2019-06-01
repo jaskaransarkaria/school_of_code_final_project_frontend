@@ -10,17 +10,11 @@ body {
   background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png");
   /* background-image: linear-gradient(to bottom right, #04c7d9, #5f04cf); */
 }
-.container {
-  /* background-image: linear-gradient(to bottom right, #04c7d9, #5f04cf); */
-  display: grid;
-  grid-template-columns: auto auto;
-  grid-template-areas: "header form";
-  margin: 2% auto;
-  height: 90vh;
-  width: 70%;
-}
-h4 {
-  margin: 0px;
+.subHeader {
+  position: relative;
+  top: 35%;
+  font-size: 1.6em;
+  text-align: center;
 }
 
 h1 {
@@ -44,16 +38,13 @@ h3 {
   margin-bottom: 10%;
 }
 .loginContainer {
-  margin-bottom: 10%;
+  position: relative;
+  top: 40%;
 }
 .leftContainer {
-  background-image: linear-gradient(to bottom right, #04c7d9, #5f04cf);
   /* background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png"); */
   grid-area: header;
   color: white;
-  border-bottom-left-radius: 5px;
-  border-top-left-radius: 5px;
-  border: #e0e0e0 solid 5px;
 }
 .socialMediaContainer {
   width: 100%;
@@ -61,57 +52,7 @@ h3 {
   justify-content: space-around;
   margin-bottom: 10%;
 }
-.twitterContainer,
-.facebookContainer,
-.youtubeContainer,
-.linkedInContainer,
-.mediumContainer,
-.locationContainer,
-.emailContainer {
-  display: flex;
-  align-items: center;
 
-  border-radius: 20%;
-}
-.twitterLogo,
-.facebookLogo,
-.youtubeLogo,
-.linkedInLogo,
-.mediumLogo,
-.locationLogo,
-.emailLogo {
-  width: 40px;
-  height: 40px;
-}
-
-.twitterContainer:hover {
-  cursor: pointer;
-  background-color: #00acee;
-}
-.facebookContainer:hover {
-  cursor: pointer;
-  background-color: #3b5998;
-}
-.youtubeContainer:hover {
-  cursor: pointer;
-  background-color: #c4302b;
-}
-.linkedInContainer:hover {
-  cursor: pointer;
-  background-color: #0077b5;
-}
-.mediumContainer:hover {
-  cursor: pointer;
-  background-color: #00ab6c;
-}
-.locationContainer:hover {
-  cursor: pointer;
-  background-color: #c4302b;
-}
-.emailContainer:hover {
-  cursor: pointer;
-  background-color: #3b5998;
-}
 .webAddress {
   display: flex;
   justify-content: center;
@@ -121,26 +62,16 @@ h3 {
   justify-content: center;
   margin-bottom: 5%;
 }
-.locationContainer {
-  margin-right: 20px;
-}
-
-.followUs {
-  margin: 3%;
-}
-
-.contactUs {
-  margin: 3%;
-}
 
 /* RIGHT CONTAINER */
+
 .moonImage {
   background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png");
   position: absolute;
 
-  top: 80%;
+  top: 85%;
   width: 100%;
-  height: 20%;
+  height: 15%;
 }
 @keyframes float {
   0% {
@@ -160,107 +91,39 @@ h3 {
 .astronautImage {
   position: absolute;
   top: 60%;
-  width: 30%;
-  height: 20%;
+  height: 30%;
 }
 .planetImage {
+  top: 20%;
   position: absolute;
-  left: 85%;
-  width: 30%;
-  height: 30%;
-  z-index: 1;
-}
-.techHeading {
-  font-size: 2.6em;
-  position: relative;
+  left: 88%;
+
+  height: 60%;
 }
 
-.rightContainer {
-  grid-area: form;
-  position: relative;
-  border-bottom-right-radius: 5px;
-  border-top-right-radius: 5px;
-  border-bottom: #e0e0e0 solid 5px;
-  border-top: #e0e0e0 solid 5px;
-  border-right: #e0e0e0 solid 5px;
-  font-weight: bold;
-  background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png");
+.launchIntoTech {
+  color: white;
+  display: inline-block;
+  position: absolute;
+  top: 25%;
+  left: 5%;
+  font-size: 4em;
+}
+.sentenceOne,
+.sentenceTwo {
   color: white;
 }
 
 .socImage {
+  top: 5%;
   width: 200px;
   height: 200px;
+  transform: translate(-50%, 0);
+  position: absolute;
+  left: 50%;
 }
 
-.socImageContainer {
-  position: relative;
-  top: 20px;
-  width: 100%;
-
-  display: inline-flex;
-  justify-content: center;
-}
-
-.sentenceOne {
-  position: relative;
-  width: 100%;
-
-  display: flex;
-  justify-content: center;
-}
-.sentenceTwo {
-  position: relative;
-  width: 100%;
-
-  display: flex;
-  justify-content: center;
-}
-
-/* LOGO MEDIA QUERY */
-@media only screen and (max-width: 1290px) {
-  .socImage {
-    height: 220px;
-    width: 220px;
-  }
-}
-@media only screen and (max-width: 980px) {
-  .socImage {
-    height: 200px;
-    width: 200px;
-  }
-}
-
-@media only screen and (max-width: 875px) {
-  .socImage {
-    height: 180px;
-    width: 180px;
-  }
-}
-
-@media only screen and (max-width: 785px) {
-  .socImage {
-    height: 160px;
-    width: 160px;
-  }
-}
-@media only screen and (max-width: 720px) {
-  .socImage {
-    height: 140px;
-    width: 140px;
-  }
-}
-
-/* RIGHT CONTAINER MEDIA QUERY */
-
-/* MOBILE VIEW */
-@media only screen and (max-width: 550px) {
-  .socImage {
-    display: none;
-  }
-  .leftContainer {
-    width: 100%;
-  }
+/* @media only screen and (max-width: 550px) {
   .socialMediaContainer {
     display: none;
   }
@@ -273,17 +136,69 @@ h3 {
   .contactUs {
     display: none;
   }
+  .planetImage {
+    display: none;
+  }
+  .launchIntoTech {
+    display: none;
+  }
 }
-@media only screen and (max-width: 549px) {
+@media only screen and (max-width: 800px) {
+  .socialMediaContainer {
+    display: none;
+  }
+  .contactContainer {
+    display: none;
+  }
+  .followUs {
+    display: none;
+  }
+  .contactUs {
+    display: none;
+  }
+  .planetImage {
+    display: none;
+  }
+}
+@media only screen and (max-width: 600px) {
   .container {
     display: grid;
     grid-template-columns: auto;
     grid-template-rows: auto auto;
     grid-template-areas: "header" "form";
-    margin: 2% auto;
+    margin: 5% auto;
     height: 100%;
-    border: 3px solid white;
-    border-radius: 10px;
+    border: 7px solid white;
+    border-radius: 7px;
     width: 70%;
+    height: 90%;
+  }
+  .leftContainer {
+    border: 0px;
+    border-radius: 0px;
+
+    border-bottom: #e0e0e0 solid 7px;
+  }
+  .rightContainer {
+    border: 0px;
+  }
+  .planetImage {
+    display: none;
+  }
+  .launchIntoTech {
+    display: none;
+  }
+  .socImage {
+    width: 150px;
+    height: 150px;
+  }
+  .techHeading {
+    font-size: 1.3em;
   }
 }
+
+@media only screen and (max-width: 350px) {
+  .container {
+    height: 90%;
+  }
+} */

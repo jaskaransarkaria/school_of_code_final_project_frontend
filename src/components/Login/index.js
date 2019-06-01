@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import firebase from "firebase";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-import Welcome from "../Welcome";
-
+import { Redirect } from "react-router-dom";
 import { api } from "../../config";
+import { UserUidContext } from "../App";
 
-const Login = () => {
+function Login(props) {
   const [signedIn, setSignedIn] = useState(false);
+  const userUid = useContext(UserUidContext);
 
   const uiConfig = {
     signInFlow: "popup",
@@ -22,10 +23,17 @@ const Login = () => {
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
       setSignedIn(!!user); // not not meaning if the user is an object it will revert to true and if it isn't an object it will revert to false
-      console.log("user", user);
-      console.log("uid", user.uid);
+
+      if (user === null) {
+        return;
+      } else {
+        console.log("user", user);
+        console.log("uid", user.uid);
+      }
     });
   }, []);
+
+  console.log("uid from context", userUid);
 
   return (
     <>
@@ -35,23 +43,10 @@ const Login = () => {
           firebaseAuth={firebase.auth()}
         />
       ) : (
-        <div className="App">
-          <Welcome
-            fullName={firebase.auth().currentUser.displayName}
-            photo={firebase.auth().currentUser.photoURL}
-          />
-
-          <button
-            onClick={() => {
-              firebase.auth().signOut();
-            }}
-          >
-            Sign Out
-          </button>
-        </div>
+        <Redirect to="applicant-dashboard" />
       )}
     </>
   );
-};
+}
 
 export default Login;
