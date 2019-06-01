@@ -6,7 +6,7 @@ import shortid from "shortid";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import firebase from "firebase";
 import { api } from "../../config";
-import ThankYou from "../ThankYou";
+import ThankYouSubmission from "../ThankYouSubmission";
 
 AWS.config.update({
   region: "eu-west-1",
@@ -68,7 +68,7 @@ const VideoUpload = () => {
 
   let savedUid;
   useEffect(() => {
-    firebase.auth().onAuthStateChanged(function(user) {
+    return firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         savedUid = user.uid;
         setFirebaseUid(user.uid);
@@ -224,7 +224,7 @@ const VideoUpload = () => {
   // Otherwise, the promise from the call will be rejected. getUserMedia() also won't work for cross origin
   // calls from iframes
 
-  return (
+  return !redirect ? (
     <div style={{ textAlign: "center" }}>
       {console.log("all videos", allVideoLinks)}
       {showVideo &&
@@ -344,8 +344,9 @@ const VideoUpload = () => {
           confirm upload
         </button>
       )}
-      {redirect && <ThankYou />}
     </div>
+  ) : (
+    <ThankYouSubmission />
   );
 };
 

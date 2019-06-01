@@ -30,7 +30,7 @@ const ApplicantDashBoard = props => {
   const [users, setUsers] = useState({});
 
   useEffect(() => {
-    firebase.auth().onAuthStateChanged(user => {
+    return firebase.auth().onAuthStateChanged(user => {
       if (user === null) {
         return;
       } else {
@@ -41,24 +41,18 @@ const ApplicantDashBoard = props => {
 
   useEffect(() => {
     // GET the current uid's application info
-    if (userUid) {
-      console.log("applicant dashboard userUid", userUid);
-      const getUidApplicationData = async () => {
+
+    const getUidApplicationData = async () => {
+      if (userUid) {
         const data = await fetch(`${api.applications}/${userUid}`);
         const response = await data.json();
         console.log("GET uid application", response);
         setUsers({ ...response.result });
-      };
-
-      getUidApplicationData();
-    }
+      }
+    };
+    getUidApplicationData();
+    return getUidApplicationData;
   }, [userUid]);
-
-  // const changeStage = info => {
-  //   if (info.stage === 1) {
-  //     setUsers([{ ...users }]);
-  //   }
-  // };
 
   const toggleModal = () => {
     setModal(!modal);
@@ -186,13 +180,6 @@ const ApplicantDashBoard = props => {
             passFinalStage={users.passInterviewStage}
           />
         </div>
-
-        {/* <div className={css.acceptanceContainer}>
-            <h3> Secondary Container</h3>
-            <div className={css.acceptCard}>
-              <h3> Accept place</h3>
-            </div>
-          </div> */}
       </div>
     </div>
   );

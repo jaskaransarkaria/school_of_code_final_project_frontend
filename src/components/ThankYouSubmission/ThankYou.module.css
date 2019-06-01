@@ -1,0 +1,233 @@
+@import url("https://fonts.googleapis.com/css?family=Oxygen:300,400");
+/* MAIN CONTAINERS */
+.body {
+  font-family: "Oxygen", sans-serif;
+}
+.container {
+  display: grid;
+  grid-template-columns: 35% 65%;
+  grid-template-areas: "header form";
+
+  height: 100vh;
+}
+.leftContainer {
+  grid-area: header;
+
+  color: white;
+
+  background-image: linear-gradient(to bottom right, #04c7d9, #5f04cf);
+}
+.rightContainer {
+  grid-area: form;
+  color: white;
+  position: relative;
+
+  background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png");
+  font-weight: bold;
+}
+/* LEFT CONTAINER CONTENT */
+/* SOC IMAGE */
+.socImage {
+  width: 200px;
+  height: 200px;
+}
+.socImageContainer {
+  top: 5%;
+  position: relative;
+  text-align: center;
+}
+/* QUESTION SELECT BOX */
+
+.selectdiv {
+  margin-left: 20px;
+  position: absolute;
+
+  width: 30%;
+  float: left;
+  top: 70%;
+}
+
+.selectdiv:after {
+  content: "\f078";
+  font: normal normal normal 17px/1 FontAwesome;
+  color: #0ebeff;
+  right: 11px;
+  top: 6px;
+  height: 34px;
+  padding: 15px 0px 0px 8px;
+  border-left: 1px solid #0ebeff;
+  position: absolute;
+  pointer-events: none;
+}
+
+/* IE11 hide native button (thanks Matt!) */
+select::-ms-expand {
+  display: none;
+}
+
+.selectdiv select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* Add some styling */
+
+  display: block;
+  width: 100%;
+
+  height: 50px;
+  float: right;
+  margin: 5px 0px;
+  padding: 0px 24px;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #333;
+  background-color: #ffffff;
+  background-image: none;
+  border: 1px solid #0ebeff;
+  -ms-word-break: normal;
+  word-break: normal;
+}
+.instructionsText {
+  margin-left: 20px;
+  float: left;
+  border-bottom: 3px solid white;
+}
+.instructionsParagraph {
+  font-size: 1.2em;
+  width: 30%;
+  margin-left: 20px;
+  margin-top: 20px;
+  position: relative;
+  text-align: justify;
+  word-wrap: break-word;
+}
+.instructionsContainer {
+  float: left;
+
+  position: absolute;
+  top: 40%;
+}
+
+/* RIGHT CONTAINER CONTENT */
+.firstAndLastNameContainer {
+  display: flex;
+}
+.firstNameContainer {
+  flex: 1;
+}
+.lastNameContainer {
+  margin-left: 10px;
+  flex: 1;
+}
+
+.firstName,
+.lastName {
+  font-size: 1.2em;
+  color: white;
+  padding: 10px;
+  width: 100%;
+  background-color: transparent;
+  border: 5px solid #11cf84;
+  box-sizing: border-box;
+  margin-top: 10px;
+}
+.email {
+  font-size: 1.2em;
+  color: white;
+  padding: 10px;
+  width: 50%;
+  background-color: transparent;
+  border: 5px solid #11cf84;
+  box-sizing: border-box;
+  margin-top: 10px;
+}
+.nextButton {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 50px;
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+  width: 50%;
+  color: white;
+  padding: 10px;
+  border-style: none;
+  background-color: #11cf84;
+}
+
+::placeholder {
+  color: white;
+}
+.firstNameLabel,
+.lastNameLabel,
+.emailLabel {
+  font-weight: bold;
+  color: white;
+}
+
+.firstNameContainer,
+.lastNameContainer,
+.emailContainer {
+  margin-bottom: 60px;
+}
+.header {
+  color: white;
+}
+.formContainer {
+  position: relative;
+  top: 30%;
+  color: white;
+}
+
+.applicationFormText {
+  margin: 10px 0;
+  position: absolute;
+}
+.applicationStepText {
+  position: absolute;
+  margin-top: 80px;
+}
+.tickImage {
+  position: relative;
+  transform: translate(-50%);
+  left: 50%;
+  margin-bottom: 1%;
+  width: 150px;
+  height: 150px;
+}
+.rightContentWrapper {
+  border-radius: 10px;
+  border: 10px solid #11cf84;
+  position: absolute;
+  left: 25%;
+  right: 25%;
+  top: 25%;
+  padding: 20px;
+  display: inline-block;
+}
+.subTextOne {
+  margin: 2%;
+  text-transform: uppercase;
+  font-size: 1.1em;
+  text-align: center;
+  font-style: italic;
+}
+.thanksMessage {
+  text-transform: uppercase;
+}
+.signOutButton {
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 25%);
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 20px;
+  cursor: pointer;
+
+  bottom: 0;
+  width: 50%;
+  color: white;
+  padding: 10px;
+  border-style: none;
+  background-color: #11cf84;
+}

@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import DashboardScheduleCarousel from "../DashboardScheduleCarousel";
 import css from "../DashboardSchedule/DashboardSchedule.module.css";
+
+// get last 5 days schedule || most recent schedule and the 5 days previous
+
 class DashboardSchedule extends Component {
   constructor(props) {
     super(props);
@@ -28,7 +31,6 @@ class DashboardSchedule extends Component {
               <div className={css.dayBox}>Wednesday</div>
               <div className={css.dayBox}>Thursday</div>
               <div className={css.dayBox}>Friday</div>
-
             </div>
 
             <DashboardScheduleCarousel />
