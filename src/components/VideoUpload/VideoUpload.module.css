@@ -1,54 +1,69 @@
 .startRecording {
-  width: 30%;
-  color: white;
-
-  border-style: none;
-  background-color: #11cf84;
-  font-size: 1.2em;
-  font-weight: bold;
+  width: 7%;
+  padding: 0.5%;
+  /* color: white; */
+  /* background: url("/record.png"); */
+  /* border-style: none; */
+  /* background-color: #11cf84; */
+  /* font-size: 1.2em; */
+  /* font-weight: bold; */
   cursor: pointer;
 }
 
 .stopRecording {
-  width: 30%;
-  color: white;
+  width: 7%;
+  padding: 0.5%;
+
+  /* color: white;
 
   border-style: none;
   background-color: red;
   font-size: 1.2em;
-  font-weight: bold;
+  font-weight: bold; */
   cursor: pointer;
 }
 
+.playRecording {
+  width: 7%;
+  padding: 0.5%;
+
+  /* color: white;
+
+  border-style: none;
+  background-color: red;
+  font-size: 1.2em;
+  font-weight: bold; */
+  cursor: pointer;
+}
 .submitRecording {
-  width: 30%;
-  color: white;
+  width: 7%;
+  padding: 0.5%;
+
+  /* color: white;
   padding: 10px;
   border-style: none;
   background-color: #11cf84;
   font-size: 1.2em;
-  font-weight: bold;
+  font-weight: bold; */
   cursor: pointer;
+  margin-left: 70%;
 }
 .submitFinalVideos {
-  width: 25%;
-  color: white;
+  width: 7%;
+  padding: 0.5%;
+
+  /* color: white;
   padding: 10px;
   border-style: none;
   background-color: #11cf84;
   font-size: 1.2em;
-  font-weight: bold;
+  font-weight: bold; */
   cursor: pointer;
 }
-.startRecording,
-.stopRecording,
-.submitRecording {
-}
+
 .buttonContainer {
   margin-top: 20px;
   width: 100%;
-  display: flex;
-  justify-content: space-between;
 }
 .stepText {
   font-size: 1.9em;

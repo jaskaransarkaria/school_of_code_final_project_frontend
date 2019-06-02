@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 import { api } from "../../config";
+import css from "./BootcamperSchedule.module.css";
+import ArrowImage from "../../Images/arrow.png";
 
 // get last 5 days schedule || most recent schedule and the 5 days previous
 // display Day name at the top..
@@ -24,17 +26,6 @@ const BootcamperSchedule = () => {
   const [scheduleData, setScheduleData] = useState([]);
   const [sessionIndex, setSessionIndex] = useState(0);
   const [dateToShow, setDateToShow] = useState([]);
-
-  const convertDate = isoDate => {
-    const convertedDate = moment(isoDate).format("DD/MM/YYYY");
-    setSelectedDate(convertedDate);
-  };
-
-  const changeDate = num => {
-    // returns a moment.js object
-    const newDate = moment(selectedDate, "DD/MM/YYYY").add(num, "days");
-    return setSelectedDate(moment(newDate._d).format("DD/MM/YYYY"));
-  };
 
   useEffect(() => {
     async function fetchSchedule() {
@@ -60,6 +51,7 @@ const BootcamperSchedule = () => {
       }
     }
     fetchSchedule();
+    return fetchSchedule;
   }, [selectedDate]);
 
   useEffect(() => {
@@ -80,12 +72,9 @@ const BootcamperSchedule = () => {
     return fetchMostRecentSchedule;
   }, []);
   const controlCarousel = num => {
-    // find out the daysContent length (how far can the carousel go up before not working)
-    const carouselData = scheduleData.find(day => day.date === selectedDate);
-
     if (
-      sessionIndex + num < 0 &&
-      sessionIndex + 3 + num >= carouselData.daysContent.length
+      sessionIndex + num < 0 ||
+      sessionIndex + 3 + num > dateToShow[0].daysContent.length
     ) {
       return;
     } else {
@@ -93,95 +82,67 @@ const BootcamperSchedule = () => {
     }
   };
 
-  const onDateSelect = date =>
-    setDateToShow([...scheduleData.find(day => day.date === date)]);
+  const FormatedDate = ({ date, num }) => (
+    <div
+      onClick={() => {
+        setSelectedDate(
+          moment(moment(date, "DD/MM/YYYY").add(num, "days")._d).format(
+            "DD/MM/YYYY"
+          )
+        );
+      }}
+    >
+      {moment(moment(date, "DD/MM/YYYY").add(num, "days")._d).format(
+        "ddd Do MMM"
+      )}
+    </div>
+  );
 
   return (
     <>
       {console.log("From BOOTCAMPER SChedule", scheduleData)}
       {console.log("selected date", selectedDate)}
       {console.log("dateToShow", dateToShow)}
-      {scheduleData.map(day => (
-        // here we display the 5 days
-        // logic to display the "selectedDate"
-        <>
-          <button
-            onClick={() => {
-              setSelectedDate(
-                moment(day.date, "DD/MM/YYYY").format("DD/MM/YYYY")
-              );
-            }}
-          >
-            {moment(day.date, "DD/MM/YYYY").format("ddd Do MMM")}
-          </button>
-          <button
-            onClick={() => {
-              setSelectedDate(
-                moment(
-                  moment(day.date, "DD/MM/YYYY").add(-1, "days")._d
-                ).format("DD/MM/YYYY")
-              );
-            }}
-          >
-            {moment(moment(day.date, "DD/MM/YYYY").add(-1, "days")._d).format(
-              "ddd Do MMM"
-            )}
-          </button>
-          <button
-            onClick={() => {
-              setSelectedDate(
-                moment(
-                  moment(day.date, "DD/MM/YYYY").add(-2, "days")._d
-                ).format("DD/MM/YYYY")
-              );
-            }}
-          >
-            {moment(moment(day.date, "DD/MM/YYYY").add(-2, "days")._d).format(
-              "ddd Do MMM"
-            )}
-          </button>
-          <button
-            onClick={() => {
-              setSelectedDate(
-                moment(
-                  moment(day.date, "DD/MM/YYYY").add(-3, "days")._d
-                ).format("DD/MM/YYYY")
-              );
-            }}
-          >
-            {moment(moment(day.date, "DD/MM/YYYY").add(-3, "days")._d).format(
-              "ddd Do MMM"
-            )}
-          </button>
-          <button
-            onClick={() => {
-              setSelectedDate(
-                moment(
-                  moment(day.date, "DD/MM/YYYY").add(-4, "days")._d
-                ).format("DD/MM/YYYY")
-              );
-            }}
-          >
-            {moment(moment(day.date, "DD/MM/YYYY").add(-4, "days")._d).format(
-              "ddd Do MMM"
-            )}
-          </button>
-        </>
-      ))}
-      <br />
-      <span>
-        <button onClick={() => controlCarousel(1)}>&lt;</button>
-        {dateToShow.map(day =>
-          day.daysContent.map((session, idx) => (
-            <>
-              <p>{session.sessionTimes}</p>
-              <p>{`Lesson ${idx + 1}`}</p>
-              <p>{session.learningObjectives}</p>
-            </>
-          ))
-        )}
-        <button onClick={() => controlCarousel(-1)}>&gt;</button>
-      </span>
+      <div className={css.dashboardScheduleContainer}>
+        {scheduleData.map(day => (
+          // here we display the 5 days
+          <div className={css.daysOfWeekContainer}>
+            <FormatedDate className={css.dayBox} date={day.date} num={0} />
+            <FormatedDate className={css.dayBox} date={day.date} num={-1} />
+            <FormatedDate className={css.dayBox} date={day.date} num={-2} />
+            <FormatedDate className={css.dayBox} date={day.date} num={-3} />
+            <FormatedDate className={css.dayBox} date={day.date} num={-4} />
+          </div>
+        ))}
+        <br />
+        <div className={css.carouselContainer}>
+          <img
+            src={ArrowImage}
+            alt="left arrow"
+            className={css.leftArrow}
+            onClick={() => controlCarousel(-1)}
+          />
+          {dateToShow.map(day =>
+            day.daysContent
+
+              .map((session, idx) => (
+                <div className={css.itemContainer}>
+                  <b>{`Lesson ${idx + 1}`}</b>
+                  <p>{session.contentTitle}</p>
+                  <p>{session.learningObjectives}</p>
+                </div>
+              ))
+              .slice(sessionIndex, sessionIndex + 3)
+          )}
+
+          <img
+            src={ArrowImage}
+            alt="right arrow"
+            className={css.rightArrow}
+            onClick={() => controlCarousel(1)}
+          />
+        </div>
+      </div>
     </>
   );
 };

@@ -1,0 +1,87 @@
+.dashboardScheduleContainer {
+  display: inline-block;
+  width: 100%;
+  height: 40%;
+  background-image: linear-gradient(to bottom right, #04c7d9, #5f04cf);
+  opacity: 0.9;
+}
+.daysOfWeekContainer {
+  width: 100%;
+  height: 20%;
+  font-family: "Oxygen", sans-serif;
+  font-weight: bold;
+  display: inline-flex;
+  justify-content: space-between;
+  background-color: white;
+}
+.dayBox {
+  font-size: 1.3em;
+  display: inline-flex;
+  border-right: 1px solid lightgrey;
+  align-items: center;
+  justify-content: center;
+  width: 20%;
+  padding: 15px;
+  transition: 200ms ease-in-out;
+}
+.dayBox:hover {
+  background-color: #11cf84;
+  color: white;
+  cursor: pointer;
+}
+
+.carouselContainer {
+  display: flex;
+  position: relative;
+  justify-content: space-around;
+  align-items: center;
+  padding: 35px 10px;
+}
+
+.itemContainer {
+  position: relative;
+  width: 15%;
+  height: 80%;
+  bottom: 15%;
+  padding: 25px;
+  background-color: whitesmoke;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: 200ms ease-in-out;
+}
+
+.itemContainer:hover {
+  box-shadow: 3px 3px 5px;
+  cursor: pointer;
+}
+
+.rightArrow {
+  display: inline-flex;
+  position: relative;
+  height: 40px;
+  width: 40px;
+  transition: 300ms ease-in-out;
+  position: relative;
+  z-index: 1;
+}
+.rightArrow:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.leftArrow {
+  display: inline-flex;
+  position: relative;
+  transform: rotate(180deg);
+  height: 40px;
+  width: 40px;
+  transition: 300ms ease-in-out;
+}
+.leftArrow:hover {
+  cursor: pointer;
+  transform: scale(1.1) rotate(180deg);
+}

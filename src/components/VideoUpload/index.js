@@ -31,11 +31,17 @@ let localStream;
 let recorder;
 
 const interviewQuestions = [
-  { question: "Tell us about yourself" },
-  { question: "Why do you want to learn to code?" },
-  { question: "What drives you?" },
-  { question: "Why do you want to join School of Code?" },
-  { question: "Explain something complex in simple terms" }
+  { question: "Tell us about yourself", poster: "/q1_poster.png" },
+  { question: "Why do you want to learn to code?", poster: "/q2_poster.png" },
+  { question: "What drives you?", poster: "/q3_poster.png" },
+  {
+    question: "Why do you want to join School of Code?",
+    poster: "/q4_poster.png"
+  },
+  {
+    question: "Explain something complex in simple terms",
+    poster: "/q5_poster.png"
+  }
 ];
 
 // send the video to the server
@@ -49,9 +55,9 @@ const VideoUpload = () => {
   const [hasVideo, setHasVideo] = useState(false);
   const [hasAudio, setHasAudio] = useState(false);
   const [showVideo, setShowVideo] = useState(true);
-  const [src, setSrc] = useState("");
+  const [src, setSrc] = useState();
   const [allVideoLinks, setAllVideoLinks] = useState([]);
-  const [autoplay, setAutoplay] = useState(true);
+  const [autoplay, setAutoplay] = useState(false);
   const [chunks, setChunks] = useState([]);
   const [redirect, setRedirect] = useState(false);
   const video = useRef(null);
@@ -66,11 +72,9 @@ const VideoUpload = () => {
     []
   );
 
-  let savedUid;
   useEffect(() => {
     return firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
-        savedUid = user.uid;
         setFirebaseUid(user.uid);
         console.log(user.uid);
       } else {
@@ -118,7 +122,7 @@ const VideoUpload = () => {
         } else {
           //setSrc(data.Location);
           setAllVideoLinks([...allVideoLinks, data.Location]);
-          setAutoplay(true);
+          setAutoplay(false);
           resolve(data);
         }
       });
@@ -155,6 +159,7 @@ const VideoUpload = () => {
       navigator.mediaDevices.getUserMedia(constraints).then(stream => {
         switch (action) {
           case "stop":
+            video.current.pause();
             var tracks = stream.getTracks();
             setSrc(null);
             tracks.forEach(function(track) {
@@ -168,6 +173,8 @@ const VideoUpload = () => {
                 track.stop();
               });
             }
+            video.current.load();
+            setSrc(null);
             setAutoplay(false);
             if (recorder.state === "recording") {
               recorder.stop();
@@ -239,26 +246,24 @@ const VideoUpload = () => {
           .map(item => {
             return (
               <div className={css.videoContainer}>
-                <h2 className={css.stepText}>Step {questionCounter + 1}/5 </h2>
-                <br />
-                <h2 className={css.questionsText}> {item.question}</h2>
-
                 <video
                   ref={video}
-                  controls
+                  preload="none"
                   autoPlay={autoplay}
                   id="videoUpload"
                   height="60%"
                   width="100%"
                   display="block"
-                  poster="/school-of-code.jpg"
+                  poster={item.poster}
                   key={src}
                 >
                   <source src={src} />
                 </video>
                 <br />
                 <div className={css.buttonContainer}>
-                  <button
+                  <img
+                    src="/record.png"
+                    alt="record video"
                     className={css.startRecording}
                     onClick={() => {
                       // check if they have a microphone and webcam here
@@ -273,28 +278,37 @@ const VideoUpload = () => {
                         handleRecording("start");
                       }
                     }}
-                  >
-                    Start Recording
-                  </button>
-                  <>
-                    <button
-                      className={css.stopRecording}
-                      onClick={() => {
-                        if (localStream) {
-                          handleRecording("stop");
-                        }
-                      }}
-                    >
-                      Stop Recording
-                    </button>
-                  </>
+                  />
 
+                  <img
+                    src="stop.png"
+                    alt="stop recording"
+                    className={css.stopRecording}
+                    onClick={() => {
+                      if (localStream) {
+                        handleRecording("stop");
+                      }
+                    }}
+                  />
+                  <img
+                    src="play.png"
+                    alt="play recording"
+                    className={css.playRecording}
+                    onClick={() => {
+                      video.current.play();
+                    }}
+                  />
                   {!isLoading &&
                     (questionCounter + 1 < interviewQuestions.length ? (
-                      <button
+                      <img
+                        src="checked.png"
+                        alt="submit video"
                         className={css.submitRecording}
                         onClick={() => {
-                          const blob = new Blob(chunks, { type: "video/webm" });
+                          handleRecording("stop");
+                          const blob = new Blob(chunks, {
+                            type: "video/webm"
+                          });
                           console.log(blob);
                           if (blob.size > 0 && !isRecording) {
                             // upload to datbase
@@ -306,12 +320,12 @@ const VideoUpload = () => {
                               );
                           }
                         }}
-                      >
-                        Submit Video
-                      </button>
+                      />
                     ) : (
-                      <button
-                        className={css.submitFinalVideos}
+                      <img
+                        src="checked.png"
+                        alt="submit video"
+                        className={css.submitRecording}
                         onClick={() => {
                           const blob = new Blob(chunks, { type: "video/webm" });
                           console.log(blob);
@@ -325,11 +339,9 @@ const VideoUpload = () => {
                           }
                           return;
                         }}
-                      >
-                        Submit Final Videos
-                      </button>
+                      />
                     ))}
-                  {isLoading && <CircularProgress />}
+                  {isLoading && <CircularProgress color="white" />}
                 </div>
               </div>
             );

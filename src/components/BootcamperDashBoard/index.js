@@ -13,7 +13,7 @@ class BootcamperDashBoard extends Component {
       <div className={css.dashBoardContainer}>
         <NavBar propsUser="Bootcamper" />
         <DashboardBanner title={"Welcome Bootcamper!"} />
-        <DashBoardSchedule />
+        {/* <DashBoardSchedule /> */}
         <BootcamperSchedule />
         {/* <DashboardTopicsCarousel /> */}
         <TopicsTray style={{ margin: "20%" }} />
