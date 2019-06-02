@@ -23,6 +23,7 @@
   width: 20%;
   padding: 15px;
   transition: 200ms ease-in-out;
+  cursor: pointer;
 }
 .dayBox:hover {
   background-color: #11cf84;

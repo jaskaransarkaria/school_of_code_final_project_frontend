@@ -26,6 +26,7 @@ const BootcamperSchedule = () => {
   const [scheduleData, setScheduleData] = useState([]);
   const [sessionIndex, setSessionIndex] = useState(0);
   const [dateToShow, setDateToShow] = useState([]);
+  const [dateInBar, setDateInBar] = useState(0);
 
   useEffect(() => {
     async function fetchSchedule() {
@@ -100,18 +101,49 @@ const BootcamperSchedule = () => {
 
   return (
     <>
-      {console.log("From BOOTCAMPER SChedule", scheduleData)}
-      {console.log("selected date", selectedDate)}
-      {console.log("dateToShow", dateToShow)}
       <div className={css.dashboardScheduleContainer}>
         {scheduleData.map(day => (
           // here we display the 5 days
           <div className={css.daysOfWeekContainer}>
-            <FormatedDate className={css.dayBox} date={day.date} num={0} />
-            <FormatedDate className={css.dayBox} date={day.date} num={-1} />
-            <FormatedDate className={css.dayBox} date={day.date} num={-2} />
-            <FormatedDate className={css.dayBox} date={day.date} num={-3} />
-            <FormatedDate className={css.dayBox} date={day.date} num={-4} />
+            {dateInBar > 0 && (
+              <button
+                style={{ border: "none", background: "transparent", cursor: "pointer" }}
+                onClick={() => setDateInBar(dateInBar + 1)}
+              >
+                &#60;
+              </button>
+            )}
+            <FormatedDate
+              className={css.dayBox}
+              date={day.date}
+              num={dateInBar}
+            />
+            <FormatedDate
+              className={css.dayBox}
+              date={day.date}
+              num={dateInBar - 1}
+            />
+            <FormatedDate
+              className={css.dayBox}
+              date={day.date}
+              num={dateInBar - 2}
+            />
+            <FormatedDate
+              className={css.dayBox}
+              date={day.date}
+              num={dateInBar - 3}
+            />
+            <FormatedDate
+              className={css.dayBox}
+              date={day.date}
+              num={dateInBar - 4}
+            />
+            <button
+              style={{ border: "none", background: "transparent", cursor: "pointer"}}
+              onClick={() => setDateInBar(dateInBar - 1)}
+            >
+              &#62;
+            </button>
           </div>
         ))}
         <br />
