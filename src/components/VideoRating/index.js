@@ -231,6 +231,8 @@ const VideoRating = props => {
         user => !user.passVideoStage
       )
     );
+
+    updatePassStage();
   }, [sliderPassValue]);
 
   useEffect(() => {
@@ -297,7 +299,7 @@ const VideoRating = props => {
               // setRatingValue(value);
               // setAdminFeedbackRating(value * 2);
               setSliderPassValue(value * 2);
-              updatePassStage();
+              //updatePassStage();
             }}
           />
         </div>
