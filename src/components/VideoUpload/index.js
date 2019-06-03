@@ -1,6 +1,7 @@
 import css from "../VideoUpload/VideoUpload.module.css";
 import React, { useState, useEffect, useRef } from "react";
 import AWS from "aws-sdk";
+import TranscribeService from "aws-sdk/clients/transcribeservice";
 import { aws } from "../../config";
 import shortid from "shortid";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -13,7 +14,9 @@ AWS.config.update({
   accessKeyId: `${aws.key_id}`,
   secretAccessKey: `${aws.secret_key}`
 });
+
 const s3 = new AWS.S3();
+var transcribeservice = new TranscribeService({ apiVersion: "2017-10-26" });
 
 const constraints = {
   audio: {
@@ -71,7 +74,6 @@ const VideoUpload = () => {
         navigator.mozGetUserMedia),
     []
   );
-
   useEffect(() => {
     return firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
@@ -106,14 +108,35 @@ const VideoUpload = () => {
       .catch(err => console.error(err));
   };
 
+  const transcribeVideo = fileToTranslate => {
+    return new Promise((res, rej) => {
+      const jobName = firebaseUid + `_Q${questionCounter + 1}`;
+      let params = {
+        LanguageCode: "en-GB",
+        Media: { MediaFileUri: fileToTranslate },
+        MediaFormat: "mp4",
+        TranscriptionJobName: jobName,
+        OutputBucketName: "school-of-code-applicant-videos"
+      };
+      transcribeservice.startTranscriptionJob(params, function(err, data) {
+        if (err) {
+          console.log("error from transcribe start", err, err.stack);
+        } else {
+          console.log("TRANSCRIPT DATA", data);
+          res(data);
+        }
+      });
+    });
+  };
+
   const uploadToAWS = blob => {
     return new Promise((resolve, reject) => {
       const fileName = shortid.generate();
       var params = {
         Bucket: "school-of-code-applicant-videos",
-        Key: `${fileName}.webm`,
+        Key: `${fileName}.mp4`,
         Body: blob,
-        ContentType: "video/webm"
+        ContentType: "video/mp4"
       };
 
       s3.upload(params, function(err, data) {
@@ -122,6 +145,7 @@ const VideoUpload = () => {
         } else {
           //setSrc(data.Location);
           setAllVideoLinks([...allVideoLinks, data.Location]);
+          transcribeVideo(data.Location);
           setAutoplay(false);
           resolve(data);
         }
@@ -161,7 +185,6 @@ const VideoUpload = () => {
           case "stop":
             video.current.pause();
             var tracks = stream.getTracks();
-            setSrc(null);
             tracks.forEach(function(track) {
               track.stop();
             });
@@ -188,8 +211,8 @@ const VideoUpload = () => {
 
             video.current.play(); // use a ref here
             localStream = stream;
-
-            recorder = new MediaRecorder(stream);
+            var options = { mimeType: "video/webm;codecs=h264" };
+            recorder = new MediaRecorder(stream, options);
             setIsRecording(true);
             recorder.ondataavailable = e => {
               if (e.data && e.data.size > 0) {
@@ -307,8 +330,9 @@ const VideoUpload = () => {
                         onClick={() => {
                           handleRecording("stop");
                           const blob = new Blob(chunks, {
-                            type: "video/webm"
+                            type: "video/mp4"
                           });
+
                           console.log(blob);
                           if (blob.size > 0 && !isRecording) {
                             // upload to datbase
@@ -327,7 +351,7 @@ const VideoUpload = () => {
                         alt="submit video"
                         className={css.submitRecording}
                         onClick={() => {
-                          const blob = new Blob(chunks, { type: "video/webm" });
+                          const blob = new Blob(chunks, { type: "video/mp4" });
                           console.log(blob);
                           if (blob.size > 0 && !isRecording) {
                             setIsLoading(true);

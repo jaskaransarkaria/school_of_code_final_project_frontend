@@ -5,6 +5,7 @@ import { api } from "../../config";
 import UserName from "../UserName";
 import Rating from "react-rating";
 import css from "./VideoRating.module.css";
+//import Transcript from "../Transcript";
 // TODO
 
 // add questions
@@ -306,10 +307,7 @@ const VideoRating = props => {
         <div id="videoTray">
           {pendingVideosData.map(
             ({ videoApplicationData, firebaseUid }, applicantIndex) => {
-              if (
-                applicantIndex === applicantCounter &&
-                videoApplicationData.length > 0
-              ) {
+              if (applicantIndex === applicantCounter) {
                 return (
                   <>
                     <div className={css.applicationStatusContainer}>
@@ -329,7 +327,8 @@ const VideoRating = props => {
                             {
                               pendingVideosData.filter(
                                 applicant =>
-                                  applicant.passVideoStage === "pending"
+                                  applicant.passVideoStage === "pending" &&
+                                  applicant.videoApplicationData.length > 0
                               ).length
                             }
                           </p>
@@ -344,26 +343,34 @@ const VideoRating = props => {
                           {/* List all applicants, unless the search input is used  */}
                           {pendingVideosData.map(
                             (applicant, pendingApplicationIndex) => {
-                              return (
-                                <>
-                                  <UserName
-                                    classToBe={css.applicant}
-                                    click={e =>
-                                      viewApplication(e, applicant.firebaseUid)
-                                    }
-                                    key={e =>
-                                      viewApplication(e, applicant.firebaseUid)
-                                    }
-                                    uid={applicant.firebaseUid}
-                                    applicantCounter={() =>
-                                      setApplicantCounter(
-                                        pendingApplicationIndex
-                                      )
-                                    }
-                                    dispatch={() => dispatch("pending")}
-                                  />
-                                </>
-                              );
+                              if (applicant.videoApplicationData.length > 0) {
+                                return (
+                                  <>
+                                    <UserName
+                                      classToBe={css.applicant}
+                                      click={e =>
+                                        viewApplication(
+                                          e,
+                                          applicant.firebaseUid
+                                        )
+                                      }
+                                      key={e =>
+                                        viewApplication(
+                                          e,
+                                          applicant.firebaseUid
+                                        )
+                                      }
+                                      uid={applicant.firebaseUid}
+                                      applicantCounter={() =>
+                                        setApplicantCounter(
+                                          pendingApplicationIndex
+                                        )
+                                      }
+                                      dispatch={() => dispatch("pending")}
+                                    />
+                                  </>
+                                );
+                              }
                             }
                           )}
                         </ul>
@@ -582,6 +589,10 @@ const VideoRating = props => {
                                             >
                                               Cancel
                                             </button>
+                                            {/* <Transcript
+                                              uid={currentUid}
+                                              questionNumber={videoCounter + 1}
+                                            /> */}
                                           </div>
                                         </div>
                                       </div>
