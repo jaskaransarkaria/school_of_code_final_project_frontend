@@ -5,9 +5,12 @@ const UserName = ({
   uid,
   classToBe,
   click,
-  key,
+  indexKey,
   dispatch,
-  applicantCounter = "noData"
+  applicantCounter = "noData",
+  setAdminFeedbackRating,
+  setVideoCounter,
+  setCollateFeedback
 }) => {
   const [allUsers, setAllUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState("");
@@ -15,8 +18,8 @@ const UserName = ({
   const getAllUsers = async () => {
     const data = await fetch(`${api.users}`);
     const response = await data.json();
-    console.log("get all USERS", response);
-    console.log("getAll users", response.result);
+    // console.log("get all USERS", response);
+    // console.log("getAll users", response.result);
     setAllUsers([...response.result]);
   };
   useEffect(() => {
@@ -51,9 +54,12 @@ const UserName = ({
           return;
         } else {
           applicantCounter();
+          setAdminFeedbackRating(0);
+          setVideoCounter(0);
+          setCollateFeedback([]);
         }
       }}
-      key={key}
+      key={indexKey}
     >{`${currentUser}`}</button>
   );
 };
