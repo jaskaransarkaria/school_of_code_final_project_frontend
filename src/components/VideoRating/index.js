@@ -5,7 +5,6 @@ import { api } from "../../config";
 import UserName from "../UserName";
 import Rating from "react-rating";
 import css from "./VideoRating.module.css";
-//import Transcript from "../Transcript";
 import { Spring } from "react-spring/renderprops";
 import { useTransition, animated } from "react-spring";
 
@@ -261,8 +260,6 @@ const VideoRating = props => {
         user => !user.passVideoStage
       )
     );
-
-    updatePassStage();
   }, [sliderPassValue]);
 
   useEffect(() => {
@@ -329,7 +326,7 @@ const VideoRating = props => {
               // setRatingValue(value);
               // setAdminFeedbackRating(value * 2);
               setSliderPassValue(value * 2);
-              //updatePassStage();
+              updatePassStage();
             }}
           />
         </div>
@@ -343,6 +340,65 @@ const VideoRating = props => {
                       key={applicantIndex}
                       className={css.applicationStatusContainer}
                     >
+                      <div>
+                        <button
+                          className={
+                            showApplicants === false
+                              ? css.applicationStatusButtonActive
+                              : css.applicationStatusButton
+                          }
+                          onClick={() => {
+                            dispatch(false);
+                            viewApplication();
+                          }}
+                        >
+                          <p> Rejected Applications</p>
+                          <Spring
+                            from={{ number: 0 }}
+                            to={{
+                              number: rejectedVideosData.filter(
+                                applicant => applicant.passVideoStage === false
+                              ).length
+                            }}
+                            config={{ duration: 500 }}
+                          >
+                            {props => (
+                              <p className={css.applicationsNumber}>
+                                {props.number.toFixed()}
+                              </p>
+                            )}
+                          </Spring>
+                        </button>
+                        <ul
+                          className={
+                            showApplicants === false
+                              ? css.applicantListContainer
+                              : css.hideApplicantListContainer
+                          }
+                        >
+                          {/* List all applicants, unless the search input is used  */}
+                          {rejectedVideosData.map(applicant => {
+                            return (
+                              <>
+                                <UserName
+                                  classToBe={css.applicant}
+                                  click={e =>
+                                    viewApplication(e, applicant.firebaseUid)
+                                  }
+                                  indexKey={applicant.firebaseUid}
+                                  uid={applicant.firebaseUid}
+                                  dispatch={() => dispatch(false)}
+                                  setAdminFeedbackRating={
+                                    setAdminFeedbackRating
+                                  }
+                                  setVideoCounter={setVideoCounter}
+                                  setCollateFeedback={setCollateFeedback}
+                                />
+                              </>
+                            );
+                          })}
+                        </ul>
+                      </div>
                       <div>
                         <button
                           className={
@@ -360,8 +416,7 @@ const VideoRating = props => {
                             {
                               pendingVideosData.filter(
                                 applicant =>
-                                  applicant.passVideoStage === "pending" &&
-                                  applicant.videoApplicationData.length > 0
+                                  applicant.passVideoStage === "pending"
                               ).length
                             }
                           </p>
@@ -376,9 +431,6 @@ const VideoRating = props => {
                           {/* List all applicants, unless the search input is used  */}
                           {pendingVideosData.map(
                             (applicant, pendingApplicationIndex) => {
-
-
-                            if (applicant.videoApplicationData.length > 0) {
                               return (
                                 <>
                                   <UserName
@@ -402,8 +454,7 @@ const VideoRating = props => {
                                     setCollateFeedback={setCollateFeedback}
                                   />
                                 </>
-                              );}
-
+                              );
                             }
                           )}
                         </ul>
@@ -476,65 +527,7 @@ const VideoRating = props => {
                           <button> Admin Home</button>
                         </div>
                       </div>
-                      <div>
-                        <button
-                          className={
-                            showApplicants === false
-                              ? css.applicationStatusButtonActive
-                              : css.applicationStatusButton
-                          }
-                          onClick={() => {
-                            dispatch(false);
-                            viewApplication();
-                          }}
-                        >
-                          <p> Rejected Applications</p>
-                          <Spring
-                            from={{ number: 0 }}
-                            to={{
-                              number: rejectedVideosData.filter(
-                                applicant => applicant.passVideoStage === false
-                              ).length
-                            }}
-                            config={{ duration: 500 }}
-                          >
-                            {props => (
-                              <p className={css.applicationsNumber}>
-                                {props.number.toFixed()}
-                              </p>
-                            )}
-                          </Spring>
-                        </button>
-                        <ul
-                          className={
-                            showApplicants === false
-                              ? css.applicantListContainer
-                              : css.hideApplicantListContainer
-                          }
-                        >
-                          {/* List all applicants, unless the search input is used  */}
-                          {rejectedVideosData.map(applicant => {
-                            return (
-                              <>
-                                <UserName
-                                  classToBe={css.applicant}
-                                  click={e =>
-                                    viewApplication(e, applicant.firebaseUid)
-                                  }
-                                  indexKey={applicant.firebaseUid}
-                                  uid={applicant.firebaseUid}
-                                  dispatch={() => dispatch(false)}
-                                  setAdminFeedbackRating={
-                                    setAdminFeedbackRating
-                                  }
-                                  setVideoCounter={setVideoCounter}
-                                  setCollateFeedback={setCollateFeedback}
-                                />
-                              </>
-                            );
-                          })}
-                        </ul>
-                      </div>
+                      
                     </div>
                     {videoApplicationData.length === 0 && (
                       <p>no video application data for: {firebaseUid} </p>
@@ -667,19 +660,6 @@ const VideoRating = props => {
                                                 setAdminFeedbackComment
                                               }
                                             />
-
-                                            <button
-                                              className={
-                                                css.toggleVideosContainer
-                                              }
-                                              onClick={viewApplication}
-                                            >
-                                              Cancel
-                                            </button>
-                                            {/* <Transcript
-                                              uid={currentUid}
-                                              questionNumber={videoCounter + 1}
-                                            /> */}
                                           </div>
                                         </div>
                                       </animated.div>

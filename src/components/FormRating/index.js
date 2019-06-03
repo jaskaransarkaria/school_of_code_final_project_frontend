@@ -390,6 +390,79 @@ function FormRating(props) {
         <div>
           <button
             className={
+              applicationStatus === false
+                ? css.applicationStatusButtonActive
+                : css.applicationStatusButton
+            }
+            onClick={() => dispatch(false)}
+          >
+            <p> Rejected Applications </p>
+            <p className={css.applicationsNumber}>
+              {
+                rejectedApplicants.filter(
+                  applicant => applicant.passFormStage === false
+                ).length
+              }
+            </p>
+          </button>
+          <ul
+            className={
+              applicationStatus === false
+                ? css.applicantListContainer
+                : css.hideApplicantListContainer
+            }
+          >
+            <input
+              onChange={e => handleInput(e)}
+              className={
+                applicationStatus === false
+                  ? css.showSearchInput
+                  : css.hideSearchInput
+              }
+              placeholder="Search Applicants"
+            />
+            {/* List all applicants, unless the search input is used  */}
+            {rejectedApplicants.map(applicant => {
+              return (
+                showSpecificApplications.length === 0 &&
+                applicationStatus === false &&
+                applicant.passFormStage === applicationStatus &&
+                input === "" && (
+                  <>
+                    <UserName
+                      classToBe={css.applicant}
+                      click={e => viewApplications(e, applicant.firebaseUid)}
+                      key={e => viewApplications(e, applicant.firebaseUid)}
+                      uid={applicant.firebaseUid}
+                      dispatch={() => dispatch(false)}
+                    />
+                  </>
+                )
+              );
+            })}
+            {/* Lists all applicants when search input is used */}
+            {searchedApplications.map(applicant => {
+              return (
+                input !== "" &&
+                applicant.passFormStage === false && (
+                  <>
+                    <UserName
+                      classToBe={css.applicant}
+                      click={e => viewApplications(e, applicant.firebaseUid)}
+                      key={e => viewApplications(e, applicant.firebaseUid)}
+                      uid={applicant.firebaseUid}
+                      dispatch={() => dispatch(false)}
+                    />
+                  </>
+                )
+              );
+            })}
+          </ul>
+        </div>
+
+        <div>
+          <button
+            className={
               applicationStatus === "pending"
                 ? css.applicationStatusButtonActive
                 : css.applicationStatusButton
@@ -463,6 +536,7 @@ function FormRating(props) {
             })}
           </ul>
         </div>
+
         <div>
           <button
             className={
@@ -535,78 +609,7 @@ function FormRating(props) {
             })}
           </ul>
         </div>
-        <div>
-          <button
-            className={
-              applicationStatus === false
-                ? css.applicationStatusButtonActive
-                : css.applicationStatusButton
-            }
-            onClick={() => dispatch(false)}
-          >
-            <p> Rejected Applications </p>
-            <p className={css.applicationsNumber}>
-              {
-                rejectedApplicants.filter(
-                  applicant => applicant.passFormStage === false
-                ).length
-              }
-            </p>
-          </button>
-          <ul
-            className={
-              applicationStatus === false
-                ? css.applicantListContainer
-                : css.hideApplicantListContainer
-            }
-          >
-            <input
-              onChange={e => handleInput(e)}
-              className={
-                applicationStatus === false
-                  ? css.showSearchInput
-                  : css.hideSearchInput
-              }
-              placeholder="Search Applicants"
-            />
-            {/* List all applicants, unless the search input is used  */}
-            {rejectedApplicants.map(applicant => {
-              return (
-                showSpecificApplications.length === 0 &&
-                applicationStatus === false &&
-                applicant.passFormStage === applicationStatus &&
-                input === "" && (
-                  <>
-                    <UserName
-                      classToBe={css.applicant}
-                      click={e => viewApplications(e, applicant.firebaseUid)}
-                      key={e => viewApplications(e, applicant.firebaseUid)}
-                      uid={applicant.firebaseUid}
-                      dispatch={() => dispatch(false)}
-                    />
-                  </>
-                )
-              );
-            })}
-            {/* Lists all applicants when search input is used */}
-            {searchedApplications.map(applicant => {
-              return (
-                input !== "" &&
-                applicant.passFormStage === false && (
-                  <>
-                    <UserName
-                      classToBe={css.applicant}
-                      click={e => viewApplications(e, applicant.firebaseUid)}
-                      key={e => viewApplications(e, applicant.firebaseUid)}
-                      uid={applicant.firebaseUid}
-                      dispatch={() => dispatch(false)}
-                    />
-                  </>
-                )
-              );
-            })}
-          </ul>
-        </div>
+
         <div onClick={goToHome} className={css.adminDashboardHome}>
           <button> Admin Home</button>
         </div>
