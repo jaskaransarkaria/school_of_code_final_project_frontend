@@ -14,21 +14,36 @@
   justify-content: center;
   padding: 10px;
   margin: 20px auto;
-  width: 60%;
+  position: relative;
 }
 
 ul.applicantListContainer {
-  max-height: 300px;
-  overflow: scroll;
   display: flex;
   flex-direction: column;
-  margin: 0 25px;
   padding: 0;
-  background: rgba(1, 1, 1, 0.2);
+  background: rgba(1, 1, 1, 0.46);
+  position: absolute;
+  left: 19%;
+  right: 19%;
+  z-index: 1;
+  opacity: 1;
+  transition: 300ms ease-in-out;
 }
 
 ul.hideApplicantListContainer {
-  display: none;
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  background: rgba(1, 1, 1, 0.46);
+  position: absolute;
+  left: 19%;
+  right: 19%;
+  z-index: 1;
+  visibility: hidden;
+  position: absolute;
+  opacity: 0;
+  transition: 300ms ease-in-out;
 }
 
 /*----------------------------
@@ -62,17 +77,10 @@ button {
   font-size: 14px;
 }
 
-.applicationStatusContainer {
-  display: flex;
-  justify-content: center;
-  padding: 10px;
-  margin: 20px auto;
-  width: 60%;
-}
-
 .applicationStatusButtonActive {
   background: #57c7cc;
   margin: 0 25px;
+
   padding: 10px;
   width: 250px;
   border-radius: 5px;
@@ -139,27 +147,12 @@ button.applicant {
   border-color: unset;
   border: 0;
   background: none;
-  font-size: 18px;
+  font-size: 30px;
   z-index: 1;
 }
 
 button.applicant:hover {
   cursor: pointer;
-}
-
-ul.applicantListContainer {
-  max-height: 300px;
-  max-width: 250px;
-  overflow: scroll;
-  display: flex;
-  flex-direction: column;
-  margin: 0 25px;
-  padding: 0;
-  background: rgba(1, 1, 1, 0.2);
-}
-
-ul.hideApplicantListContainer {
-  display: none;
 }
 
 /*----------------------------
@@ -168,6 +161,28 @@ ul.hideApplicantListContainer {
 .videoRatingsContainer {
   display: flex;
   flex-wrap: wrap;
+  background: white;
+  box-shadow: 1px 1px 5px;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.videoRatingsContainer h2 {
+  color: black;
+  background: #ececec;
+  padding: 10px;
+  border: solid 1px;
+  border-left: none;
+  font-size: 22px;
+}
+
+.videoRatingsContainer div:first-of-type h2 {
+  border-radius: 5px 0 0 0;
+}
+
+.videoRatingsContainer div:last-of-type h2 {
+  border-right: none;
+  border-radius: 0 5px 0 0;
 }
 
 /*--------------------
@@ -175,21 +190,54 @@ ul.hideApplicantListContainer {
 ---------------------*/
 
 .detailsContainer {
-  flex: 0 50%;
+  flex: 0 30%;
   margin: 0 auto;
-  padding: 10px;
-  background: #31a4db;
   border-radius: 5px;
-  box-shadow: 1px 1px 5px;
+}
+
+.detailsContainer h3 {
+  margin: 20px;
+  font-size: 20px;
+  padding: 10px;
+  position: relative;
+}
+
+.detailsContainer h3:before {
+  content: "";
+  position: absolute;
+  bottom: 20%;
+  top: 20%;
+  left: 10%;
+  right: 10%;
+  border-right: solid 2px;
+  border-left: solid 2px;
 }
 
 .metaData {
   display: flex;
+  flex-direction: column;
   justify-content: center;
 }
 
+.metaData div {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  margin: 20px;
+  position: relative;
+}
+
+.metaData img {
+  width: 35px;
+  height: 100%;
+}
+
 .metaData p {
-  margin: 0 20px;
+  font-size: 20px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
 }
 
 .detailsSubContainer h2 {
@@ -200,61 +248,73 @@ ul.hideApplicantListContainer {
         Videos
 ------------------------*/
 
-.videoStageTitle {
-  flex: 0 60%;
-  margin: 0 auto;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  position: relative;
-}
-
-.videoStageTitle p {
-  width: 20%;
-  margin: 10px auto 0 auto;
-  padding: 10px;
-  font-size: 20px;
-  color: black;
-  border-radius: 5px;
-  font-size: 18px;
-  box-shadow: 1px 1px 3px;
-}
-
-.videoStageTitle p:nth-last-of-type(1) {
-  position: absolute;
-  right: 10%;
-  width: auto;
-}
-
-.videoStageTitle span {
-  color: white;
-}
 .videosContainer {
-  flex: 0 100%;
-  margin: 10px auto;
+  flex: 0 30%;
   text-align: center;
   position: relative;
 }
 
 .videoPlayer {
-  padding: 5px;
+  margin: 20px 10px;
   width: 500px;
-  background: white;
   border-radius: 5px;
   box-shadow: 1px 1px 5px;
 }
 
 .toggleVideosContainer button {
-  margin: 0 15px;
+  margin: 15px;
   width: 150px;
   padding: 10px;
   border-radius: 5px;
   box-shadow: 1px 1px 2px;
   transition: 200ms;
-  background: white;
+  background: #ececec;
+}
+
+.toggleVideosContainer button p {
+  color: black;
+  font-size: 18px;
 }
 
 .toggleVideosContainer button:hover {
   cursor: pointer;
-  box-shadow: 2px 2px 5px;
+  box-shadow: 2px 2px 2px;
+}
+
+/*--------------------------
+    Rate Videos 
+----------------------------*/
+
+.rateVideosContainer {
+  flex: 0 30%;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+}
+
+div.overallRating {
+  margin: 15px;
+  color: black;
+  border-radius: 5px;
+  font-size: 18px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* .rateVideosContainer p:nth-last-of-type(1) {
+  position: absolute;
+  right: 10%;
+  width: auto;
+} */
+
+.rateVideosContainer span {
+  /* color: white; */
+}
+
+.detailsContainer,
+.videosContainer,
+.rateVideosContainer {
+  flex: calc(30% - 5px);
 }

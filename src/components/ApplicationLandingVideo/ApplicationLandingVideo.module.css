@@ -4,7 +4,8 @@ body {
 }
 
 .videoUploadContainer {
-  display: inline-block;
+  display: flex;
+  justify-content: center;
 }
 .container {
   display: grid;
@@ -80,7 +81,7 @@ body {
 }
 .applicationFormText {
   margin: 10px 0;
-  float: left;
+  text-align: center;
 }
 /* .subVideoInstructions li {
   list-style: decimal;

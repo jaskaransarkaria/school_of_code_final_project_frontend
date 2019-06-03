@@ -44,6 +44,7 @@ class ApplicationLandingVideo extends Component {
             <h1 className={css.applicationFormText}>
               Application Video Questions
             </h1>
+            <br />
 
             <div className={css.videoUploadContainer}>
               <VideoUpload />
