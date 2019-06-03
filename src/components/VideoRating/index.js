@@ -296,25 +296,8 @@ const VideoRating = props => {
 
   // POST ratings for each video all at once && POST whether they have passed or failed this stage
   // also reset the collateFeedback back to an empty array
-  console.log("acceptedVideosData", acceptedVideosData);
   return (
     <>
-      {/* {console.log("pendingvideodata", pendingVideosData)}
-      {console.log("acceptedvideodata", acceptedVideosData)}
-      {console.log("rejectedvideodata", rejectedVideosData)}
-      {console.log("userInfo", userInfo)}
-      {console.log("adminFeedbackRating", adminFeedbackRating)}
-      {console.log("adminFeedbackComment", adminFeedbackComment)}
-      {console.log("collated ratings", collateFeedback)}
-      {console.log("current uid", currentUid)}
-      {console.log("current slider pass value", sliderPassValue)}
-      {console.log("get ALL USERS", allUsers)} */}
-      {allUsers.map(user => {
-        /* console.log(
-          "MAPPING AND UID TO NAME!!",
-          matchUidToName(user.firebaseUid)
-        ) */
-      })}
       <DashboardBanner title={"Video Applications"} />
       <div id="userTray" className={css.userTray}>
         <div className={css.ratingTitleContainer}>
@@ -376,34 +359,34 @@ const VideoRating = props => {
                           {/* List all applicants, unless the search input is used  */}
                           {pendingVideosData.map(
                             (applicant, pendingApplicationIndex) => {
-
-
-                            if (applicant.videoApplicationData.length > 0) {
-                              return (
-                                <>
-                                  <UserName
-                                    classToBe={css.applicant}
-                                    click={e =>
-                                      viewApplication(e, applicant.firebaseUid)
-                                    }
-                                    indexKey={applicant.firebaseUid}
-                                    uid={applicant.firebaseUid}
-                                    applicantCounter={() =>
-                                      setApplicantCounter(
-                                        pendingApplicationIndex
-                                      )
-                                    }
-                                    dispatch={() => dispatch("pending")}
-                                    showApplicants={showApplicants}
-                                    setAdminFeedbackRating={
-                                      setAdminFeedbackRating
-                                    }
-                                    setVideoCounter={setVideoCounter}
-                                    setCollateFeedback={setCollateFeedback}
-                                  />
-                                </>
-                              );}
-
+                              if (applicant.videoApplicationData.length > 0) {
+                                return (
+                                  <>
+                                    <UserName
+                                      classToBe={css.applicant}
+                                      click={e =>
+                                        viewApplication(
+                                          e,
+                                          applicant.firebaseUid
+                                        )
+                                      }
+                                      indexKey={applicant.firebaseUid}
+                                      uid={applicant.firebaseUid}
+                                      applicantCounter={() =>
+                                        setApplicantCounter(
+                                          pendingApplicationIndex
+                                        )
+                                      }
+                                      dispatch={() => dispatch("pending")}
+                                      setAdminFeedbackRating={
+                                        setAdminFeedbackRating
+                                      }
+                                      setVideoCounter={setVideoCounter}
+                                      setCollateFeedback={setCollateFeedback}
+                                    />
+                                  </>
+                                );
+                              }
                             }
                           )}
                         </ul>

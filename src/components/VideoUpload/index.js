@@ -63,6 +63,7 @@ const VideoUpload = () => {
   const [autoplay, setAutoplay] = useState(false);
   const [chunks, setChunks] = useState([]);
   const [redirect, setRedirect] = useState(false);
+  const [reRecord, setReRecord] = useState(false);
   const video = useRef(null);
 
   useEffect(
@@ -84,10 +85,6 @@ const VideoUpload = () => {
       }
     });
   }, []);
-
-  useEffect(() => {
-    return () => {};
-  }, [video]);
 
   const uploadVideosToDb = () => {
     fetch(`${api.applications}/video-upload`, {
@@ -270,12 +267,10 @@ const VideoUpload = () => {
             return (
               <div className={css.videoContainer}>
                 <video
+                  id={css.videoUpload}
                   ref={video}
                   preload="none"
                   autoPlay={autoplay}
-                  id="videoUpload"
-                  height="60%"
-                  width="100%"
                   display="block"
                   poster={item.poster}
                   key={src}
@@ -284,43 +279,58 @@ const VideoUpload = () => {
                 </video>
                 <br />
                 <div className={css.buttonContainer}>
-                  <img
-                    src="/record.png"
-                    alt="record video"
-                    className={css.startRecording}
-                    onClick={() => {
-                      // check if they have a microphone and webcam here
+                  <div className={css.leftContainer}>
+                    <img
+                      src="/record.png"
+                      alt="record video"
+                      className={css.startRecording}
+                      onClick={() => {
+                        // check if they have a microphone and webcam here
 
-                      hasGetUserMedia();
-                      if (!hasVideo || !hasAudio) {
-                        alert(
-                          "Your device needs a microphone and a webcam your device is missing one"
-                        );
-                        return;
-                      } else {
-                        handleRecording("start");
-                      }
-                    }}
-                  />
+                        hasGetUserMedia();
+                        if (!hasVideo || !hasAudio) {
+                          alert(
+                            "Your device needs a microphone and a webcam your device is missing one"
+                          );
+                          return;
+                        } else {
+                          handleRecording("start");
+                        }
+                      }}
+                    />
 
-                  <img
-                    src="stop.png"
-                    alt="stop recording"
-                    className={css.stopRecording}
-                    onClick={() => {
-                      if (localStream) {
-                        handleRecording("stop");
-                      }
-                    }}
-                  />
-                  <img
-                    src="play.png"
-                    alt="play recording"
-                    className={css.playRecording}
-                    onClick={() => {
-                      video.current.play();
-                    }}
-                  />
+                    <img
+                      src="stop.png"
+                      alt="stop recording"
+                      className={css.stopRecording}
+                      onClick={() => {
+                        if (localStream) {
+                          handleRecording("stop");
+                          setReRecord(true);
+                        }
+                      }}
+                    />
+                    <img
+                      src="play.png"
+                      alt="play recording"
+                      className={css.playRecording}
+                      onClick={() => {
+                        video.current.play();
+                      }}
+                    />
+                    {reRecord && (
+                      <p
+                        style={{
+                          color: "red",
+                          verticalAlign: "text-bottom",
+                          textAlign: "center",
+                          fontSize: "30px"
+                        }}
+                      >
+                        Hit record, if your not happy with your first take.
+                      </p>
+                    )}
+                  </div>
                   {!isLoading &&
                     (questionCounter + 1 < interviewQuestions.length ? (
                       <img
@@ -339,9 +349,10 @@ const VideoUpload = () => {
                             setIsLoading(true);
                             uploadToAWS(blob)
                               .then(_ => setIsLoading(false))
-                              .then(_ =>
-                                setQuestionCounter(questionCounter + 1)
-                              );
+                              .then(_ => {
+                                setQuestionCounter(questionCounter + 1);
+                                setReRecord(false);
+                              });
                           }
                         }}
                       />

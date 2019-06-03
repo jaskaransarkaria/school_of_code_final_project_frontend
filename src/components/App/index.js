@@ -245,7 +245,7 @@ function App() {
           <Route path="/application-video" component={ApplicantVideoPage} />
           <Route path="/application-form" component={ApplicantFormPage} />
           <Route path="/thankyou" component={ThankYouPage} />
-          <Route path="/template" component={TemplatePage} />
+          <Route path="/contract" component={ContractPage} />
         </Router>
       </Store.Provider>
     </UserUidContext.Provider>

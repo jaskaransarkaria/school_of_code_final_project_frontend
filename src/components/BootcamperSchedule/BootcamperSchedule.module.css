@@ -31,6 +31,18 @@
   cursor: pointer;
 }
 
+.dateButton {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.dateButton:hover {
+  background-color: #11cf84;
+  color: white;
+  cursor: pointer;
+}
+
 .carouselContainer {
   display: flex;
   position: relative;

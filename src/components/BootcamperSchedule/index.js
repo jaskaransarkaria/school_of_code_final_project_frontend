@@ -106,13 +106,9 @@ const BootcamperSchedule = () => {
         {scheduleData.map(day => (
           // here we display the 5 days
           <div className={css.daysOfWeekContainer}>
-            {dateInBar > 0 && (
+            {dateInBar < 0 && (
               <button
-                style={{
-                  border: "none",
-                  background: "transparent",
-                  cursor: "pointer"
-                }}
+                className={css.dateButton}
                 onClick={() => setDateInBar(dateInBar + 1)}
               >
                 &#60;
@@ -121,17 +117,7 @@ const BootcamperSchedule = () => {
             <FormatedDate
               className={css.dayBox}
               date={day.date}
-              num={dateInBar}
-            />
-            <FormatedDate
-              className={css.dayBox}
-              date={day.date}
-              num={dateInBar - 1}
-            />
-            <FormatedDate
-              className={css.dayBox}
-              date={day.date}
-              num={dateInBar - 2}
+              num={dateInBar - 4}
             />
             <FormatedDate
               className={css.dayBox}
@@ -141,14 +127,22 @@ const BootcamperSchedule = () => {
             <FormatedDate
               className={css.dayBox}
               date={day.date}
-              num={dateInBar - 4}
+              num={dateInBar - 2}
             />
+            <FormatedDate
+              className={css.dayBox}
+              date={day.date}
+              num={dateInBar - 1}
+            />
+
+            <FormatedDate
+              className={css.dayBox}
+              date={day.date}
+              num={dateInBar}
+            />
+
             <button
-              style={{
-                border: "none",
-                background: "transparent",
-                cursor: "pointer"
-              }}
+              className={css.dateButton}
               onClick={() => setDateInBar(dateInBar - 1)}
             >
               &#62;
