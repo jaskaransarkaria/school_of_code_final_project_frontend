@@ -1,6 +1,21 @@
+.videoContainer {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  height: 90%;
+  margin: auto;
+}
+
+#videoUpload {
+  border: 5px white solid;
+  border-radius: 5px;
+}
+
 .startRecording {
-  width: 7%;
+  width: 70px;
+  height: 70px;
   padding: 0.5%;
+
   /* color: white; */
   /* background: url("/record.png"); */
   /* border-style: none; */
@@ -11,7 +26,8 @@
 }
 
 .stopRecording {
-  width: 7%;
+  width: 70px;
+  height: 70px;
   padding: 0.5%;
 
   /* color: white;
@@ -24,7 +40,8 @@
 }
 
 .playRecording {
-  width: 7%;
+  width: 70px;
+  height: 70px;
   padding: 0.5%;
 
   /* color: white;
@@ -36,8 +53,11 @@
   cursor: pointer;
 }
 .submitRecording {
-  width: 7%;
+  width: 70px;
+  height: 70px;
   padding: 0.5%;
+  position: absolute;
+  right: 0;
 
   /* color: white;
   padding: 10px;
@@ -46,11 +66,13 @@
   font-size: 1.2em;
   font-weight: bold; */
   cursor: pointer;
-  margin-left: 70%;
 }
 .submitFinalVideos {
-  width: 7%;
+  width: 70px;
+  height: 70px;
   padding: 0.5%;
+  position: absolute;
+  right: 0;
 
   /* color: white;
   padding: 10px;
@@ -62,9 +84,17 @@
 }
 
 .buttonContainer {
-  margin-top: 20px;
   width: 100%;
+  position: relative;
 }
+
+.leftContainer {
+  display: inline-flex;
+  justify-content: flex-start;
+  width: 100%;
+  left: 0;
+}
+
 .stepText {
   font-size: 1.9em;
   margin: 0px;
