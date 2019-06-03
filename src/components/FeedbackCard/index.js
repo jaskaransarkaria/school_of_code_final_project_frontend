@@ -31,12 +31,20 @@ const FeedbackCard = ({
         <div>
           {ratingValue === 0 ? (
             <div className={css.ratingTitleContainer}>
-              <p> Please Rate </p>
+              <p className={css.rateVideoTitle}> Rate Video </p>
               <Rating
                 initialRating={item.rating / 2}
                 emptySymbol="fa fa-star-o fa-2x"
                 fullSymbol="fa fa-star fa-2x"
-                style={{ color: "rgba(248, 180, 22, 1)" }}
+                style={{
+                  color: "rgba(248, 180, 22, 1)",
+                  fontSize: "25px",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translateX(-50%) translateY(-50%)",
+                  width: "100%",
+                  position: "absolute"
+                }}
                 fractions={2}
                 onClick={value => {
                   setRatingValue(value);
