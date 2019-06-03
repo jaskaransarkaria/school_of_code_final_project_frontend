@@ -5,6 +5,7 @@ import { api } from "../../config";
 import UserName from "../UserName";
 import Rating from "react-rating";
 import css from "./VideoRating.module.css";
+//import Transcript from "../Transcript";
 import { Spring } from "react-spring/renderprops";
 import { useTransition, animated } from "react-spring";
 
@@ -260,6 +261,8 @@ const VideoRating = props => {
         user => !user.passVideoStage
       )
     );
+
+    updatePassStage();
   }, [sliderPassValue]);
 
   useEffect(() => {
@@ -326,7 +329,7 @@ const VideoRating = props => {
               // setRatingValue(value);
               // setAdminFeedbackRating(value * 2);
               setSliderPassValue(value * 2);
-              updatePassStage();
+              //updatePassStage();
             }}
           />
         </div>
@@ -357,7 +360,8 @@ const VideoRating = props => {
                             {
                               pendingVideosData.filter(
                                 applicant =>
-                                  applicant.passVideoStage === "pending"
+                                  applicant.passVideoStage === "pending" &&
+                                  applicant.videoApplicationData.length > 0
                               ).length
                             }
                           </p>
@@ -372,6 +376,9 @@ const VideoRating = props => {
                           {/* List all applicants, unless the search input is used  */}
                           {pendingVideosData.map(
                             (applicant, pendingApplicationIndex) => {
+
+
+                            if (applicant.videoApplicationData.length > 0) {
                               return (
                                 <>
                                   <UserName
@@ -395,7 +402,8 @@ const VideoRating = props => {
                                     setCollateFeedback={setCollateFeedback}
                                   />
                                 </>
-                              );
+                              );}
+
                             }
                           )}
                         </ul>
@@ -659,6 +667,19 @@ const VideoRating = props => {
                                                 setAdminFeedbackComment
                                               }
                                             />
+
+                                            <button
+                                              className={
+                                                css.toggleVideosContainer
+                                              }
+                                              onClick={viewApplication}
+                                            >
+                                              Cancel
+                                            </button>
+                                            {/* <Transcript
+                                              uid={currentUid}
+                                              questionNumber={videoCounter + 1}
+                                            /> */}
                                           </div>
                                         </div>
                                       </animated.div>

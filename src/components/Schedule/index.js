@@ -70,6 +70,7 @@ const Schedule = ({ props }) => {
       }
     }
     fetchMostRecentSchedule();
+    return fetchMostRecentSchedule;
   }, []);
 
   useEffect(() => {
@@ -87,6 +88,8 @@ const Schedule = ({ props }) => {
       }
     }
     fetchSchedule();
+
+    return fetchSchedule;
   }, [selectedDate]);
 
   // console.log("contentToBeDisplayed outside get request", contentToBeDisplayed);

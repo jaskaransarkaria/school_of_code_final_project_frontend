@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import SocImage from "../../Images/soc-logo.png";
 import css from "../ThankYou/ThankYou.module.css";
 import TickImage from "../../Images/checked.svg";
+
 class ThankYou extends Component {
   constructor(props) {
     super(props);

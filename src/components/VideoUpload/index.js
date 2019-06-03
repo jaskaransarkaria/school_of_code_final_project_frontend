@@ -1,19 +1,22 @@
 import css from "../VideoUpload/VideoUpload.module.css";
 import React, { useState, useEffect, useRef } from "react";
 import AWS from "aws-sdk";
+import TranscribeService from "aws-sdk/clients/transcribeservice";
 import { aws } from "../../config";
 import shortid from "shortid";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import firebase from "firebase";
 import { api } from "../../config";
-import { Redirect } from "react-router-dom";
-import ThankYouPage from "../../pages/ThankYouPage";
+import ThankYouSubmission from "../ThankYouSubmission";
+
 AWS.config.update({
   region: "eu-west-1",
   accessKeyId: `${aws.key_id}`,
   secretAccessKey: `${aws.secret_key}`
 });
+
 const s3 = new AWS.S3();
+var transcribeservice = new TranscribeService({ apiVersion: "2017-10-26" });
 
 const constraints = {
   audio: {
@@ -31,11 +34,17 @@ let localStream;
 let recorder;
 
 const interviewQuestions = [
-  { question: "Tell us about yourself" },
-  { question: "Why do you want to learn to code?" },
-  { question: "What drives you?" },
-  { question: "Why do you want to join School of Code?" },
-  { question: "Explain something complex in simple terms" }
+  { question: "Tell us about yourself", poster: "/q1_poster.png" },
+  { question: "Why do you want to learn to code?", poster: "/q2_poster.png" },
+  { question: "What drives you?", poster: "/q3_poster.png" },
+  {
+    question: "Why do you want to join School of Code?",
+    poster: "/q4_poster.png"
+  },
+  {
+    question: "Explain something complex in simple terms",
+    poster: "/q5_poster.png"
+  }
 ];
 
 // send the video to the server
@@ -49,9 +58,9 @@ const VideoUpload = () => {
   const [hasVideo, setHasVideo] = useState(false);
   const [hasAudio, setHasAudio] = useState(false);
   const [showVideo, setShowVideo] = useState(true);
-  const [src, setSrc] = useState("");
+  const [src, setSrc] = useState();
   const [allVideoLinks, setAllVideoLinks] = useState([]);
-  const [autoplay, setAutoplay] = useState(true);
+  const [autoplay, setAutoplay] = useState(false);
   const [chunks, setChunks] = useState([]);
   const [redirect, setRedirect] = useState(false);
   const video = useRef(null);
@@ -65,12 +74,9 @@ const VideoUpload = () => {
         navigator.mozGetUserMedia),
     []
   );
-
-  let savedUid;
   useEffect(() => {
-    firebase.auth().onAuthStateChanged(function(user) {
+    return firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
-        savedUid = user.uid;
         setFirebaseUid(user.uid);
         console.log(user.uid);
       } else {
@@ -84,8 +90,6 @@ const VideoUpload = () => {
   }, [video]);
 
   const uploadVideosToDb = () => {
-    console.log("inside upload", firebaseUid);
-    console.log(allVideoLinks);
     fetch(`${api.applications}/video-upload`, {
       method: "post",
       headers: {
@@ -104,14 +108,35 @@ const VideoUpload = () => {
       .catch(err => console.error(err));
   };
 
+  const transcribeVideo = fileToTranslate => {
+    return new Promise((res, rej) => {
+      const jobName = firebaseUid + `_Q${questionCounter + 1}`;
+      let params = {
+        LanguageCode: "en-GB",
+        Media: { MediaFileUri: fileToTranslate },
+        MediaFormat: "mp4",
+        TranscriptionJobName: jobName,
+        OutputBucketName: "school-of-code-applicant-videos"
+      };
+      transcribeservice.startTranscriptionJob(params, function(err, data) {
+        if (err) {
+          console.log("error from transcribe start", err, err.stack);
+        } else {
+          console.log("TRANSCRIPT DATA", data);
+          res(data);
+        }
+      });
+    });
+  };
+
   const uploadToAWS = blob => {
     return new Promise((resolve, reject) => {
       const fileName = shortid.generate();
       var params = {
         Bucket: "school-of-code-applicant-videos",
-        Key: `${fileName}.webm`,
+        Key: `${fileName}.mp4`,
         Body: blob,
-        ContentType: "video/webm"
+        ContentType: "video/mp4"
       };
 
       s3.upload(params, function(err, data) {
@@ -120,7 +145,8 @@ const VideoUpload = () => {
         } else {
           //setSrc(data.Location);
           setAllVideoLinks([...allVideoLinks, data.Location]);
-          setAutoplay(true);
+          transcribeVideo(data.Location);
+          setAutoplay(false);
           resolve(data);
         }
       });
@@ -141,7 +167,7 @@ const VideoUpload = () => {
         });
       })
       .catch(function(err) {
-        console.log("err caught");
+        console.log("err caught in Video upload component");
         console.log(err.name + ": " + err.message);
       });
     return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
@@ -157,8 +183,8 @@ const VideoUpload = () => {
       navigator.mediaDevices.getUserMedia(constraints).then(stream => {
         switch (action) {
           case "stop":
+            video.current.pause();
             var tracks = stream.getTracks();
-            setSrc(null);
             tracks.forEach(function(track) {
               track.stop();
             });
@@ -170,6 +196,8 @@ const VideoUpload = () => {
                 track.stop();
               });
             }
+            video.current.load();
+            setSrc(null);
             setAutoplay(false);
             if (recorder.state === "recording") {
               recorder.stop();
@@ -183,8 +211,8 @@ const VideoUpload = () => {
 
             video.current.play(); // use a ref here
             localStream = stream;
-
-            recorder = new MediaRecorder(stream);
+            var options = { mimeType: "video/webm;codecs=h264" };
+            recorder = new MediaRecorder(stream, options);
             setIsRecording(true);
             recorder.ondataavailable = e => {
               if (e.data && e.data.size > 0) {
@@ -226,7 +254,7 @@ const VideoUpload = () => {
   // Otherwise, the promise from the call will be rejected. getUserMedia() also won't work for cross origin
   // calls from iframes
 
-  return (
+  return !redirect ? (
     <div style={{ textAlign: "center" }}>
       {console.log("all videos", allVideoLinks)}
       {showVideo &&
@@ -241,26 +269,24 @@ const VideoUpload = () => {
           .map(item => {
             return (
               <div className={css.videoContainer}>
-                <h2 className={css.stepText}>Step {questionCounter + 1}/5 </h2>
-                <br />
-                <h2 className={css.questionsText}> {item.question}</h2>
-
                 <video
                   ref={video}
-                  controls
+                  preload="none"
                   autoPlay={autoplay}
                   id="videoUpload"
                   height="60%"
                   width="100%"
                   display="block"
-                  poster="/school-of-code.jpg"
+                  poster={item.poster}
                   key={src}
                 >
                   <source src={src} />
                 </video>
                 <br />
                 <div className={css.buttonContainer}>
-                  <button
+                  <img
+                    src="/record.png"
+                    alt="record video"
                     className={css.startRecording}
                     onClick={() => {
                       // check if they have a microphone and webcam here
@@ -275,28 +301,38 @@ const VideoUpload = () => {
                         handleRecording("start");
                       }
                     }}
-                  >
-                    Start Recording
-                  </button>
-                  <>
-                    <button
-                      className={css.stopRecording}
-                      onClick={() => {
-                        if (localStream) {
-                          handleRecording("stop");
-                        }
-                      }}
-                    >
-                      Stop Recording
-                    </button>
-                  </>
+                  />
 
+                  <img
+                    src="stop.png"
+                    alt="stop recording"
+                    className={css.stopRecording}
+                    onClick={() => {
+                      if (localStream) {
+                        handleRecording("stop");
+                      }
+                    }}
+                  />
+                  <img
+                    src="play.png"
+                    alt="play recording"
+                    className={css.playRecording}
+                    onClick={() => {
+                      video.current.play();
+                    }}
+                  />
                   {!isLoading &&
                     (questionCounter + 1 < interviewQuestions.length ? (
-                      <button
+                      <img
+                        src="checked.png"
+                        alt="submit video"
                         className={css.submitRecording}
                         onClick={() => {
-                          const blob = new Blob(chunks, { type: "video/webm" });
+                          handleRecording("stop");
+                          const blob = new Blob(chunks, {
+                            type: "video/mp4"
+                          });
+
                           console.log(blob);
                           if (blob.size > 0 && !isRecording) {
                             // upload to datbase
@@ -308,14 +344,14 @@ const VideoUpload = () => {
                               );
                           }
                         }}
-                      >
-                        Submit Video
-                      </button>
+                      />
                     ) : (
-                      <button
-                        className={css.submitFinalVideos}
+                      <img
+                        src="checked.png"
+                        alt="submit video"
+                        className={css.submitRecording}
                         onClick={() => {
-                          const blob = new Blob(chunks, { type: "video/webm" });
+                          const blob = new Blob(chunks, { type: "video/mp4" });
                           console.log(blob);
                           if (blob.size > 0 && !isRecording) {
                             setIsLoading(true);
@@ -327,11 +363,9 @@ const VideoUpload = () => {
                           }
                           return;
                         }}
-                      >
-                        Submit Final Videos
-                      </button>
+                      />
                     ))}
-                  {isLoading && <CircularProgress />}
+                  {isLoading && <CircularProgress color="white" />}
                 </div>
               </div>
             );
@@ -346,8 +380,9 @@ const VideoUpload = () => {
           confirm upload
         </button>
       )}
-      {redirect && <Redirect to="thankyou" />}
     </div>
+  ) : (
+    <ThankYouSubmission />
   );
 };
 
