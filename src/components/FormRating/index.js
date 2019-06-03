@@ -1,9 +1,9 @@
 import React, { useState, useReducer, useEffect } from "react";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
 import DashboardBanner from "../DashboardBanner";
 import css from "./FormRating.module.css";
 import { api } from "../../config";
 import UserName from "../UserName";
+import { useTransition, animated } from "react-spring";
 
 // every time it re-renders it's adding another list of people to the dropdown (which are buttons)
 // search functionality is not hooked up
@@ -242,6 +242,32 @@ function FormRating(props) {
     }
   }, null);
 
+  // Created an array of all applicants to use in the transitions array below
+  const allApplicants = [
+    ...pendingApplicants,
+    ...rejectedApplicants,
+    ...acceptedApplicants
+  ];
+
+  // Transitions contains the data which will be mapped over for the animations
+  const transitions = useTransition(
+    allApplicants,
+    allApplicants => allApplicants._id,
+    {
+      from: {
+        transform: "translateX(-1000px) rotate(0deg)"
+      },
+      enter: {
+        transform: "translateX(0) rotate(360deg)"
+      },
+      leave: {
+        transform: "translateX(-500px)"
+      },
+      config: { duration: 1500 }
+    }
+  );
+  console.log("TRANSITION", transitions);
+
   const getAllUsers = async () => {
     const data = await fetch(`${api.users}`);
     const response = await data.json();
@@ -469,7 +495,6 @@ function FormRating(props) {
                   ? css.showSearchInput
                   : css.hideSearchInput
               }
-              
               placeholder="Search Applicants"
             />
             {/* List all applicants, unless the search input is used  */}
@@ -586,109 +611,98 @@ function FormRating(props) {
           <button> Admin Home</button>
         </div>
         <div className={css.applicantDetailsContainer}>
-          <TransitionGroup className={css.item}>
-            {[
-              ...pendingApplicants,
-              ...acceptedApplicants,
-              ...rejectedApplicants
-            ].map(
-              /// ALL OF THE APPLICANTS this will be all my applications
-              // nned to add ...acceptedApplicants, ...rejectedApplicants
-              applicant => {
-                const matchedUser =
-                  allUsers.find(
-                    user => user.firebaseUid === applicant.firebaseUid
-                  ) || "no matched User";
+          {transitions.map(({ item, key, props }) => {
+            console.log("APPLICANT", item);
+            const matchedUser =
+              allUsers.find(user => user.firebaseUid === item.firebaseUid) ||
+              "no matched User";
 
-                return (
-                  showSpecificApplications[0] === applicant.passFormStage && // this will be passFormStage
-                  applicant.firebaseUid === showSpecificApplications[1] && ( // an array with 2 args (1st arg is application status)
-                    // and the 2nd arg is id - this needs to be set as at the minute the function is pointing to just the id not the uid
-                    <CSSTransition timeout={200} classNames="item">
-                      <div>
-                        <div
-                          className={css.detailsSubContainer}
-                          key={applicant.firebaseUid}
-                        >
-                          <h2>Applicant Details </h2>
-                          <h3>
-                            {matchedUser.firstName || "noFirstName"}{" "}
-                            {matchedUser.lastName || "noLastName"}{" "}
-                            {/*access the user database for this info*/}
-                          </h3>
-                          <div className={css.metaData}>
-                            <p>Age: {matchedUser.age || "noAge"}</p>{" "}
-                            {/*access the user database for this info*/}
-                            <p>
-                              Location: {matchedUser.location || "noLocation"}
-                            </p>{" "}
-                            {/*access the user database for this info*/}
-                            <p>
-                              Background:{" "}
-                              {matchedUser.background || "noBackground"}
-                            </p>{" "}
-                            {/*access the user database for this info*/}
-                          </div>
-                        </div>
-                        <div className={css.reasonSubContainer}>
-                          <h3>Reason for applying </h3>
-                          <p>
-                            {applicant.formApplicationData.motivationQuestion ||
-                              "noMotivationQuestion"}
-                          </p>
-                        </div>
-                        <div className={css.applicationButtonsContainer}>
-                          <button
-                            onClick={() => {
-                              //changeStatus(applicant.firebaseUid, "accepted");
-                              setShowSpecificApplications([]);
-
-                              // this is not connected up correctly
-                              // this function changes the status in the list which contains all the the
-                              // data locally
-
-                              // this won't be neccessary if I fill the accepted and rejected trays from the
-                              // database
-                            }}
-                            onMouseUp={() => {
-                              dispatch(applicant.passFormStage); // this isnt connected up either
-                              postForm(true, applicant.firebaseUid);
-                            }}
-                          >
-                            ACCEPT
-                          </button>
-                          <button
-                            onClick={() =>
-                              //changeStatus(applicant.firebaseUid, "rejected")
-                              setShowSpecificApplications([])
-                            } // this is not connected up correctly
-                            onMouseUp={() => {
-                              dispatch(applicant.passFormStage); // this isnt connected up either
-                              postForm(false, applicant.firebaseUid);
-                            }}
-                          >
-                            DECLINE
-                          </button>
-                          <button
-                            onClick={() =>
-                              // changeStatus(
-                              //   applicant.firebaseUid,
-                              //   applicant.passFormStage
-                              // )
-                              setShowSpecificApplications([])
-                            }
-                            onMouseUp={() => dispatch(applicant.passFormStage)}
-                          >
-                            CANCEL
-                          </button>
-                        </div>
+            return (
+              showSpecificApplications[0] === item.passFormStage && // this will be passFormStage
+              item.firebaseUid === showSpecificApplications[1] && ( // an array with 2 args (1st arg is application status)
+                // and the 2nd arg is id - this needs to be set as at the minute the function is pointing to just the id not the uid
+                <animated.div key={key} style={props}>
+                  <div>
+                    <div
+                      className={css.detailsSubContainer}
+                      key={item.firebaseUid}
+                    >
+                      <h2>item Details </h2>
+                      <h3>
+                        {matchedUser.firstName || "noFirstName"}{" "}
+                        {matchedUser.lastName || "noLastName"}{" "}
+                        {/*access the user database for this info*/}
+                      </h3>
+                      <div className={css.metaData}>
+                        <p>Age: {matchedUser.age || "noAge"}</p>{" "}
+                        {/*access the user database for this info*/}
+                        <p>
+                          Location: {matchedUser.location || "noLocation"}
+                        </p>{" "}
+                        {/*access the user database for this info*/}
+                        <p>
+                          Background: {matchedUser.background || "noBackground"}
+                        </p>{" "}
+                        {/*access the user database for this info*/}
                       </div>
-                    </CSSTransition>
-                  )
-                );
-              }
-            )}
-          </TransitionGroup>
+                    </div>
+                    <div className={css.reasonSubContainer}>
+                      <h3>Reason for applying </h3>
+                      <p>
+                        {item.formApplicationData.motivationQuestion ||
+                          "noMotivationQuestion"}
+                      </p>
+                    </div>
+                    <div className={css.applicationButtonsContainer}>
+                      <button
+                        onClick={() => {
+                          //changeStatus(item.firebaseUid, "accepted");
+                          setShowSpecificApplications([]);
+
+                          // this is not connected up correctly
+                          // this function changes the status in the list which contains all the the
+                          // data locally
+
+                          // this won't be neccessary if I fill the accepted and rejected trays from the
+                          // database
+                        }}
+                        onMouseUp={() => {
+                          dispatch(item.passFormStage); // this isnt connected up either
+                          postForm(true, item.firebaseUid);
+                        }}
+                      >
+                        ACCEPT
+                      </button>
+                      <button
+                        onClick={() =>
+                          //changeStatus(item.firebaseUid, "rejected")
+                          setShowSpecificApplications([])
+                        } // this is not connected up correctly
+                        onMouseUp={() => {
+                          dispatch(item.passFormStage); // this isnt connected up either
+                          postForm(false, item.firebaseUid);
+                        }}
+                      >
+                        DECLINE
+                      </button>
+                      <button
+                        onClick={() =>
+                          // changeStatus(
+                          //   item.firebaseUid,
+                          //   item.passFormStage
+                          // )
+                          setShowSpecificApplications([])
+                        }
+                        onMouseUp={() => dispatch(item.passFormStage)}
+                      >
+                        CANCEL
+                      </button>
+                    </div>
+                  </div>
+                </animated.div>
+              )
+            );
+          })}
         </div>
       </div>
     </>

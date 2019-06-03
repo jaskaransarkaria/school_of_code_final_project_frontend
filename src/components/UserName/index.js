@@ -5,7 +5,7 @@ const UserName = ({
   uid,
   classToBe,
   click,
-  key,
+  indexKey,
   dispatch,
   applicantCounter = "noData",
   setAdminFeedbackRating,
@@ -59,7 +59,7 @@ const UserName = ({
           setCollateFeedback([]);
         }
       }}
-      key={key}
+      key={indexKey}
     >{`${currentUser}`}</button>
   );
 };
