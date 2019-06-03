@@ -85,6 +85,7 @@ const BootcamperSchedule = () => {
 
   const FormatedDate = ({ date, num }) => (
     <div
+      className={css.dayBox}
       onClick={() => {
         setSelectedDate(
           moment(moment(date, "DD/MM/YYYY").add(num, "days")._d).format(
@@ -107,7 +108,11 @@ const BootcamperSchedule = () => {
           <div className={css.daysOfWeekContainer}>
             {dateInBar > 0 && (
               <button
-                style={{ border: "none", background: "transparent", cursor: "pointer" }}
+                style={{
+                  border: "none",
+                  background: "transparent",
+                  cursor: "pointer"
+                }}
                 onClick={() => setDateInBar(dateInBar + 1)}
               >
                 &#60;
@@ -139,7 +144,11 @@ const BootcamperSchedule = () => {
               num={dateInBar - 4}
             />
             <button
-              style={{ border: "none", background: "transparent", cursor: "pointer"}}
+              style={{
+                border: "none",
+                background: "transparent",
+                cursor: "pointer"
+              }}
               onClick={() => setDateInBar(dateInBar - 1)}
             >
               &#62;
