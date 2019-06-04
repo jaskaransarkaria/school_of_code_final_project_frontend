@@ -3,6 +3,7 @@ import css from "../ApplicantDashboard/ApplicantDashboard.module.css";
 import socPlanet from "../../Images/planet_soc.png";
 import { api } from "../../config";
 import firebase from "firebase";
+import rocket from "../../Images/spaceship.png";
 
 const ApplicantDashBoard = props => {
   const [userUid, setUserUid] = useState("");
@@ -58,11 +59,13 @@ const ApplicantDashBoard = props => {
   };
 
   const goToApplicationForm = () => {
-    props.props.history.push(`application-form`);
+    props.history.push(`/application-form`);
   };
 
   const goToApplicationVideo = () => {
-    props.props.history.push(`application-video`);
+    console.log(props);
+    console.log(props.props);
+    props.history.push(`/application-video`);
   };
 
   const redirectTo = stage => {
@@ -74,11 +77,11 @@ const ApplicantDashBoard = props => {
     }
 
     if (stage === 3) {
-      props.props.history.push("bootcamper-dashboard");
+      props.history.push("/bootcamper-dashboard");
     }
   };
   const ApplicationStage = () => {
-    let stage = "";
+    let stage;
     if (userUid.passInterviewStage === true) {
       stage = "You passed them all! ";
     } else if (userUid.passVideoStage === true) {
@@ -88,7 +91,7 @@ const ApplicantDashBoard = props => {
     } else {
       stage = "You are at stage 1";
     }
-    return <h3> Track your journey to becoming a Bootcamper. {stage} </h3>;
+    return <h3>Track your journey to becoming a Bootcamper.</h3>;
   };
 
   const Step = ({ passFirstStage, passSecondStage, passFinalStage }) => {
@@ -104,13 +107,11 @@ const ApplicantDashBoard = props => {
           (info.stage === 3 && passSecondStage === "pending") ||
           (info.stage === 3 && passSecondStage === false) ? (
             <div className={css.stepNotAvailable}>
-              <p>Stage {info.stage}</p>
               <img
                 src="/lock_white.png"
                 alt="padlocked stage"
                 style={{ width: "40%" }}
               />
-              <p>Locked</p>
             </div>
           ) : null}
 
@@ -118,7 +119,11 @@ const ApplicantDashBoard = props => {
           (info.stage === 2 && passSecondStage === true) ||
           (info.stage === 3 && passFinalStage === true) ? (
             <div className={css.stepPassed}>
-              <p>Congratulations! You passed Stage {info.stage}!</p>
+              <div className={css.congratsMessage}>Congratulations!</div>
+              <div className={css.congratsMessage}>
+                {" "}
+                You passed Stage {info.stage}!
+              </div>
             </div>
           ) : null}
           {/* <button onClick={() => changeStage(info)}> Pass </button> */}
@@ -133,7 +138,7 @@ const ApplicantDashBoard = props => {
             Stage {info.stage}{" "}
           </div>
           <div className={css.progressImgContainer}>
-            <img src={socPlanet} alt="socPlanet icon" />
+            <img src={rocket} alt="socPlanet icon" style={{ bottom: "15%" }} />
           </div>
           <div onClick={() => redirectTo(info.stage)} className={css.stepCard}>
             <h3> {info.title}</h3>

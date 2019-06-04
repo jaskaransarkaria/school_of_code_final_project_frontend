@@ -125,7 +125,7 @@ const VideoUpload = () => {
   };
 
   const uploadToAWS = blob => {
-    new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       const fileName = shortid.generate();
       var params = {
         Bucket: "school-of-code-applicant-videos",
@@ -360,7 +360,9 @@ const VideoUpload = () => {
                         alt="submit video"
                         className={css.submitRecording}
                         onClick={() => {
-                          const blob = new Blob(chunks, { type: "video/mp4" });
+                          const blob = new Blob(chunks, {
+                            type: "video/mp4"
+                          });
                           console.log(blob);
                           if (blob.size > 0 && !isRecording) {
                             setIsLoading(true);
@@ -374,7 +376,9 @@ const VideoUpload = () => {
                         }}
                       />
                     ))}
-                  {isLoading && <CircularProgress color="inherit" />}
+                  {isLoading && (
+                    <CircularProgress id={css.loadingCircle} color="inherit" />
+                  )}
                 </div>
               </div>
             );

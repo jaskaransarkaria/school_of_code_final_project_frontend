@@ -58,6 +58,7 @@ const FormPart3 = ({
       <div className={css.wrapper}>
         <div className={css.container}>
           <div className={css.leftContainer}>
+            <h1 className={css.applicationFormText}>Application Form</h1>
             <div className={css.socImageContainer}>
               <img
                 src={SocImage}
@@ -67,17 +68,15 @@ const FormPart3 = ({
             </div>
             <div className={css.instructionsBox}>Instructions</div>
             <ol className={css.instructionsContainer}>
-              <li>Please fill out the form</li>
-              <li>There are 5 sections in total which need completed</li>
+              <li>Please complete all five sections of the form</li>
 
               <li>
-                You will be sent an email notifying if you have made it to the
-                next stage
+                You will receive an email notifying you if have made it to the
+                next stage!
               </li>
             </ol>
           </div>
           <div className={css.rightContainer}>
-            <h1 className={css.applicationFormText}>Application Form</h1>
             <h1 className={css.applicationStepText}>Step 3/5</h1>
             <div className={css.formContainer}>
               <div className={css.identifyContainer}>
@@ -134,12 +133,11 @@ const FormPart3 = ({
                 {" "}
                 Previous{" "}
               </button>
-              <div className={css.nextButtonContainer}>
-                <button onClick={saveAndContinue} className={css.nextButton}>
-                  {" "}
-                  Next{" "}
-                </button>
-              </div>
+
+              <button onClick={saveAndContinue} className={css.nextButton}>
+                {" "}
+                Next{" "}
+              </button>
             </div>
           </div>
         </div>

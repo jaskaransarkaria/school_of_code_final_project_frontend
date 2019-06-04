@@ -53,6 +53,7 @@ const FormPart1 = ({
       <div className={css.wrapper}>
         <div className={css.container}>
           <div className={css.leftContainer}>
+            <h1 className={css.applicationFormText}>Application Form</h1>
             <div className={css.socImageContainer}>
               <img
                 src={SocImage}
@@ -62,58 +63,56 @@ const FormPart1 = ({
             </div>
             <div className={css.instructionsBox}>Instructions</div>
             <ol className={css.instructionsContainer}>
-              <li>Please fill out the form</li>
-              <li>There are 5 sections in total which need completed</li>
+              <li>Please complete all five sections of the form</li>
 
               <li>
-                You will be sent an email notifying if you have made it to the
-                next stage
+                You will receive an email notifying you if have made it to the
+                next stage!
               </li>
             </ol>
           </div>
 
           <div className={css.rightContainer}>
-            <h1 className={css.applicationFormText}>Application Form</h1>
             <h1 className={css.applicationStepText}>Step 1/5</h1>
             <div className={css.formContainer}>
               {/* <div className={css.instructionsContainer} /> */}
-              <div className={css.firstAndLastNameContainer}>
-                <div className={css.firstNameContainer}>
-                  <label className={css.firstNameLabel}>First Name</label>
-                  <div className={css.firstNameInputContainer}>
-                    <input
-                      placeholder="Enter first name.."
-                      className={css.firstName}
-                      type="text"
-                      name="firstName"
-                      onChange={updateField}
-                      defaultValue={formValues.firstName}
-                      required
-                    />
-                  </div>
-                </div>
 
-                <div className={css.lastNameContainer}>
-                  <label className={css.lastNameLabel}>Last Name</label>
-
-                  <div className={css.lastNameInputContainer}>
-                    <input
-                      placeholder="Enter last name.."
-                      className={css.lastName}
-                      type="text"
-                      name="lastName"
-                      onChange={updateField}
-                      defaultValue={formValues.lastName}
-                      required
-                    />
-                  </div>
+              <div className={css.firstNameContainer}>
+                <label className={css.firstNameLabel}>First Name</label>
+                <div className={css.firstNameInputContainer}>
+                  <input
+                    placeholder="Enter first name*"
+                    className={css.firstName}
+                    type="text"
+                    name="firstName"
+                    onChange={updateField}
+                    defaultValue={formValues.firstName}
+                    required
+                  />
                 </div>
               </div>
+
+              <div className={css.lastNameContainer}>
+                <label className={css.lastNameLabel}>Last Name</label>
+
+                <div className={css.lastNameInputContainer}>
+                  <input
+                    placeholder="Enter last name*"
+                    className={css.lastName}
+                    type="text"
+                    name="lastName"
+                    onChange={updateField}
+                    defaultValue={formValues.lastName}
+                    required
+                  />
+                </div>
+              </div>
+
               <div className={css.emailContainer}>
                 <label className={css.emailLabel}>Email</label>
                 <div className={css.emailInputContainer}>
                   <input
-                    placeholder="Enter email.."
+                    placeholder="Enter email*"
                     className={css.email}
                     type="email"
                     name="email"

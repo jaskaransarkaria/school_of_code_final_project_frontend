@@ -13,7 +13,6 @@ class AdminDashBoard extends Component {
     return (
       <>
         <div className={css.dashBoardContainer}>
-          <NavBar propsUser="Admin" />
           <div className={css.optionsContainer}>
             <BrowserRouter>
               <Switch>
