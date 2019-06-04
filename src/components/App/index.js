@@ -258,6 +258,7 @@ function App() {
           <Route exact path="/application-form" component={ApplicantFormPage} />
           <Route exact path="/thankyou" component={ThankYouPage} />
           <Route exact path="/contract" component={ContractPage} />
+          <Route exact path="/template" component={TemplatePage} />
         </Switch>
       </Router>
     </Store.Provider>
