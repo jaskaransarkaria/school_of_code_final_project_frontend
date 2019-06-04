@@ -13,7 +13,6 @@ import { useTransition, animated } from "react-spring";
 import approved from "../../Images/approved.png";
 import location from "../../Images/location.png";
 import age from "../../Images/calendar.png";
-import { isTemplateLiteral } from "@babel/types";
 // TODO
 
 // add questions

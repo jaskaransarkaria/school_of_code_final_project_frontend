@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import css from "../ThankYou/ThankYou.module.css";
 import TickImage from "../../Images/checked.svg";
 
 const ThankYouSubmission = () => {
-  const [redirect, setRedirect] = useState(false);
-
-  if (redirect) return <Redirect to="/applicant-dashboard" />;
-
   return (
     <>
       <div className={css.rightContentWrapper}>
@@ -18,14 +14,9 @@ const ThankYouSubmission = () => {
           You will receive an email within the next few weeks
         </p>
 
-        <>
-          <button
-            className={css.signOutButton}
-            onClick={() => setRedirect(true)}
-          >
-            Bootcamper Dashboard
-          </button>
-        </>
+        <Link className={css.signOutButton} to="/applicant-dashboard">
+          Bootcamper Dashboard
+        </Link>
       </div>
     </>
   );

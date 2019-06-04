@@ -52,6 +52,7 @@ const FormPart2 = ({
       <div className={css.wrapper}>
         <div className={css.container}>
           <div className={css.leftContainer}>
+            <h1 className={css.applicationFormText}>Application Form</h1>
             <div className={css.socImageContainer}>
               <img
                 src={SocImage}
@@ -61,56 +62,54 @@ const FormPart2 = ({
             </div>
             <div className={css.instructionsBox}>Instructions</div>
             <ol className={css.instructionsContainer}>
-              <li>Please fill out the form</li>
-              <li>There are 5 sections in total which need completed</li>
+              <li>Please complete all five sections of the form</li>
 
               <li>
-                You will be sent an email notifying if you have made it to the
-                next stage
+                You will receive an email notifying you if have made it to the
+                next stage!
               </li>
             </ol>
           </div>
 
           <div className={css.rightContainer}>
-            <h1 className={css.applicationFormText}>Application Form</h1>
             <h1 className={css.applicationStepText}>Step 2/5</h1>
             <div className={css.formContainer}>
               {/* <div className={css.instructionsContainer} /> */}
-              <div className={css.phoneAndAgeContainer}>
-                <div className={css.phoneContainer}>
-                  <label className={css.phoneLabel}>Phone</label>
-                  <div className={css.phoneInputContainer}>
-                    <input
-                      placeholder="Enter phone..."
-                      className={css.phone}
-                      type="number"
-                      name="phoneNumber"
-                      onChange={updateField}
-                      defaultValue={formValues.phoneNumber}
-                    />
-                  </div>
-                </div>
 
-                <div className={css.ageContainer}>
-                  <label className={css.ageLabel}>Age</label>
-
-                  <div className={css.ageInputContainer}>
-                    <input
-                      placeholder="Enter age..."
-                      className={css.age}
-                      type="number"
-                      name="age"
-                      onChange={updateField}
-                      defaultValue={formValues.age}
-                    />
-                  </div>
+              <div className={css.phoneContainer}>
+                <label className={css.phoneLabel}>Phone</label>
+                <div className={css.phoneInputContainer}>
+                  <input
+                    placeholder="Enter phone*"
+                    className={css.phone}
+                    type="number"
+                    name="phoneNumber"
+                    onChange={updateField}
+                    defaultValue={formValues.phoneNumber}
+                  />
                 </div>
               </div>
+
+              <div className={css.ageContainer}>
+                <label className={css.ageLabel}>Age</label>
+
+                <div className={css.ageInputContainer}>
+                  <input
+                    placeholder="Enter age*"
+                    className={css.age}
+                    type="number"
+                    name="age"
+                    onChange={updateField}
+                    defaultValue={formValues.age}
+                  />
+                </div>
+              </div>
+
               <div className={css.locationContainer}>
                 <label className={css.locationLabel}>Location</label>
                 <div className={css.locationInputContainer}>
                   <input
-                    placeholder="Enter location..."
+                    placeholder="Enter location*"
                     className={css.location}
                     type="text"
                     name="location"
@@ -119,7 +118,6 @@ const FormPart2 = ({
                   />
                 </div>
               </div>
-
               <div style={{ color: "red", fontSize: 12 }}>
                 {" "}
                 {formError.inputError}
@@ -129,17 +127,17 @@ const FormPart2 = ({
                 {formError.emailError}
               </div>
             </div>
+
             <div className={css.previousAndNextContainer}>
               <button onClick={previous} className={css.previousButton}>
                 {" "}
                 Previous{" "}
               </button>
-              <div className={css.nextButtonContainer}>
-                <button onClick={saveAndContinue} className={css.nextButton}>
-                  {" "}
-                  Next{" "}
-                </button>
-              </div>
+
+              <button onClick={saveAndContinue} className={css.nextButton}>
+                {" "}
+                Next{" "}
+              </button>
             </div>
           </div>
         </div>
