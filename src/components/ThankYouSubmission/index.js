@@ -12,9 +12,11 @@ const ThankYouSubmission = () => {
       <p className={css.subTextOne}>
         You will receive an email within the next few weeks
       </p>
-      <Link className={css.signOutButton} to="/applicant-dashboard">
-        Bootcamper Dashboard
-      </Link>
+      <div className={css.linkContainer}>
+        <Link className={css.signOutButton} to="/applicant-dashboard">
+          Bootcamper Dashboard
+        </Link>
+      </div>
     </div>
   );
 };

@@ -216,17 +216,20 @@ select::-ms-expand {
   text-transform: uppercase;
 }
 .signOutButton {
+  text-align: center;
   position: relative;
-  left: 25%;
+  margin: auto;
   font-size: 1.2em;
   font-weight: bold;
-  margin-bottom: 20px;
   cursor: pointer;
-
-  bottom: 0;
   width: 50%;
   color: white;
   padding: 10px;
   border-style: none;
   background-color: #11cf84;
+}
+
+.linkContainer {
+  display: flex;
+  justify-content: center;
 }
