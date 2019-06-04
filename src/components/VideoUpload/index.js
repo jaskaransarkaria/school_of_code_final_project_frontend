@@ -66,17 +66,15 @@ const VideoUpload = () => {
   const [reRecord, setReRecord] = useState(false);
   const video = useRef(null);
 
-  useEffect(
-    () =>
-      // feature detction - check existance of a navigator
-      (navigator.getUserMedia =
-        navigator.getUserMedia ||
-        navigator.webkitGetUserMedia ||
-        navigator.mozGetUserMedia),
-    []
-  );
   useEffect(() => {
-    return firebase.auth().onAuthStateChanged(function(user) {
+    // feature detction - check existance of a navigator
+    navigator.getUserMedia =
+      navigator.getUserMedia ||
+      navigator.webkitGetUserMedia ||
+      navigator.mozGetUserMedia;
+  }, []);
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         setFirebaseUid(user.uid);
         console.log(user.uid);
@@ -362,7 +360,9 @@ const VideoUpload = () => {
                         alt="submit video"
                         className={css.submitRecording}
                         onClick={() => {
-                          const blob = new Blob(chunks, { type: "video/mp4" });
+                          const blob = new Blob(chunks, {
+                            type: "video/mp4"
+                          });
                           console.log(blob);
                           if (blob.size > 0 && !isRecording) {
                             setIsLoading(true);
@@ -376,7 +376,9 @@ const VideoUpload = () => {
                         }}
                       />
                     ))}
-                  {isLoading && <CircularProgress color="white" />}
+                  {isLoading && (
+                    <CircularProgress id={css.loadingCircle} color="inherit" />
+                  )}
                 </div>
               </div>
             );

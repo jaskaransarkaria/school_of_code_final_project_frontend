@@ -11,6 +11,7 @@ const ReviewForm = ({ step, setStep, formValues, submitForm }) => {
       <div className={css.wrapper}>
         <div className={css.container}>
           <div className={css.leftContainer}>
+            <h1 className={css.applicationFormText}>Application Form</h1>
             <div className={css.socImageContainer}>
               <img
                 src={SocImage}
@@ -20,17 +21,15 @@ const ReviewForm = ({ step, setStep, formValues, submitForm }) => {
             </div>
             <div className={css.instructionsBox}>Instructions</div>
             <ol className={css.instructionsContainer}>
-              <li>Please fill out the form</li>
-              <li>There are 5 sections in total which need completed</li>
+              <li>Please complete all five sections of the form</li>
 
               <li>
-                You will be sent an email notifying if you have made it to the
-                next stage
+                You will receive an email notifying you if have made it to the
+                next stage!
               </li>
             </ol>
           </div>
           <div className={css.rightContainer}>
-            <h1 className={css.applicationFormText}>Application Form</h1>
             <h1 className={css.applicationStepText}>
               Please review your information
             </h1>

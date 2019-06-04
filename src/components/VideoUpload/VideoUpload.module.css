@@ -7,7 +7,7 @@
 }
 
 #videoUpload {
-  border: 5px white solid;
+  border: 5px #11cf84 solid;
   border-radius: 5px;
 }
 
@@ -104,4 +104,7 @@
   font-size: 1.6em;
   text-align: center;
   margin: 5px 0;
+}
+
+#loadingCircle {
 }

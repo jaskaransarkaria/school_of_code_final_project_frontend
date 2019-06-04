@@ -18,12 +18,21 @@
   background-image: linear-gradient(to bottom right, #04c7d9, #5f04cf);
 }
 .rightContainer {
+  display: flex;
+  justify-content: center;
   grid-area: form;
   color: white;
   position: relative;
   margin: 0 5%;
-  background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png");
+  background-image: url(../../Images/starsBackground.png);
+  /* background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png"); */
   font-weight: bold;
+}
+.formContainer {
+  position: relative;
+  top: 20%;
+  width: 50%;
+  color: white;
 }
 /* LEFT CONTAINER CONTENT */
 /* SOC IMAGE */
@@ -32,22 +41,22 @@
   height: 200px;
 }
 .socImageContainer {
-  top: 5%;
+  top: 15%;
   position: relative;
   text-align: center;
 }
 .instructionsContainer {
   position: relative;
-  top: 10%;
+  top: 25%;
   font-size: 1.3em;
   margin: 0;
-  margin-top: 20px;
-  margin-left: 20px;
+  /* margin-top: 20px; */
+  /* margin-left: 20px; */
   padding: 0;
+  margin: 0px 10%;
 }
 .instructionsContainer li {
-  margin-left: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
   list-style: circle;
 }
 
@@ -56,54 +65,33 @@
   font-weight: bold;
   font-size: 1.8em;
   position: relative;
-  top: 10%;
+  top: 20%;
   display: flex;
   justify-content: center;
 }
 
-/* RIGHT CONTAINER CONTENT */
-.phoneAndAgeContainer {
-  display: flex;
-}
-.phoneContainer {
-  flex: 1;
-}
-.ageContainer {
-  margin-left: 10px;
-  flex: 1;
-}
-
 .phone,
-.age {
-  font-size: 1.2em;
+.age,
+.location {
+  font-size: inherit;
   color: white;
-  padding: 10px;
+  padding: 6px 0 7px;
   width: 100%;
   background-color: transparent;
-  border: 5px solid #11cf84;
+  border-style: none;
+  border-bottom: 2px solid #11cf84;
   box-sizing: border-box;
-  margin-top: 10px;
+  margin-top: 20px;
+  -webkit-tap-highlight-color: transparent;
 }
-.location {
-  font-size: 1.2em;
-  color: white;
-  padding: 10px;
-  width: 50%;
-  background-color: transparent;
-  border: 5px solid #11cf84;
-  box-sizing: border-box;
-  margin-top: 10px;
-}
+
 .nextButton {
-  margin-left: 10px;
-  left: 50%;
   font-size: 1.2em;
   font-weight: bold;
-  margin-bottom: 50px;
+
   cursor: pointer;
-  position: absolute;
-  bottom: 0;
-  width: 50%;
+
+  width: 25%;
   color: white;
   padding: 10px;
   border-style: none;
@@ -112,19 +100,22 @@
 .previousButton {
   font-size: 1.2em;
   font-weight: bold;
-  margin-bottom: 50px;
+  margin-right: 10px;
   cursor: pointer;
-  position: absolute;
-  bottom: 0;
-  width: 50%;
+
+  width: 25%;
   color: white;
   padding: 10px;
   border-style: none;
   background-color: #11cf84;
 }
 .previousAndNextContainer {
+  justify-content: center;
   display: flex;
   flex-direction: row;
+  position: absolute;
+  width: 100%;
+  bottom: 15%;
 }
 ::placeholder {
   color: white;
@@ -134,6 +125,7 @@
 .locationLabel {
   font-weight: bold;
   color: white;
+  font-size: 1.3em;
 }
 
 .phoneContainer,
@@ -144,15 +136,11 @@
 .header {
   color: white;
 }
-.formContainer {
-  position: relative;
-  top: 30%;
-  color: white;
-}
 
 .applicationFormText {
-  margin: 10px 0;
-  position: absolute;
+  position: relative;
+  top: 10%;
+  text-align: center;
 }
 .applicationStepText {
   position: absolute;

@@ -1,13 +1,54 @@
-import React from "react";
+import React, { Component } from "react";
 import SocImage from "../../Images/soc-logo.png";
+import { Redirect } from "react-router-dom";
 import css from "../Contract/Contract.module.css";
-function Contract() {
-  return (
-    <div>
+
+class Contract extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      accept: false,
+      decline: false,
+      disabled: true
+    };
+  }
+
+  setRedirectBootcamper = () => {
+    this.setState({
+      accept: true
+    });
+  };
+  setRedirectApplicant = () => {
+    this.setState({
+      decline: true
+    });
+  };
+  renderRedirectBootcamper = () => {
+    if (this.state.accept) {
+      return <Redirect to="/bootcamper-dashboard" />;
+    }
+  };
+  renderRedirectApplicant = () => {
+    if (this.state.decline) {
+      return <Redirect to="/applicant-dashboard" />;
+    }
+  };
+
+  goFurther = event => {
+    const target = event.target.checked;
+    if (target) {
+      this.setState({
+        disabled: false
+      });
+    }
+  };
+  render() {
+    return (
       <>
         <div className={css.wrapper}>
           <div className={css.container}>
             <div className={css.leftContainer}>
+              <h1 className={css.contractText}>School of Code Contract</h1>
               <div className={css.socImageContainer}>
                 <img
                   src={SocImage}
@@ -30,8 +71,6 @@ function Contract() {
             </div>
 
             <div className={css.rightContainer}>
-              <h1 className={css.contractText}>School of Code Contract</h1>
-
               <div className={css.formContainer}>
                 <div className={css.termsAndConditionsContainer}>
                   <span
@@ -121,19 +160,44 @@ function Contract() {
 
                   <span style={{ color: "black" }}>
                     I agree to the terms and agreement.
-                    <input type="checkbox" required />
+                    <input
+                      id="chkAgree"
+                      type="checkbox"
+                      onChange={e => this.goFurther(e)}
+                    />
                   </span>
                 </div>
                 <div className={css.buttonContainer}>
-                  <button className={css.acceptButton}>Accept</button>
-                  <button className={css.declineButton}>Decline</button>
+                  <>
+                    {this.renderRedirectBootcamper()}
+                    {!this.state.disabled && (
+                      <button
+                        id="btnSubmit"
+                        onClick={this.setRedirectBootcamper}
+                        className={css.acceptButton}
+                      >
+                        Accept
+                      </button>
+                    )}
+                  </>
+                  <>
+                    {this.renderRedirectApplicant()}
+
+                    <button
+                      onClick={this.setRedirectApplicant}
+                      className={css.declineButton}
+                    >
+                      Decline
+                    </button>
+                  </>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </>
-    </div>
-  );
+    );
+  }
 }
+
 export default Contract;
