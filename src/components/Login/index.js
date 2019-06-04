@@ -1,13 +1,11 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import firebase from "firebase";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { Redirect } from "react-router-dom";
 import { api } from "../../config";
-import { UserUidContext } from "../App";
 
 function Login(props) {
   const [signedIn, setSignedIn] = useState(false);
-  const userUid = useContext(UserUidContext);
 
   const uiConfig = {
     signInFlow: "popup",
@@ -32,8 +30,6 @@ function Login(props) {
       }
     });
   }, []);
-
-  console.log("uid from context", userUid);
 
   return (
     <>

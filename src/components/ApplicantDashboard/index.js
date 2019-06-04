@@ -7,6 +7,7 @@ import firebase from "firebase";
 const ApplicantDashBoard = props => {
   const [userUid, setUserUid] = useState("");
   const [modal, setModal] = useState(true);
+  const [users, setUsers] = useState({});
   const [stepInfo, setStepInfo] = useState([
     {
       title: "Complete Form",
@@ -27,7 +28,6 @@ const ApplicantDashBoard = props => {
       className: css.stepThree
     }
   ]);
-  const [users, setUsers] = useState({});
 
   useEffect(() => {
     return firebase.auth().onAuthStateChanged(user => {
@@ -51,7 +51,6 @@ const ApplicantDashBoard = props => {
       }
     };
     getUidApplicationData();
-    return getUidApplicationData;
   }, [userUid]);
 
   const toggleModal = () => {

@@ -66,17 +66,15 @@ const VideoUpload = () => {
   const [reRecord, setReRecord] = useState(false);
   const video = useRef(null);
 
-  useEffect(
-    () =>
-      // feature detction - check existance of a navigator
-      (navigator.getUserMedia =
-        navigator.getUserMedia ||
-        navigator.webkitGetUserMedia ||
-        navigator.mozGetUserMedia),
-    []
-  );
   useEffect(() => {
-    return firebase.auth().onAuthStateChanged(function(user) {
+    // feature detction - check existance of a navigator
+    navigator.getUserMedia =
+      navigator.getUserMedia ||
+      navigator.webkitGetUserMedia ||
+      navigator.mozGetUserMedia;
+  }, []);
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         setFirebaseUid(user.uid);
         console.log(user.uid);
@@ -127,7 +125,7 @@ const VideoUpload = () => {
   };
 
   const uploadToAWS = blob => {
-    return new Promise((resolve, reject) => {
+    new Promise((resolve, reject) => {
       const fileName = shortid.generate();
       var params = {
         Bucket: "school-of-code-applicant-videos",
@@ -376,7 +374,7 @@ const VideoUpload = () => {
                         }}
                       />
                     ))}
-                  {isLoading && <CircularProgress color="white" />}
+                  {isLoading && <CircularProgress color="inherit" />}
                 </div>
               </div>
             );
