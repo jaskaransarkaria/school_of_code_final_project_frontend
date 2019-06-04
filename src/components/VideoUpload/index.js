@@ -277,7 +277,9 @@ const VideoUpload = () => {
                 </video>
                 <br />
                 <div className={css.buttonContainer}>
-                  <div className={css.leftContainer}>
+                  <div
+                    style={{ position: "absolute", left: "0", width: "21%" }}
+                  >
                     <img
                       src="/record.png"
                       alt="record video"
@@ -316,19 +318,21 @@ const VideoUpload = () => {
                         video.current.play();
                       }}
                     />
-                    {reRecord && (
-                      <p
-                        style={{
-                          color: "red",
-                          verticalAlign: "text-bottom",
-                          textAlign: "center",
-                          fontSize: "30px"
-                        }}
-                      >
-                        Hit record, if your not happy with your first take.
-                      </p>
-                    )}
                   </div>
+
+                  {reRecord && (
+                    <p
+                      style={{
+                        color: "red",
+                        verticalAlign: "text-bottom",
+                        textAlign: "center",
+                        fontSize: "150%",
+                        display: "inline-block"
+                      }}
+                    >
+                      Re-record, if your not <br /> happy with your first take.
+                    </p>
+                  )}
                   {!isLoading &&
                     (questionCounter + 1 < interviewQuestions.length ? (
                       <img
