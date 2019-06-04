@@ -16,24 +16,38 @@ const AdminUserOptions = props => {
   return (
     <div className={css.container}>
       <DashboardBanner title={"Admin Dashboard"} />
-      {
-        <>
-          <div className={css.optionsContainer}>
-            <div onClick={goToForms} className={css.optionsCard}>
-              <p> Process Application Forms</p>
-            </div>
-            <div onClick={goToVideos} className={css.optionsCard}>
-              <p>Process Video Applications</p>
-            </div>
-            <div onClick={goToSchedule} className={css.optionsCard}>
-              <p>Teacher Resource Upload</p>
-            </div>
-            {/* <div onClick={goToSchedule} className={css.optionsCard}>
-              <p>View all accepted Applications</p>
-            </div> */}
+      <div className={css.optionsContainer}>
+        <div className={css.cardContainer}>
+          <img
+            style={{ width: "150px", padding: "20px" }}
+            src="/saturn.png"
+            alt="saturn icon for forms"
+          />
+          <div onClick={goToForms} className={css.optionsCard}>
+            <p>Application Forms</p>
           </div>
-        </>
-      }
+        </div>
+        <div className={css.cardContainer}>
+          <img
+            style={{ width: "150px", padding: "20px" }}
+            src="/venus.png"
+            alt="venus icon for videos"
+          />
+          <div onClick={goToVideos} className={css.optionsCard}>
+            <p>Application Videos</p>
+          </div>
+        </div>
+        <div className={css.cardContainer}>
+          <img
+            style={{ width: "150px", padding: "20px" }}
+            src="/jupiter.svg"
+            alt="jupiter icon for resource upload"
+          />
+          <div onClick={goToSchedule} className={css.optionsCard}>
+            <p>Resource uploads</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

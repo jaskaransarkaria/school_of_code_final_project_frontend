@@ -1,19 +1,19 @@
 .videoContainer {
+  position: relative;
   display: flex;
   flex-direction: column;
-  width: 90%;
-  height: 90%;
+  width: 80%;
   margin: auto;
 }
 
 #videoUpload {
   border: 5px #11cf84 solid;
   border-radius: 5px;
+  width: 100%;
 }
 
 .startRecording {
-  width: 70px;
-  height: 70px;
+  width: 31%;
   padding: 0.5%;
 
   /* color: white; */
@@ -26,8 +26,8 @@
 }
 
 .stopRecording {
-  width: 70px;
-  height: 70px;
+  width: 31%;
+
   padding: 0.5%;
 
   /* color: white;
@@ -40,8 +40,8 @@
 }
 
 .playRecording {
-  width: 70px;
-  height: 70px;
+  width: 31%;
+
   padding: 0.5%;
 
   /* color: white;
@@ -53,9 +53,9 @@
   cursor: pointer;
 }
 .submitRecording {
-  width: 70px;
-  height: 70px;
-  padding: 0.5%;
+  width: 7%;
+
+  padding: 0.25%;
   position: absolute;
   right: 0;
 
@@ -68,9 +68,9 @@
   cursor: pointer;
 }
 .submitFinalVideos {
-  width: 70px;
-  height: 70px;
-  padding: 0.5%;
+  width: 7%;
+
+  padding: 0.25%;
   position: absolute;
   right: 0;
 

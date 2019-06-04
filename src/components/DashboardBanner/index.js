@@ -5,7 +5,6 @@ import firebase from "firebase";
 
 function DashboardBanner({ title }) {
   const [displayName, setDisplayName] = useState("");
-
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
       if (user === null) {
