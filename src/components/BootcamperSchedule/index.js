@@ -128,14 +128,12 @@ const BootcamperSchedule = () => {
         {scheduleData.map(day => (
           // here we display the 5 days
           <div className={css.daysOfWeekContainer}>
-            {dateInBar < 0 && (
-              <button
-                className={css.dateButton}
-                onClick={() => setDateInBar(dateInBar + 1)}
-              >
-                &#60;
-              </button>
-            )}
+            <button
+              className={css.dateButton}
+              onClick={() => setDateInBar(dateInBar - 1)}
+            >
+              &#60;
+            </button>
             <FormatedDate
               className={css.dayBox}
               date={day.date}
@@ -162,13 +160,14 @@ const BootcamperSchedule = () => {
               date={day.date}
               num={dateInBar}
             />
-
-            <button
-              className={css.dateButton}
-              onClick={() => setDateInBar(dateInBar - 1)}
-            >
-              &#62;
-            </button>
+            {dateInBar < 0 && (
+              <button
+                className={css.dateButton}
+                onClick={() => setDateInBar(dateInBar + 1)}
+              >
+                &#62;
+              </button>
+            )}
           </div>
         ))}
         <SlackDrawer />

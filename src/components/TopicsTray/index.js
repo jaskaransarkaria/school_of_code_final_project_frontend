@@ -25,14 +25,14 @@ const TopicsTray = () => {
   return (
     <>
       <div>
-        <h2 className={css.topicsTitle}>Resources</h2>
+        <h2 className={css.topicsTitle}>Link Library</h2>
+        <h2 className={css.topicsTitle}>Search Bar</h2>
         <div className={css.topicsContainer}>
-          {topicKeys.map(topic => (
+          {topicKeys.sort().map(topic => (
             <ExpansionPanel>
               <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1a-content"
-                id="panel1a-header"
                 onClick={() => setShowTopic(showTopic ? false : topic)}
               >
                 <Typography>{topic}</Typography>
@@ -51,7 +51,3 @@ const TopicsTray = () => {
 };
 
 export default TopicsTray;
-
-function SimpleExpansionPanel() {
-  return <div />;
-}

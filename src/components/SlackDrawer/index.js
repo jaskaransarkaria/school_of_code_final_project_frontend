@@ -45,7 +45,11 @@ const SlackDrawer = () => {
             }}
           />
         </button>
-        <Drawer open={state.left} onClose={toggleDrawer("left", false)}>
+        <Drawer
+          open={state.left}
+          onClose={toggleDrawer("left", false)}
+          width={1}
+        >
           <TopicsTray />
         </Drawer>
       </div>
