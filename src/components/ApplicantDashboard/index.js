@@ -164,7 +164,7 @@ const ApplicantDashBoard = props => {
     return stepInfo.map(addProgressionMock).map(renderStep);
   };
   const addProgressionMock = (info, idx) => ({
-    progression: (idx + 1) * 50,
+    progression: (idx + 1) * 25,
     ...info
   });
 
