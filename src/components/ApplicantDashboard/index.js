@@ -4,7 +4,7 @@ import socPlanet from "../../Images/planet_soc.png";
 import { api } from "../../config";
 import firebase from "firebase";
 import rocket from "../../Images/spaceship.png";
-
+import SOCImage from "../../Images/soc-logo.png";
 const ApplicantDashBoard = props => {
   const [userUid, setUserUid] = useState("");
   const [modal, setModal] = useState(true);
@@ -140,11 +140,12 @@ const ApplicantDashBoard = props => {
           </div>
           <div className={css.progressImgContainer}>
             <img
+              className={css.rocketImage}
               src={rocket}
               alt="socPlanet icon"
               style={{
-                width: "50px",
-                height: "50px",
+                width: "100px",
+                height: "100px",
                 position: "absolute",
                 left: `${info.progression}%`,
                 bottom: `${info.progression}%`,
@@ -172,6 +173,7 @@ const ApplicantDashBoard = props => {
       {console.log("in APP DASH USERS", users)}
       <div className={css.header}>
         <h2> Applicant Dashboard </h2>
+        <img className={css.socLogo} src={SOCImage} alt="school of code logo" />
       </div>
       <div className={css.mainContentContainer}>
         <div

@@ -78,15 +78,27 @@ p {
 /*-----------------
   Header Section 
 ------------------*/
+
+/* background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png"); */
+/* height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center; */
+.socLogo {
+  position: absolute;
+  width: 75px;
+  right: 1%;
+  height: 100px;
+  width: 100px;
+}
 .header {
-  background-image: url(../../Images/starsBackground.png);
+  background: rgba(108, 122, 137, 0.4);
   /* background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png"); */
   height: 20vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 .header h2 {
   font-size: 40px;
 }
@@ -150,8 +162,10 @@ p {
 }
 
 .stepNotAvailable {
+  background: radial-gradient(rgba(48, 143, 214, 0.57), rgb(3, 4, 9));
   position: absolute;
-  background: rgba(0, 0, 0, 0);
+  /* background: rgba(0, 0, 0, 0); */
+  height: 100%;
   top: 0;
   bottom: 10%;
   left: 0;
@@ -238,10 +252,6 @@ p {
   font-size: 35px;
 }
 
-.rocket0 {
-  background-color: red;
-}
-
 @keyframes rocketFlight25 {
   from {
     bottom: 0%;
@@ -272,14 +282,7 @@ p {
     left: 75%;
   }
 }
-@keyframes infiniteSpinning {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+
 /* @keyframes mymove {
   from {
     top: 0px;
