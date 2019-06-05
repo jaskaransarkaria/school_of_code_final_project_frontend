@@ -28,6 +28,7 @@ const BootcamperSchedule = () => {
   const [sessionIndex, setSessionIndex] = useState(0);
   const [dateToShow, setDateToShow] = useState([]);
   const [dateInBar, setDateInBar] = useState(0);
+  const [lessonInfo, setLessonInfo] = useState("");
 
   useEffect(() => {
     async function fetchSchedule() {
@@ -183,10 +184,12 @@ const BootcamperSchedule = () => {
             day.daysContent
 
               .map((session, idx) => (
-                <div className={css.itemContainer}>
+                <div
+                  className={css.itemContainer}
+                  onClick={() => setLessonInfo(session.learningObjectives)}
+                >
                   <b>{`Lesson ${idx + 1}`}</b>
                   <p>{session.contentTitle}</p>
-                  <p>{session.learningObjectives}</p>
                 </div>
               ))
               .slice(sessionIndex, sessionIndex + 3)
@@ -201,7 +204,12 @@ const BootcamperSchedule = () => {
         </div>
         <div className={css.lessonInfoContainer}>
           <div className={css.lessonInfoBox}>
-            <div className={css.lessonTitle}>Lesson Information</div>
+            <div className={css.lessonTitle}>
+              <p>Lesson Information</p>
+            </div>
+            <div className={css.lessonDetails}>
+              <p>{lessonInfo}</p>
+            </div>
           </div>
         </div>
       </div>
