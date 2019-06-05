@@ -14,12 +14,15 @@
   grid-area: header;
   /* border-right: 5px solid white; */
   color: white;
-
+  background-image: radial-gradient(
+    rgba(48, 143, 214, 0.57),
+    rgba(108, 122, 137, 0.26)
+  );
   background-color: rgba(49, 165, 220, 0.1);
 
   /* background-image: linear-gradient(to bottom right, #04c7d9, #5f04cf); */
 
-  background-image: linear-gradient(to bottom right, #04d94296, #5f04cf7a);
+  /* background-image: linear-gradient(to bottom right, #04d94296, #5f04cf7a); */
 }
 .rightContainer {
   display: flex;
@@ -45,6 +48,16 @@
 .socImage {
   width: 200px;
   height: 200px;
+  padding: 20px;
+  box-shadow: 2px 2px 10px #fff;
+  border-radius: 200px;
+  /* 
+  -moz-box-shadow: 5px 10px 20px #ccc;
+  -webkit-box-shadow: 5px 6px 5px #ccc;
+  box-shadow: 10px 6px 5px #ccc;
+  -moz-border-radius: 190px;
+  -webkit-border-radius: 190px;
+  border-radius: 200px; */
 }
 .socImageContainer {
   top: 15%;
