@@ -8,6 +8,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import firebase from "firebase";
 import { api } from "../../config";
 import ThankYouSubmission from "../ThankYouSubmission";
+import SubmitImage from "../../Images/submit.png";
 
 AWS.config.update({
   region: "eu-west-1",
@@ -388,14 +389,21 @@ const VideoUpload = () => {
             );
           })}
       {!showVideo && !redirect && (
-        <button
-          onClick={() => {
-            uploadVideosToDb();
-            // add re routing link here
-          }}
-        >
-          confirm upload
-        </button>
+        <div className={css.rightContentWrapper}>
+          <h1 className={css.headerMessage}>Press submit to process videos</h1>
+          <img
+            className={css.tickImage}
+            src={SubmitImage}
+            alt="green tick icon"
+            onClick={() => {
+              uploadVideosToDb();
+              // add re routing link here
+            }}
+          />
+          <p className={css.subTextOne}>
+            You will receive an email within the next few weeks
+          </p>
+        </div>
       )}
     </div>
   ) : (

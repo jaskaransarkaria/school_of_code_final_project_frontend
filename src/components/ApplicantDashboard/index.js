@@ -94,8 +94,9 @@ const ApplicantDashBoard = props => {
     return <h3>Track your journey to becoming a Bootcamper.</h3>;
   };
 
-  const Step = ({ passFirstStage, passSecondStage, passFinalStage }) => {
-    return stepInfo.map((info, idx) => {
+  const Steps = ({ passFirstStage, passSecondStage, passFinalStage }) => {
+    const renderStep = (info, idx) => {
+      console.log(info);
       return (
         <div className={info.className}>
           {(info.stage === 2 && Object.entries(users).length === 0) ||
@@ -138,7 +139,18 @@ const ApplicantDashBoard = props => {
             Stage {info.stage}{" "}
           </div>
           <div className={css.progressImgContainer}>
-            <img src={rocket} alt="socPlanet icon" style={{ bottom: "15%" }} />
+            <img
+              src={rocket}
+              alt="socPlanet icon"
+              style={{
+                width: "50px",
+                height: "50px",
+                position: "absolute",
+                left: `${info.progression}%`,
+                bottom: `${info.progression}%`,
+                animation: `${css[`rocketFlight${info.progression}`]} 1s`
+              }}
+            />
           </div>
           <div onClick={() => redirectTo(info.stage)} className={css.stepCard}>
             <h3> {info.title}</h3>
@@ -146,8 +158,14 @@ const ApplicantDashBoard = props => {
           </div>
         </div>
       );
-    });
+    };
+    console.log(css);
+    return stepInfo.map(addProgressionMock).map(renderStep);
   };
+  const addProgressionMock = (info, idx) => ({
+    progression: (idx + 1) * 25,
+    ...info
+  });
 
   return (
     <div className={css.container}>
@@ -178,7 +196,7 @@ const ApplicantDashBoard = props => {
           <ApplicationStage />
         </div>
         <div className={css.stepsContainer}>
-          <Step
+          <Steps
             passFirstStage={users.passFormStage}
             passSecondStage={users.passVideoStage}
             passFinalStage={users.passInterviewStage}
