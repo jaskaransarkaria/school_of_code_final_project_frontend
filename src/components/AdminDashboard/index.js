@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import DashboardBanner from "../DashboardBanner";
-import NavBar from "../NavBar";
 import AdminUserOptions from "../AdminUserOptions";
 import FormRating from "../FormRating";
 import VideoRating from "../VideoRating";
@@ -18,22 +17,15 @@ class AdminDashBoard extends Component {
               <Switch>
                 <Route
                   exact
-                  path="/admin-dashboard/"
+                  path="/admin-dashboard"
                   component={AdminUserOptions}
                 />
+                <Route path="/form-processing" component={FormRating} />
+                <Route path="/video-processing" component={VideoRating} />
                 <Route
-                  path="/admin-dashboard/form-processing"
-                  component={FormRating}
-                />
-                <Route
-                  path="/admin-dashboard/video-processing"
-                  component={VideoRating}
-                />
-                <Route
-                  path="/admin-dashboard/upload-schedule"
+                  path="/upload-schedule"
                   component={AdminUploadSchedule}
                 />
-                {/* <Route component={NotFound} /> */}
               </Switch>
             </BrowserRouter>
           </div>

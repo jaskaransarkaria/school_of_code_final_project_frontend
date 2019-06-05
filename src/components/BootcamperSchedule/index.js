@@ -3,6 +3,7 @@ import moment from "moment";
 import { api } from "../../config";
 import css from "./BootcamperSchedule.module.css";
 import ArrowImage from "../../Images/arrow.png";
+import SlackDrawer from "../SlackDrawer";
 
 // get last 5 days schedule || most recent schedule and the 5 days previous
 // display Day name at the top..
@@ -83,22 +84,42 @@ const BootcamperSchedule = () => {
     }
   };
 
-  const FormatedDate = ({ date, num }) => (
-    <div
-      className={css.dayBox}
-      onClick={() => {
-        setSelectedDate(
-          moment(moment(date, "DD/MM/YYYY").add(num, "days")._d).format(
-            "DD/MM/YYYY"
-          )
-        );
-      }}
-    >
-      {moment(moment(date, "DD/MM/YYYY").add(num, "days")._d).format(
-        "ddd Do MMM"
-      )}
-    </div>
-  );
+  const FormatedDate = ({ date, num }) => {
+    let highlightDay = {};
+    console.log("datetoshow", date);
+    console.log("selectedDate", selectedDate);
+    console.log(
+      moment(moment(date, "DD/MM/YYYY").add(num, "days")._d).format(
+        "DD/MM/YYYY"
+      )
+    );
+
+    if (
+      selectedDate ===
+      moment(moment(date, "DD/MM/YYYY").add(num, "days")._d).format(
+        "DD/MM/YYYY"
+      )
+    ) {
+      highlightDay = { backgroundColor: "#11cf84" };
+    }
+    return (
+      <div
+        className={css.dayBox}
+        style={highlightDay}
+        onClick={() => {
+          setSelectedDate(
+            moment(moment(date, "DD/MM/YYYY").add(num, "days")._d).format(
+              "DD/MM/YYYY"
+            )
+          );
+        }}
+      >
+        {moment(moment(date, "DD/MM/YYYY").add(num, "days")._d).format(
+          "ddd Do MMM"
+        )}
+      </div>
+    );
+  };
 
   return (
     <>
@@ -149,6 +170,7 @@ const BootcamperSchedule = () => {
             </button>
           </div>
         ))}
+        <SlackDrawer />
         <br />
         <div className={css.carouselContainer}>
           <img
@@ -176,6 +198,11 @@ const BootcamperSchedule = () => {
             className={css.rightArrow}
             onClick={() => controlCarousel(1)}
           />
+        </div>
+        <div className={css.lessonInfoContainer}>
+          <div className={css.lessonInfoBox}>
+            <div className={css.lessonTitle}>Lesson Information</div>
+          </div>
         </div>
       </div>
     </>

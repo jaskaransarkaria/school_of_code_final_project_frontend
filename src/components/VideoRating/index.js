@@ -80,12 +80,17 @@ const VideoRating = props => {
 
   const AverageScore = () => {
     let score;
+    console.log("SCORE", score);
+    console.log("collateLength", collateFeedback.length);
+    console.log("COLLATEEEEEEEE", collateFeedback);
+    score = collateFeedback
+      .map(item => item.rating / 2)
+      .reduce((accumulator, currentValue) => {
+        console.log("accumulator", accumulator);
+        console.log("currentValue", currentValue);
 
-    score =
-      collateFeedback
-        .map(item => item.rating)
-        .reduce((accumulator, currentValue) => accumulator + currentValue) /
-      collateFeedback.length;
+        return (accumulator + currentValue) / collateFeedback.length;
+      });
     ///
     //   10) *
     // 100;
