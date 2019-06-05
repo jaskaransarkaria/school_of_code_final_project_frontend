@@ -33,8 +33,12 @@ body {
   grid-area: header;
 
   color: white;
-
-  background-image: linear-gradient(to bottom right, #04d94296, #5f04cf7a);
+  background-image: radial-gradient(
+    rgba(48, 143, 214, 0.57),
+    rgba(108, 122, 137, 0.26)
+  );
+  background-color: rgba(49, 165, 220, 0.1);
+  /* background-image: linear-gradient(to bottom right, #04d94296, #5f04cf7a); */
 }
 /* SOC IMAGE */
 .socImage {

@@ -1,7 +1,7 @@
 import React from "react";
 import css from "../ApplicationFormPage1/ApplicationFormPage1.module.css";
 import SocImage from "../../Images/soc-logo.png";
-
+import ufoImage from "../../Images/ufo.svg";
 const FormPart1 = ({
   step,
   setStep,
@@ -54,6 +54,7 @@ const FormPart1 = ({
         <div className={css.container}>
           <div className={css.leftContainer}>
             <h1 className={css.applicationFormText}>Application Form</h1>
+
             <div className={css.socImageContainer}>
               <img
                 src={SocImage}
