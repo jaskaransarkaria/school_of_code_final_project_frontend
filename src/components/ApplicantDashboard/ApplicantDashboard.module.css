@@ -167,7 +167,8 @@ p {
 
 .stepPassed {
   position: absolute;
-  background: radial-gradient(rgb(224, 224, 224), rgba(87, 213, 64, 0.5));
+
+  background: radial-gradient(rgba(48, 143, 214, 0.57), rgb(3, 4, 9));
   top: 0;
   bottom: 0;
   left: 0;
@@ -197,7 +198,7 @@ p {
   box-shadow: 1px 1px 5px;
   position: relative;
 
-  width: 80%;
+  /* width: 80%; */
 }
 
 .stepCard:hover {

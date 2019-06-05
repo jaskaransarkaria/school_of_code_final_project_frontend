@@ -120,7 +120,7 @@ const ApplicantDashBoard = props => {
           (info.stage === 2 && passSecondStage === true) ||
           (info.stage === 3 && passFinalStage === true) ? (
             <div className={css.stepPassed}>
-              <div className={css.congratsMessage}>Congratulations!</div>
+              <div className={css.congratsMessage}>Congratulations</div>
               <div className={css.congratsMessage}>
                 {" "}
                 You passed Stage {info.stage}!
