@@ -78,15 +78,27 @@ p {
 /*-----------------
   Header Section 
 ------------------*/
+
+/* background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png"); */
+/* height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center; */
+.socLogo {
+  position: absolute;
+  width: 75px;
+  right: 1%;
+  height: 100px;
+  width: 100px;
+}
 .header {
-  background-image: url(../../Images/starsBackground.png);
+  background: rgba(108, 122, 137, 0.4);
   /* background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png"); */
   height: 20vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 .header h2 {
   font-size: 40px;
 }
@@ -126,17 +138,17 @@ p {
   display: flex;
   flex-direction: column;
   flex: 1;
-
+  justify-content: flex-end;
   position: relative;
 }
 
-.stepOne {
+/* .stepOne {
   justify-content: flex-end;
 }
 
 .stepTwo {
   justify-content: center;
-}
+} */
 
 .stageTitle,
 .finalStageTitle {
@@ -150,8 +162,10 @@ p {
 }
 
 .stepNotAvailable {
+  background: radial-gradient(rgba(48, 143, 214, 0.57), rgb(3, 4, 9));
   position: absolute;
-  background: rgba(0, 0, 0, 0);
+  /* background: rgba(0, 0, 0, 0); */
+  height: 100%;
   top: 0;
   bottom: 10%;
   left: 0;
@@ -167,7 +181,8 @@ p {
 
 .stepPassed {
   position: absolute;
-  background: radial-gradient(rgb(224, 224, 224), rgba(87, 213, 64, 0.5));
+
+  background: radial-gradient(rgba(48, 143, 214, 0.57), rgb(3, 4, 9));
   top: 0;
   bottom: 0;
   left: 0;
@@ -182,20 +197,11 @@ p {
 }
 
 .progressImgContainer {
-  /* display: flex;
-  justify-content: center;
-  margin: 5px; */
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
   position: relative;
-  height: 25%;
-
-  left: 15%;
-  bottom: 20%;
-}
-
-.progressImgContainer img {
-  width: 100px;
-  height: 100%;
-  object-fit: contain;
+  flex: 1;
 }
 
 .stepCard {
@@ -204,11 +210,9 @@ p {
   background: white;
   border-radius: 5px;
   box-shadow: 1px 1px 5px;
-  position: absolute;
-  top: 75%;
-  left: 50%;
-  width: 80%;
-  transform: translateX(-50%);
+  position: relative;
+
+  /* width: 80%; */
 }
 
 .stepCard:hover {
@@ -248,9 +252,54 @@ p {
   font-size: 35px;
 }
 
-.rocket0 {
-  background-color: red;
+@keyframes rocketFlight25 {
+  from {
+    bottom: 0%;
+    left: 0%;
+  }
+  to {
+    bottom: 25%;
+    left: 25%;
+  }
 }
+@keyframes rocketFlight50 {
+  from {
+    bottom: 0%;
+    left: 0%;
+  }
+  to {
+    bottom: 50%;
+    left: 50%;
+  }
+}
+@keyframes rocketFlight75 {
+  from {
+    bottom: 0%;
+    left: 0%;
+  }
+  to {
+    bottom: 75%;
+    left: 75%;
+  }
+}
+
+/* @keyframes mymove {
+  from {
+    top: 0px;
+  }
+  to {
+    top: 200px;
+  }
+} */
+/* @keyframes rocketFlight25 {
+  from {
+    transform: rotateX(90deg);
+  }
+  to {
+    transform: rotateX(180deg);
+  }
+} */
+
 /*----------------------
     Media Queries
 ----------------------*/

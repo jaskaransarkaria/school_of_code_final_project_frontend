@@ -108,3 +108,33 @@
 
 #loadingCircle {
 }
+/* SUBMIT CSS */
+.rightContentWrapper {
+  border-radius: 10px;
+  border: 10px solid red;
+  position: absolute;
+  left: 25%;
+  right: 25%;
+  top: 25%;
+  padding: 20px;
+}
+.subTextOne {
+  margin: 2%;
+  text-transform: uppercase;
+  font-size: 1.1em;
+  text-align: center;
+  font-style: italic;
+}
+.headerMessage {
+  text-transform: capitalize;
+  font-size: 1.7em;
+  margin: 10px;
+}
+.rightContentWrapper img {
+  width: 200px;
+  height: 100px;
+  position: relative;
+}
+.rightContentWrapper img:hover {
+  cursor: pointer;
+}
