@@ -89,15 +89,6 @@ const BootcamperSchedule = () => {
 
   const FormatedDate = ({ date, num }) => {
     let highlightDay = {};
-    console.log("datetoshow", date);
-    console.log("datetoshow", dateToShow[0].date);
-    console.log("selectedDate", selectedDate);
-    console.log(
-      moment(moment(date, "DD/MM/YYYY").add(num, "days")._d).format(
-        "DD/MM/YYYY"
-      )
-    );
-
     if (
       selectedDate ===
         moment(moment(date, "DD/MM/YYYY").add(num, "days")._d).format(
