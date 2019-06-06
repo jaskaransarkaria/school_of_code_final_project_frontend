@@ -167,6 +167,7 @@ function FormRating(props) {
       <DashboardBanner title={"Form Applications"} />
 
       <div className={css.applicationStatusContainer}>
+      <div className={css.traysContainer}>
         <div>
           <button
             className={
@@ -391,6 +392,7 @@ function FormRating(props) {
               );
             })}
           </ul>
+        </div>
         </div>
 
         <div onClick={goToHome} className={css.adminDashboardHome}>
