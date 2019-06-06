@@ -17,7 +17,7 @@ const AdminUserOptions = props => {
     <div className={css.container}>
       <DashboardBanner title={"Admin Dashboard"} />
       <div className={css.optionsContainer}>
-        <div className={css.cardContainer}>
+        <div onClick={goToForms} className={css.cardContainer}>
           <img
             style={{ width: "200px", padding: "20px" }}
             src="/saturn.png"
@@ -27,7 +27,7 @@ const AdminUserOptions = props => {
             <p>Form Applications</p>
           </div>
         </div>
-        <div className={css.cardContainer}>
+        <div onClick={goToVideos} className={css.cardContainer}>
           <img
             style={{ width: "200px", padding: "20px" }}
             src="/venus.png"
@@ -37,7 +37,7 @@ const AdminUserOptions = props => {
             <p>Video Applications</p>
           </div>
         </div>
-        <div className={css.cardContainer}>
+        <div onClick={goToSchedule} className={css.cardContainer}>
           <img
             style={{ width: "200px", padding: "20px" }}
             src="/jupiter.svg"
