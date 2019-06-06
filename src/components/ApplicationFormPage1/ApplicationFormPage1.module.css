@@ -1,8 +1,5 @@
-@import url("https://fonts.googleapis.com/css?family=Oxygen:300,400");
 /* MAIN CONTAINERS */
-.body {
-  font-family: "Oxygen", sans-serif;
-}
+
 .container {
   display: grid;
   grid-template-columns: 35% 65%;
@@ -23,7 +20,7 @@
     rgba(48, 143, 214, 0.57),
     rgba(108, 122, 137, 0.26)
   ); */
-  background-color: rgba(49, 165, 220, 0.1);
+  /* background-color: rgba(49, 165, 220, 0.1); */
 
   /* background-image: linear-gradient(to bottom right, #04c7d9, #5f04cf); */
 
@@ -71,7 +68,7 @@
 }
 .instructionsContainer {
   position: relative;
-  top: 25%;
+  top: 22%;
   font-size: 1.3em;
   margin: 0;
   /* margin-top: 20px; */
@@ -81,7 +78,8 @@
 }
 .instructionsContainer li {
   margin-bottom: 30px;
-  list-style: circle;
+  list-style: none;
+  font-size: 1.2em;
 }
 
 .instructionsBox {
@@ -133,6 +131,7 @@
   padding: 10px;
   border-style: none;
   background-color: #11cf84;
+  border-radius: 5px;
 }
 
 ::placeholder {
@@ -159,10 +158,12 @@
   position: relative;
   top: 10%;
   text-align: center;
+  font-size: 2.2em;
 }
 .applicationStepText {
   position: absolute;
   margin-top: 80px;
+  font-size: 2.2em;
 }
 
 input:-webkit-autofill,

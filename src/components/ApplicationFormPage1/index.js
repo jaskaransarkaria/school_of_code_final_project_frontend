@@ -62,7 +62,7 @@ const FormPart1 = ({
                 alt="School of code logo"
               />
             </div>
-            <div className={css.instructionsBox}>Instructions</div>
+            {/* <div className={css.instructionsBox}>Instructions</div> */}
             <ol className={css.instructionsContainer}>
               <li>Please complete all five sections of the form</li>
 
