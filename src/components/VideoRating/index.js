@@ -252,7 +252,7 @@ const VideoRating = props => {
     if (collateFeedback.length > 3) {
       setOverallRating(calculateOverallRating());
 
-      if (collateFeedback.length === 10) {
+      if (collateFeedback.length === 5) {
         postRatingsToServer();
       }
     }
@@ -283,12 +283,6 @@ const VideoRating = props => {
 
   return (
     <>
-      {allUsers.map(user => {
-        /* console.log(
-          "MAPPING AND UID TO NAME!!",
-          matchUidToName(user.firebaseUid)
-        ) */
-      })}
       <DashboardBanner title={"Video Applications"} />
       <div id="userTray" className={css.userTray}>
         <div className={css.passThresholdContainer}>
@@ -300,74 +294,124 @@ const VideoRating = props => {
             style={{ color: "rgba(82, 226, 80, 1)" }}
             fractions={2}
             onClick={value => {
-              // setRatingValue(value);
-              // setAdminFeedbackRating(value * 2);
               setSliderPassValue(value * 2);
               updatePassStage();
             }}
           />
         </div>
         <div id="videoTray">
-          {pendingVideosData.map(
-            ({ videoApplicationData, firebaseUid }, applicantIndex) => {
-              if (applicantIndex === applicantCounter) {
-                console.log("APPLICANTINDEX", applicantIndex);
-                console.log("APPLICANTCOUNTER", applicantCounter);
-                return (
-                  <>
-                    <div
-                      key={applicantIndex}
-                      className={css.applicationStatusContainer}
-                    >
-                      <div>
-                        <button
-                          className={
-                            showApplicants === false
-                              ? css.applicationStatusButtonActive
-                              : css.applicationStatusButton
-                          }
-                          onClick={() => {
-                            dispatch(false);
-                            viewApplication();
+          {[
+            ...pendingVideosData,
+            ...acceptedVideosData,
+            ...rejectedVideosData
+          ].map(({ videoApplicationData, firebaseUid }, applicantIndex) => {
+            if (applicantIndex === applicantCounter) {
+              return (
+                <>
+                  <div
+                    key={applicantIndex}
+                    className={css.applicationStatusContainer}
+                  >
+                    <div>
+                      <button
+                        className={
+                          showApplicants === false
+                            ? css.applicationStatusButtonActive
+                            : css.applicationStatusButton
+                        }
+                        onClick={() => {
+                          dispatch(false);
+                          viewApplication();
+                        }}
+                      >
+                        <p> Rejected Applications</p>
+                        <Spring
+                          from={{ number: 0 }}
+                          to={{
+                            number: rejectedVideosData.filter(
+                              applicant => applicant.passVideoStage === false
+                            ).length
                           }}
+                          config={{ duration: 500 }}
                         >
-                          <p> Rejected Applications</p>
-                          <Spring
-                            from={{ number: 0 }}
-                            to={{
-                              number: rejectedVideosData.filter(
-                                applicant => applicant.passVideoStage === false
-                              ).length
-                            }}
-                            config={{ duration: 500 }}
-                          >
-                            {props => (
-                              <p className={css.applicationsNumber}>
-                                {props.number.toFixed()}
-                              </p>
-                            )}
-                          </Spring>
-                        </button>
-                        {showApplicants === null && currentUid === undefined ? (
-                          <ul className={css.instructionsMessage}>
-                            <h3>
-                              {" "}
-                              Select "Pending Applications" to begin rating{" "}
-                              <br /> or <br /> Adjust Pass Threshold to set the
-                              acceptance rate.{" "}
-                            </h3>{" "}
-                          </ul>
-                        ) : null}
+                          {props => (
+                            <p className={css.applicationsNumber}>
+                              {props.number.toFixed()}
+                            </p>
+                          )}
+                        </Spring>
+                      </button>
+                      {showApplicants === null && currentUid === undefined ? (
+                        <ul className={css.instructionsMessage}>
+                          <h3>
+                            {" "}
+                            Select "Pending Applications" to begin rating <br />{" "}
+                            or <br /> Adjust Pass Threshold to set the
+                            acceptance rate.{" "}
+                          </h3>{" "}
+                        </ul>
+                      ) : null}
 
-                        <ul
-                          className={
-                            showApplicants === false
-                              ? css.applicantListContainer
-                              : css.hideApplicantListContainer
+                      <ul
+                        className={
+                          showApplicants === false
+                            ? css.applicantListContainer
+                            : css.hideApplicantListContainer
+                        }
+                      >
+                        {/* List all applicants, unless the search input is used  */}
+                        {rejectedVideosData.map(applicant => {
+                          return (
+                            <>
+                              <UserName
+                                classToBe={css.applicant}
+                                click={e =>
+                                  viewApplication(applicant.firebaseUid)
+                                }
+                                indexKey={applicant.firebaseUid}
+                                uid={applicant.firebaseUid}
+                                dispatch={() => dispatch(false)}
+                                setAdminFeedbackRating={setAdminFeedbackRating}
+                                setVideoCounter={setVideoCounter}
+                                setCollateFeedback={setCollateFeedback}
+                              />
+                            </>
+                          );
+                        })}
+                      </ul>
+                    </div>
+                    <div>
+                      <button
+                        className={
+                          showApplicants === "pending"
+                            ? css.applicationStatusButtonActive
+                            : css.applicationStatusButton
+                        }
+                        onClick={() => {
+                          dispatch("pending");
+                          viewApplication();
+                        }}
+                      >
+                        <p> Pending Applications</p>
+                        <p className={css.applicationsNumber}>
+                          {
+                            pendingVideosData.filter(
+                              applicant =>
+                                applicant.passVideoStage === "pending"
+                            ).length
                           }
-                        >
-                          {/* List all applicants, unless the search input is used  */}
-                          {rejectedVideosData.map(applicant => {
+                        </p>
+                      </button>
+                      <ul
+                        className={
+                          showApplicants === "pending"
+                            ? css.applicantListContainer
+                            : css.hideApplicantListContainer
+                        }
+                      >
+                        {/* List all applicants, unless the search input is used  */}
+                        {pendingVideosData.map(
+                          (applicant, pendingApplicationIndex) => {
                             return (
                               <>
                                 <UserName
@@ -377,7 +421,11 @@ const VideoRating = props => {
                                   }
                                   indexKey={applicant.firebaseUid}
                                   uid={applicant.firebaseUid}
-                                  dispatch={() => dispatch(false)}
+                                  applicantCounter={() =>
+                                    setApplicantCounter(pendingApplicationIndex)
+                                  }
+                                  dispatch={() => dispatch("pending")}
+                                  showApplicants={showApplicants}
                                   setAdminFeedbackRating={
                                     setAdminFeedbackRating
                                   }
@@ -386,329 +434,257 @@ const VideoRating = props => {
                                 />
                               </>
                             );
-                          })}
-                        </ul>
-                      </div>
-                      <div>
-                        <button
-                          className={
-                            showApplicants === "pending"
-                              ? css.applicationStatusButtonActive
-                              : css.applicationStatusButton
                           }
-                          onClick={() => {
-                            dispatch("pending");
-                            viewApplication();
+                        )}
+                      </ul>
+                    </div>
+                    <div>
+                      <button
+                        className={
+                          showApplicants === true
+                            ? css.applicationStatusButtonActive
+                            : css.applicationStatusButton
+                        }
+                        onClick={() => {
+                          dispatch(true);
+                          viewApplication();
+                        }}
+                      >
+                        <p> Accepted Applications</p>
+                        <Spring
+                          from={{
+                            number: 0
                           }}
-                        >
-                          <p> Pending Applications</p>
-                          <p className={css.applicationsNumber}>
-                            {
-                              pendingVideosData.filter(
-                                applicant =>
-                                  applicant.passVideoStage === "pending"
-                              ).length
-                            }
-                          </p>
-                        </button>
-                        <ul
-                          className={
-                            showApplicants === "pending"
-                              ? css.applicantListContainer
-                              : css.hideApplicantListContainer
-                          }
-                        >
-                          {/* List all applicants, unless the search input is used  */}
-                          {pendingVideosData.map(
-                            (applicant, pendingApplicationIndex) => {
-                              return (
-                                <>
-                                  <UserName
-                                    classToBe={css.applicant}
-                                    click={e =>
-                                      viewApplication(applicant.firebaseUid)
-                                    }
-                                    indexKey={applicant.firebaseUid}
-                                    uid={applicant.firebaseUid}
-                                    applicantCounter={() =>
-                                      setApplicantCounter(
-                                        pendingApplicationIndex
-                                      )
-                                    }
-                                    dispatch={() => dispatch("pending")}
-                                    showApplicants={showApplicants}
-                                    setAdminFeedbackRating={
-                                      setAdminFeedbackRating
-                                    }
-                                    setVideoCounter={setVideoCounter}
-                                    setCollateFeedback={setCollateFeedback}
-                                  />
-                                </>
-                              );
-                            }
-                          )}
-                        </ul>
-                      </div>
-                      <div>
-                        <button
-                          className={
-                            showApplicants === true
-                              ? css.applicationStatusButtonActive
-                              : css.applicationStatusButton
-                          }
-                          onClick={() => {
-                            dispatch(true);
-                            viewApplication();
+                          to={{
+                            number: acceptedVideosData.filter(
+                              applicant => applicant.passVideoStage === true
+                            ).length
                           }}
+                          config={{ duration: 500 }}
                         >
-                          <p> Accepted Applications</p>
-                          <Spring
-                            from={{
-                              number: 0
-                            }}
-                            to={{
-                              number: acceptedVideosData.filter(
-                                applicant => applicant.passVideoStage === true
-                              ).length
-                            }}
-                            config={{ duration: 500 }}
-                          >
-                            {props => (
-                              <p className={css.applicationsNumber}>
-                                {props.number.toFixed()}
-                                {props.secondNumber}
-                              </p>
-                            )}
-                          </Spring>
-                        </button>
-                        <ul
-                          className={
-                            showApplicants === true
-                              ? css.applicantListContainer
-                              : css.hideApplicantListContainer
-                          }
-                        >
-                          {/* List all applicants, unless the search input is used  */}
-                          {acceptedVideosData.map(
-                            (applicant, acceptedApplicationIndex) => {
-                              console.log(
-                                "ACCEPTEDVIDEOSDATA",
-                                acceptedVideosData
-                              );
-                              return (
-                                <>
-                                  <UserName
-                                    classToBe={css.applicant}
-                                    click={e =>
-                                      viewApplication(applicant.firebaseUid)
-                                    }
-                                    indexKey={applicant.firebaseUid}
-                                    uid={applicant.firebaseUid}
-                                    dispatch={() => dispatch(true)}
-                                    setAdminFeedbackRating={
-                                      setAdminFeedbackRating
-                                    }
-                                    setVideoCounter={setVideoCounter}
-                                    setCollateFeedback={setCollateFeedback}
-                                  />
-                                </>
-                              );
-                            }
+                          {props => (
+                            <p className={css.applicationsNumber}>
+                              {props.number.toFixed()}
+                              {props.secondNumber}
+                            </p>
                           )}
-                        </ul>
-                        <div
-                          onClick={goToHome}
-                          className={css.adminDashboardHome}
-                        >
-                          <button> Admin Home</button>
-                        </div>
+                        </Spring>
+                      </button>
+                      <ul
+                        className={
+                          showApplicants === true
+                            ? css.applicantListContainer
+                            : css.hideApplicantListContainer
+                        }
+                      >
+                        {/* List all applicants, unless the search input is used  */}
+                        {acceptedVideosData.map(
+                          (applicant, acceptedApplicationIndex) => {
+                            console.log(
+                              "ACCEPTEDVIDEOSDATA",
+                              acceptedVideosData
+                            );
+                            return (
+                              <>
+                                <UserName
+                                  classToBe={css.applicant}
+                                  click={e =>
+                                    viewApplication(applicant.firebaseUid)
+                                  }
+                                  indexKey={applicant.firebaseUid}
+                                  uid={applicant.firebaseUid}
+                                  dispatch={() => dispatch(true)}
+                                  setAdminFeedbackRating={
+                                    setAdminFeedbackRating
+                                  }
+                                  setVideoCounter={setVideoCounter}
+                                  setCollateFeedback={setCollateFeedback}
+                                />
+                              </>
+                            );
+                          }
+                        )}
+                      </ul>
+                      <div
+                        onClick={goToHome}
+                        className={css.adminDashboardHome}
+                      >
+                        <button> Admin Home</button>
                       </div>
                     </div>
-                    {videoApplicationData.length === 0 && (
-                      <p>no video application data for: {firebaseUid} </p>
-                    )}
-                    {videoApplicationData.map(({ videoUrl }, videoIndex) => {
-                      console.log(
-                        "VIDEOAPPLICATIONSDATA",
-                        videoApplicationData
-                      );
-                      console.log("FIREBASEID", firebaseUid);
-                      if (
-                        String(firebaseUid) ===
-                          String(showSpecificApplication) &&
-                        videoIndex === videoCounter
-                      ) {
-                        return (
-                          <>
-                            {userInfo &&
-                              transitions.map(({ item, props, key }, idx) => {
-                                if (applicantIndex === idx) {
-                                  return (
-                                    <>
-                                      <animated.div key={key} style={props}>
-                                        <div
-                                          className={css.videoRatingsContainer}
-                                        >
-                                          <div className={css.detailsContainer}>
-                                            <h2>Applicant Details </h2>
-                                            <h3>
-                                              {item.result.firstName}{" "}
-                                              {item.result.lastName}
-                                            </h3>
-                                            <div className={css.metaData}>
-                                              <div>
-                                                <img src={age} />
-                                                <p>
-                                                  {item.result.age} Years old
-                                                </p>
-                                              </div>
-                                              <div>
-                                                <img src={location} />
-                                                <p>{item.result.location}</p>
-                                              </div>
-                                              <div>
-                                                <img src={approved} />
-                                                <p>{item.result.background}</p>
-                                              </div>
+                  </div>
+                  {videoApplicationData.length === 0 && (
+                    <p>no video application data for: {firebaseUid} </p>
+                  )}
+                  {videoApplicationData.map(({ videoUrl }, videoIndex) => {
+                    console.log("VIDEOAPPLICATIONSDATA", videoApplicationData);
+                    console.log("FIREBASEID", firebaseUid);
+                    if (
+                      String(firebaseUid) === String(showSpecificApplication) &&
+                      videoIndex === videoCounter
+                    ) {
+                      return (
+                        <>
+                          {userInfo &&
+                            transitions.map(({ item, props, key }, idx) => {
+                              if (applicantIndex === idx) {
+                                return (
+                                  <>
+                                    <animated.div key={key} style={props}>
+                                      <div
+                                        className={css.videoRatingsContainer}
+                                      >
+                                        <div className={css.detailsContainer}>
+                                          <h2>Applicant Details </h2>
+                                          <h3>
+                                            {item.result.firstName}{" "}
+                                            {item.result.lastName}
+                                          </h3>
+                                          <div className={css.metaData}>
+                                            <div>
+                                              <img src={age} />
+                                              <p>{item.result.age} Years old</p>
+                                            </div>
+                                            <div>
+                                              <img src={location} />
+                                              <p>{item.result.location}</p>
+                                            </div>
+                                            <div>
+                                              <img src={approved} />
+                                              <p>{item.result.background}</p>
                                             </div>
                                           </div>
-                                          <div className={css.videosContainer}>
-                                            <h2>
-                                              {videoCounter + 1}/5:{" "}
-                                              {
-                                                videoQuestions[videoCounter]
-                                                  .question
-                                              }
-                                            </h2>
-                                            <video
-                                              className={css.videoPlayer}
-                                              controls
-                                              src={videoUrl}
-                                            />
-                                            <div
+                                        </div>
+                                        <div className={css.videosContainer}>
+                                          <h2>
+                                            {videoCounter + 1}/5:{" "}
+                                            {
+                                              videoQuestions[videoCounter]
+                                                .question
+                                            }
+                                          </h2>
+                                          <video
+                                            className={css.videoPlayer}
+                                            controls
+                                            src={videoUrl}
+                                          />
+                                          <div
+                                            className={
+                                              css.toggleVideosContainer
+                                            }
+                                          >
+                                            <button
                                               className={
                                                 css.toggleVideosContainer
                                               }
+                                              onClick={() => {
+                                                viewApplication();
+                                                setAdminFeedbackRating(0);
+                                                setVideoCounter(0);
+                                                setCollateFeedback([]);
+                                              }}
                                             >
-                                              <button
-                                                className={
-                                                  css.toggleVideosContainer
-                                                }
-                                                onClick={() => {
-                                                  viewApplication();
-                                                  setAdminFeedbackRating(0);
-                                                  setVideoCounter(0);
-                                                  setCollateFeedback([]);
-                                                }}
-                                              >
-                                                <p> Cancel </p>
-                                              </button>
-                                            </div>
-                                          </div>
-                                          <div
-                                            className={css.rateVideosContainer}
-                                          >
-                                            <h2>Rating</h2>
-
-                                            <FeedbackTray
-                                              key={key}
-                                              adminFeedbackRating={
-                                                adminFeedbackRating
-                                              }
-                                              setAdminFeedbackRating={
-                                                setAdminFeedbackRating
-                                              }
-                                              videoCounter={videoCounter}
-                                              setVideoCounter={setVideoCounter}
-                                              collateFeedback={collateFeedback}
-                                              setCollateFeedback={
-                                                setCollateFeedback
-                                              }
-                                              videoUrl={videoUrl}
-                                              // setAdminFeedbackComment={
-                                              //   setAdminFeedbackComment
-                                              // }
-                                              videoApplicationData={
-                                                videoApplicationData
-                                              }
-                                            />
-                                            {collateFeedback.length === 0 ? (
-                                              <div
-                                                className={css.overallRating}
-                                              >
-                                                <h3>Overall Rating</h3>
-                                                <div
-                                                  className={
-                                                    css.ratingTitleContainer
-                                                  }
-                                                >
-                                                  <Rating
-                                                    initialRating={0}
-                                                    emptySymbol="fa fa-star-o fa-2x"
-                                                    fullSymbol="fa fa-star fa-2x"
-                                                    style={{
-                                                      color:
-                                                        "rgba(248, 180, 22, 1)"
-                                                    }}
-                                                    fractions={2}
-                                                    readonly
-                                                  />
-                                                </div>
-                                              </div>
-                                            ) : (
-                                              <AverageScore
-                                                collateFeedback={
-                                                  collateFeedback
-                                                }
-                                              />
-                                            )}
+                                              <p> Cancel </p>
+                                            </button>
                                           </div>
                                         </div>
-                                      </animated.div>
-                                    </>
-                                  );
-                                } else {
-                                  return;
-                                }
-                              })}
-                          </>
-                        );
-                      } else if (collateFeedback.length === 5) {
-                        return videoIndex === 4
-                          ? transitions.map(({ item, key, props }, idx) => {
-                              return applicantIndex === idx ? (
-                                <div className={css.thankyouContainer}>
-                                  <h3> Thankyou </h3>
-                                  <p>
-                                    Your final score of {getAverageScore()} for{" "}
-                                    {""}
-                                    {item.result.firstName} has been submitted
-                                  </p>
-                                  <button
-                                    onClick={() => setCollateFeedback([])}
-                                  >
-                                    Close
-                                  </button>
-                                  <img
-                                    src={close}
-                                    alt="close button"
-                                    onClick={() => setCollateFeedback([])}
-                                  />
-                                </div>
-                              ) : null;
-                            })
-                          : null;
-                      } else {
-                        return;
-                      }
-                    })}
-                  </>
-                );
-              } else {
-                return;
-              }
+                                        <div
+                                          className={css.rateVideosContainer}
+                                        >
+                                          <h2>Rating</h2>
+
+                                          <FeedbackTray
+                                            key={key}
+                                            adminFeedbackRating={
+                                              adminFeedbackRating
+                                            }
+                                            setAdminFeedbackRating={
+                                              setAdminFeedbackRating
+                                            }
+                                            videoCounter={videoCounter}
+                                            setVideoCounter={setVideoCounter}
+                                            collateFeedback={collateFeedback}
+                                            setCollateFeedback={
+                                              setCollateFeedback
+                                            }
+                                            videoUrl={videoUrl}
+                                            // setAdminFeedbackComment={
+                                            //   setAdminFeedbackComment
+                                            // }
+                                            videoApplicationData={
+                                              videoApplicationData
+                                            }
+                                          />
+                                          {collateFeedback.length === 0 ? (
+                                            <div className={css.overallRating}>
+                                              <h3>Overall Rating</h3>
+                                              <div
+                                                className={
+                                                  css.ratingTitleContainer
+                                                }
+                                              >
+                                                <Rating
+                                                  initialRating={0}
+                                                  emptySymbol="fa fa-star-o fa-2x"
+                                                  fullSymbol="fa fa-star fa-2x"
+                                                  style={{
+                                                    color:
+                                                      "rgba(248, 180, 22, 1)"
+                                                  }}
+                                                  fractions={2}
+                                                  readonly
+                                                />
+                                              </div>
+                                            </div>
+                                          ) : (
+                                            <AverageScore
+                                              collateFeedback={collateFeedback}
+                                            />
+                                          )}
+                                        </div>
+                                      </div>
+                                    </animated.div>
+                                  </>
+                                );
+                              } else {
+                                return;
+                              }
+                            })}
+                        </>
+                      );
+                    } else if (collateFeedback.length === 5) {
+                      return videoIndex === 4
+                        ? transitions.map(({ item, key, props }, idx) => {
+                            return applicantIndex === idx ? (
+                              <div className={css.thankyouContainer}>
+                                <h3> Thankyou </h3>
+                                <p>
+                                  Your final score of {getAverageScore()} for{" "}
+                                  {""}
+                                  {item.result.firstName} has been submitted
+                                </p>
+                                <button onClick={() => setCollateFeedback([])}>
+                                  Close
+                                </button>
+                                <img
+                                  src={close}
+                                  alt="close button"
+                                  onClick={() => setCollateFeedback([])}
+                                />
+                              </div>
+                            ) : null;
+                          })
+                        : null;
+                    } else {
+                      return;
+                    }
+                  })}
+                </>
+              );
+            } else {
+              return;
             }
-          )}
+          })}
         </div>
       </div>
     </>
