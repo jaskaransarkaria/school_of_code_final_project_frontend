@@ -19,27 +19,27 @@ const AdminUserOptions = props => {
       <div className={css.optionsContainer}>
         <div className={css.cardContainer}>
           <img
-            style={{ width: "150px", padding: "20px" }}
+            style={{ width: "200px", padding: "20px" }}
             src="/saturn.png"
             alt="saturn icon for forms"
           />
           <div onClick={goToForms} className={css.optionsCard}>
-            <p>Application Forms</p>
+            <p>Form Applications</p>
           </div>
         </div>
         <div className={css.cardContainer}>
           <img
-            style={{ width: "150px", padding: "20px" }}
+            style={{ width: "200px", padding: "20px" }}
             src="/venus.png"
             alt="venus icon for videos"
           />
           <div onClick={goToVideos} className={css.optionsCard}>
-            <p>Application Videos</p>
+            <p>Video Applications</p>
           </div>
         </div>
         <div className={css.cardContainer}>
           <img
-            style={{ width: "150px", padding: "20px" }}
+            style={{ width: "200px", padding: "20px" }}
             src="/jupiter.svg"
             alt="jupiter icon for resource upload"
           />

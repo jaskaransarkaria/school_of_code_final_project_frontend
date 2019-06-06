@@ -22,8 +22,6 @@ function FormRating(props) {
   const [rejectedApplicants, setRejectedApplicants] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
   const [applicants, setApplicants] = useState([]);
-  const [applicantCounter, setApplicantCounter] = useState(0);
-
   // This function has been created to avoid a double call of
   // dispacth on the useReducer the first time.
 
@@ -176,15 +174,9 @@ function FormRating(props) {
                 ? css.applicationStatusButtonActive
                 : css.applicationStatusButton
             }
-            onClick={() => dispatch(false)
-// setShowSpecificApplications([]); test this, it should clear viewed applicant
-}
-
-
-
-
-
-
+            onClick={() => {
+              dispatch(false);
+            }}
           >
             <p> Rejected Applications </p>
             <p className={css.applicationsNumber}>
@@ -213,24 +205,26 @@ function FormRating(props) {
             />
             {/* List all applicants, unless the search input is used  */}
             {rejectedApplicants.map(applicant => {
-              return (
-                <>
-                {/*showSpecificApplications.length === 0 &&
+              if (
+                showSpecificApplications.length === 0 &&
+                applicationStatus === false
+              ) {
+                return (
+                  <>
+                    {/* showSpecificApplications.length === 0 &&
                 applicationStatus === false &&
                 applicant.passFormStage === applicationStatus &&
                 input === "" && ( */}
-                  
                     <UserName
                       classToBe={css.applicant}
                       click={e => viewApplications(e, applicant.firebaseUid)}
-                      indexKey={applicant.firebaseUid}
+                      key={e => viewApplications(e, applicant.firebaseUid)}
                       uid={applicant.firebaseUid}
                       dispatch={() => dispatch(false)}
                     />
                   </>
-                )
-
-              );
+                );
+              }
             })}
             {/* Lists all applicants when search input is used */}
             {searchedApplications.map(applicant => {
@@ -241,7 +235,7 @@ function FormRating(props) {
                     <UserName
                       classToBe={css.applicant}
                       click={e => viewApplications(e, applicant.firebaseUid)}
-                      indexKey={applicant.firebaseUid}
+                      key={e => viewApplications(e, applicant.firebaseUid)}
                       uid={applicant.firebaseUid}
                       dispatch={() => dispatch(false)}
                     />
@@ -259,9 +253,7 @@ function FormRating(props) {
                 ? css.applicationStatusButtonActive
                 : css.applicationStatusButton
             }
-
             onClick={() => dispatch("pending")}
-
           >
             <p> Pending Applications</p>
             <p className={css.applicationsNumber}>
@@ -294,22 +286,19 @@ function FormRating(props) {
             {/* List all applicants, unless the search input is used  */}
             {pendingApplicants.map(applicant => {
               return (
-
                 <>
-                {/*showSpecificApplications.length === 0 &&
+                  {/* showSpecificApplications.length === 0 &&
                 applicationStatus === "pending" &&
                 applicant.passFormStage === applicationStatus &&
-                input === "" && (*/}
-                  
-                    <UserName
-                      classToBe={css.applicant}
-                      dispatch={() => dispatch("pending")}
-                      click={e => viewApplications(e, applicant.firebaseUid)}
-                      indexKey={applicant.firebaseUid}
-                      uid={applicant.firebaseUid}
-                    />
-                  </>
-                )
+                input === "" && ( */}
+                  <UserName
+                    classToBe={css.applicant}
+                    dispatch={() => dispatch("pending")}
+                    click={e => viewApplications(e, applicant.firebaseUid)}
+                    key={e => viewApplications(e, applicant.firebaseUid)}
+                    uid={applicant.firebaseUid}
+                  />
+                </>
               );
             })}
             {/* Lists all applicants when search input is used */}
@@ -322,7 +311,7 @@ function FormRating(props) {
                       classToBe={css.applicant}
                       dispatch={() => dispatch("pending")}
                       click={e => viewApplications(e, applicant.firebaseUid)}
-                      indexKey={applicant.firebaseUid}
+                      key={e => viewApplications(e, applicant.firebaseUid)}
                       uid={applicant.firebaseUid}
                     />
                   </>
@@ -339,9 +328,7 @@ function FormRating(props) {
                 ? css.applicationStatusButtonActive
                 : css.applicationStatusButton
             }
-
             onClick={() => dispatch(true)}
-
           >
             <p> Accepted Applications </p>
             <p className={css.applicationsNumber}>
@@ -359,7 +346,6 @@ function FormRating(props) {
                 : css.hideApplicantListContainer
             }
           >
-           
             <input
               onChange={e => handleInput(e)}
               className={
@@ -373,21 +359,18 @@ function FormRating(props) {
             {acceptedApplicants.map(applicant => {
               return (
                 <>
-                {/* showSpecificApplications.length === 0 &&
+                  {/* showSpecificApplications.length === 0 &&
                 applicationStatus === true &&
                 applicant.passFormStage === applicationStatus &&
                 input === "" && ( */}
-                  
-                    <UserName
-                      classToBe={css.applicant}
-                      click={e => viewApplications(e, applicant.firebaseUid)}
-                      indexKey={applicant.firebaseUid}
-                      uid={applicant.firebaseUid}
-                      dispatch={() => dispatch(true)}
-                    />
-                  </>
-                )
-
+                  <UserName
+                    classToBe={css.applicant}
+                    click={e => viewApplications(e, applicant.firebaseUid)}
+                    key={e => viewApplications(e, applicant.firebaseUid)}
+                    uid={applicant.firebaseUid}
+                    dispatch={() => dispatch(true)}
+                  />
+                </>
               );
             })}
             {/* Lists all applicants when search input is used */}
@@ -399,7 +382,7 @@ function FormRating(props) {
                     <UserName
                       classToBe={css.applicant}
                       click={e => viewApplications(e, applicant.firebaseUid)}
-                      indexKey={applicant.firebaseUid}
+                      key={e => viewApplications(e, applicant.firebaseUid)}
                       uid={applicant.firebaseUid}
                       dispatch={() => dispatch(true)}
                     />
