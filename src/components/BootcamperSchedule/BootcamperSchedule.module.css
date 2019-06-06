@@ -2,7 +2,7 @@
   display: inline-block;
   width: 100%;
   height: 40%;
-  background-image: linear-gradient(to bottom right, #04c7d9, #5f04cf);
+
   opacity: 0.9;
 }
 .daysOfWeekContainer {
@@ -48,13 +48,13 @@
   position: relative;
   justify-content: space-around;
   align-items: center;
+
   padding: 35px 10px;
 }
 
 .itemContainer {
   position: relative;
-  width: 15%;
-  height: 80%;
+
   bottom: 15%;
   padding: 25px;
   background-color: whitesmoke;
@@ -62,7 +62,7 @@
   box-shadow: 1px 1px 5px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+
   align-items: center;
   transition: 200ms ease-in-out;
 }
@@ -97,4 +97,40 @@
 .leftArrow:hover {
   cursor: pointer;
   transform: scale(1.1) rotate(180deg);
+}
+.lessonInfoContainer {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  position: relative;
+  top: 20%;
+}
+.lessonInfoBox {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-shadow: 1px 1px 5px;
+  background-color: whitesmoke;
+  width: 50%;
+  height: 80%;
+  border-radius: 5px;
+}
+.lessonTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 20%;
+  font-weight: bold;
+
+  font-size: 1.4em;
+}
+
+.lessonDetails {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
 }

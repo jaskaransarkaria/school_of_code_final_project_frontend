@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import DashboardBanner from "../DashboardBanner";
-import NavBar from "../NavBar";
 import DashBoardSchedule from "../DashboardSchedule";
 import DashboardTopicsCarousel from "../DashboardTopicsCarousel";
 import TopicsTray from "../TopicsTray";
@@ -11,12 +10,8 @@ class BootcamperDashBoard extends Component {
   render() {
     return (
       <div className={css.dashBoardContainer}>
-        <NavBar propsUser="Bootcamper" />
         <DashboardBanner title={"Welcome Bootcamper!"} />
-        {/* <DashBoardSchedule /> */}
         <BootcamperSchedule />
-        {/* <DashboardTopicsCarousel /> */}
-        <TopicsTray style={{ margin: "20%" }} />
       </div>
     );
   }

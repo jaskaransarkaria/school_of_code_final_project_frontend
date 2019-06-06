@@ -1,0 +1,74 @@
+.slackDrawerContainer {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  display: inline-block;
+  width: 125px;
+  height: 125px;
+  padding: 0;
+  border: none;
+  background-color: white;
+  border-radius: 50%;
+  transform: translateX(-50%) rotate(215deg);
+  -webkit-animation: shake-horizontal 4s cubic-bezier(0.455, 0.03, 0.515, 0.955)
+    infinite both;
+  animation: shake-horizontal 4s cubic-bezier(0.455, 0.03, 0.515, 0.955)
+    infinite both;
+}
+
+@-webkit-keyframes shake-horizontal {
+  0%,
+  22.75% {
+    -webkit-transform: translateX(-50%) rotate(215deg);
+    transform: translateX(-50%) rotate(215deg);
+  }
+
+  2.5%,
+  7.5%,
+  12.5%,
+  15% {
+    -webkit-transform: translateX(-52.5%) rotate(215deg);
+    transform: translateX(-52.5%) rotate(215deg);
+  }
+  5%,
+  10%,
+  15% {
+    -webkit-transform: translateX(-47.5%) rotate(215deg);
+    transform: translateX(-47.5%) rotate(215deg);
+  }
+  20% {
+    -webkit-transform: translateX(-49%) rotate(215deg);
+    transform: translateX(-49%) rotate(215deg);
+  }
+  22.5% {
+    -webkit-transform: translateX(-50.5%) rotate(215deg);
+    transform: translateX(-50.5%) rotate(215deg);
+  }
+}
+@keyframes shake-horizontal {
+  0%,
+  22.75% {
+    -webkit-transform: translateX(-50%) rotate(215deg);
+    transform: translateX(-50%) rotate(215deg);
+  }
+  2.5%,
+  7.5%,
+  12.5% {
+    -webkit-transform: translateX(-52.5%) rotate(215deg);
+    transform: translateX(-52.5%) rotate(215deg);
+  }
+  5%,
+  10%,
+  15% {
+    -webkit-transform: translateX(-47.5%) rotate(215deg);
+    transform: translateX(-47.5%) rotate(215deg);
+  }
+  20% {
+    -webkit-transform: translateX(-49%) rotate(215deg);
+    transform: translateX(-49%) rotate(215deg);
+  }
+  22.5% {
+    -webkit-transform: translateX(-50.5%) rotate(215deg);
+    transform: translateX(-50.5%) rotate(215deg);
+  }
+}

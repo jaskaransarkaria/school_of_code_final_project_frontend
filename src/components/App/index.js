@@ -1,6 +1,5 @@
 import React, { useState, createContext, useEffect } from "react";
 import ApplicantDashboardPage from "../ApplicantDashboard";
-import AdminUploadSchedulePage from "../../pages/AdminUploadSchedulePage";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import LoginPage from "../../pages/LoginPage";
 import SchedulePage from "../../pages/SchedulePage";
@@ -13,9 +12,11 @@ import { api } from "../../config";
 import firebase from "firebase";
 import ApplicantVideoPage from "../../pages/ApplicantVideoPage";
 import ApplicantFormPage from "../../pages/ApplicantFormPage";
-
 import ContractPage from "../../pages/ContractPage";
 import ThankYouPage from "../../pages/ThankYouPage";
+import FormRating from "../FormRating";
+import VideoRating from "../VideoRating";
+import AdminUploadSchedule from "../AdminUploadSchedule";
 
 firebase.initializeApp({
   apiKey: api.firebase_key,
@@ -236,12 +237,19 @@ function App() {
             path="/bootcamper-dashboard"
             component={BootcamperDashboardPage}
           />
-          <Route exact path="/admin-dashboard" component={AdminDashboardPage} />
           <Route
-            exact
-            path="/upload-schedule"
-            component={AdminUploadSchedulePage}
+            path="/admin-dashboard/form-processing"
+            component={FormRating}
           />
+          <Route
+            path="/admin-dashboard/video-processing"
+            component={VideoRating}
+          />
+          <Route
+            path="/admin-dashboard/upload-schedule"
+            component={AdminUploadSchedule}
+          />
+          <Route path="/admin-dashboard" component={AdminDashboardPage} />
           <Route exact path="/schedule" component={SchedulePage} />
           <Route exact path="/topics" component={TopicsPage} />
           <Route exact path="/credits" component={CreditsPage} />
