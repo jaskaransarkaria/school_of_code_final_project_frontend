@@ -29,8 +29,7 @@ const SlackDrawer = () => {
             borderRadius: "50%",
             padding: "0",
             width: "125px",
-            height: "125px",
-            border: "2.5px #11cf84 solid"
+            height: "125px"
           }}
           onClick={toggleDrawer("left", true)}
         >
@@ -41,7 +40,8 @@ const SlackDrawer = () => {
               width: "125px",
               height: "125px",
               borderRadius: "50%",
-              cursor: "pointer"
+              cursor: "pointer",
+              border: "2.5px #11cf84 solid"
             }}
           />
         </button>
