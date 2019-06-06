@@ -2,37 +2,13 @@ import React, { useState, useEffect } from "react";
 import { api } from "../../config";
 import Topics from "../Topics";
 import css from "./Topics.module.css";
-// fetch GET topic keys
 
-// {
-//   "success": true,
-//   "result": [
-//       {
-//           "entries": [
-//               {
-//                   "subTopic": "#hooks",
-//                   "url": "https://reactjs.org/docs/hooks-intro.html",
-//                   "date": "18/05/2019"
-//               },
-//               {
-//                   "subTopic": "#contextAPI",
-//                   "url": "https://reactjs.org/docs/hooks-intro.html",
-//                   "date": "18/05/2019"
-//               },
-//               {
-//                   "subTopic": "#reducer",
-//                   "url": "https://reactjs.org/docs/hooks-intro.html",
-//                   "date": "18/05/2019"
-//               }
-//           ],
-//           "_id": "5ce05cc925a9325ee686d5a1",
-//           "topic": "#react",
-//           "__v": 0,
-//           "createdAt": "2019-05-18T19:28:09.046Z",
-//           "updatedAt": "2019-05-18T19:45:15.091Z"
-//       }
-//   ]
-// }
+import ExpansionPanel from "@material-ui/core/ExpansionPanel";
+import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
+import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
+import Typography from "@material-ui/core/Typography";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+// fetch GET topic keys
 
 const TopicsTray = () => {
   const [topicKeys, setTopicKeys] = useState([]);
@@ -42,8 +18,6 @@ const TopicsTray = () => {
     async function fetchTopicData() {
       const data = await fetch(`${api.topics}`);
       const response = await data.json();
-      console.log(response);
-      console.log(response.topics);
       setTopicKeys([...response.topics]); // make an array of topics
     }
     fetchTopicData();
@@ -51,18 +25,25 @@ const TopicsTray = () => {
   return (
     <>
       <div>
-        <h2 className={css.topicsTitle}>Resources</h2>
+        <h2 className={css.topicsTitle}>Link Library</h2>
+        <h2 className={css.topicsTitle}>Search Bar</h2>
         <div className={css.topicsContainer}>
-          {!showTopic ? (
-            topicKeys.map(topic => (
-              <button onClick={() => setShowTopic(topic)}>{topic}</button>
-            ))
-          ) : (
-            <>
-              <button onClick={() => setShowTopic(false)}>back</button>
-              <Topics topicKey={showTopic} />
-            </>
-          )}
+          {topicKeys.sort().map(topic => (
+            <ExpansionPanel>
+              <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                onClick={() => setShowTopic(showTopic ? false : topic)}
+              >
+                <Typography>{topic}</Typography>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+                <Typography>
+                  {showTopic && <Topics topicKey={showTopic} />}
+                </Typography>
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
+          ))}
         </div>
       </div>
     </>

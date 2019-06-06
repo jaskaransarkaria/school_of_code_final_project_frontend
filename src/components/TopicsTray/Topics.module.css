@@ -1,10 +1,13 @@
 .topicsContainer {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  width: 400px;
 }
 
 .topicsTitle {
   padding: 10px;
+  color: black;
 }
 
 .topicsContainer button {

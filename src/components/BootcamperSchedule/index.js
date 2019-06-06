@@ -3,6 +3,7 @@ import moment from "moment";
 import { api } from "../../config";
 import css from "./BootcamperSchedule.module.css";
 import ArrowImage from "../../Images/arrow.png";
+import SlackDrawer from "../SlackDrawer";
 
 // get last 5 days schedule || most recent schedule and the 5 days previous
 // display Day name at the top..
@@ -27,6 +28,7 @@ const BootcamperSchedule = () => {
   const [sessionIndex, setSessionIndex] = useState(0);
   const [dateToShow, setDateToShow] = useState([]);
   const [dateInBar, setDateInBar] = useState(0);
+  const [lessonInfo, setLessonInfo] = useState("");
 
   useEffect(() => {
     async function fetchSchedule() {
@@ -83,21 +85,42 @@ const BootcamperSchedule = () => {
     }
   };
 
-  const FormatedDate = ({ date, num }) => (
-    <div
-      onClick={() => {
-        setSelectedDate(
-          moment(moment(date, "DD/MM/YYYY").add(num, "days")._d).format(
-            "DD/MM/YYYY"
-          )
-        );
-      }}
-    >
-      {moment(moment(date, "DD/MM/YYYY").add(num, "days")._d).format(
-        "ddd Do MMM"
-      )}
-    </div>
-  );
+  const FormatedDate = ({ date, num }) => {
+    let highlightDay = {};
+    console.log("datetoshow", date);
+    console.log("selectedDate", selectedDate);
+    console.log(
+      moment(moment(date, "DD/MM/YYYY").add(num, "days")._d).format(
+        "DD/MM/YYYY"
+      )
+    );
+
+    if (
+      selectedDate ===
+      moment(moment(date, "DD/MM/YYYY").add(num, "days")._d).format(
+        "DD/MM/YYYY"
+      )
+    ) {
+      highlightDay = { backgroundColor: "#11cf84" };
+    }
+    return (
+      <div
+        className={css.dayBox}
+        style={highlightDay}
+        onClick={() => {
+          setSelectedDate(
+            moment(moment(date, "DD/MM/YYYY").add(num, "days")._d).format(
+              "DD/MM/YYYY"
+            )
+          );
+        }}
+      >
+        {moment(moment(date, "DD/MM/YYYY").add(num, "days")._d).format(
+          "ddd Do MMM"
+        )}
+      </div>
+    );
+  };
 
   return (
     <>
@@ -105,28 +128,16 @@ const BootcamperSchedule = () => {
         {scheduleData.map(day => (
           // here we display the 5 days
           <div className={css.daysOfWeekContainer}>
-            {dateInBar > 0 && (
-              <button
-                style={{ border: "none", background: "transparent", cursor: "pointer" }}
-                onClick={() => setDateInBar(dateInBar + 1)}
-              >
-                &#60;
-              </button>
-            )}
+            <button
+              className={css.dateButton}
+              onClick={() => setDateInBar(dateInBar - 1)}
+            >
+              &#60;
+            </button>
             <FormatedDate
               className={css.dayBox}
               date={day.date}
-              num={dateInBar}
-            />
-            <FormatedDate
-              className={css.dayBox}
-              date={day.date}
-              num={dateInBar - 1}
-            />
-            <FormatedDate
-              className={css.dayBox}
-              date={day.date}
-              num={dateInBar - 2}
+              num={dateInBar - 4}
             />
             <FormatedDate
               className={css.dayBox}
@@ -136,16 +147,30 @@ const BootcamperSchedule = () => {
             <FormatedDate
               className={css.dayBox}
               date={day.date}
-              num={dateInBar - 4}
+              num={dateInBar - 2}
             />
-            <button
-              style={{ border: "none", background: "transparent", cursor: "pointer"}}
-              onClick={() => setDateInBar(dateInBar - 1)}
-            >
-              &#62;
-            </button>
+            <FormatedDate
+              className={css.dayBox}
+              date={day.date}
+              num={dateInBar - 1}
+            />
+
+            <FormatedDate
+              className={css.dayBox}
+              date={day.date}
+              num={dateInBar}
+            />
+            {dateInBar < 0 && (
+              <button
+                className={css.dateButton}
+                onClick={() => setDateInBar(dateInBar + 1)}
+              >
+                &#62;
+              </button>
+            )}
           </div>
         ))}
+        <SlackDrawer />
         <br />
         <div className={css.carouselContainer}>
           <img
@@ -158,10 +183,12 @@ const BootcamperSchedule = () => {
             day.daysContent
 
               .map((session, idx) => (
-                <div className={css.itemContainer}>
+                <div
+                  className={css.itemContainer}
+                  onClick={() => setLessonInfo(session.learningObjectives)}
+                >
                   <b>{`Lesson ${idx + 1}`}</b>
                   <p>{session.contentTitle}</p>
-                  <p>{session.learningObjectives}</p>
                 </div>
               ))
               .slice(sessionIndex, sessionIndex + 3)
@@ -173,6 +200,16 @@ const BootcamperSchedule = () => {
             className={css.rightArrow}
             onClick={() => controlCarousel(1)}
           />
+        </div>
+        <div className={css.lessonInfoContainer}>
+          <div className={css.lessonInfoBox}>
+            <div className={css.lessonTitle}>
+              <p>Lesson Information</p>
+            </div>
+            <div className={css.lessonDetails}>
+              <p>{lessonInfo}</p>
+            </div>
+          </div>
         </div>
       </div>
     </>

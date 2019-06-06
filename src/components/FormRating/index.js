@@ -21,216 +21,9 @@ function FormRating(props) {
   const [acceptedApplicants, setAcceptedApplicants] = useState([]);
   const [rejectedApplicants, setRejectedApplicants] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
-  const [applicants, setApplicants] = useState([
-    {
-      firstName: "Matt",
-      lastName: "Wendzina",
-      email: "mattwendzina@hotmail.com",
-      phoneNumber: 7575557979,
-      age: 36,
-      location: "Coventry",
-      identify: "Male",
-      background: "Employed",
-      motivationQuestion: "Because SoC Rocks",
-      passForm: "pending",
-      id: 0
-    },
-    {
-      firstName: "Kathyrn",
-      lastName: "Burgess",
-      email: "kathryn@burgess.com",
-      phoneNumber: 909812471,
-      age: 46,
-      location: "London",
-      identify: "Female",
-      background: "Employed",
-      motivationQuestion: "To learn to code",
-      passForm: "pending",
-      id: 1
-    },
-    {
-      firstName: "Aidan",
-      lastName: "Walker",
-      email: "aidan@walker.com",
-      phoneNumber: 298124890,
-      age: 24,
-      location: "Birmingham",
-      identify: "Male",
-      background: "Student",
-      motivationQuestion: "To nail coding",
-      passForm: "pending",
-      id: 2
-    },
-    {
-      firstName: "Jazz",
-      lastName: "Sarkaria",
-      email: "jazz@sakaria.com",
-      phoneNumber: 1209832481,
-      age: 29,
-      location: "Birmingham",
-      identify: "Male",
-      background: "Employed",
-      motivationQuestion: "Master Javascript",
-      passForm: "pending",
-      id: 3
-    },
-    {
-      firstName: "Oliva",
-      lastName: "Winteringham",
-      email: "oliva@winteringham.com",
-      phoneNumber: 7575557979,
-      age: 36,
-      location: "Coventry",
-      identify: "Male",
-      background: "Employed",
-      motivationQuestion: "Because SoC Rocks",
-      passForm: "pending",
-      id: 4
-    },
-    {
-      firstName: "Alex",
-      lastName: "Wiley",
-      email: "alex@wiley.com",
-      phoneNumber: 909812471,
-      age: 46,
-      location: "London",
-      identify: "Female",
-      background: "Employed",
-      motivationQuestion: "To learn to code",
-      passForm: "pending",
-      id: 5
-    },
-    {
-      firstName: "David",
-      lastName: "Ashcroft",
-      email: "david@ashcroft.com",
-      phoneNumber: 298124890,
-      age: 24,
-      location: "Birmingham",
-      identify: "Male",
-      background: "Student",
-      motivationQuestion: "To nail coding",
-      passForm: "pending",
-      id: 6
-    },
-    {
-      firstName: "Bukola",
-      lastName: "Java",
-      email: "bukola@java.com",
-      phoneNumber: 1098828719,
-      age: 35,
-      location: "Birmingham",
-      identify: "Male",
-      background: "Employed",
-      motivationQuestion: "Master Javascript",
-      passForm: "pending",
-      id: 7
-    },
-    {
-      firstName: "Brendan",
-      lastName: "Richards",
-      email: "brendan@richards.com",
-      phoneNumber: 7575557979,
-      age: 36,
-      location: "Coventry",
-      identify: "Male",
-      background: "Employed",
-      motivationQuestion: "Because SoC Rocks",
-      passForm: "pending",
-      id: 8
-    },
-    {
-      firstName: "Luke",
-      lastName: "Bennett",
-      email: "like@bennett.com",
-      phoneNumber: 909812471,
-      age: 46,
-      location: "London",
-      identify: "Female",
-      background: "Employed",
-      motivationQuestion: "To learn to code",
-      passForm: "pending",
-      id: 9
-    },
-    {
-      firstName: "Chris",
-      lastName: "Meah",
-      email: "chris@meah.com",
-      phoneNumber: 298124890,
-      age: 24,
-      location: "Birmingham",
-      identify: "Male",
-      background: "Student",
-      motivationQuestion: "To nail coding",
-      passForm: "pending",
-      id: 10
-    },
-    {
-      firstName: "Karen",
-      lastName: "Chahal",
-      email: "karen@chahal.com",
-      phoneNumber: 1098828719,
-      age: 35,
-      location: "Birmingham",
-      identify: "Male",
-      background: "Employed",
-      motivationQuestion: "Master Javascript",
-      passForm: "pending",
-      id: 11
-    },
-    {
-      firstName: "Lee",
-      lastName: "Cheneler",
-      email: "lee@cheneler.com",
-      phoneNumber: 7575557979,
-      age: 36,
-      location: "Coventry",
-      identify: "Male",
-      background: "Employed",
-      motivationQuestion: "Because SoC Rocks",
-      passForm: "pending",
-      id: 12
-    },
-    {
-      firstName: "Kira",
-      lastName: "Green",
-      email: "kira@green.com",
-      phoneNumber: 909812471,
-      age: 46,
-      location: "London",
-      identify: "Female",
-      background: "Employed",
-      motivationQuestion: "To learn to code",
-      passForm: "pending",
-      id: 13
-    },
-    {
-      firstName: "Kim",
-      lastName: "McGrath",
-      email: "kim@mcgrath.com",
-      phoneNumber: 298124890,
-      age: 24,
-      location: "Birmingham",
-      identify: "Male",
-      background: "Student",
-      motivationQuestion: "To nail coding",
-      passForm: "pending",
-      id: 14
-    },
-    {
-      firstName: "Liam",
-      lastName: "Johnson",
-      email: "laim@johnson.com",
-      phoneNumber: 1098828719,
-      age: 35,
-      location: "Birmingham",
-      identify: "Male",
-      background: "Employed",
-      motivationQuestion: "Master Javascript",
-      passForm: "pending",
-      id: 15
-    }
-  ]);
+  const [applicants, setApplicants] = useState([]);
+  const [applicantCounter, setApplicantCounter] = useState(0);
+
   // This function has been created to avoid a double call of
   // dispacth on the useReducer the first time.
 
@@ -383,7 +176,15 @@ function FormRating(props) {
                 ? css.applicationStatusButtonActive
                 : css.applicationStatusButton
             }
-            onClick={() => dispatch(false)}
+            onClick={() => dispatch(false)
+// setShowSpecificApplications([]); test this, it should clear viewed applicant
+}
+
+
+
+
+
+
           >
             <p> Rejected Applications </p>
             <p className={css.applicationsNumber}>
@@ -413,20 +214,22 @@ function FormRating(props) {
             {/* List all applicants, unless the search input is used  */}
             {rejectedApplicants.map(applicant => {
               return (
-                showSpecificApplications.length === 0 &&
+                <>
+                {/*showSpecificApplications.length === 0 &&
                 applicationStatus === false &&
                 applicant.passFormStage === applicationStatus &&
-                input === "" && (
-                  <>
+                input === "" && ( */}
+                  
                     <UserName
                       classToBe={css.applicant}
                       click={e => viewApplications(e, applicant.firebaseUid)}
-                      key={e => viewApplications(e, applicant.firebaseUid)}
+                      indexKey={applicant.firebaseUid}
                       uid={applicant.firebaseUid}
                       dispatch={() => dispatch(false)}
                     />
                   </>
                 )
+
               );
             })}
             {/* Lists all applicants when search input is used */}
@@ -438,7 +241,7 @@ function FormRating(props) {
                     <UserName
                       classToBe={css.applicant}
                       click={e => viewApplications(e, applicant.firebaseUid)}
-                      key={e => viewApplications(e, applicant.firebaseUid)}
+                      indexKey={applicant.firebaseUid}
                       uid={applicant.firebaseUid}
                       dispatch={() => dispatch(false)}
                     />
@@ -456,7 +259,9 @@ function FormRating(props) {
                 ? css.applicationStatusButtonActive
                 : css.applicationStatusButton
             }
+
             onClick={() => dispatch("pending")}
+
           >
             <p> Pending Applications</p>
             <p className={css.applicationsNumber}>
@@ -489,16 +294,18 @@ function FormRating(props) {
             {/* List all applicants, unless the search input is used  */}
             {pendingApplicants.map(applicant => {
               return (
-                showSpecificApplications.length === 0 &&
+
+                <>
+                {/*showSpecificApplications.length === 0 &&
                 applicationStatus === "pending" &&
                 applicant.passFormStage === applicationStatus &&
-                input === "" && (
-                  <>
+                input === "" && (*/}
+                  
                     <UserName
                       classToBe={css.applicant}
                       dispatch={() => dispatch("pending")}
                       click={e => viewApplications(e, applicant.firebaseUid)}
-                      key={e => viewApplications(e, applicant.firebaseUid)}
+                      indexKey={applicant.firebaseUid}
                       uid={applicant.firebaseUid}
                     />
                   </>
@@ -515,7 +322,7 @@ function FormRating(props) {
                       classToBe={css.applicant}
                       dispatch={() => dispatch("pending")}
                       click={e => viewApplications(e, applicant.firebaseUid)}
-                      key={e => viewApplications(e, applicant.firebaseUid)}
+                      indexKey={applicant.firebaseUid}
                       uid={applicant.firebaseUid}
                     />
                   </>
@@ -532,7 +339,9 @@ function FormRating(props) {
                 ? css.applicationStatusButtonActive
                 : css.applicationStatusButton
             }
+
             onClick={() => dispatch(true)}
+
           >
             <p> Accepted Applications </p>
             <p className={css.applicationsNumber}>
@@ -563,20 +372,22 @@ function FormRating(props) {
             {/* List all applicants, unless the search input is used  */}
             {acceptedApplicants.map(applicant => {
               return (
-                showSpecificApplications.length === 0 &&
+                <>
+                {/* showSpecificApplications.length === 0 &&
                 applicationStatus === true &&
                 applicant.passFormStage === applicationStatus &&
-                input === "" && (
-                  <>
+                input === "" && ( */}
+                  
                     <UserName
                       classToBe={css.applicant}
                       click={e => viewApplications(e, applicant.firebaseUid)}
-                      key={e => viewApplications(e, applicant.firebaseUid)}
+                      indexKey={applicant.firebaseUid}
                       uid={applicant.firebaseUid}
                       dispatch={() => dispatch(true)}
                     />
                   </>
                 )
+
               );
             })}
             {/* Lists all applicants when search input is used */}
@@ -588,7 +399,7 @@ function FormRating(props) {
                     <UserName
                       classToBe={css.applicant}
                       click={e => viewApplications(e, applicant.firebaseUid)}
-                      key={e => viewApplications(e, applicant.firebaseUid)}
+                      indexKey={applicant.firebaseUid}
                       uid={applicant.firebaseUid}
                       dispatch={() => dispatch(true)}
                     />

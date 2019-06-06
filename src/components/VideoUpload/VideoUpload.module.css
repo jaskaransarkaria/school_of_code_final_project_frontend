@@ -1,6 +1,21 @@
+.videoContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: auto;
+}
+
+#videoUpload {
+  border: 5px #11cf84 solid;
+  border-radius: 5px;
+  width: 100%;
+}
+
 .startRecording {
-  width: 7%;
+  width: 31%;
   padding: 0.5%;
+
   /* color: white; */
   /* background: url("/record.png"); */
   /* border-style: none; */
@@ -11,7 +26,8 @@
 }
 
 .stopRecording {
-  width: 7%;
+  width: 31%;
+
   padding: 0.5%;
 
   /* color: white;
@@ -24,7 +40,8 @@
 }
 
 .playRecording {
-  width: 7%;
+  width: 31%;
+
   padding: 0.5%;
 
   /* color: white;
@@ -37,7 +54,10 @@
 }
 .submitRecording {
   width: 7%;
-  padding: 0.5%;
+
+  padding: 0.25%;
+  position: absolute;
+  right: 0;
 
   /* color: white;
   padding: 10px;
@@ -46,11 +66,13 @@
   font-size: 1.2em;
   font-weight: bold; */
   cursor: pointer;
-  margin-left: 70%;
 }
 .submitFinalVideos {
   width: 7%;
-  padding: 0.5%;
+
+  padding: 0.25%;
+  position: absolute;
+  right: 0;
 
   /* color: white;
   padding: 10px;
@@ -62,9 +84,17 @@
 }
 
 .buttonContainer {
-  margin-top: 20px;
   width: 100%;
+  position: relative;
 }
+
+.leftContainer {
+  display: inline-flex;
+  justify-content: flex-start;
+  width: 100%;
+  left: 0;
+}
+
 .stepText {
   font-size: 1.9em;
   margin: 0px;
@@ -74,4 +104,37 @@
   font-size: 1.6em;
   text-align: center;
   margin: 5px 0;
+}
+
+#loadingCircle {
+}
+/* SUBMIT CSS */
+.rightContentWrapper {
+  border-radius: 10px;
+  border: 10px solid red;
+  position: absolute;
+  left: 25%;
+  right: 25%;
+  top: 25%;
+  padding: 20px;
+}
+.subTextOne {
+  margin: 2%;
+  text-transform: uppercase;
+  font-size: 1.1em;
+  text-align: center;
+  font-style: italic;
+}
+.headerMessage {
+  text-transform: capitalize;
+  font-size: 1.7em;
+  margin: 10px;
+}
+.rightContentWrapper img {
+  width: 200px;
+  height: 100px;
+  position: relative;
+}
+.rightContentWrapper img:hover {
+  cursor: pointer;
 }

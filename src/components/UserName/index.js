@@ -44,6 +44,7 @@ const UserName = ({
     };
     matchUidToName();
   }, [allUsers]);
+
   return (
     <button
       className={classToBe}

@@ -2,17 +2,23 @@
 body {
   font-family: "Oxygen", sans-serif;
 }
+.rightContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
 
 .videoUploadContainer {
-  display: flex;
-  justify-content: center;
+  margin: auto;
+  right: 0;
+  width: 100%;
 }
 .container {
   display: grid;
   grid-template-columns: 35% 65%;
   grid-template-areas: "header form";
 
-  height: 100vh;
+  height: 50vh;
 }
 .wrapper {
   position: fixed;
@@ -27,8 +33,12 @@ body {
   grid-area: header;
 
   color: white;
-
-  background-image: linear-gradient(to bottom right, #04c7d9, #5f04cf);
+  background-image: radial-gradient(
+    rgba(48, 143, 214, 0.57),
+    rgba(108, 122, 137, 0.26)
+  );
+  background-color: rgba(49, 165, 220, 0.1);
+  /* background-image: linear-gradient(to bottom right, #04d94296, #5f04cf7a); */
 }
 /* SOC IMAGE */
 .socImage {
@@ -36,25 +46,16 @@ body {
   height: 200px;
 }
 .socImageContainer {
-  top: 5%;
+  top: 20%;
   position: relative;
   text-align: center;
 }
 
 .instructionsContainer {
-  position: relative;
-  top: 10%;
+  position: absolute;
   font-size: 1.3em;
-  margin: 0;
-  margin-top: 20px;
-  margin-left: 20px;
-  padding: 0;
-}
-.instructionsContainer li {
-  margin-left: 20px;
-  margin-bottom: 5px;
-  margin-top: 5px;
-  list-style: circle;
+  padding: 3%;
+  top: 50%;
 }
 
 .instructionsBox {
@@ -62,7 +63,7 @@ body {
   font-weight: bold;
   font-size: 1.8em;
   position: relative;
-  top: 10%;
+  top: 30%;
   display: flex;
   justify-content: center;
 }
@@ -80,15 +81,16 @@ body {
   font-weight: bold;
 }
 .applicationFormText {
-  margin: 10px 0;
+  position: relative;
+  top: 13%;
   text-align: center;
 }
 /* .subVideoInstructions li {
   list-style: decimal;
   list-style-image: url(../../Images/one.svg);
 } */
-.subVideoInstructions li {
-  list-style-type: none;
+.subVideoInstructions {
+  text-align: center;
 }
 
 .subVideoInstructions .startRecording:before {
@@ -99,7 +101,7 @@ body {
   background-size: 40px;
   position: relative;
   top: 20px;
-  background-image: url(../../Images/one.svg);
+  background-image: url("/record.png");
   background-repeat: no-repeat;
 }
 .subVideoInstructions .stopRecording:before {
@@ -110,7 +112,7 @@ body {
   background-size: 40px;
   position: relative;
   top: 20px;
-  background-image: url(../../Images/twoRed.svg);
+  background-image: url("/stop.png");
   background-repeat: no-repeat;
 }
 .subVideoInstructions .playRecording:before {
@@ -121,19 +123,18 @@ body {
   background-size: 40px;
   position: relative;
   top: 20px;
-  background-image: url(../../Images/play-button.svg);
+  background-image: url("/play.png");
   background-repeat: no-repeat;
 }
 .subVideoInstructions .submitRecording:before {
   content: "";
-
   display: inline-block;
   height: 50px;
   width: 50px;
   background-size: 40px;
   position: relative;
   top: 20px;
-  background-image: url(../../Images/three.svg);
+  background-image: url("/checked.png");
   background-repeat: no-repeat;
 }
 /* LOGO MEDIA QUERY */

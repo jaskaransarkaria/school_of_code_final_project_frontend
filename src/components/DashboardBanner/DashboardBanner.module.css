@@ -1,15 +1,18 @@
 .bannerContainer {
   background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png");
   width: 100%;
-  height: 15vh;
+  height: 17.5vh;
+  background: rgba(108, 122, 137, 0.4);
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
   position: relative;
 }
 .bannerWelcomeText {
+  position: relative;
   color: white;
   font-family: "Oxygen", sans-serif;
+  left: 2.5%;
 }
 .socLogo {
   position: absolute;

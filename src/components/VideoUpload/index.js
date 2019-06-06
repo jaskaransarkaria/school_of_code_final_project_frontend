@@ -8,6 +8,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import firebase from "firebase";
 import { api } from "../../config";
 import ThankYouSubmission from "../ThankYouSubmission";
+import SubmitImage from "../../Images/submit.png";
 
 AWS.config.update({
   region: "eu-west-1",
@@ -63,19 +64,18 @@ const VideoUpload = () => {
   const [autoplay, setAutoplay] = useState(false);
   const [chunks, setChunks] = useState([]);
   const [redirect, setRedirect] = useState(false);
+  const [reRecord, setReRecord] = useState(false);
   const video = useRef(null);
 
-  useEffect(
-    () =>
-      // feature detction - check existance of a navigator
-      (navigator.getUserMedia =
-        navigator.getUserMedia ||
-        navigator.webkitGetUserMedia ||
-        navigator.mozGetUserMedia),
-    []
-  );
   useEffect(() => {
-    return firebase.auth().onAuthStateChanged(function(user) {
+    // feature detction - check existance of a navigator
+    navigator.getUserMedia =
+      navigator.getUserMedia ||
+      navigator.webkitGetUserMedia ||
+      navigator.mozGetUserMedia;
+  }, []);
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         setFirebaseUid(user.uid);
         console.log(user.uid);
@@ -84,10 +84,6 @@ const VideoUpload = () => {
       }
     });
   }, []);
-
-  useEffect(() => {
-    return () => {};
-  }, [video]);
 
   const uploadVideosToDb = () => {
     fetch(`${api.applications}/video-upload`, {
@@ -270,12 +266,10 @@ const VideoUpload = () => {
             return (
               <div className={css.videoContainer}>
                 <video
+                  id={css.videoUpload}
                   ref={video}
                   preload="none"
                   autoPlay={autoplay}
-                  id="videoUpload"
-                  height="60%"
-                  width="100%"
                   display="block"
                   poster={item.poster}
                   key={src}
@@ -284,43 +278,62 @@ const VideoUpload = () => {
                 </video>
                 <br />
                 <div className={css.buttonContainer}>
-                  <img
-                    src="/record.png"
-                    alt="record video"
-                    className={css.startRecording}
-                    onClick={() => {
-                      // check if they have a microphone and webcam here
+                  <div
+                    style={{ position: "absolute", left: "0", width: "21%" }}
+                  >
+                    <img
+                      src="/record.png"
+                      alt="record video"
+                      className={css.startRecording}
+                      onClick={() => {
+                        // check if they have a microphone and webcam here
 
-                      hasGetUserMedia();
-                      if (!hasVideo || !hasAudio) {
-                        alert(
-                          "Your device needs a microphone and a webcam your device is missing one"
-                        );
-                        return;
-                      } else {
-                        handleRecording("start");
-                      }
-                    }}
-                  />
+                        hasGetUserMedia();
+                        if (!hasVideo || !hasAudio) {
+                          alert(
+                            "Your device needs a microphone and a webcam your device is missing one"
+                          );
+                          return;
+                        } else {
+                          handleRecording("start");
+                        }
+                      }}
+                    />
 
-                  <img
-                    src="stop.png"
-                    alt="stop recording"
-                    className={css.stopRecording}
-                    onClick={() => {
-                      if (localStream) {
-                        handleRecording("stop");
-                      }
-                    }}
-                  />
-                  <img
-                    src="play.png"
-                    alt="play recording"
-                    className={css.playRecording}
-                    onClick={() => {
-                      video.current.play();
-                    }}
-                  />
+                    <img
+                      src="stop.png"
+                      alt="stop recording"
+                      className={css.stopRecording}
+                      onClick={() => {
+                        if (localStream) {
+                          handleRecording("stop");
+                          setReRecord(true);
+                        }
+                      }}
+                    />
+                    <img
+                      src="play.png"
+                      alt="play recording"
+                      className={css.playRecording}
+                      onClick={() => {
+                        video.current.play();
+                      }}
+                    />
+                  </div>
+
+                  {reRecord && (
+                    <p
+                      style={{
+                        color: "red",
+                        verticalAlign: "text-bottom",
+                        textAlign: "center",
+                        fontSize: "150%",
+                        display: "inline-block"
+                      }}
+                    >
+                      Re-record, if your not <br /> happy with your first take.
+                    </p>
+                  )}
                   {!isLoading &&
                     (questionCounter + 1 < interviewQuestions.length ? (
                       <img
@@ -339,9 +352,10 @@ const VideoUpload = () => {
                             setIsLoading(true);
                             uploadToAWS(blob)
                               .then(_ => setIsLoading(false))
-                              .then(_ =>
-                                setQuestionCounter(questionCounter + 1)
-                              );
+                              .then(_ => {
+                                setQuestionCounter(questionCounter + 1);
+                                setReRecord(false);
+                              });
                           }
                         }}
                       />
@@ -351,7 +365,9 @@ const VideoUpload = () => {
                         alt="submit video"
                         className={css.submitRecording}
                         onClick={() => {
-                          const blob = new Blob(chunks, { type: "video/mp4" });
+                          const blob = new Blob(chunks, {
+                            type: "video/mp4"
+                          });
                           console.log(blob);
                           if (blob.size > 0 && !isRecording) {
                             setIsLoading(true);
@@ -365,20 +381,29 @@ const VideoUpload = () => {
                         }}
                       />
                     ))}
-                  {isLoading && <CircularProgress color="white" />}
+                  {isLoading && (
+                    <CircularProgress id={css.loadingCircle} color="inherit" />
+                  )}
                 </div>
               </div>
             );
           })}
       {!showVideo && !redirect && (
-        <button
-          onClick={() => {
-            uploadVideosToDb();
-            // add re routing link here
-          }}
-        >
-          confirm upload
-        </button>
+        <div className={css.rightContentWrapper}>
+          <h1 className={css.headerMessage}>Press submit to process videos</h1>
+          <img
+            className={css.tickImage}
+            src={SubmitImage}
+            alt="green tick icon"
+            onClick={() => {
+              uploadVideosToDb();
+              // add re routing link here
+            }}
+          />
+          <p className={css.subTextOne}>
+            You will receive an email within the next few weeks
+          </p>
+        </div>
       )}
     </div>
   ) : (

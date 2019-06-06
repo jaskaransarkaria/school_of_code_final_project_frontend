@@ -12,8 +12,10 @@ import { useTransition, animated } from "react-spring";
 import approved from "../../Images/approved.png";
 import location from "../../Images/location.png";
 import age from "../../Images/calendar.png";
+
 import close from "../../Images/error.png";
-import { isTemplateLiteral } from "@babel/types";
+// import { isTemplateLiteral } from "@babel/types";
+
 // TODO
 
 // add questions
@@ -82,6 +84,7 @@ const VideoRating = props => {
     collateFeedback.map(item => (score += item.rating));
     return score / 2 / collateFeedback.length;
   };
+
 
   const AverageScore = () => {
     const calculatedScore = getAverageScore();
@@ -280,19 +283,8 @@ const VideoRating = props => {
   // POST ratings for each video all at once && POST whether they have passed or failed this stage
   // also reset the collateFeedback back to an empty array
 
-  console.log("SHOWAPPLICANTS", showApplicants);
-  console.log("CURRENTID", currentUid);
-  console.log("SHOWSPECIFICAPPLICANTSLENGTH", showSpecificApplication.length);
-
-
   return (
     <>
-      {allUsers.map(user => {
-        /* console.log(
-          "MAPPING AND UID TO NAME!!",
-          matchUidToName(user.firebaseUid)
-        ) */
-      })}
       <DashboardBanner title={"Video Applications"} />
       <div id="userTray" className={css.userTray}>
         <div className={css.passThresholdContainer}>
@@ -304,8 +296,6 @@ const VideoRating = props => {
             style={{ color: "rgba(82, 226, 80, 1)" }}
             fractions={2}
             onClick={value => {
-              // setRatingValue(value);
-              // setAdminFeedbackRating(value * 2);
               setSliderPassValue(value * 2);
               updatePassStage();
             }}
@@ -315,8 +305,6 @@ const VideoRating = props => {
           {pendingVideosData.map(
             ({ videoApplicationData, firebaseUid }, applicantIndex) => {
               if (applicantIndex === applicantCounter) {
-                console.log("APPLICANTINDEX", applicantIndex);
-                console.log("APPLICANTCOUNTER", applicantCounter);
                 return (
                   <>
                     <div
@@ -417,30 +405,35 @@ const VideoRating = props => {
                           {/* List all applicants, unless the search input is used  */}
                           {pendingVideosData.map(
                             (applicant, pendingApplicationIndex) => {
-                              return (
-                                <>
-                                  <UserName
-                                    classToBe={css.applicant}
-                                    click={e =>
-                                      viewApplication(applicant.firebaseUid)
-                                    }
-                                    indexKey={applicant.firebaseUid}
-                                    uid={applicant.firebaseUid}
-                                    applicantCounter={() =>
-                                      setApplicantCounter(
-                                        pendingApplicationIndex
-                                      )
-                                    }
-                                    dispatch={() => dispatch("pending")}
-                                    showApplicants={showApplicants}
-                                    setAdminFeedbackRating={
-                                      setAdminFeedbackRating
-                                    }
-                                    setVideoCounter={setVideoCounter}
-                                    setCollateFeedback={setCollateFeedback}
-                                  />
-                                </>
-                              );
+                              if (applicant.videoApplicationData.length > 0) {
+                                return (
+                                  <>
+                                    <UserName
+                                      classToBe={css.applicant}
+                                      click={e =>
+                                        viewApplication(
+                                          e,
+                                          applicant.firebaseUid
+                                        )
+                                      }
+                                      indexKey={applicant.firebaseUid}
+                                      uid={applicant.firebaseUid}
+                                      applicantCounter={() =>
+                                        setApplicantCounter(
+                                          pendingApplicationIndex
+                                        )
+                                      }
+                                      dispatch={() => dispatch("pending")}
+                                      setAdminFeedbackRating={
+                                        setAdminFeedbackRating
+                                      }
+                                    //showApplicants={showApplicants} just added from matts changes test this
+                                      setVideoCounter={setVideoCounter}
+                                      setCollateFeedback={setCollateFeedback}
+                                    />
+                                  </>
+                                );
+                              }
                             }
                           )}
                         </ul>

@@ -10,12 +10,16 @@
 
   color: white;
 
-  background-image: linear-gradient(to bottom right, #04c7d9, #5f04cf);
+  background-image: radial-gradient(
+    rgba(48, 143, 214, 0.57),
+    rgba(108, 122, 137, 0.26)
+  );
+  background-color: rgba(49, 165, 220, 0.1);
 }
 .formContainer {
-  font-size: 1.4em;
   position: relative;
-  top: 20%;
+  top: 25%;
+  width: 50%;
   color: white;
 }
 ul {
@@ -26,43 +30,26 @@ ul li {
   margin-top: 10px;
 }
 .rightContainer {
+  display: flex;
+  justify-content: center;
   grid-area: form;
   color: white;
   position: relative;
   margin: 0 5%;
-  background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png");
+  background-image: url(../../Images/starsBackground.png);
+  /* background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png"); */
   font-weight: bold;
 }
 
-.submitButton {
-  margin-left: 10px;
-  left: 50%;
-  font-size: 1.2em;
-  font-weight: bold;
-  margin-bottom: 50px;
-  cursor: pointer;
-  position: absolute;
-  bottom: 0;
+/* LEFT CONTAINER CONTENT */
+/* SOC IMAGE */
+.formContainer {
+  position: relative;
+  font-size: 1.3em;
+  top: 20%;
   width: 50%;
   color: white;
-  padding: 10px;
-  border-style: none;
-  background-color: #11cf84;
 }
-.previousButton {
-  font-size: 1.2em;
-  font-weight: bold;
-  margin-bottom: 50px;
-  cursor: pointer;
-  position: absolute;
-  bottom: 0;
-  width: 50%;
-  color: white;
-  padding: 10px;
-  border-style: none;
-  background-color: #11cf84;
-}
-
 /* LEFT CONTAINER CONTENT */
 /* SOC IMAGE */
 .socImage {
@@ -70,22 +57,22 @@ ul li {
   height: 200px;
 }
 .socImageContainer {
-  top: 5%;
+  top: 15%;
   position: relative;
   text-align: center;
 }
 .instructionsContainer {
   position: relative;
-  top: 10%;
+  top: 25%;
   font-size: 1.3em;
   margin: 0;
-  margin-top: 20px;
-  margin-left: 20px;
+  /* margin-top: 20px; */
+  /* margin-left: 20px; */
   padding: 0;
+  margin: 0px 10%;
 }
 .instructionsContainer li {
-  margin-left: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
   list-style: circle;
 }
 
@@ -94,14 +81,48 @@ ul li {
   font-weight: bold;
   font-size: 1.8em;
   position: relative;
-  top: 10%;
+  top: 20%;
   display: flex;
   justify-content: center;
 }
 
-.applicationFormText {
-  margin: 10px 0;
+.submitButton {
+  font-size: 1.2em;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  width: 25%;
+  color: white;
+  padding: 10px;
+  border-style: none;
+  background-color: #11cf84;
+}
+.previousButton {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-right: 10px;
+  cursor: pointer;
+
+  width: 25%;
+  color: white;
+  padding: 10px;
+  border-style: none;
+  background-color: #11cf84;
+}
+.buttons {
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
   position: absolute;
+  width: 100%;
+  bottom: 15%;
+}
+
+.applicationFormText {
+  position: relative;
+  top: 10%;
+  text-align: center;
 }
 .applicationStepText {
   position: absolute;

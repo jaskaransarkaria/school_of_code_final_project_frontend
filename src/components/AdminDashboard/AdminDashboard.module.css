@@ -1,6 +1,5 @@
 .optionsContainer {
-  width: 94%;
-  margin-left: 6%;
+  width: 100%;
   height: 100vh;
-  background-image: linear-gradient(to bottom right, #04c7d9, #5f04cf);
+  background-image: url("/starsBackground.png");
 }
