@@ -14,10 +14,15 @@
   grid-area: header;
   /* border-right: 5px solid white; */
   color: white;
-  background-image: radial-gradient(
+  background-image: linear-gradient(
+    to bottom right,
+    rgba(48, 143, 214, 0.57),
+    rgba(108, 122, 137, 0.33)
+  );
+  /* background-image: radial-gradient(
     rgba(48, 143, 214, 0.57),
     rgba(108, 122, 137, 0.26)
-  );
+  ); */
   background-color: rgba(49, 165, 220, 0.1);
 
   /* background-image: linear-gradient(to bottom right, #04c7d9, #5f04cf); */
