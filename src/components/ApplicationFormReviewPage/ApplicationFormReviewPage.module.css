@@ -10,11 +10,11 @@
 
   color: white;
 
-  background-image: radial-gradient(
+  background-image: linear-gradient(
+    to bottom right,
     rgba(48, 143, 214, 0.57),
-    rgba(108, 122, 137, 0.26)
+    rgba(108, 122, 137, 0.33)
   );
-  background-color: rgba(49, 165, 220, 0.1);
 }
 .formContainer {
   position: relative;
@@ -55,6 +55,9 @@ ul li {
 .socImage {
   width: 200px;
   height: 200px;
+  padding: 20px;
+  box-shadow: 2px 2px 10px #fff;
+  border-radius: 200px;
 }
 .socImageContainer {
   top: 15%;
@@ -63,7 +66,7 @@ ul li {
 }
 .instructionsContainer {
   position: relative;
-  top: 25%;
+  top: 22%;
   font-size: 1.3em;
   margin: 0;
   /* margin-top: 20px; */
@@ -73,7 +76,8 @@ ul li {
 }
 .instructionsContainer li {
   margin-bottom: 30px;
-  list-style: circle;
+  list-style: none;
+  font-size: 1.2em;
 }
 
 .instructionsBox {
@@ -81,7 +85,7 @@ ul li {
   font-weight: bold;
   font-size: 1.8em;
   position: relative;
-  top: 20%;
+  margin: 0px 10%;
   display: flex;
   justify-content: center;
 }
@@ -91,7 +95,7 @@ ul li {
   font-weight: bold;
 
   cursor: pointer;
-
+  border-radius: 5px;
   width: 25%;
   color: white;
   padding: 10px;
@@ -103,7 +107,7 @@ ul li {
   font-weight: bold;
   margin-right: 10px;
   cursor: pointer;
-
+  border-radius: 5px;
   width: 25%;
   color: white;
   padding: 10px;
@@ -123,10 +127,12 @@ ul li {
   position: relative;
   top: 10%;
   text-align: center;
+  font-size: 2.2em;
 }
 .applicationStepText {
   position: absolute;
   margin-top: 80px;
+  font-size: 2.2em;
 }
 /* @media only screen and (max-width: 750px) {
   .header {

@@ -4,6 +4,7 @@ import socPlanet from "../../Images/planet_soc.png";
 import { api } from "../../config";
 import firebase from "firebase";
 import rocket from "../../Images/spaceship.png";
+
 import SOCImage from "../../Images/soc-logo.png";
 const ApplicantDashBoard = props => {
   const [userUid, setUserUid] = useState("");
@@ -115,16 +116,17 @@ const ApplicantDashBoard = props => {
               />
             </div>
           ) : null}
-
           {(info.stage === 1 && passFirstStage === true) ||
           (info.stage === 2 && passSecondStage === true) ||
           (info.stage === 3 && passFinalStage === true) ? (
             <div className={css.stepPassed}>
-              <div className={css.congratsMessage}>Congratulations</div>
-              <div className={css.congratsMessage}>
+              <div className={css.astronautFlag}>
+                <img src="/astronaut.png" />
+              </div>
+              {/* <div className={css.congratsMessage}>
                 {" "}
                 You passed Stage {info.stage}!
-              </div>
+              </div> */}
             </div>
           ) : null}
           {/* <button onClick={() => changeStage(info)}> Pass </button> */}
@@ -136,20 +138,22 @@ const ApplicantDashBoard = props => {
             }
           >
             {" "}
-            Stage {info.stage}{" "}
+            Stage {info.stage}
           </div>
+
           <div className={css.progressImgContainer}>
+            <img className={css.earthGlobe} src="/earth-globe.png" />
             <img
               className={css.rocketImage}
               src={rocket}
-              alt="socPlanet icon"
+              alt="rocket icon"
               style={{
                 width: "100px",
                 height: "100px",
                 position: "absolute",
                 left: `${info.progression}%`,
                 bottom: `${info.progression}%`,
-                animation: `${css[`rocketFlight${info.progression}`]} 1s`
+                animation: `${css[`rocketFlight${info.progression}`]} 2s`
               }}
             />
           </div>

@@ -9,11 +9,12 @@
   grid-area: header;
 
   color: white;
-  background-image: radial-gradient(
+  background-image: linear-gradient(
+    to bottom right,
     rgba(48, 143, 214, 0.57),
-    rgba(108, 122, 137, 0.26)
+    rgba(108, 122, 137, 0.33)
   );
-  background-color: rgba(49, 165, 220, 0.1);
+  /* background-color: rgba(49, 165, 220, 0.1); */
 }
 
 .rightContainer {
@@ -29,7 +30,7 @@
 }
 .formContainer {
   position: relative;
-  top: 15%;
+  top: 17%;
   width: 50%;
   color: white;
 }
@@ -38,6 +39,9 @@
 .socImage {
   width: 200px;
   height: 200px;
+  padding: 20px;
+  box-shadow: 2px 2px 10px #fff;
+  border-radius: 200px;
 }
 .socImageContainer {
   top: 15%;
@@ -46,7 +50,7 @@
 }
 .instructionsContainer {
   position: relative;
-  top: 25%;
+  top: 22%;
   font-size: 1.3em;
   margin: 0;
   /* margin-top: 20px; */
@@ -56,7 +60,8 @@
 }
 .instructionsContainer li {
   margin-bottom: 30px;
-  list-style: circle;
+  list-style: none;
+  font-size: 1.2em;
 }
 
 .instructionsBox {
@@ -64,7 +69,7 @@
   font-weight: bold;
   font-size: 1.8em;
   position: relative;
-  top: 20%;
+  margin: 0px 10%;
   display: flex;
   justify-content: center;
 }
@@ -72,7 +77,7 @@
 .nextButton {
   font-size: 1.2em;
   font-weight: bold;
-
+  border-radius: 5px;
   cursor: pointer;
 
   width: 25%;
@@ -82,6 +87,8 @@
   background-color: #11cf84;
 }
 .previousButton {
+  border-radius: 5px;
+  font-size: 1.3em;
   font-size: 1.2em;
   font-weight: bold;
   margin-right: 10px;
@@ -109,10 +116,12 @@
   position: relative;
   top: 10%;
   text-align: center;
+  font-size: 2.2em;
 }
 .applicationStepText {
   position: absolute;
   margin-top: 80px;
+  font-size: 2.2em;
 }
 .saveAndContinueButton,
 .previousButton {
