@@ -95,82 +95,125 @@ const ApplicantDashBoard = props => {
     return <h3>Track your journey to becoming a Bootcamper.</h3>;
   };
 
+  const addProgressionMock = (info, idx) => ({
+    progression: (idx + 1) * 25,
+    ...info
+  });
+
   const Steps = ({ passFirstStage, passSecondStage, passFinalStage }) => {
     const renderStep = (info, idx) => {
       console.log(info);
-      return (
-        <div className={info.className}>
-          {(info.stage === 2 && Object.entries(users).length === 0) ||
-          (info.stage === 3 && Object.entries(users).length === 0) ||
-          (info.stage === 2 && passFirstStage === false) ||
-          (info.stage === 2 && passFirstStage === "pending") ||
-          (info.stage === 3 && passFirstStage === false) ||
-          (info.stage === 3 && passFirstStage === "pending") ||
-          (info.stage === 3 && passSecondStage === "pending") ||
-          (info.stage === 3 && passSecondStage === false) ? (
+
+      if (
+        (info.stage === 2 && Object.entries(users).length === 0) ||
+        (info.stage === 3 && Object.entries(users).length === 0) ||
+        (info.stage === 2 && passFirstStage === false) ||
+        (info.stage === 2 && passFirstStage === "pending") ||
+        (info.stage === 3 && passFirstStage === false) ||
+        (info.stage === 3 && passFirstStage === "pending") ||
+        (info.stage === 3 && passSecondStage === "pending") ||
+        (info.stage === 3 && passSecondStage === false)
+      ) {
+        return (
+          <div className={info.className}>
             <div className={css.stepNotAvailable}>
+              <div
+                className={
+                  info.stage === 1 || info.stage === 2
+                    ? css.stageTitle
+                    : css.finalStageTitle
+                }
+              >
+                Stage {info.stage}
+              </div>
               <img
                 src="/lock_white.png"
                 alt="padlocked stage"
                 style={{ width: "40%" }}
               />
             </div>
-          ) : null}
-          {(info.stage === 1 && passFirstStage === true) ||
-          (info.stage === 2 && passSecondStage === true) ||
-          (info.stage === 3 && passFinalStage === true) ? (
+            <div
+              onClick={() => redirectTo(info.stage)}
+              className={css.stepCard}
+            >
+              <h3> {info.title}</h3>
+              <p> {info.desc} </p>
+            </div>
+          </div>
+        );
+      } else if (
+        (info.stage === 1 && passFirstStage === true) ||
+        (info.stage === 2 && passSecondStage === true) ||
+        (info.stage === 3 && passFinalStage === true)
+      ) {
+        return (
+          <div className={info.className}>
+            <div
+              className={
+                info.stage === 1 || info.stage === 2
+                  ? css.stageTitle
+                  : css.finalStageTitle
+              }
+            >
+              Stage {info.stage}
+            </div>
             <div className={css.stepPassed}>
               <div className={css.astronautFlag}>
                 <img src="/astronaut.png" />
               </div>
-              {/* <div className={css.congratsMessage}>
-                {" "}
-                You passed Stage {info.stage}!
-              </div> */}
             </div>
-          ) : null}
-          {/* <button onClick={() => changeStage(info)}> Pass </button> */}
-          <div
-            className={
-              info.stage === 1 || info.stage === 2
-                ? css.stageTitle
-                : css.finalStageTitle
-            }
-          >
-            {" "}
-            Stage {info.stage}
+            <div
+              onClick={() => redirectTo(info.stage)}
+              className={css.stepCard}
+            >
+              <h3> {info.title}</h3>
+              <p> {info.desc} </p>
+            </div>
           </div>
+        );
+      } else {
+        return (
+          <div className={info.className}>
+            <div
+              className={
+                info.stage === 1 || info.stage === 2
+                  ? css.stageTitle
+                  : css.finalStageTitle
+              }
+            >
+              Stage {info.stage}
+            </div>
 
-          <div className={css.progressImgContainer}>
-            <img className={css.earthGlobe} src="/earth-globe.png" />
-            <img
-              className={css.rocketImage}
-              src={rocket}
-              alt="rocket icon"
-              style={{
-                width: "100px",
-                height: "100px",
-                position: "absolute",
-                left: `${info.progression}%`,
-                bottom: `${info.progression}%`,
-                animation: `${css[`rocketFlight${info.progression}`]} 2s`
-              }}
-            />
+            <div className={css.progressImgContainer}>
+              <img className={css.earthGlobe} src="/earth-globe.png" />
+              <img
+                className={css.rocketImage}
+                src={rocket}
+                alt="rocket icon"
+                style={{
+                  width: "100px",
+                  height: "100px",
+                  position: "absolute",
+                  left: `${info.progression}%`,
+                  bottom: `${info.progression}%`,
+                  animation: `${css[`rocketFlight${info.progression}`]} 2s`
+                }}
+              />
+            </div>
+            <div
+              onClick={() => redirectTo(info.stage)}
+              className={css.stepCard}
+            >
+              <h3> {info.title}</h3>
+              <p> {info.desc} </p>
+            </div>
           </div>
-          <div onClick={() => redirectTo(info.stage)} className={css.stepCard}>
-            <h3> {info.title}</h3>
-            <p> {info.desc} </p>
-          </div>
-        </div>
-      );
+        );
+      }
     };
     console.log(css);
     return stepInfo.map(addProgressionMock).map(renderStep);
   };
-  const addProgressionMock = (info, idx) => ({
-    progression: (idx + 1) * 25,
-    ...info
-  });
 
   return (
     <div className={css.container}>
