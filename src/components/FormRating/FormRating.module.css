@@ -77,6 +77,15 @@ button {
 Applicant Lists
 -------------------*/
 
+.instructionsMessage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 35px;
+}
+
 button.applicant {
   color: white;
   margin: 0 auto;
@@ -134,7 +143,7 @@ ul.hideApplicantListContainer {
  Application Details Container  
 ---------------------------------*/
 .applicantDetailsContainer {
-  flex: 0 60%;
+  flex: 0 80%;
   display: flex;
   flex-direction: column;
   width: 50%;
@@ -162,17 +171,25 @@ ul.hideApplicantListContainer {
   text-align: center;
 }
 
-.reasonSubContainer {
-  padding: 10px;
-  margin: 10px;
-  background: #eae8e8;
+.reasonContainer {
   border-radius: 5px;
-  box-shadow: 1px 1px 2px;
+}
+
+.reasonContainer p {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: scroll;
 }
 
 .applicationButtonsContainer {
   display: flex;
   justify-content: center;
+  flex: 100%;
+  padding: 10px;
+  background: #21a8d7;
+  border-radius: 0 0 5px 5px;
 }
 
 .applicationButtonsContainer button {
@@ -182,6 +199,8 @@ ul.hideApplicantListContainer {
   border-radius: 5px;
   box-shadow: 1px 1px 2px;
   transition: 200ms;
+  position: relative;
+  z-index: 1;
 }
 
 .applicationButtonsContainer button:hover {
@@ -207,4 +226,96 @@ ul.hideApplicantListContainer {
 .adminDashboardHome button:hover {
   cursor: pointer;
   box-shadow: 2px 2px 5px;
+}
+
+/*--------------------
+    User Details 
+---------------------*/
+
+.reasonContainer,
+.detailsContainer {
+  flex-basis: calc(50%);
+}
+
+.detailsContainer {
+  border-radius: 5px;
+}
+
+.detailsContainer h3 {
+  margin: 20px;
+  font-size: 20px;
+  padding: 10px;
+  position: relative;
+}
+
+.detailsContainer h3:before {
+  content: "";
+  position: absolute;
+  bottom: 20%;
+  top: 20%;
+  left: 10%;
+  right: 10%;
+  border-right: solid 2px;
+  border-left: solid 2px;
+}
+
+.metaData {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.metaData div {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  margin: 20px;
+  position: relative;
+}
+
+.metaData img {
+  width: 35px;
+  height: 100%;
+}
+
+.metaData p {
+  font-size: 18px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.detailsSubContainer h2 {
+  text-align: center;
+}
+
+/*----------------------------
+    Videos Rating Container 
+-----------------------------*/
+.videoRatingsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  background: white;
+  box-shadow: 1px 1px 5px;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.videoRatingsContainer h2 {
+  color: black;
+  background: #ececec;
+  padding: 10px;
+  border: solid 1px;
+  border-left: none;
+  font-size: 22px;
+}
+
+.videoRatingsContainer div:first-of-type h2 {
+  border-radius: 5px 0 0 0;
+}
+
+.videoRatingsContainer div:nth-of-type(2) h2 {
+  border-right: none;
+  border-radius: 0 5px 0 0;
 }

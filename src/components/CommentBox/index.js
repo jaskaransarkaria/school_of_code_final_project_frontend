@@ -10,10 +10,10 @@ const CommentBox = ({
   setCollateFeedback,
   videoUrl,
   adminFeedbackRating,
-  setAdminFeedbackComment,
-  setRateVideoAlert,
+  // setAdminFeedbackComment,
   setVideoCounter,
-  videoCounter
+  videoCounter,
+  videoApplicationData
 }) => {
   const [comment, setComment] = useState("");
   return (
@@ -26,7 +26,7 @@ const CommentBox = ({
         onKeyDown={e => {
           if (e.keyCode === 13) {
             e.preventDefault();
-            setAdminFeedbackComment(comment);
+            // setAdminFeedbackComment(comment);
             update(title, value, comment);
             reset();
           }
@@ -39,7 +39,7 @@ const CommentBox = ({
       <button
         onClick={e => {
           e.preventDefault();
-          setAdminFeedbackComment(comment);
+          // setAdminFeedbackComment(comment);
           setCollateFeedback([
             ...collateFeedback,
             {
@@ -50,13 +50,13 @@ const CommentBox = ({
           ]);
 
           update(title, value, comment);
-          setRateVideoAlert(false);
           setVideoCounter(videoCounter + 1);
           reset();
-          console.log("COLLATE FEEDBACK:", collateFeedback);
         }}
       >
-        Submit Rating and Comment
+        {videoCounter + 1 === videoApplicationData.length
+          ? "Submit FINAL RATING"
+          : "Submit Rating and Comment"}
       </button>
     </form>
   );
