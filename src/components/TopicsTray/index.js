@@ -22,6 +22,14 @@ const TopicsTray = () => {
     }
     fetchTopicData();
   }, []);
+
+  const searchTopics = (array, searchInput) => {
+    return array.filter(topic => {
+      let regex = new RegExp(searchInput, "gi");
+      return topic.match(regex);
+    });
+  };
+
   return (
     <>
       <div>

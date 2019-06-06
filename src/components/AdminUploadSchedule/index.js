@@ -146,7 +146,7 @@ const AdminUploadSchedule = props => {
   };
   return (
     <>
-      <DashboardBanner title={"Form Applications"} />
+      <DashboardBanner title={"Resource Uploads"} />
       <div className={css.formContainer}>
         <form>
           <fieldset>

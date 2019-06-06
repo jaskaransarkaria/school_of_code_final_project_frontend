@@ -12,10 +12,7 @@ import { useTransition, animated } from "react-spring";
 import approved from "../../Images/approved.png";
 import location from "../../Images/location.png";
 import age from "../../Images/calendar.png";
-
 import close from "../../Images/error.png";
-// import { isTemplateLiteral } from "@babel/types";
-
 // TODO
 
 // add questions
@@ -85,7 +82,6 @@ const VideoRating = props => {
     return score / 2 / collateFeedback.length;
   };
 
-
   const AverageScore = () => {
     const calculatedScore = getAverageScore();
     return (
@@ -133,7 +129,6 @@ const VideoRating = props => {
     const response = await data.json();
     // const findApplicant = pendingVideosData.findIndex(applicant=>applicant.firebaseUid === currentUid)
     // setPendingVideosData([...pendingVideosData.slice(0, findApplicant), ...pendingVideosData.slice(findApplicant + 1)])
-
   };
   const updatePassStage = async () => {
     return await fetch(`${api.applications}/admin-video-descion-update-many`, {
@@ -181,7 +176,7 @@ const VideoRating = props => {
     // } else if (e.type !== "click" && e.key !== "Enter") {
     //   return;
     // }
-    
+
     setCurrentUid(id);
     // showSpecificApplication
     //   ? setShowSpecificApplication(null)
@@ -256,11 +251,10 @@ const VideoRating = props => {
   useEffect(() => {
     if (collateFeedback.length > 3) {
       setOverallRating(calculateOverallRating());
-      
+
       if (collateFeedback.length === 10) {
         postRatingsToServer();
       }
-
     }
   }, [collateFeedback]);
 
@@ -283,8 +277,18 @@ const VideoRating = props => {
   // POST ratings for each video all at once && POST whether they have passed or failed this stage
   // also reset the collateFeedback back to an empty array
 
+  console.log("SHOWAPPLICANTS", showApplicants);
+  console.log("CURRENTID", currentUid);
+  console.log("SHOWSPECIFICAPPLICANTSLENGTH", showSpecificApplication.length);
+
   return (
     <>
+      {allUsers.map(user => {
+        /* console.log(
+          "MAPPING AND UID TO NAME!!",
+          matchUidToName(user.firebaseUid)
+        ) */
+      })}
       <DashboardBanner title={"Video Applications"} />
       <div id="userTray" className={css.userTray}>
         <div className={css.passThresholdContainer}>
@@ -296,6 +300,8 @@ const VideoRating = props => {
             style={{ color: "rgba(82, 226, 80, 1)" }}
             fractions={2}
             onClick={value => {
+              // setRatingValue(value);
+              // setAdminFeedbackRating(value * 2);
               setSliderPassValue(value * 2);
               updatePassStage();
             }}
@@ -305,6 +311,8 @@ const VideoRating = props => {
           {pendingVideosData.map(
             ({ videoApplicationData, firebaseUid }, applicantIndex) => {
               if (applicantIndex === applicantCounter) {
+                console.log("APPLICANTINDEX", applicantIndex);
+                console.log("APPLICANTCOUNTER", applicantCounter);
                 return (
                   <>
                     <div
@@ -318,7 +326,7 @@ const VideoRating = props => {
                               ? css.applicationStatusButtonActive
                               : css.applicationStatusButton
                           }
-                           onClick={() => {
+                          onClick={() => {
                             dispatch(false);
                             viewApplication();
                           }}
@@ -340,14 +348,22 @@ const VideoRating = props => {
                             )}
                           </Spring>
                         </button>
-                        {showApplicants === null  && currentUid === undefined   ? <ul className={css.instructionsMessage}> 
-                        <h3>  Select "Pending Applications" to begin rating{" "} <br/> or <br/> Adjust Pass Threshold to set the acceptance rate. </h3> </ul> : null}
-                        
+                        {showApplicants === null && currentUid === undefined ? (
+                          <ul className={css.instructionsMessage}>
+                            <h3>
+                              {" "}
+                              Select "Pending Applications" to begin rating{" "}
+                              <br /> or <br /> Adjust Pass Threshold to set the
+                              acceptance rate.{" "}
+                            </h3>{" "}
+                          </ul>
+                        ) : null}
+
                         <ul
                           className={
                             showApplicants === false
                               ? css.applicantListContainer
-                              : css.hideApplicantListContainer 
+                              : css.hideApplicantListContainer
                           }
                         >
                           {/* List all applicants, unless the search input is used  */}
@@ -405,35 +421,30 @@ const VideoRating = props => {
                           {/* List all applicants, unless the search input is used  */}
                           {pendingVideosData.map(
                             (applicant, pendingApplicationIndex) => {
-                              if (applicant.videoApplicationData.length > 0) {
-                                return (
-                                  <>
-                                    <UserName
-                                      classToBe={css.applicant}
-                                      click={e =>
-                                        viewApplication(
-                                          e,
-                                          applicant.firebaseUid
-                                        )
-                                      }
-                                      indexKey={applicant.firebaseUid}
-                                      uid={applicant.firebaseUid}
-                                      applicantCounter={() =>
-                                        setApplicantCounter(
-                                          pendingApplicationIndex
-                                        )
-                                      }
-                                      dispatch={() => dispatch("pending")}
-                                      setAdminFeedbackRating={
-                                        setAdminFeedbackRating
-                                      }
-                                    //showApplicants={showApplicants} just added from matts changes test this
-                                      setVideoCounter={setVideoCounter}
-                                      setCollateFeedback={setCollateFeedback}
-                                    />
-                                  </>
-                                );
-                              }
+                              return (
+                                <>
+                                  <UserName
+                                    classToBe={css.applicant}
+                                    click={e =>
+                                      viewApplication(applicant.firebaseUid)
+                                    }
+                                    indexKey={applicant.firebaseUid}
+                                    uid={applicant.firebaseUid}
+                                    applicantCounter={() =>
+                                      setApplicantCounter(
+                                        pendingApplicationIndex
+                                      )
+                                    }
+                                    dispatch={() => dispatch("pending")}
+                                    showApplicants={showApplicants}
+                                    setAdminFeedbackRating={
+                                      setAdminFeedbackRating
+                                    }
+                                    setVideoCounter={setVideoCounter}
+                                    setCollateFeedback={setCollateFeedback}
+                                  />
+                                </>
+                              );
                             }
                           )}
                         </ul>
