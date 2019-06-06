@@ -11,14 +11,13 @@ const data = [
 const FeedbackTray = ({
   adminFeedbackRating,
   setAdminFeedbackRating,
-  setAdminFeedbackComment,
+  // setAdminFeedbackComment,
   collateFeedback,
   setCollateFeedback,
   videoUrl,
-  rateVideoAlert,
-  setRateVideoAlert,
   setVideoCounter,
-  videoCounter
+  videoCounter,
+  videoApplicationData
 }) => {
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [dummyFeedbackData, setDummyFeedbackData] = useState(data);
@@ -41,51 +40,42 @@ const FeedbackTray = ({
       setCarouselIndex(carouselIndex - 1);
     }
   };
+  console.log("DUMMYFEEDBACKDATA", dummyFeedbackData);
   return (
     <>
       {console.log("feedback tray", dummyFeedbackData)}
-      {/* <button
-        onClick={() => {
-          if (
-            carouselIndex ===
-              dummyFeedbackData.filter(i => i.complete === false).length - 3 ||
-            dummyFeedbackData.filter(i => i.complete === false).length <= 3
-          ) {
-            return;
-          }
-          setCarouselIndex(carouselIndex + 1);
-        }}
-      >
-        &gt;
-      </button> */}
-      {/* <Paper> */}
       {dummyFeedbackData
         .filter(i => i.complete === false)
         .slice(carouselIndex, carouselIndex + 3)
         .map((item, index) => {
           return (
             <>
-              <div className={css.feedbackContainer}>
+              <div
+                className={
+                  videoCounter + 1 !== videoApplicationData.length
+                    ? css.feedbackContainer
+                    : css.finalFeedbackContainer
+                }
+              >
                 <FeedbackCard
                   key={index}
                   item={item}
                   update={updateFeedback}
-                  style={{ margin: "20px auto" }}
                   adminFeedbackRating={adminFeedbackRating}
                   setAdminFeedbackRating={setAdminFeedbackRating}
-                  setAdminFeedbackComment={setAdminFeedbackComment}
+                  // setAdminFeedbackComment={setAdminFeedbackComment}
                   collateFeedback={collateFeedback}
                   setCollateFeedback={setCollateFeedback}
                   videoUrl={videoUrl}
-                  rateVideoAlert={rateVideoAlert}
-                  setRateVideoAlert={setRateVideoAlert}
                   videoCounter={videoCounter}
                   setVideoCounter={setVideoCounter}
+                  videoApplicationData={videoApplicationData}
                 />
               </div>
             </>
           );
         })}
+
       {/* </Paper> */}
       {/* <button
         onClick={() => {

@@ -12,7 +12,10 @@
 .commentsContainer {
   border-radius: 5px;
   box-shadow: 1px 1px 5px;
-  padding: 5px;
+  padding: 10px;
+  width: 95%;
+  margin: 0 auto;
+  background: rgba(29, 174, 215, 0.5);
 }
 
 .ratingsContainerAlert {
@@ -38,23 +41,37 @@
   }
 }
 
-.ratingTitleContainer {
+.commentsTitleContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: -10px;
+  padding: 10px;
+  border-radius: 5px;
+}
+.finalCommentsTitleContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: -10px;
+  padding: 10px;
+  border-radius: 5px;
+  background: #ffadad;
 }
 
-.ratingTitleContainer p {
+.commentsTitleContainer p {
+  font-size: 20px;
+  padding: 10px;
+  width: 100%;
+}
+.rateVideoTitle {
   margin: 20px;
   font-size: 20px;
   padding: 10px;
   position: relative;
-  font-weight: bold;
-  position: relative;
-  width: 100%;
 }
 
-.ratingTitleContainer p.rateVideoTitle:before {
+.rateVideoTitle:before {
   content: "";
   position: absolute;
   bottom: 20%;
@@ -67,14 +84,24 @@
 
 .containerTitle {
   display: flex;
+  position: relative;
 }
 
 .containerTitle p {
   font-size: 18px;
+  padding: 0 0 10px 0;
 }
 
-.rating {
+p.rating {
   position: absolute;
-  top: 10px;
-  right: 0;
+  left: 100%;
+  top: 12%;
+  font-size: 14px;
+  width: 100%;
 }
+
+/* position: absolute;
+    left: 100%;
+    top: 3px;
+    font-size: 14px;
+    width: 100%; */

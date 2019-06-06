@@ -7,8 +7,37 @@
 }
 
 /*----------------------------
+    Pass Threshold Container
+-------------------------------*/
+
+.passThresholdContainer {
+  text-align:center;
+  padding-top:10px;
+}
+
+.passThresholdContainer p {
+  font-size:20px;
+}
+
+/*----------------------------
   Application Status Section
 ------------------------------*/
+
+.instructionsMessage {
+  background: rgba(1, 1, 1, 0.46);
+  position: absolute;
+  left: 19%;
+  right: 19%;
+  height: 60vh;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size:25px;
+  transition: 300ms ease-in-out;
+  font-weight:normal;
+}
+
 .applicationStatusContainer {
   display: flex;
   justify-content: center;
@@ -317,4 +346,56 @@ div.overallRating {
 .videosContainer,
 .rateVideosContainer {
   flex: calc(30% - 5px);
+}
+
+/*----------------------------
+    Thankyou Container 
+----------------------------*/
+.thankyouContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  width: 50%;
+  padding: 50px;
+  margin: 0 auto;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px;
+  position: relative;
+}
+
+.thankyouContainer p {
+  padding: 10px;
+}
+
+.thankyouContainer button {
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 1px 1px 1px;
+  margin: 10px 0 0 0;
+  transition: 200ms ease-in-out;
+}
+
+.thankyouContainer button:hover {
+  cursor: pointer;
+  box-shadow: 1px 1px 3px;
+}
+
+.thankyouContainer img {
+  position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px;
+    width: 20px;
+    transition: 200ms ease-in-out;
+}
+
+.thankyouContainer img:hover {
+  transform: rotate(360deg) scale(1.1);
+  cursor: pointer;
+}
+
+.thankyouContainer button:hover:before {
+  cursor: pointer;
 }
