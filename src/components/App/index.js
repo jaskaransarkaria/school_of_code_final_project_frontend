@@ -12,7 +12,6 @@ import { api } from "../../config";
 import firebase from "firebase";
 import ApplicantVideoPage from "../../pages/ApplicantVideoPage";
 import ApplicantFormPage from "../../pages/ApplicantFormPage";
-import TemplatePage from "../../pages/TemplatePage";
 import ContractPage from "../../pages/ContractPage";
 import ThankYouPage from "../../pages/ThankYouPage";
 import FormRating from "../FormRating";
@@ -267,7 +266,6 @@ function App() {
           <Route exact path="/application-form" component={ApplicantFormPage} />
           <Route exact path="/thankyou" component={ThankYouPage} />
           <Route exact path="/contract" component={ContractPage} />
-          <Route exact path="/template" component={TemplatePage} />
         </Switch>
       </Router>
     </Store.Provider>
