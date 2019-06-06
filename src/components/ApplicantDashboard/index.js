@@ -126,7 +126,9 @@ const ApplicantDashBoard = props => {
               >
                 Stage {info.stage}
               </div>
+
               <img
+                className={css.lockImage}
                 src="/lock_white.png"
                 alt="padlocked stage"
                 style={{ width: "40%" }}
@@ -137,7 +139,7 @@ const ApplicantDashBoard = props => {
               className={css.stepCard}
             >
               <h3> {info.title}</h3>
-              <p> {info.desc} </p>
+              <p className={css.lockedText}> Locked </p>
             </div>
           </div>
         );
@@ -162,12 +164,16 @@ const ApplicantDashBoard = props => {
                 <img src="/astronaut.png" />
               </div>
             </div>
+
             <div
               onClick={() => redirectTo(info.stage)}
               className={css.stepCard}
             >
-              <h3> {info.title}</h3>
-              <p> {info.desc} </p>
+              <h3>Complete</h3>
+
+              <p className={css.congratsText}>Congratulations</p>
+
+              <img className={css.confetti} src="./confetti.png" />
             </div>
           </div>
         );
@@ -200,6 +206,7 @@ const ApplicantDashBoard = props => {
                 }}
               />
             </div>
+
             <div
               onClick={() => redirectTo(info.stage)}
               className={css.stepCard}
