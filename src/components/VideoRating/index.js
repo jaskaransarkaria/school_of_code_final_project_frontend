@@ -252,7 +252,7 @@ const VideoRating = props => {
     if (collateFeedback.length > 3) {
       setOverallRating(calculateOverallRating());
 
-      if (collateFeedback.length === 5) {
+      if (collateFeedback.length === 10) {
         postRatingsToServer();
       }
     }
@@ -291,7 +291,7 @@ const VideoRating = props => {
             initialRating={sliderPassValue / 2}
             emptySymbol="fa fa-star-o fa-2x"
             fullSymbol="fa fa-star fa-2x"
-            style={{ color: "rgba(82, 226, 80, 1)" }}
+            style={{ color: "#11cf84" }}
             fractions={2}
             onClick={value => {
               setSliderPassValue(value * 2);
