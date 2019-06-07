@@ -12,20 +12,20 @@ const ApplicantDashBoard = props => {
   const [users, setUsers] = useState({});
   const [stepInfo, setStepInfo] = useState([
     {
-      title: "Complete Form",
-      desc: "Click here to complete the form",
+      title: "Application Form",
+      desc: "Click here to complete your form",
       stage: 1,
       className: css.stepOne
     },
     {
-      title: "Complete Videos",
-      desc: "Click here to complete the videos",
+      title: "Video Interview",
+      desc: "Click here to complete your videos",
       stage: 2,
       className: css.stepTwo
     },
     {
       title: "Interview Day",
-      desc: "Click here to accept place for interview",
+      desc: "Click here to accept your place for interview",
       stage: 3,
       className: css.stepThree
     }
@@ -208,7 +208,7 @@ const ApplicantDashBoard = props => {
                 onClick={() => redirectTo(info.stage)}
                 className={css.stepCard}
               >
-                {/* <h3> {info.title}</h3> */}
+                <h3> {info.title}</h3>
                 <p> {info.desc} </p>
               </div>
             </div>

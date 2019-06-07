@@ -219,16 +219,34 @@ p {
 .stepCard {
   display: flex;
   margin: 5px;
-  color: white;
-  border: 5px solid #11cf84;
+  background: white;
   border-radius: 5px;
   box-shadow: 1px 1px 5px;
   position: relative;
-  left: 50%;
-  transform: translateX(-50%);
   bottom: 5%;
-  width: 70%;
-  height: 90px;
+
+  /* width: 80%; */
+}
+
+.stepCard:hover {
+  cursor: pointer;
+}
+
+.stepsContainer h3 {
+  background: #bcf2ff;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 15px 5px;
+}
+
+.stepsContainer p {
+  flex: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 35px 5px;
+  text-align: center;
 }
 .cardContainer .stepCard {
   background-image: linear-gradient(

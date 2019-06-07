@@ -16,11 +16,11 @@
     rgba(48, 143, 214, 0.57),
     rgba(108, 122, 137, 0.33)
   );
+  /* background-color: rgba(49, 165, 220, 0.1); */
   /* background-image: radial-gradient(
     rgba(48, 143, 214, 0.57),
     rgba(108, 122, 137, 0.26)
   ); */
-  /* background-color: rgba(49, 165, 220, 0.1); */
 
   /* background-image: linear-gradient(to bottom right, #04c7d9, #5f04cf); */
 
@@ -32,9 +32,9 @@
   grid-area: form;
   color: white;
   position: relative;
+  background-color: rgba(49, 165, 220, 0.1);
   /* margin: 0 5%; */
   /* background-image: url(../../Images/starsBackground.png); */
-  background-color: rgba(49, 165, 220, 0.05);
 
   /* background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png"); */
   font-weight: bold;

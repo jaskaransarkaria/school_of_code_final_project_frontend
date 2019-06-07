@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import SocImage from "../../Images/soc-logo.png";
 import css from "../ThankYou/ThankYou.module.css";
-import TickImage from "../../Images/checked.svg";
+import TickImage from "../../Images/checked.png";
 
 class ThankYou extends Component {
   constructor(props) {
@@ -35,18 +35,17 @@ class ThankYou extends Component {
                   alt="School of code logo"
                 />
               </div>
-              <div className={css.instructionsContainer}>
-                <h2 className={css.instructionsText}>Instructions</h2>
-                <br />
+              <ol className={css.instructionsContainer}>
+                <li>
+                  Please be patient receiving a response as we process a high
+                  number of applicants.
+                </li>
 
-                <p className={css.instructionsParagraph}>
-                  Please note we receive a high number of applicants so it may
-                  take up to a few weeks to find out the outcome, so we ask you
-                  to be patient. If you receive an acceptance email you will
-                  then be able to log back in and will automatically be taken to
-                  the next stage.
-                </p>
-              </div>
+                <li>
+                  You will receive an email notifying if you have made it to the
+                  next stage!
+                </li>
+              </ol>
             </div>
 
             <div className={css.rightContainer}>

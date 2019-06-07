@@ -21,10 +21,10 @@ const ReviewForm = ({ step, setStep, formValues, submitForm }) => {
             </div>
             {/* <div className={css.instructionsBox}>Instructions</div> */}
             <ol className={css.instructionsContainer}>
-              <li>Please complete all five sections of the form</li>
+              <li>Please complete all five sections of the form.</li>
 
               <li>
-                You will receive an email notifying you if have made it to the
+                You will receive an email notifying if you have made it to the
                 next stage!
               </li>
             </ol>
