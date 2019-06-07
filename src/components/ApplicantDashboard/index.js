@@ -126,19 +126,21 @@ const ApplicantDashBoard = props => {
               >
                 Stage {info.stage}
               </div>
+
               <img
+                className={css.lockImage}
                 src="/lock_white.png"
                 alt="padlocked stage"
                 style={{ width: "40%" }}
               />
             </div>
-            <div
+            {/* <div
               onClick={() => redirectTo(info.stage)}
               className={css.stepCard}
             >
               <h3> {info.title}</h3>
-              <p> {info.desc} </p>
-            </div>
+              <p className={css.lockedText}> Locked </p>
+            </div> */}
           </div>
         );
       } else if (
@@ -162,13 +164,15 @@ const ApplicantDashBoard = props => {
                 <img src="/astronaut.png" />
               </div>
             </div>
-            <div
+
+            {/* <div
               onClick={() => redirectTo(info.stage)}
               className={css.stepCard}
             >
-              <h3> {info.title}</h3>
-              <p> {info.desc} </p>
-            </div>
+              <h3>Complete</h3>
+
+              <p className={css.congratsText}>Congratulations</p>
+            </div> */}
           </div>
         );
       } else {
@@ -200,6 +204,7 @@ const ApplicantDashBoard = props => {
                 }}
               />
             </div>
+
             <div
               onClick={() => redirectTo(info.stage)}
               className={css.stepCard}
