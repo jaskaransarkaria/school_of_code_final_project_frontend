@@ -535,24 +535,53 @@ const VideoRating = props => {
                                         className={css.videoRatingsContainer}
                                       >
                                         <div className={css.detailsContainer}>
-                                          <h2>Applicant Details </h2>
                                           <h3>
                                             {item.result.firstName}{" "}
                                             {item.result.lastName}
                                           </h3>
                                           <div className={css.metaData}>
-                                            <div>
+                                            {/* <div>
                                               <img src={age} />
                                               <p>{item.result.age} Years old</p>
-                                            </div>
-                                            <div>
+                                            </div> */}
+                                            {/* <div>
                                               <img src={location} />
                                               <p>{item.result.location}</p>
-                                            </div>
+                                            </div> */}
                                             <div>
                                               <img src={approved} />
                                               <p>{item.result.background}</p>
                                             </div>
+                                            {collateFeedback.length === 0 ? (
+                                              <div
+                                                className={css.overallRating}
+                                              >
+                                                <h3>Overall Rating</h3>
+                                                <div
+                                                  className={
+                                                    css.ratingTitleContainer
+                                                  }
+                                                >
+                                                  <Rating
+                                                    initialRating={0}
+                                                    emptySymbol="fa fa-star-o fa-2x"
+                                                    fullSymbol="fa fa-star fa-2x"
+                                                    style={{
+                                                      color:
+                                                        "rgba(248, 180, 22, 1)"
+                                                    }}
+                                                    fractions={2}
+                                                    readonly
+                                                  />
+                                                </div>
+                                              </div>
+                                            ) : (
+                                              <AverageScore
+                                                collateFeedback={
+                                                  collateFeedback
+                                                }
+                                              />
+                                            )}
                                           </div>
                                         </div>
                                         <div className={css.videosContainer}>
@@ -573,7 +602,7 @@ const VideoRating = props => {
                                               css.toggleVideosContainer
                                             }
                                           >
-                                            <button
+                                            {/* <button
                                               className={
                                                 css.toggleVideosContainer
                                               }
@@ -585,14 +614,12 @@ const VideoRating = props => {
                                               }}
                                             >
                                               <p> Cancel </p>
-                                            </button>
+                                            </button> */}
                                           </div>
                                         </div>
                                         <div
                                           className={css.rateVideosContainer}
                                         >
-                                          <h2>Rating</h2>
-
                                           <FeedbackTray
                                             key={key}
                                             adminFeedbackRating={
@@ -615,32 +642,6 @@ const VideoRating = props => {
                                               videoApplicationData
                                             }
                                           />
-                                          {collateFeedback.length === 0 ? (
-                                            <div className={css.overallRating}>
-                                              <h3>Overall Rating</h3>
-                                              <div
-                                                className={
-                                                  css.ratingTitleContainer
-                                                }
-                                              >
-                                                <Rating
-                                                  initialRating={0}
-                                                  emptySymbol="fa fa-star-o fa-2x"
-                                                  fullSymbol="fa fa-star fa-2x"
-                                                  style={{
-                                                    color:
-                                                      "rgba(248, 180, 22, 1)"
-                                                  }}
-                                                  fractions={2}
-                                                  readonly
-                                                />
-                                              </div>
-                                            </div>
-                                          ) : (
-                                            <AverageScore
-                                              collateFeedback={collateFeedback}
-                                            />
-                                          )}
                                         </div>
                                       </div>
                                     </animated.div>
