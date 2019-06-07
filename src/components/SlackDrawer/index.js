@@ -1,9 +1,21 @@
 import React, { useState } from "react";
 import Drawer from "@material-ui/core/Drawer";
+import { withStyles } from "@material-ui/core/styles";
 import TopicsTray from "../TopicsTray";
 import css from "./SlackDrawer.module.css";
 
-const SlackDrawer = () => {
+const styles = {
+  paper: {
+    backgroundColor: `rgba(0,0,0, 0.9)`,
+    borderRadius: 3,
+    border: 0,
+    width: "auto",
+    padding: "0 30px"
+  }
+};
+
+const SlackDrawer = props => {
+  const { classes } = props;
   function TempDrawer() {
     const [state, setState] = useState({
       left: false
@@ -48,7 +60,9 @@ const SlackDrawer = () => {
         <Drawer
           open={state.left}
           onClose={toggleDrawer("left", false)}
-          width={1}
+          classes={{
+            paper: classes.paper
+          }}
         >
           <TopicsTray />
         </Drawer>
@@ -58,4 +72,4 @@ const SlackDrawer = () => {
   return <TempDrawer />;
 };
 
-export default SlackDrawer;
+export default withStyles(styles)(SlackDrawer);

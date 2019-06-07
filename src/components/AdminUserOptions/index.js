@@ -4,13 +4,13 @@ import DashboardBanner from "../DashboardBanner";
 
 const AdminUserOptions = props => {
   const goToForms = () => {
-    props.history.push(`form-processing/`);
+    props.history.push(`form-processing`);
   };
   const goToVideos = () => {
-    props.history.push(`video-processing/`);
+    props.history.push(`video-processing`);
   };
   const goToSchedule = () => {
-    props.history.push(`upload-schedule/`);
+    props.history.push(`upload-schedule`);
   };
 
   return (

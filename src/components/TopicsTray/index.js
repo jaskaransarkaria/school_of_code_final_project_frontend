@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { api } from "../../config";
 import Topics from "../Topics";
 import css from "./Topics.module.css";
+import { withStyles } from "@material-ui/core/styles";
 
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
@@ -10,10 +11,19 @@ import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 // fetch GET topic keys
 
-const TopicsTray = () => {
+const styles = {
+  root: {
+    backgroundColor: "#11cf84",
+    margin: 5
+  }
+};
+
+const TopicsTray = props => {
   const [topicKeys, setTopicKeys] = useState([]);
   const [showTopic, setShowTopic] = useState(false);
   const [searchField, setSearchField] = useState("");
+
+  const { classes } = props;
 
   useEffect(() => {
     async function fetchTopicData() {
@@ -23,13 +33,6 @@ const TopicsTray = () => {
     }
     fetchTopicData();
   }, []);
-
-  const searchTopics = (array, searchInput) => {
-    return array.filter(topic => {
-      let regex = new RegExp(searchInput, "gi");
-      return topic.match(regex);
-    });
-  };
 
   return (
     <>
@@ -45,7 +48,7 @@ const TopicsTray = () => {
         <div className={css.topicsContainer}>
           {searchField === ""
             ? topicKeys.sort().map(topic => (
-                <ExpansionPanel>
+                <ExpansionPanel classes={{ root: classes.root }}>
                   <ExpansionPanelSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1a-content"
@@ -67,7 +70,7 @@ const TopicsTray = () => {
                   return topic.match(regex);
                 })
                 .map(topic => (
-                  <ExpansionPanel>
+                  <ExpansionPanel classes={{ root: classes.root }}>
                     <ExpansionPanelSummary
                       expandIcon={<ExpandMoreIcon />}
                       aria-controls="panel1a-content"
@@ -88,4 +91,4 @@ const TopicsTray = () => {
   );
 };
 
-export default TopicsTray;
+export default withStyles(styles)(TopicsTray);
