@@ -38,11 +38,11 @@ const FeedbackCard = ({
               style={{
                 color: "rgba(248, 180, 22, 1)",
                 fontSize: "25px",
-                top: "50%",
-                left: "50%",
-                transform: "translateX(-50%) translateY(-50%)",
-                width: "100%",
-                position: "absolute"
+                // top: "50%",
+                // left: "50%",
+                // transform: "translateX(-50%) translateY(-50%)",
+                width: "100%"
+                // position: "absolute"
               }}
               fractions={2}
               onClick={value => {

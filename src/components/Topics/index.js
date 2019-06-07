@@ -23,7 +23,9 @@ const Topics = ({ topicKey }) => {
           <>
             <br />
             {item.subTopic && <p classname={css.topic}>{item.subTopic}</p>}
-            <a href={item.url}>{item.url}</a>
+            <a href={item.url} style={{ color: "yellow" }}>
+              {item.url}
+            </a>
           </>
         ))}
     </div>
