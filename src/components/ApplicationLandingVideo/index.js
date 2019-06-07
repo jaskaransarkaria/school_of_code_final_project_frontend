@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Login from "../Login";
 import css from "../ApplicationLandingVideo/ApplicationLandingVideo.module.css";
+
+// Images
 import SocImage from "../../Images/soc-logo.png";
 
 import VideoUpload from "../VideoUpload";
@@ -21,19 +23,29 @@ class ApplicationLandingVideo extends Component {
               />
             </div>
             <div className={css.instructionsContainer}>
-              <div className={css.subVideoInstructions}>
-                <p>Please record and submit all 5 videos</p>
-                <div className={css.startRecording}>Start Recording</div>
-                <div className={css.stopRecording}>Stop Recording</div>
-                <div className={css.playRecording}>Review Video</div>
-                <div className={css.submitRecording}>Submit Video</div>
+              <p>Please record and submit all 5 videos</p>
+              <div className={css.keysContainer}>
+                <div className={css.iconContainer}>
+                  <p className={css.startRecording}>Start Recording</p>
+                  <img src="/record.png" alt="Record Button " />
+                </div>
+                <div className={css.iconContainer}>
+                  <p>Stop Recording</p>
+                  <img src="/stop.png" alt="Record Button " />
+                </div>
+                <div className={css.iconContainer}>
+                  <p>Review Video</p>
+                  <img src="/play.png" alt="Record Button " />
+                </div>
+                <div className={css.iconContainer}>
+                  <p>Submit Video</p>
+                  <img src="/checked.png" alt="Record Button " />
+                </div>
               </div>
             </div>
           </div>
           <div className={css.rightContainer}>
-            <div className={css.videoUploadContainer}>
-              <VideoUpload />
-            </div>
+            <VideoUpload />
           </div>
         </div>
       </div>

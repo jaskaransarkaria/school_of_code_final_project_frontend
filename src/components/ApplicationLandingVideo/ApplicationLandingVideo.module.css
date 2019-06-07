@@ -2,36 +2,22 @@
 body {
   font-family: "Oxygen", sans-serif;
 }
-.rightContainer {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-}
 
-.videoUploadContainer {
-  margin: auto;
-  right: 0;
-  width: 100%;
-}
 .container {
-  display: grid;
-  grid-template-columns: 35% 65%;
-  grid-template-areas: "header form";
-
-  height: 50vh;
+  display: flex;
+  min-height: 100vh;
+  min-width: 100vw;
 }
 .wrapper {
-  position: fixed;
-
-  width: 100%;
-  height: 100%;
   background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png");
-  /* background-image: linear-gradient(to bottom right, #04c7d9, #5f04cf); */
 }
 /* LEFT CONTAINER CONTENT */
 .leftContainer {
-  grid-area: header;
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
   color: white;
   background-image: linear-gradient(
     to bottom right,
@@ -50,16 +36,11 @@ body {
   border-radius: 200px;
 }
 .socImageContainer {
-  top: 20%;
-  position: relative;
-  text-align: center;
+  padding: 20px 0;
 }
 
 .instructionsContainer {
-  position: absolute;
-  font-size: 1.3em;
-  padding: 3%;
-  top: 50%;
+  padding: 20px 0;
 }
 
 .instructionsBox {
@@ -77,7 +58,9 @@ body {
 
 /* RIGHT CONTAINER CONTENT */
 .rightContainer {
-  grid-area: form;
+  display: flex;
+  align-items: center;
+  flex: 2;
   color: white;
   position: relative;
   margin: 0 5%;
@@ -85,63 +68,38 @@ body {
   font-weight: bold;
 }
 .applicationFormText {
-  position: relative;
-  top: 13%;
-
-  text-align: center;
+  padding: 20px;
 }
-/* .subVideoInstructions li {
-  list-style: decimal;
-  list-style-image: url(../../Images/one.svg);
-} */
+
 .subVideoInstructions {
   text-align: center;
 }
 
-.subVideoInstructions .startRecording:before {
-  content: "";
-  display: inline-block;
-  height: 50px;
-  width: 50px;
-  background-size: 40px;
-  position: relative;
-  top: 20px;
-  background-image: url("/record.png");
-  background-repeat: no-repeat;
+.keysContainer {
+  margin-left: 65px;
 }
-.subVideoInstructions .stopRecording:before {
-  content: "";
-  display: inline-block;
-  height: 50px;
-  width: 50px;
-  background-size: 40px;
-  position: relative;
-  top: 20px;
-  background-image: url("/stop.png");
-  background-repeat: no-repeat;
+
+.keysContainer p {
+  text-align: left;
 }
-.subVideoInstructions .playRecording:before {
-  content: "";
-  display: inline-block;
-  height: 50px;
-  width: 50px;
-  background-size: 40px;
+
+.iconContainer {
   position: relative;
-  top: 20px;
-  background-image: url("/play.png");
-  background-repeat: no-repeat;
+  padding: 10px;
 }
-.subVideoInstructions .submitRecording:before {
-  content: "";
-  display: inline-block;
-  height: 50px;
-  width: 50px;
-  background-size: 40px;
+
+.iconContainer img {
+  width: 30px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 100%;
+}
+
+.startRecording {
   position: relative;
-  top: 20px;
-  background-image: url("/checked.png");
-  background-repeat: no-repeat;
 }
+
 /* LOGO MEDIA QUERY */
 /* @media only screen and (max-width: 1290px) {
   .socImage {
