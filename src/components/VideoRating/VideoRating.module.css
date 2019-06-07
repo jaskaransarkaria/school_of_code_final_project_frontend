@@ -11,14 +11,14 @@
 -------------------------------*/
 
 .passThresholdContainer {
-  text-align:center;
-  padding-top:10px;
+  text-align: center;
+  padding-top: 10px;
 }
 
 .passThresholdContainer p {
-  font-size:20px;
-  color:white;
-  font-weight:bold;
+  font-size: 20px;
+  color: white;
+  font-weight: bold;
 }
 
 /*----------------------------
@@ -35,9 +35,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size:25px;
+  font-size: 25px;
   transition: 300ms ease-in-out;
-  font-weight:normal;
+  font-weight: normal;
 }
 
 .applicationStatusContainer {
@@ -91,13 +91,14 @@ ul.hideApplicantListContainer {
   width: 100px;
   padding: 10px;
   border-radius: 5px;
-  box-shadow: 1px 1px 2px;
+  background: rgba(59, 59, 59, 0.7);
   transition: 200ms;
+  box-shadow: 0 0 8px;
+  color: white;
 }
 
 .adminDashboardHome button:hover {
   cursor: pointer;
-  box-shadow: 2px 2px 5px;
 }
 
 /* ---------------------------
@@ -109,8 +110,14 @@ button {
 }
 
 .applicationStatusButtonActive {
-  background: #31a4db;
-  color:white;
+  background: rgba(59, 59, 59, 0.2);
+  background-image: linear-gradient(
+    to bottom right,
+    rgba(48, 143, 214, 0.57),
+    rgba(108, 122, 137, 0.33)
+  );
+  cursor: pointer;
+
   margin: 0 25px;
   padding: 10px;
   width: 250px;
@@ -120,7 +127,12 @@ button {
   align-items: center;
   justify-content: space-between;
   z-index: 1;
-  transition: 100ms;
+  transition: 200ms;
+
+  color: white;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 8px;
 }
 
 .applicationStatusButtonActive:hover {
@@ -135,6 +147,8 @@ button {
   font-size: 18px;
 }
 .applicationStatusButton {
+  cursor: pointer;
+  background: rgba(59, 59, 59, 0.7);
   margin: 0 25px;
   padding: 10px;
   width: 250px;
@@ -145,12 +159,17 @@ button {
   justify-content: space-between;
   z-index: 1;
   transition: 200ms;
+
+  color: white;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 8px;
 }
 
-.applicationStatusButton:hover {
+/* .applicationStatusButton:hover {
   cursor: pointer;
   box-shadow: 2px 2px 3px;
-}
+} */
 
 .applicationStatusButton p {
   display: flex;
@@ -161,8 +180,8 @@ button {
 }
 
 .applicationsNumber {
-  border-radius: 0px 4px 4px 0px;
-  background: lightcoral;
+  border-radius: 0 5px 5px 0;
+  background: #11cf84;
   display: flex;
   align-items: center;
 }
@@ -192,18 +211,17 @@ button.applicant:hover {
 .videoRatingsContainer {
   display: flex;
   flex-wrap: wrap;
-  background: white;
+  color: white;
   box-shadow: 1px 1px 5px;
   margin: 10px;
   border-radius: 5px;
 }
 
 .videoRatingsContainer h2 {
-  color: black;
-  background: #31a4db;
+  color: white;
+
   padding: 10px;
-  border: solid 1px;
-  border-left: none;
+
   font-size: 22px;
 }
 
@@ -221,7 +239,11 @@ button.applicant:hover {
 ---------------------*/
 
 .detailsContainer {
-  flex: 0 30%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  top: 30%;
+  /* flex: 0 30%; */
   margin: 0 auto;
   border-radius: 5px;
 }
@@ -315,21 +337,25 @@ button.applicant:hover {
 ----------------------------*/
 
 .rateVideosContainer {
-  flex: 0 30%;
+  /* flex: 0 30%; */
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
   margin: 0 auto;
   text-align: center;
   position: relative;
+  top: 20%;
 }
 
 div.overallRating {
   margin: 15px;
-  color: black;
+  color: white;
   border-radius: 5px;
   font-size: 18px;
-  position: absolute;
+  position: relative;
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
+
+  /* transform: translateX(-50%); */
 }
 
 /* .rateVideosContainer p:nth-last-of-type(1) {
@@ -356,13 +382,14 @@ div.overallRating {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: white;
+  color: white;
   width: 50%;
   padding: 50px;
   margin: 0 auto;
   border-radius: 5px;
   box-shadow: 1px 1px 5px;
   position: relative;
+  background: rgba(59, 59, 59, 0.7);
 }
 
 .thankyouContainer p {
@@ -384,11 +411,14 @@ div.overallRating {
 
 .thankyouContainer img {
   position: absolute;
-    top: 0;
-    right: 0;
-    margin: 10px;
-    width: 20px;
-    transition: 200ms ease-in-out;
+  top: 0;
+  right: 0;
+  margin: 10px;
+  width: 20px;
+  transition: 200ms ease-in-out;
+  background-color: white;
+  border-radius: 50%;
+  padding: 1px;
 }
 
 .thankyouContainer img:hover {

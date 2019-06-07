@@ -23,7 +23,7 @@ class ApplicationLandingVideo extends Component {
               />
             </div>
             <div className={css.instructionsContainer}>
-              <p>Please record and submit all 5 videos</p>
+              <p>Please record and submit all 5 videos.</p>
               <div className={css.keysContainer}>
                 <div className={css.iconContainer}>
                   <p className={css.startRecording}>Start Recording</p>

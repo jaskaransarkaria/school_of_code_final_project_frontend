@@ -7,7 +7,7 @@
   display: grid;
   grid-template-columns: 35% 65%;
   grid-template-areas: "header form";
-
+  background-image: url(../../Images/starsBackground.png);
   height: 100vh;
 }
 .leftContainer {
@@ -15,7 +15,12 @@
 
   color: white;
 
-  background-image: linear-gradient(to bottom right, #04c7d9, #5f04cf);
+  background-image: linear-gradient(
+    to bottom right,
+    rgba(48, 143, 214, 0.57),
+    rgba(108, 122, 137, 0.33)
+  );
+  background-color: rgba(49, 165, 220, 0.1);
 }
 .rightContainer {
   grid-area: form;
@@ -26,13 +31,32 @@
   font-weight: bold;
 }
 /* LEFT CONTAINER CONTENT */
+.instructionsContainer {
+  position: relative;
+  top: 22%;
+  font-size: 1.3em;
+  margin: 0;
+  /* margin-top: 20px; */
+  /* margin-left: 20px; */
+  padding: 0;
+  margin: 0px 10%;
+}
+.instructionsContainer li {
+  margin-bottom: 30px;
+  list-style: none;
+  font-size: 1.2em;
+}
+
 /* SOC IMAGE */
 .socImage {
   width: 200px;
   height: 200px;
+  padding: 20px;
+  box-shadow: 2px 2px 10px #fff;
+  border-radius: 200px;
 }
 .socImageContainer {
-  top: 5%;
+  top: 15%;
   position: relative;
   text-align: center;
 }
@@ -91,21 +115,6 @@ select::-ms-expand {
   margin-left: 20px;
   float: left;
   border-bottom: 3px solid white;
-}
-.instructionsParagraph {
-  font-size: 1.2em;
-  width: 30%;
-  margin-left: 20px;
-  margin-top: 20px;
-  position: relative;
-  text-align: justify;
-  word-wrap: break-word;
-}
-.instructionsContainer {
-  float: left;
-
-  position: absolute;
-  top: 40%;
 }
 
 /* RIGHT CONTAINER CONTENT */
@@ -230,4 +239,5 @@ select::-ms-expand {
   padding: 10px;
   border-style: none;
   background-color: #11cf84;
+  border-radius: 5px;
 }

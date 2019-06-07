@@ -23,32 +23,34 @@ const FeedbackCard = ({
 
   return (
     <>
-      <h3 className={css.rateVideoTitle}> Rate Video </h3>
       <div
         className={
           ratingValue === 0 ? css.ratingsContainer : css.commentsContainer
         }
       >
         {ratingValue === 0 ? (
-          <Rating
-            initialRating={item.rating / 2}
-            emptySymbol="fa fa-star-o fa-2x"
-            fullSymbol="fa fa-star fa-2x"
-            style={{
-              color: "rgba(248, 180, 22, 1)",
-              fontSize: "25px",
-              top: "50%",
-              left: "50%",
-              transform: "translateX(-50%) translateY(-50%)",
-              width: "100%",
-              position: "absolute"
-            }}
-            fractions={2}
-            onClick={value => {
-              setRatingValue(value);
-              setAdminFeedbackRating(value * 2);
-            }}
-          />
+          <>
+            <h2>Rate this video</h2>
+            <Rating
+              initialRating={item.rating / 2}
+              emptySymbol="fa fa-star-o fa-2x"
+              fullSymbol="fa fa-star fa-2x"
+              style={{
+                color: "rgba(248, 180, 22, 1)",
+                fontSize: "25px",
+                top: "50%",
+                left: "50%",
+                transform: "translateX(-50%) translateY(-50%)",
+                width: "100%",
+                position: "absolute"
+              }}
+              fractions={2}
+              onClick={value => {
+                setRatingValue(value);
+                setAdminFeedbackRating(value * 2);
+              }}
+            />
+          </>
         ) : collateFeedback.length === 5 ? (
           <div>Thanks, your review has been submmited</div>
         ) : (
