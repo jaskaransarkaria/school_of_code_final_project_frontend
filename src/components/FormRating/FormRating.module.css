@@ -99,12 +99,23 @@ Applicant Lists
 -------------------*/
 
 .instructionsMessage {
+  background: rgba(59, 59, 59, 0.5);
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+
+  height: 60vh;
+  width: 100%;
   color: white;
-  font-size: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  transition: 300ms ease-in-out;
+  font-weight: normal;
+
+  /* top: 50%;
+  left: 50%; */
+  /* transform: translate(-50%, -50%); */
+  /* font-size: 35px; */
 }
 
 button.applicant {
@@ -124,11 +135,12 @@ button.applicant:hover {
 
 ul.applicantListContainer {
   position: absolute;
-  left: 18%;
-  right: 18%;
+  left: 0%;
   margin: 10px;
-  height: 65vh;
-  overflow: scroll;
+  height: 60vh;
+  width: 100%;
+  margin-top: 15px;
+  /* overflow: scroll; */
   display: flex;
   flex-direction: column;
 
