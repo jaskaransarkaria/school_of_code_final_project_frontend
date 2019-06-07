@@ -64,17 +64,16 @@ const BootcamperSchedule = () => {
       const response = await fetch(`${api.schedule}/most-recent`);
       const data = await response.json();
       if (data.result === null) {
-        return;
+        return null;
       } else {
         console.log("fetch most recent", data);
         console.log("fetch most recent", data.result);
-        await setScheduleData([...scheduleData, ...data.result]);
-        await setDateToShow([...data.result]);
+        setScheduleData([...scheduleData, ...data.result]);
+        setDateToShow([...data.result]);
       }
+      return;
     }
     fetchMostRecentSchedule();
-
-    return fetchMostRecentSchedule;
   }, []);
   const controlCarousel = num => {
     if (
@@ -89,7 +88,9 @@ const BootcamperSchedule = () => {
 
   const FormatedDate = ({ date, num }) => {
     let highlightDay = {};
-    if (
+    if (!dateToShow.length > 0) {
+      return <></>;
+    } else if (
       selectedDate ===
         moment(moment(date, "DD/MM/YYYY").add(num, "days")._d).format(
           "DD/MM/YYYY"
