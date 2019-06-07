@@ -134,6 +134,7 @@ const ApplicantDashBoard = props => {
                 style={{ width: "40%" }}
               />
             </div>
+            <div className={css.lockedText}>Locked</div>
             {/* <div
               onClick={() => redirectTo(info.stage)}
               className={css.stepCard}
@@ -164,14 +165,14 @@ const ApplicantDashBoard = props => {
                 <img src="/astronaut.png" />
               </div>
             </div>
-
+            <div className={css.congratsText}>Congratulations!</div>
             {/* <div
               onClick={() => redirectTo(info.stage)}
               className={css.stepCard}
             >
               <h3>Complete</h3>
 
-              <p className={css.congratsText}>Congratulations</p>
+             
             </div> */}
           </div>
         );
@@ -203,14 +204,13 @@ const ApplicantDashBoard = props => {
                   animation: `${css[`rocketFlight${info.progression}`]} 2s`
                 }}
               />
-            </div>
-
-            <div
-              onClick={() => redirectTo(info.stage)}
-              className={css.stepCard}
-            >
-              <h3> {info.title}</h3>
-              <p> {info.desc} </p>
+              <div
+                onClick={() => redirectTo(info.stage)}
+                className={css.stepCard}
+              >
+                {/* <h3> {info.title}</h3> */}
+                <p> {info.desc} </p>
+              </div>
             </div>
           </div>
         );

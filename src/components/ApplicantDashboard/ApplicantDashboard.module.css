@@ -219,12 +219,16 @@ p {
 .stepCard {
   display: flex;
   margin: 5px;
-  background: white;
+  color: white;
+  border: 5px solid #11cf84;
   border-radius: 5px;
   box-shadow: 1px 1px 5px;
   position: relative;
-  height: 100px;
-  /* width: 80%; */
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 5%;
+  width: 70%;
+  height: 90px;
 }
 .cardContainer .stepCard {
   background-image: linear-gradient(
@@ -239,7 +243,6 @@ p {
 }
 
 .stepsContainer h3 {
-  background: #bcf2ff;
   flex: 1;
   display: flex;
   align-items: center;
@@ -247,12 +250,14 @@ p {
 }
 
 .stepsContainer p {
+  font-size: 1.4em;
   flex: 3;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 35px 5px;
   text-align: center;
+  font-weight: bold;
 }
 
 .acceptanceContainer {
@@ -286,13 +291,15 @@ p {
 .lockImage {
   top: 10%;
 }
-.stepCard .confetti {
-  width: 100px;
-  height: 100%;
-}
-.congratsText {
-  font-size: 1.4em;
+
+.congratsText,
+.lockedText {
+  font-size: 1.8em;
   font-weight: bold;
+  color: white;
+  position: relative;
+  text-align: center;
+  bottom: 10%;
 }
 @keyframes rocketFlight25 {
   from {
