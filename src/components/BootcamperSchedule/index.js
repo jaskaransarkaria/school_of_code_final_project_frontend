@@ -28,7 +28,10 @@ const BootcamperSchedule = () => {
   const [sessionIndex, setSessionIndex] = useState(0);
   const [dateToShow, setDateToShow] = useState([]);
   const [dateInBar, setDateInBar] = useState(0);
-  const [lessonInfo, setLessonInfo] = useState("");
+  const [lessonInfo, setLessonInfo] = useState(
+    "Click a lesson to view resources"
+  );
+  const [links, setLinks] = useState([]);
 
   useEffect(() => {
     async function fetchSchedule() {
@@ -54,7 +57,6 @@ const BootcamperSchedule = () => {
       }
     }
     fetchSchedule();
-    return fetchSchedule;
   }, [selectedDate]);
 
   useEffect(() => {
@@ -62,17 +64,16 @@ const BootcamperSchedule = () => {
       const response = await fetch(`${api.schedule}/most-recent`);
       const data = await response.json();
       if (data.result === null) {
-        return;
+        return null;
       } else {
         console.log("fetch most recent", data);
         console.log("fetch most recent", data.result);
-        await setScheduleData([...scheduleData, ...data.result]);
-        await setDateToShow([...data.result]);
+        setScheduleData([...scheduleData, ...data.result]);
+        setDateToShow([...data.result]);
       }
+      return;
     }
     fetchMostRecentSchedule();
-
-    return fetchMostRecentSchedule;
   }, []);
   const controlCarousel = num => {
     if (
@@ -87,19 +88,17 @@ const BootcamperSchedule = () => {
 
   const FormatedDate = ({ date, num }) => {
     let highlightDay = {};
-    console.log("datetoshow", date);
-    console.log("selectedDate", selectedDate);
-    console.log(
-      moment(moment(date, "DD/MM/YYYY").add(num, "days")._d).format(
-        "DD/MM/YYYY"
-      )
-    );
-
-    if (
+    if (!dateToShow.length > 0) {
+      return <></>;
+    } else if (
       selectedDate ===
-      moment(moment(date, "DD/MM/YYYY").add(num, "days")._d).format(
-        "DD/MM/YYYY"
-      )
+        moment(moment(date, "DD/MM/YYYY").add(num, "days")._d).format(
+          "DD/MM/YYYY"
+        ) ||
+      dateToShow[0].date ===
+        moment(moment(date, "DD/MM/YYYY").add(num, "days")._d).format(
+          "DD/MM/YYYY"
+        )
     ) {
       highlightDay = { backgroundColor: "#11cf84" };
     }
@@ -182,15 +181,21 @@ const BootcamperSchedule = () => {
           {dateToShow.map(day =>
             day.daysContent
 
-              .map((session, idx) => (
-                <div
-                  className={css.itemContainer}
-                  onClick={() => setLessonInfo(session.learningObjectives)}
-                >
-                  <b>{`Lesson ${idx + 1}`}</b>
-                  <p>{session.contentTitle}</p>
-                </div>
-              ))
+              .map((session, idx) => {
+                console.log("SESH", session);
+                return (
+                  <div
+                    className={css.itemContainer}
+                    onClick={() => {
+                      setLessonInfo(session.learningObjectives);
+                      session.contentURL && setLinks([...session.contentURL]);
+                    }}
+                  >
+                    <b>{`Lesson ${idx + 1}`}</b>
+                    <p>{session.contentTitle}</p>
+                  </div>
+                );
+              })
               .slice(sessionIndex, sessionIndex + 3)
           )}
 
@@ -207,7 +212,18 @@ const BootcamperSchedule = () => {
               <p>Lesson Information</p>
             </div>
             <div className={css.lessonDetails}>
+              <br />
+              <h2 style={{ color: "black" }}>{selectedDate}</h2>
               <p>{lessonInfo}</p>
+              <ul>
+                {links.map(link => (
+                  <li>
+                    <a href={`http://${link}`} target="_blank">
+                      {link}
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>

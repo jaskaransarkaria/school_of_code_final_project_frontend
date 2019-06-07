@@ -161,7 +161,10 @@ const ApplicantDashBoard = props => {
             </div>
             <div className={css.stepPassed}>
               <div className={css.astronautFlag}>
-                <img src="/astronaut.png" />
+                <img
+                  src="/astronaut.png"
+                  alt="congrtatulations you've passed this stage!"
+                />
               </div>
             </div>
 
@@ -189,7 +192,11 @@ const ApplicantDashBoard = props => {
             </div>
 
             <div className={css.progressImgContainer}>
-              <img className={css.earthGlobe} src="/earth-globe.png" />
+              <img
+                className={css.earthGlobe}
+                src="/earth-globe.png"
+                alt="earth image"
+              />
               <img
                 className={css.rocketImage}
                 src={rocket}

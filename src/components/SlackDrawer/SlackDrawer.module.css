@@ -14,6 +14,7 @@
     infinite both;
   animation: shake-horizontal 4s cubic-bezier(0.455, 0.03, 0.515, 0.955)
     infinite both;
+  z-index: 99;
 }
 
 @-webkit-keyframes shake-horizontal {
