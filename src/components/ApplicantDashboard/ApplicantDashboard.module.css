@@ -172,7 +172,7 @@ p {
 }
 
 .stepNotAvailable {
-  background-color: rgba(13, 135, 192, 0.185);
+  /* background-color: rgba(13, 135, 192, 0.185); */
   position: absolute;
   /* background: rgba(0, 0, 0, 0); */
   height: 100%;
@@ -192,13 +192,14 @@ p {
 
 .stepPassed {
   position: absolute;
-  background-color: rgba(13, 135, 192, 0.185);
+  /* background-color: rgba(13, 135, 192, 0.185); */
 
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  color: #7219ff;
+  /* color: #7219ff; */
+  color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;

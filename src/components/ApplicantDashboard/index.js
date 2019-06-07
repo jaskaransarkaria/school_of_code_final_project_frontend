@@ -134,13 +134,13 @@ const ApplicantDashBoard = props => {
                 style={{ width: "40%" }}
               />
             </div>
-            <div
+            {/* <div
               onClick={() => redirectTo(info.stage)}
               className={css.stepCard}
             >
               <h3> {info.title}</h3>
               <p className={css.lockedText}> Locked </p>
-            </div>
+            </div> */}
           </div>
         );
       } else if (
@@ -165,16 +165,14 @@ const ApplicantDashBoard = props => {
               </div>
             </div>
 
-            <div
+            {/* <div
               onClick={() => redirectTo(info.stage)}
               className={css.stepCard}
             >
               <h3>Complete</h3>
 
               <p className={css.congratsText}>Congratulations</p>
-
-              <img className={css.confetti} src="./confetti.png" />
-            </div>
+            </div> */}
           </div>
         );
       } else {
