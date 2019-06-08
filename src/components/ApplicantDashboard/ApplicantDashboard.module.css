@@ -219,6 +219,7 @@ p {
 .stepCard {
   display: flex;
   margin: 5px;
+  height: 100px;
   background: white;
   border-radius: 5px;
   box-shadow: 1px 1px 5px;
