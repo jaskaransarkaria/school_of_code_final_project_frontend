@@ -252,7 +252,7 @@ const VideoRating = props => {
     if (collateFeedback.length > 3) {
       setOverallRating(calculateOverallRating());
 
-      if (collateFeedback.length === 10) {
+      if (collateFeedback.length === 5) {
         postRatingsToServer();
       }
     }
