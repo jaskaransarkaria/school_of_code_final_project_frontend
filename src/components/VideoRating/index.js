@@ -113,7 +113,7 @@ const VideoRating = props => {
   };
 
   const postRatingsToServer = async () => {
-    const data = await fetch(`${api.applications}/admin-video-descion`, {
+    await fetch(`${api.applications}/admin-video-descion`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -131,7 +131,7 @@ const VideoRating = props => {
     // const findApplicant = pendingVideosData.findIndex(applicant=>applicant.firebaseUid === currentUid)
     // setPendingVideosData([...pendingVideosData.slice(0, findApplicant), ...pendingVideosData.slice(findApplicant + 1)])
   };
-  const updatePassStage = async () => {
+  const updatePassStage = async updatedRatings => {
     return await fetch(`${api.applications}/admin-video-descion-update-many`, {
       method: "post",
       headers: {
@@ -139,7 +139,7 @@ const VideoRating = props => {
         Accept: "application/json"
       },
       body: JSON.stringify({
-        ratingsData: [...acceptedVideosData, ...rejectedVideosData]
+        ratingsData: [...updatedRatings]
       })
     });
     // const response = await data.json();
@@ -185,75 +185,35 @@ const VideoRating = props => {
     setShowSpecificApplication([id]);
   };
 
+  const getVideos = async () => {
+    const pendingResponse = await fetch(
+      `${api.applications}/make-descion-videos/pending`
+    );
+    const pendingData = await pendingResponse.json();
+
+    // map over this array on the back end and send all the relevant info back
+    await setPendingVideosData(pendingData.result);
+
+    const acceptedResponse = await fetch(
+      `${api.applications}/make-descion-videos/accepted`
+    );
+    const acceptedData = await acceptedResponse.json();
+
+    // map over this array on the back end and send all the relevant info back
+    await setAcceptedVideosData(acceptedData.result);
+
+    const rejectedResponse = await fetch(
+      `${api.applications}/make-descion-videos/rejected`
+    );
+    const rejectedData = await rejectedResponse.json();
+
+    // map over this array on the back end and send all the relevant info back
+    await setRejectedVideosData(rejectedData.result);
+  };
+
   useEffect(() => {
-    const getVideos = async () => {
-      const pendingResponse = await fetch(
-        `${api.applications}/make-descion-videos/pending`
-      );
-      const pendingData = await pendingResponse.json();
-
-      // map over this array on the back end and send all the relevant info back
-      await setPendingVideosData(pendingData.result);
-
-      const acceptedResponse = await fetch(
-        `${api.applications}/make-descion-videos/accepted`
-      );
-      const acceptedData = await acceptedResponse.json();
-
-      // map over this array on the back end and send all the relevant info back
-      await setAcceptedVideosData(acceptedData.result);
-
-      const rejectedResponse = await fetch(
-        `${api.applications}/make-descion-videos/rejected`
-      );
-      const rejectedData = await rejectedResponse.json();
-
-      // map over this array on the back end and send all the relevant info back
-      await setRejectedVideosData(rejectedData.result);
-    };
-
     getVideos();
   }, [refreshData]);
-
-  useEffect(() => {
-    const getVideos = async () => {
-      const response = await fetch(
-        `${api.applications}/make-descion-videos/pending`
-      );
-      const data = await response.json();
-
-      // map over this array on the back end and send all the relevant info back
-      await setPendingVideosData(data.result);
-    };
-
-    getVideos();
-  }, []);
-
-  useEffect(() => {
-    const getVideos = async () => {
-      const response = await fetch(
-        `${api.applications}/make-descion-videos/accepted`
-      );
-      const data = await response.json();
-
-      // map over this array on the back end and send all the relevant info back
-      await setAcceptedVideosData(data.result);
-    };
-    getVideos();
-  }, []);
-
-  useEffect(() => {
-    const getVideos = async () => {
-      const response = await fetch(
-        `${api.applications}/make-descion-videos/rejected`
-      );
-      const data = await response.json();
-
-      // map over this array on the back end and send all the relevant info back
-      await setRejectedVideosData(data.result);
-    };
-    getVideos();
-  }, []);
 
   useEffect(() => {
     // go through accepted and rejected arrays and change the relevant data
@@ -267,6 +227,7 @@ const VideoRating = props => {
         user.videoOverallRating >= sliderPassValue ? true : false;
       return user;
     });
+    updatePassStage([...updatedAccepted, ...updatedRejected]);
 
     setAcceptedVideosData(
       [...updatedAccepted, ...updatedRejected].filter(
@@ -278,6 +239,8 @@ const VideoRating = props => {
         user => !user.passVideoStage
       )
     );
+
+    // go through both of the new accepted and reject and post the to them server
   }, [sliderPassValue]);
 
   useEffect(() => {
@@ -309,10 +272,6 @@ const VideoRating = props => {
   // POST ratings for each video all at once && POST whether they have passed or failed this stage
   // also reset the collateFeedback back to an empty array
 
-  console.log("SHOWAPPLICANTS", showApplicants);
-  console.log("CURRENTID", currentUid);
-  console.log("SHOWSPECIFICAPPLICANTSLENGTH", showSpecificApplication.length);
-
   return (
     <>
       <DashboardBanner title={"Video Applications"} />
@@ -327,7 +286,6 @@ const VideoRating = props => {
             fractions={2}
             onClick={value => {
               setSliderPassValue(value * 2);
-              updatePassStage();
             }}
           />
         </div>
