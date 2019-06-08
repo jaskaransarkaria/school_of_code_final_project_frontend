@@ -3,7 +3,7 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  height: 45vh;
+  height: 45%;
   margin-top: 5%;
 }
 
@@ -45,7 +45,7 @@
   border-radius: 5px;
   text-align: center;
   transition: 200ms;
-  margin: 5%;
+  margin: 3%;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }

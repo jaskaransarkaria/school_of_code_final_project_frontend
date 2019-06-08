@@ -10,27 +10,16 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 class AdminDashBoard extends Component {
   render() {
     return (
-      <>
-        <div className={css.dashBoardContainer}>
-          <div className={css.optionsContainer}>
-            <BrowserRouter>
-              <Switch>
-                <Route
-                  exact
-                  path="/admin-dashboard"
-                  component={AdminUserOptions}
-                />
-                <Route path="/form-processing" component={FormRating} />
-                <Route path="/video-processing" component={VideoRating} />
-                <Route
-                  path="/upload-schedule"
-                  component={AdminUploadSchedule}
-                />
-              </Switch>
-            </BrowserRouter>
-          </div>
-        </div>
-      </>
+      <div className={css.optionsContainer}>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/admin-dashboard" component={AdminUserOptions} />
+            <Route path="/form-processing" component={FormRating} />
+            <Route path="/video-processing" component={VideoRating} />
+            <Route path="/upload-schedule" component={AdminUploadSchedule} />
+          </Switch>
+        </BrowserRouter>
+      </div>
     );
   }
 }
