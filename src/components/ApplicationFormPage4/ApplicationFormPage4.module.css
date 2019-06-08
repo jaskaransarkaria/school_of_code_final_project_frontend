@@ -30,7 +30,7 @@
   position: relative;
   margin: 0 5%;
   background-image: url(../../Images/starsBackground.png);
-  /* background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/N13e7awhgiljgescq/videoblocks-black-empty-space-with-stars-dark-science-background-with-movement_rrrhaewqg_thumbnail-full01.png"); */
+  background-color: rgba(49, 165, 220, 0.1);
   font-weight: bold;
 }
 /* LEFT CONTAINER CONTENT */
