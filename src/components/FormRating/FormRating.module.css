@@ -257,9 +257,9 @@ ul.hideApplicantListContainer {
 }
 
 .adminDashboardHome {
-  position: absolute;
+  position: relative;
   top: 0%;
-  right: -30%;
+  left: 5%;
 }
 
 .adminDashboardHome button {
@@ -270,7 +270,7 @@ ul.hideApplicantListContainer {
   background: rgba(59, 59, 59, 0.7);
   transition: 200ms;
   box-shadow: 0 0 8px;
-  color: white;
+  color: white;`
 }
 
 .adminDashboardHome button:hover {
