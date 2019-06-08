@@ -35,6 +35,7 @@ const VideoRating = props => {
   const [applicantCounter, setApplicantCounter] = useState(0);
   const [sliderPassValue, setSliderPassValue] = useState(6);
   const [showSpecificApplication, setShowSpecificApplication] = useState([]);
+  const [refreshData, setRefreshData] = useState(false);
   const [showApplicants, dispatch] = useReducer((state, action, e) => {
     switch (action) {
       case "pending":
@@ -125,8 +126,8 @@ const VideoRating = props => {
         passVideoStage: overallRating >= sliderPassValue ? true : false
       })
     });
-
-    const response = await data.json();
+    await setRefreshData(!refreshData);
+    // const response = await data.json();
     // const findApplicant = pendingVideosData.findIndex(applicant=>applicant.firebaseUid === currentUid)
     // setPendingVideosData([...pendingVideosData.slice(0, findApplicant), ...pendingVideosData.slice(findApplicant + 1)])
   };
@@ -170,6 +171,7 @@ const VideoRating = props => {
     const response = await data.json();
     setAllUsers(response.result);
   };
+
   const viewApplication = id => {
     // if (showSpecificApplications[0] === applicationStatus) {
     //   return setShowSpecificApplications([]);
@@ -185,13 +187,43 @@ const VideoRating = props => {
 
   useEffect(() => {
     const getVideos = async () => {
+      const pendingResponse = await fetch(
+        `${api.applications}/make-descion-videos/pending`
+      );
+      const pendingData = await pendingResponse.json();
+
+      // map over this array on the back end and send all the relevant info back
+      await setPendingVideosData(pendingData.result);
+
+      const acceptedResponse = await fetch(
+        `${api.applications}/make-descion-videos/accepted`
+      );
+      const acceptedData = await acceptedResponse.json();
+
+      // map over this array on the back end and send all the relevant info back
+      await setAcceptedVideosData(acceptedData.result);
+
+      const rejectedResponse = await fetch(
+        `${api.applications}/make-descion-videos/rejected`
+      );
+      const rejectedData = await rejectedResponse.json();
+
+      // map over this array on the back end and send all the relevant info back
+      await setRejectedVideosData(rejectedData.result);
+    };
+
+    getVideos();
+  }, [refreshData]);
+
+  useEffect(() => {
+    const getVideos = async () => {
       const response = await fetch(
         `${api.applications}/make-descion-videos/pending`
       );
       const data = await response.json();
 
       // map over this array on the back end and send all the relevant info back
-      setPendingVideosData(data.result);
+      await setPendingVideosData(data.result);
     };
 
     getVideos();
@@ -205,7 +237,7 @@ const VideoRating = props => {
       const data = await response.json();
 
       // map over this array on the back end and send all the relevant info back
-      setAcceptedVideosData(data.result);
+      await setAcceptedVideosData(data.result);
     };
     getVideos();
   }, []);
@@ -218,7 +250,7 @@ const VideoRating = props => {
       const data = await response.json();
 
       // map over this array on the back end and send all the relevant info back
-      setRejectedVideosData(data.result);
+      await setRejectedVideosData(data.result);
     };
     getVideos();
   }, []);
@@ -658,19 +690,21 @@ const VideoRating = props => {
                         ? transitions.map(({ item, key, props }, idx) => {
                             return applicantIndex === idx ? (
                               <div className={css.thankyouContainer}>
-                                <h3> Thankyou </h3>
+                                <h3> Thank you </h3>
                                 <p>
                                   Your final score of {getAverageScore()} for{" "}
                                   {""}
                                   {item.result.firstName} has been submitted
                                 </p>
-                                <button onClick={() => setCollateFeedback([])}>
+                                {/* <button onClick={() => setCollateFeedback([])}>
                                   Close
-                                </button>
+                                </button> */}
                                 <img
                                   src={close}
                                   alt="close button"
-                                  onClick={() => setCollateFeedback([])}
+                                  onClick={() => {
+                                    setCollateFeedback([]);
+                                  }}
                                 />
                               </div>
                             ) : null;
