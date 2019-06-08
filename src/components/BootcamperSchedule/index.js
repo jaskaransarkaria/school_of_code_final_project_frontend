@@ -68,8 +68,8 @@ const BootcamperSchedule = () => {
       } else {
         console.log("fetch most recent", data);
         console.log("fetch most recent", data.result);
-        setScheduleData([...scheduleData, ...data.result]);
-        setDateToShow([...data.result]);
+        await setScheduleData([...scheduleData, ...data.result]);
+        await setDateToShow([...data.result]);
       }
       return;
     }
@@ -213,7 +213,6 @@ const BootcamperSchedule = () => {
             </div>
             <div className={css.lessonDetails}>
               <br />
-              <h2 style={{ color: "black" }}>{selectedDate}</h2>
               <p>{lessonInfo}</p>
               <ul>
                 {links.map(link => (

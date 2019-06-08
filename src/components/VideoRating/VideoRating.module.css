@@ -215,6 +215,7 @@ button.applicant:hover {
   box-shadow: 1px 1px 5px;
   margin: 10px;
   border-radius: 5px;
+  height: 450px;
 }
 
 .videoRatingsContainer h2 {
@@ -222,7 +223,7 @@ button.applicant:hover {
 
   padding: 10px;
 
-  font-size: 22px;
+  font-size: 36px;
 }
 
 .videoRatingsContainer div:first-of-type h2 {
@@ -261,8 +262,8 @@ button.applicant:hover {
   top: 20%;
   left: 10%;
   right: 10%;
-  border-right: solid 2px;
-  border-left: solid 2px;
+  /* border-right: solid 2px;
+  border-left: solid 2px; */
 }
 
 .metaData {
@@ -275,7 +276,7 @@ button.applicant:hover {
   display: flex;
   height: 100%;
   align-items: center;
-  margin: 20px;
+  margin: 5px;
   position: relative;
 }
 
@@ -308,7 +309,8 @@ button.applicant:hover {
 
 .videoPlayer {
   margin: 15px 10px;
-  width: 500px;
+  width: 585px;
+  height: 350px;
   border-radius: 5px;
   box-shadow: 1px 1px 5px;
 }
@@ -340,20 +342,20 @@ button.applicant:hover {
   /* flex: 0 30%; */
   display: flex;
   justify-content: center;
-  flex-direction: column;
-  margin: 0 auto;
+  align-items: center;
+  flex-direction: row;
   text-align: center;
-  position: relative;
-  top: 20%;
 }
 
 div.overallRating {
-  margin: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   color: white;
   border-radius: 5px;
   font-size: 18px;
   position: relative;
-  bottom: 0;
 
   /* transform: translateX(-50%); */
 }

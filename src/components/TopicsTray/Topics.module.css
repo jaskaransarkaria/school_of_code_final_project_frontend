@@ -8,7 +8,8 @@
 .topicsTitle {
   padding: 10px;
   margin: 5px;
-  color: black;
+  color: yellow;
+  text-align: start;
 }
 
 .topicsContainer button {
@@ -28,14 +29,20 @@
 
 #searchBar {
   color: black;
-  width: 100%;
-  height: 45px;
-  border: none;
-  border-bottom: 2px black solid;
+  width: 96%;
+  height: 60px;
+  border: 3.5px #11cf84 solid;
+  vertical-align: text-top;
+  border-radius: 5px;
+  padding-left: 10px;
+  padding-bottom: 10px;
   font-size: 40px;
-  margin-bottom: 2%;
+  margin-bottom: 4%;
 }
 
-::placeholder {
-  color: black;
+input::placeholder {
+  color: rgba(189, 195, 199, 1);
+  font-size: 24px;
+  text-align: start;
+  vertical-align: top;
 }

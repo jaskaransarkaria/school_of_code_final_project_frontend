@@ -480,10 +480,6 @@ const VideoRating = props => {
                         {/* List all applicants, unless the search input is used  */}
                         {acceptedVideosData.map(
                           (applicant, acceptedApplicationIndex) => {
-                            console.log(
-                              "ACCEPTEDVIDEOSDATA",
-                              acceptedVideosData
-                            );
                             return (
                               <>
                                 <UserName
@@ -517,7 +513,6 @@ const VideoRating = props => {
                     <p>no video application data for: {firebaseUid} </p>
                   )}
                   {videoApplicationData.map(({ videoUrl }, videoIndex) => {
-                    console.log("VIDEOAPPLICATIONSDATA", videoApplicationData);
                     console.log("FIREBASEID", firebaseUid);
                     if (
                       String(firebaseUid) === String(showSpecificApplication) &&
@@ -535,10 +530,6 @@ const VideoRating = props => {
                                         className={css.videoRatingsContainer}
                                       >
                                         <div className={css.detailsContainer}>
-                                          <h3>
-                                            {item.result.firstName}{" "}
-                                            {item.result.lastName}
-                                          </h3>
                                           <div className={css.metaData}>
                                             {/* <div>
                                               <img src={age} />
@@ -548,15 +539,23 @@ const VideoRating = props => {
                                               <img src={location} />
                                               <p>{item.result.location}</p>
                                             </div> */}
-                                            <div>
+                                            {/* <div>
                                               <img src={approved} />
                                               <p>{item.result.background}</p>
-                                            </div>
+                                            </div> */}
                                             {collateFeedback.length === 0 ? (
                                               <div
                                                 className={css.overallRating}
                                               >
-                                                <h3>Overall Rating</h3>
+                                                <h2>
+                                                  {item.result.firstName}{" "}
+                                                  {item.result.lastName}
+                                                </h2>
+                                                <h2
+                                                  style={{ fontSize: "27px" }}
+                                                >
+                                                  Overall Rating
+                                                </h2>
                                                 <div
                                                   className={
                                                     css.ratingTitleContainer
@@ -568,7 +567,8 @@ const VideoRating = props => {
                                                     fullSymbol="fa fa-star fa-2x"
                                                     style={{
                                                       color:
-                                                        "rgba(248, 180, 22, 1)"
+                                                        "rgba(248, 180, 22, 1)",
+                                                      fontSize: "22px"
                                                     }}
                                                     fractions={2}
                                                     readonly

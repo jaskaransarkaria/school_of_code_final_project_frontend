@@ -14,8 +14,14 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 const styles = {
   root: {
     backgroundColor: "#11cf84",
+    borderRadius: "5px",
     margin: 5
-  }
+  },
+  broot: {
+    backgroundColor: `rgba(0,0,0, 0.9)`
+  },
+  p: { fontSize: 32 },
+  subPara: { fontSize: 24, color: "white" }
 };
 
 const TopicsTray = props => {
@@ -37,27 +43,28 @@ const TopicsTray = props => {
   return (
     <>
       <div>
-        <h2 className={css.topicsTitle}>Link Library</h2>
+        <h2 className={css.topicsTitle}>Resource Archive</h2>
         <input
           placeholder="search for a topic"
-          autofocus
           id={css.searchBar}
-          type="search"
           onChange={e => setSearchField(e.target.value)}
         />
         <div className={css.topicsContainer}>
           {searchField === ""
             ? topicKeys.sort().map(topic => (
-                <ExpansionPanel classes={{ root: classes.root }}>
+                <ExpansionPanel classes={{ root: classes.broot }}>
                   <ExpansionPanelSummary
+                    classes={{ root: classes.root }}
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1a-content"
                     onClick={() => setShowTopic(showTopic ? false : topic)}
                   >
-                    <Typography>{topic}</Typography>
+                    <Typography classes={{ root: classes.p }}>
+                      {topic}
+                    </Typography>
                   </ExpansionPanelSummary>
                   <ExpansionPanelDetails>
-                    <Typography>
+                    <Typography classes={{ root: classes.subPara }}>
                       {showTopic && <Topics topicKey={showTopic} />}
                     </Typography>
                   </ExpansionPanelDetails>
@@ -72,14 +79,17 @@ const TopicsTray = props => {
                 .map(topic => (
                   <ExpansionPanel classes={{ root: classes.root }}>
                     <ExpansionPanelSummary
+                      classes={{ root: classes.root }}
                       expandIcon={<ExpandMoreIcon />}
                       aria-controls="panel1a-content"
                       onClick={() => setShowTopic(showTopic ? false : topic)}
                     >
-                      <Typography>{topic}</Typography>
+                      <Typography classes={{ root: classes.p }}>
+                        {topic}
+                      </Typography>
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
-                      <Typography>
+                      <Typography classes={{ root: classes.subPara }}>
                         {showTopic && <Topics topicKey={showTopic} />}
                       </Typography>
                     </ExpansionPanelDetails>
