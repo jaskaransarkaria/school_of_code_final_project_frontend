@@ -71,8 +71,8 @@ const FormPart3 = ({
               <li>Please complete all five sections of the form.</li>
 
               <li>
-                You will receive an email notifying if you have made it to the
-                next stage!
+                You will receive an email notifying you the outcome of the first
+                stage within a few weeks!
               </li>
             </ol>
           </div>

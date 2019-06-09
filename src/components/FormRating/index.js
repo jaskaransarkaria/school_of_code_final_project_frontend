@@ -400,9 +400,9 @@ function FormRating(props) {
               })}
             </ul>
           </div>
-          <div onClick={goToHome} className={css.adminDashboardHome}>
-            <button> Admin Home</button>
-          </div>
+        </div>
+        <div className={css.adminDashboardHome}>
+          <button onClick={goToHome}> Admin Home</button>
         </div>
 
         <div className={css.applicantDetailsContainer}>
