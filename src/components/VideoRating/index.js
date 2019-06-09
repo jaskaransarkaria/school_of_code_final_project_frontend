@@ -526,7 +526,7 @@ const VideoRating = props => {
                                                   {item.result.lastName}
                                                 </h2>
                                                 <h2
-                                                  style={{ fontSize: "27px" }}
+                                                  style={{ fontSize: "25px" }}
                                                 >
                                                   Overall Rating
                                                 </h2>
