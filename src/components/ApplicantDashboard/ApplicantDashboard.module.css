@@ -3,6 +3,7 @@
 ------------------*/
 .container {
   background-image: url("/starsBackground.png");
+  height: 100vh;
 }
 
 h1,
@@ -320,6 +321,7 @@ p {
   text-align: center;
   bottom: 10%;
 }
+
 @keyframes rocketFlight25 {
   from {
     bottom: 0%;

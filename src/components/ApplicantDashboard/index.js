@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import css from "../ApplicantDashboard/ApplicantDashboard.module.css";
+import css from "./ApplicantDashboard.module.css";
 import socPlanet from "../../Images/planet_soc.png";
+import DashboardBanner from "../DashboardBanner";
 import { api } from "../../config";
 import firebase from "firebase";
-import rocket from "../../Images/spaceship.png";
 
 import SOCImage from "../../Images/soc-logo.png";
 const ApplicantDashBoard = props => {
@@ -13,19 +13,19 @@ const ApplicantDashBoard = props => {
   const [stepInfo, setStepInfo] = useState([
     {
       title: "Application Form",
-      desc: "Click here to complete your form",
+      desc: "Complete your form",
       stage: 1,
       className: css.stepOne
     },
     {
       title: "Video Interview",
-      desc: "Click here to complete your videos",
+      desc: "Complete your videos",
       stage: 2,
       className: css.stepTwo
     },
     {
       title: "Interview Day",
-      desc: "Click here to accept your place for interview",
+      desc: "Accept your interview place",
       stage: 3,
       className: css.stepThree
     }
@@ -43,12 +43,10 @@ const ApplicantDashBoard = props => {
 
   useEffect(() => {
     // GET the current uid's application info
-
     const getUidApplicationData = async () => {
       if (userUid) {
         const data = await fetch(`${api.applications}/${userUid}`);
         const response = await data.json();
-        console.log("GET uid application", response);
         setUsers({ ...response.result });
       }
     };
@@ -64,8 +62,6 @@ const ApplicantDashBoard = props => {
   };
 
   const goToApplicationVideo = () => {
-    console.log(props);
-    console.log(props.props);
     props.history.push(`/application-video`);
   };
 
@@ -81,19 +77,6 @@ const ApplicantDashBoard = props => {
       props.history.push("/bootcamper-dashboard");
     }
   };
-  const ApplicationStage = () => {
-    let stage;
-    if (userUid.passInterviewStage === true) {
-      stage = "You passed them all! ";
-    } else if (userUid.passVideoStage === true) {
-      stage = "You are at stage 3";
-    } else if (userUid.passFormStage === true) {
-      stage = "You are at stage 2";
-    } else {
-      stage = "You are at stage 1";
-    }
-    return <h3>Track your journey to becoming a Bootcamper.</h3>;
-  };
 
   const addProgressionMock = (info, idx) => ({
     progression: (idx + 1) * 25,
@@ -102,8 +85,6 @@ const ApplicantDashBoard = props => {
 
   const Steps = ({ passFirstStage, passSecondStage, passFinalStage }) => {
     const renderStep = (info, idx) => {
-      console.log(info);
-
       if (
         (info.stage === 2 && Object.entries(users).length === 0) ||
         (info.stage === 3 && Object.entries(users).length === 0) ||
@@ -135,13 +116,6 @@ const ApplicantDashBoard = props => {
               />
             </div>
             <div className={css.lockedText}>Locked</div>
-            {/* <div
-              onClick={() => redirectTo(info.stage)}
-              className={css.stepCard}
-            >
-              <h3> {info.title}</h3>
-              <p className={css.lockedText}> Locked </p>
-            </div> */}
           </div>
         );
       } else if (
@@ -169,14 +143,6 @@ const ApplicantDashBoard = props => {
               </div>
             </div>
             <div className={css.congratsText}>Congratulations!</div>
-            {/* <div
-              onClick={() => redirectTo(info.stage)}
-              className={css.stepCard}
-            >
-              <h3>Complete</h3>
-
-             
-            </div> */}
           </div>
         );
       } else {
@@ -196,21 +162,22 @@ const ApplicantDashBoard = props => {
               <img
                 className={css.earthGlobe}
                 src="/earth-globe.png"
-                alt="earth image"
+                alt="earth"
               />
               <img
                 className={css.rocketImage}
-                src={rocket}
+                src={"/rocket.svg"}
                 alt="rocket icon"
                 style={{
-                  width: "100px",
-                  height: "100px",
+                  width: "175px",
+                  height: "175px",
                   position: "absolute",
                   left: `${info.progression}%`,
                   bottom: `${info.progression}%`,
                   animation: `${css[`rocketFlight${info.progression}`]} 2s`
                 }}
               />
+
               <div
                 onClick={() => redirectTo(info.stage)}
                 className={css.stepCard}
@@ -223,17 +190,13 @@ const ApplicantDashBoard = props => {
         );
       }
     };
-    console.log(css);
     return stepInfo.map(addProgressionMock).map(renderStep);
   };
 
   return (
     <div className={css.container}>
       {console.log("in APP DASH USERS", users)}
-      <div className={css.header}>
-        <h2> Applicant Dashboard </h2>
-        <img className={css.socLogo} src={SOCImage} alt="school of code logo" />
-      </div>
+      <DashboardBanner title={"Applicant Dashboard"} />
       <div className={css.mainContentContainer}>
         <div
           className={
@@ -254,7 +217,9 @@ const ApplicantDashBoard = props => {
           </div>
         </div>
         <div className={css.introductionContainer}>
-          <ApplicationStage />
+          <h3 style={{ fontSize: "36px" }}>
+            Track your journey to becoming a Bootcamper.
+          </h3>
         </div>
         <div className={css.stepsContainer}>
           <Steps
