@@ -78,11 +78,13 @@ const VideoRating = props => {
   };
 
   const getCorrectApplicantIndex = uid => {
-    return [
-      ...pendingVideosData,
-      ...acceptedVideosData,
-      ...rejectedVideosData
-    ].findIndex(item => uid === item.firebaseUid);
+    setApplicantCounter(
+      [
+        ...pendingVideosData,
+        ...acceptedVideosData,
+        ...rejectedVideosData
+      ].findIndex(item => uid === item.firebaseUid)
+    );
   };
 
   const AverageScore = () => {
@@ -339,10 +341,8 @@ const VideoRating = props => {
                                   setVideoCounter={setVideoCounter}
                                   setCollateFeedback={setCollateFeedback}
                                   applicantCounter={() =>
-                                    setApplicantCounter(
-                                      getCorrectApplicantIndex(
-                                        applicant.firebaseUid
-                                      )
+                                    getCorrectApplicantIndex(
+                                      applicant.firebaseUid
                                     )
                                   }
                                 />
@@ -394,7 +394,9 @@ const VideoRating = props => {
                                   indexKey={applicant.firebaseUid}
                                   uid={applicant.firebaseUid}
                                   applicantCounter={() =>
-                                    pendingApplicationIndex
+                                    getCorrectApplicantIndex(
+                                      applicant.firebaseUid
+                                    )
                                   }
                                   dispatch={() => dispatch("pending")}
                                   setAdminFeedbackRating={
@@ -467,10 +469,8 @@ const VideoRating = props => {
                                   setVideoCounter={setVideoCounter}
                                   setCollateFeedback={setCollateFeedback}
                                   applicantCounter={() =>
-                                    setApplicantCounter(
-                                      getCorrectApplicantIndex(
-                                        applicant.firebaseUid
-                                      )
+                                    getCorrectApplicantIndex(
+                                      applicant.firebaseUid
                                     )
                                   }
                                 />
