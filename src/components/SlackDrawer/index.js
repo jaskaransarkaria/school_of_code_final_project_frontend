@@ -6,7 +6,8 @@ import css from "./SlackDrawer.module.css";
 
 const styles = {
   paper: {
-    backgroundColor: `rgba(0,0,0, 0.9)`,
+    backgroundColor: `white`,
+    opacity: 0.95,
     borderRadius: 3,
     border: 0,
     width: "auto",

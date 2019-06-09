@@ -18,10 +18,11 @@ const styles = {
     margin: 5
   },
   broot: {
-    backgroundColor: `rgba(0,0,0, 0.9)`
+    backgroundColor: `white`,
+    opacity: 0.9
   },
   p: { fontSize: 32 },
-  subPara: { fontSize: 24, color: "white" }
+  subPara: { fontSize: 24, color: "black" }
 };
 
 const TopicsTray = props => {

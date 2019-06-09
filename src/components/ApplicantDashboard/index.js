@@ -4,7 +4,6 @@ import socPlanet from "../../Images/planet_soc.png";
 import DashboardBanner from "../DashboardBanner";
 import { api } from "../../config";
 import firebase from "firebase";
-import rocket from "../../Images/spaceship.png";
 
 import SOCImage from "../../Images/soc-logo.png";
 const ApplicantDashBoard = props => {
@@ -14,19 +13,19 @@ const ApplicantDashBoard = props => {
   const [stepInfo, setStepInfo] = useState([
     {
       title: "Application Form",
-      desc: "Click here to complete your form",
+      desc: "Complete your form",
       stage: 1,
       className: css.stepOne
     },
     {
       title: "Video Interview",
-      desc: "Click here to complete your videos",
+      desc: "Complete your videos",
       stage: 2,
       className: css.stepTwo
     },
     {
       title: "Interview Day",
-      desc: "Click here to accept your place for interview",
+      desc: "Accept your interview place",
       stage: 3,
       className: css.stepThree
     }
@@ -167,17 +166,18 @@ const ApplicantDashBoard = props => {
               />
               <img
                 className={css.rocketImage}
-                src={rocket}
+                src={"/rocket.svg"}
                 alt="rocket icon"
                 style={{
-                  width: "100px",
-                  height: "100px",
+                  width: "175px",
+                  height: "175px",
                   position: "absolute",
                   left: `${info.progression}%`,
                   bottom: `${info.progression}%`,
                   animation: `${css[`rocketFlight${info.progression}`]} 2s`
                 }}
               />
+
               <div
                 onClick={() => redirectTo(info.stage)}
                 className={css.stepCard}

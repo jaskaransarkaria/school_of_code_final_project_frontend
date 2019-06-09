@@ -321,6 +321,7 @@ p {
   text-align: center;
   bottom: 10%;
 }
+
 @keyframes rocketFlight25 {
   from {
     bottom: 0%;
