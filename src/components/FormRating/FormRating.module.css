@@ -8,6 +8,7 @@ Application Status buttons
   padding: 10px;
   margin: 60px auto 0 auto;
   position: relative;
+  left: 3.25%;
 }
 
 button {
@@ -103,7 +104,7 @@ Applicant Lists
   position: absolute;
 
   height: 60vh;
-  width: 100%;
+  width: 97%;
   color: white;
   display: flex;
   justify-content: center;

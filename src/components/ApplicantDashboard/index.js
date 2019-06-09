@@ -172,8 +172,12 @@ const ApplicantDashBoard = props => {
                   width: "175px",
                   height: "175px",
                   position: "absolute",
-                  left: `${info.progression}%`,
-                  bottom: `${info.progression}%`,
+                  left: `${
+                    idx === 2 ? info.progression - 15 : info.progression
+                  }%`,
+                  bottom: `${
+                    idx === 2 ? info.progression - 15 : info.progression
+                  }%`,
                   animation: `${css[`rocketFlight${info.progression}`]} 2s`
                 }}
               />
