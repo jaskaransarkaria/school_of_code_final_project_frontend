@@ -3,6 +3,7 @@
 ------------------*/
 .container {
   background-image: url("/starsBackground.png");
+  height: 100vh;
 }
 
 h1,
