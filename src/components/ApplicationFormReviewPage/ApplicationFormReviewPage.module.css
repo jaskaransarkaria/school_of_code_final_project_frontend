@@ -36,9 +36,7 @@ ul li {
   color: white;
   position: relative;
   margin: 0 5%;
-  background-image: url(../../Images/starsBackground.png);
   font-weight: bold;
-  background-color: rgba(49, 165, 220, 0.1);
 }
 
 /* LEFT CONTAINER CONTENT */
