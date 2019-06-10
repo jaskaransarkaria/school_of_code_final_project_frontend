@@ -634,9 +634,8 @@ const VideoRating = props => {
                               <div className={css.thankyouContainer}>
                                 <h3> Thank you </h3>
                                 <p>
-                                  Your final score of {getAverageScore()} for{" "}
-                                  {""}
-                                  {item.result.firstName} has been submitted
+                                  Your final score of {getAverageScore()} has
+                                  been submitted
                                 </p>
                                 <img
                                   src={close}
