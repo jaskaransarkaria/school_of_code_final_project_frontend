@@ -238,7 +238,9 @@ const VideoRating = props => {
           ...rejectedVideosData
         ].map(getUserInfo)
       ).then(users => {
-        setUserInfo(users);
+        setUserInfo(
+          users.filter(user => user && user.result && user.result._id)
+        );
       });
     grabAll();
   }, [pendingVideosData, rejectedVideosData, acceptedVideosData]);
