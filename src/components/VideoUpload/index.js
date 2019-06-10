@@ -331,7 +331,7 @@ const VideoUpload = () => {
                         display: "inline-block"
                       }}
                     >
-                      Re-record, if your not <br /> happy with you're first
+                      Re-record, if you're not <br /> happy with your first
                       take.
                     </p>
                   )}
