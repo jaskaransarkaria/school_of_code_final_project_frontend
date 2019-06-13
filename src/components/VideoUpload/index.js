@@ -1,5 +1,5 @@
-import css from "../VideoUpload/VideoUpload.module.css";
 import React, { useState, useEffect, useRef } from "react";
+import css from "../VideoUpload/VideoUpload.module.css";
 import AWS from "aws-sdk";
 import TranscribeService from "aws-sdk/clients/transcribeservice";
 import { aws } from "../../config";
