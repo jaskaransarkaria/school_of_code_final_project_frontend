@@ -11,7 +11,7 @@
     "ffmpeg.js": "^3.1.9001",
     "firebase": "^5.11.0",
     "flickity": "^2.2.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "react": "^16.8.6",
     "react-alice-carousel": "^1.13.11",
     "react-calendar": "^2.18.1",
